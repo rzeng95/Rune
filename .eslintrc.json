@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "quotes": [2, "double"],
+    "camelcase": [2],
+    "indent": [2, "tab"],
+    "no-extra-semi": 2,
+    "semi": [2, "always"]
+  }
+
+}
