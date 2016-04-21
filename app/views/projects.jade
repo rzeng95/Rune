@@ -1,0 +1,21 @@
+html
+
+    head
+        title Projects 
+    
+    body
+        h2 Projects Page - You can only see this page if you are logged in 
+        br
+        br
+        h4 Showing projects for: 
+        h4!= user.local.firstname
+        br
+        br
+        h4 Create New Project: #[a(href="/createproject") Here] 
+
+        br
+        br
+        a(href="/") Home
+        br
+        br
+        a(href="/logout") Logout 

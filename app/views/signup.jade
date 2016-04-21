@@ -1,0 +1,36 @@
+html
+
+    head
+        title Signup 
+    
+    body
+        h2 Signup Form
+        br
+        br
+        h4!= message 
+        br
+        br
+        form(action="/signup" method="post")
+            div
+                label First Name  
+                input(type="text" name="firstname")
+            div 
+                label Last Name 
+                input(type="text" name="lastname")
+            div
+                label Email 
+                input(type="text" name="email")
+            div
+                label Password 
+                input(type="text" name="password")
+            button(type="submit") Signup 
+            
+            
+        br        
+        a(href="/login") Login 
+        br
+        br
+        a(href="/") Home
+        br
+        br
+        a(href="/projects") Projects 

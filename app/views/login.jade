@@ -1,0 +1,27 @@
+html
+
+    head
+        title Login
+    
+    body
+        h2 Login Form - This could go inside the homepage 
+        br
+        br
+        h4!= message 
+        br
+        br
+        form(action="/login" method="post")
+            div
+                label Email 
+                input(type="text" name="email")
+            div
+                label Password 
+                input(type="text" name="password")
+            button(type="submit") Login 
+            
+            
+        br        
+        a(href="/signup") SignUp 
+        br
+        br
+        a(href="/") Home
