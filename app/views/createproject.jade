@@ -1,0 +1,20 @@
+html
+
+    head
+        title Create Project 
+    
+    body
+        h2 Create Project - You can only see this page if you are logged in 
+        br 
+        br
+        form(action="/createproject" method="post")
+            div
+                label Project Name  
+                input(type="text" name="projectname")
+            div 
+                label Project Key 
+                input(type="text" name="projectkey")
+
+            div
+                p Normally the project key is auto generated based on the input name 
+            button(type="submit") Create Project  

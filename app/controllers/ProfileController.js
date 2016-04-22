@@ -10,7 +10,7 @@ module.exports = function(app, passport) {
         });
     });
 
-}
+};
 
 // Check if user is logged in, redirect to error page if they aren't
 function isLoggedIn(req, res, next) {
