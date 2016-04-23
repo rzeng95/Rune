@@ -46,7 +46,7 @@ module.exports = function(app, passport) {
                 throw err;
             else {
                 var projectUrl = newProject.projectid;
-                console.log("project created ");
+                console.log('project created ');
             }
         });
 
@@ -57,13 +57,12 @@ module.exports = function(app, passport) {
             else if (!user) {
                 req.flash('errorMessage', 'Something pretty bad happened...');
                 res.redirect('/error');
-                }
-            else {
+            } else {
 
                 user.local.projects.push( (newProject.projectid).toString() );
 
                 user.save(function(err) {
-                    console.log("project added to user");
+                    console.log('project added to user');
                     res.redirect('/p/'+newProject.projectid);
                 });
 
@@ -83,8 +82,7 @@ module.exports = function(app, passport) {
                     projName : proj.projectname,
                     projId : proj.projectid,
                     projMembers : proj.members
-                })
-
+                });
             }
         });
 
@@ -116,8 +114,7 @@ function isUserProjectMember(req,res,next) {
         else if (!user) {
             req.flash('errorMessage', 'Not a member of project');
             res.redirect('/error');
-            }
-        else
+        } else
             return next();
     });
 }
@@ -130,8 +127,7 @@ function doesProjectExist(req,res,next) {
         else if (!proj) {
             req.flash('errorMessage', 'Project does not exist');
             res.redirect('/error');
-            }
-        else
+        } else
             return next();
     });
 
