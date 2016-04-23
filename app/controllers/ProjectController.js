@@ -4,10 +4,25 @@ var Project = require('../models/project.js');
 module.exports = function(app, passport) {
 
     app.get('/projects', isLoggedIn, function(req,res) {
-        res.render('projects.jade', {
-            user : req.user
-        });
 
+        User.findOne({'local.email': req.user.local.email}, function(err,user) {
+            if (err)
+                throw err;
+            else {
+
+                var projectList = user.local.projects;
+                /*
+                var i = 0;
+
+                while (projectList[i] !== undefined) {
+
+                    i++;
+                }
+                */
+                console.log(projectList);
+                res.render('projects.jade', {user : req.user, projlist : projectList});
+            }
+        });
     });
 
     app.get('/createproject', isLoggedIn, function(req,res) {
@@ -20,7 +35,6 @@ module.exports = function(app, passport) {
         var projectKey = req.body.projectkey;
         var userEmail = req.user.local.email;
 
-        // Add this project's ID to the user's "projects" array
         // Add the user's ID to the project's "members" array
         var newProject = new Project();
         newProject.projectname = projectName;
@@ -32,26 +46,51 @@ module.exports = function(app, passport) {
                 throw err;
             else {
                 var projectUrl = newProject.projectid;
-                console.log(newProject);
-                res.redirect('/p/'+projectUrl);
+                console.log("project created ");
             }
-
         });
 
+        // Add this project's ID to the user's "projects" array
+        User.findOne({'local.email': userEmail}, function(err,user) {
+            if (err)
+                return done(err);
+            else if (!user) {
+                req.flash('errorMessage', 'Something pretty bad happened...');
+                res.redirect('/error');
+                }
+            else {
 
-        //res.json({'1': projectName, '2': projectKey, '3': userEmail});
+                user.local.projects.push( (newProject.projectid).toString() );
+
+                user.save(function(err) {
+                    console.log("project added to user");
+                    res.redirect('/p/'+newProject.projectid);
+                });
+
+            }
+        });
+
     });
 
-    app.get('/p/:projectid', isLoggedIn, isUserProjectMember, function(req,res) {
+    app.get('/p/:projectid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         var projectId = req.params.projectid;
 
-        // Check to see if the project exists
+        Project.findById(projectId, function(err, proj) {
+            if (err)
+                throw err;
+            else {
+                res.render('individualproject.jade', {
+                    projName : proj.projectname,
+                    projId : proj.projectid,
+                    projMembers : proj.members
+                })
 
-        res.send(projectId);
+            }
+        });
 
     });
 
-    app.post('/p/:projectid', isLoggedIn, function(req,res) {
+    app.post('/p/:projectid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         //handle creating new tasks
     });
 
@@ -63,8 +102,9 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        req.flash('errorMessage', 'You are not logged in and cannot see this page.');
-        res.redirect('/error');
+        //req.flash('errorMessage', 'You are not logged in and cannot see this page.');
+        //res.redirect('/error');
+        res.redirect('/login');
     }
 }
 
@@ -74,10 +114,25 @@ function isUserProjectMember(req,res,next) {
         if (err)
             return done(err);
         else if (!user) {
-            req.flash('errorMessage', 'Not part of project');
+            req.flash('errorMessage', 'Not a member of project');
             res.redirect('/error');
             }
         else
             return next();
     });
+}
+
+function doesProjectExist(req,res,next) {
+    //Make sure if the project url is manually entered, that it exists
+    Project.findOne({'projectid': req.params.projectid}, function(err,proj){
+        if (err)
+            return done(err);
+        else if (!proj) {
+            req.flash('errorMessage', 'Project does not exist');
+            res.redirect('/error');
+            }
+        else
+            return next();
+    });
+
 }

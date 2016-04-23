@@ -10,6 +10,11 @@ html
         h4 Showing projects for: 
         h4!= user.local.firstname
         br
+        
+        each proj in projlist
+            div
+                a(href='/p/' + proj) localhost:5000/p/#{proj}
+
         br
         h4 Create New Project: #[a(href="/createproject") Here] 
 

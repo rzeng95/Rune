@@ -61,7 +61,8 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        req.flash('errorMessage', 'You are not logged in and cannot see this page.');
-        res.redirect('/error');
+        //req.flash('errorMessage', 'You are not logged in and cannot see this page.');
+        //res.redirect('/error');
+        res.redirect('/login');
     }
 }
