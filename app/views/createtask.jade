@@ -1,0 +1,18 @@
+html
+
+    head
+        title Create Task
+    
+    body
+        h2 Create Task
+        br 
+        br
+        form(action="/createtask" method="post")
+            div
+                label Task Name
+                input(type="text" name="taskname")
+            div 
+                label Task Description
+                input(type="text" name="taskdescription")
+
+            button(type="submit") Create Task  

@@ -1,5 +1,6 @@
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
+var Task = require('../models/task.js');
 
 module.exports = function(app, passport) {
 
@@ -72,9 +73,20 @@ module.exports = function(app, passport) {
 
     });
 
+
+    app.get('/p/:projectid/createtask', isLoggedIn, function(req,res) {
+        res.render('createtask.jade');
+
+    });
+
+    app.post('/p/:projectid/createtask', isLoggedIn, function(req,res) {
+
+
+    });
+
     app.get('/p/:projectid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         var projectId = req.params.projectid;
-
+        //console.log(req);
         Project.findById(projectId, function(err, proj) {
             if (err)
                 throw err;
@@ -92,6 +104,11 @@ module.exports = function(app, passport) {
 
     app.post('/p/:projectid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         //handle creating new tasks
+
+    });
+
+    app.get('/p/:projectid/:taskid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
+
     });
 
 };
@@ -110,7 +127,7 @@ function isLoggedIn(req, res, next) {
 
 function isUserProjectMember(req,res,next) {
     //Find the current user and make sure they're part of the project being accessed
-    Project.findOne({'members': req.user.local.email}, function(err,user) {
+    Project.findOne({'members': req.user.local.email, 'projectid': req.params.projectid}, function(err,user) {
         if (err)
             return done(err);
         else if (!user) {
