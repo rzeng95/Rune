@@ -14,10 +14,11 @@ module.exports = function(app, passport) {
 
 // Check if user is logged in, redirect to error page if they aren't
 function isLoggedIn(req, res, next) {
-
     if (req.isAuthenticated())
         return next();
 
-    else
+    else {
+        req.flash('errorMessage', 'You are not logged in and cannot see this page.');
         res.redirect('/error');
+    }
 }

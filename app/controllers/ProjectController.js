@@ -20,8 +20,6 @@ module.exports = function(app, passport) {
         var projectKey = req.body.projectkey;
         var userEmail = req.user.local.email;
 
-        //console.log(req.user.local);
-
         // Add this project's ID to the user's "projects" array
         // Add the user's ID to the project's "members" array
         var newProject = new Project();
@@ -33,7 +31,9 @@ module.exports = function(app, passport) {
             if (err)
                 throw err;
             else {
-                res.send(newProject);
+                var projectUrl = newProject.projectid;
+                console.log(newProject);
+                res.redirect('/p/'+projectUrl);
             }
 
         });
@@ -42,7 +42,7 @@ module.exports = function(app, passport) {
         //res.json({'1': projectName, '2': projectKey, '3': userEmail});
     });
 
-    app.get('/p/:projectid', isLoggedIn, function(req,res) {
+    app.get('/p/:projectid', isLoggedIn, isUserProjectMember, function(req,res) {
         var projectId = req.params.projectid;
 
         // Check to see if the project exists
@@ -52,7 +52,7 @@ module.exports = function(app, passport) {
     });
 
     app.post('/p/:projectid', isLoggedIn, function(req,res) {
-        //handle creating new tasks 
+        //handle creating new tasks
     });
 
 };
@@ -62,6 +62,22 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
 
-    else
+    else {
+        req.flash('errorMessage', 'You are not logged in and cannot see this page.');
         res.redirect('/error');
+    }
+}
+
+function isUserProjectMember(req,res,next) {
+    //Find the current user and make sure they're part of the project being accessed
+    Project.findOne({'members': req.user.local.email}, function(err,user) {
+        if (err)
+            return done(err);
+        else if (!user) {
+            req.flash('errorMessage', 'Not part of project');
+            res.redirect('/error');
+            }
+        else
+            return next();
+    });
 }

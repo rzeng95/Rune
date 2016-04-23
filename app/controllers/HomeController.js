@@ -45,10 +45,10 @@ module.exports = function(app, passport) {
     });
 
     // =====================================
-    // ERROR PAGE - This is displayed when someone who's not logged in attemps to access a protected page
+    // ERROR PAGE - This is displayed when someone who's not logged in attempts to access a protected page
     // =====================================
     app.get('/error', function(req,res) {
-        res.render('error.jade');
+        res.render('error.jade', { errorMessage: req.flash('errorMessage') } );
 
     });
 
@@ -57,10 +57,11 @@ module.exports = function(app, passport) {
 
 // Check if user is logged in, redirect to error page if they aren't
 function isLoggedIn(req, res, next) {
-
     if (req.isAuthenticated())
         return next();
 
-    else
+    else {
+        req.flash('errorMessage', 'You are not logged in and cannot see this page.');
         res.redirect('/error');
+    }
 }
