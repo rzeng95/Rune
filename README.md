@@ -1,8 +1,7 @@
 How to get this running:
 
 1. Fork repo    
-2. Inside directory, open up terminal and type npm install (requires nodejs downloaded)  
-3. Then run the following two commands:  
+2. Inside directory, open up terminal and run the following two commands: 
 ```
 npm install
 ```
