@@ -1,42 +1,53 @@
+/*
+ * ProjectController handles individual project pages, project creation, and task management
+ * This is the largest controller file, and can possibly be broken into ProjectController & TaskController
+*/
+
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
 var Task = require('../models/task.js');
 
 module.exports = function(app, passport) {
 
+
+    // =====================================
+    // PROJECT LIST
+    // This will most likely be integrated with the profile screen, but currently exists as a stand-alone page.
+    // =====================================
     app.get('/projects', isLoggedIn, function(req,res) {
+
+        // To get the list of all projects, we parse the variable 'req', which stores the user in the current session (this is handled by passport user authentication)
+        // Each User database model contains a list of projects that the user is a member of (See /app/models/user.js).
+        // Find the User matching the current user's email, and return the corresponding project list
 
         User.findOne({'local.email': req.user.local.email}, function(err,user) {
             if (err)
                 throw err;
             else {
-
                 var projectList = user.local.projects;
-                /*
-                var i = 0;
-
-                while (projectList[i] !== undefined) {
-
-                    i++;
-                }
-                */
-                console.log(projectList);
                 res.render('projects.jade', {user : req.user, projlist : projectList});
             }
         });
     });
 
+    // Project creation will probably be done using a pop-up modal object, which can be done via front-end bootstrap magic. Right now it's a separate page of its own located at /createproject
     app.get('/createproject', isLoggedIn, function(req,res) {
         res.render('createproject.jade');
 
     });
 
     app.post('/createproject', isLoggedIn, function(req,res) {
+
+        // Three things need to happen when a project is created:
+        // 1. The project must contain the name and other relevant details passed to it from the web form
+        // 2. The current logged-in user must automatically added to the project's member list
+        // 3. The current logged-in user's database entry must be modified to add the project id to the user's "project" list
+
         var projectName = req.body.projectname;
         var projectKey = req.body.projectkey;
         var userEmail = req.user.local.email;
 
-        // Add the user's ID to the project's "members" array
+        // Add the user's email to the project's "members" array
         var newProject = new Project();
         newProject.projectname = projectName;
         newProject.projectkey = projectKey;
@@ -72,20 +83,23 @@ module.exports = function(app, passport) {
 
     });
 
-
-    app.get('/p/:projectid/createtask', isLoggedIn, function(req,res) {
+    // Right now, task creation is handled through a separate web form
+    // This can probably be handled later by front-end pop-up modal
+    app.get('/p/:projectid/createtask', isLoggedIn, isUserProjectMember, function(req,res) {
         res.render('createtask.jade');
 
     });
 
-    app.post('/p/:projectid/createtask', isLoggedIn, function(req,res) {
+    app.post('/p/:projectid/createtask', isLoggedIn, isUserProjectMember, function(req,res) {
 
 
     });
 
+    // Each project gets its own site with its own unique url. Only logged-in users who are members of that project can access it.
     app.get('/p/:projectid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         var projectId = req.params.projectid;
-        //console.log(req);
+
+        // Knowing the project id because it's passed in by the url, the entire project database entry can be accessed using mongoose's findById method  
         Project.findById(projectId, function(err, proj) {
             if (err)
                 throw err;
@@ -117,8 +131,6 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        //req.flash('errorMessage', 'You are not logged in and cannot see this page.');
-        //res.redirect('/error');
         res.redirect('/login');
     }
 }
@@ -137,7 +149,7 @@ function isUserProjectMember(req,res,next) {
 }
 
 function doesProjectExist(req,res,next) {
-    //Make sure if the project url is manually entered, that it exists
+    //Make sure that if the project url is manually entered, that it exists
     Project.findOne({'projectid': req.params.projectid}, function(err,proj){
         if (err)
             return done(err);

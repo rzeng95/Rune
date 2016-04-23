@@ -1,3 +1,8 @@
+/*
+ * ProfileController controls anything related to user profile
+ * Right now it only renders profile, but most likely will control the student finder feature 
+*/
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -5,9 +10,7 @@ module.exports = function(app, passport) {
     // =====================================
     // The isLoggedIn function makes this page protected so that only logged in users can access it
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.jade', {
-            user : req.user // get the user out of session and pass to template
-        });
+        res.render('profile.jade', { user : req.user });
     });
 
 };
@@ -18,8 +21,6 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        //req.flash('errorMessage', 'You are not logged in and cannot see this page.');
-        //res.redirect('/error');
         res.redirect('/login');
     }
 }

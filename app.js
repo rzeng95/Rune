@@ -31,7 +31,7 @@ var mongoose = require('mongoose');
 var configDB = require('./config/db.js');
 mongoose.connect(configDB.url);
 
-// All the routes are stored in routes.js, which point to the individual controllers
+// All the routes are stored in routes.js, which point to individual controllers
 require('./app/routes.js')(app, passport);
 
 app.listen(port, function() {

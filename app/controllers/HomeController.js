@@ -1,3 +1,8 @@
+/*
+ * HomeController controls all routes related to the homepage and general pages.
+ * Currently it controls rendering homepage, login, signup, logout, and error
+*/
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -11,15 +16,14 @@ module.exports = function(app, passport) {
     // LOGIN PAGE - This may be incorporated into the homepage
     // =====================================
     app.get('/login', function(req, res) {
-
-        // render the page and pass in any flash data if it exists
         res.render('login.jade', { message: req.flash('loginMessage') });
     });
 
+    // Successful logins direct the user to their profile page
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/login', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
+        successRedirect : '/profile',
+        failureRedirect : '/login',
+        failureFlash : true
     }));
 
     // =====================================
@@ -30,9 +34,9 @@ module.exports = function(app, passport) {
     });
 
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
+        successRedirect : '/profile',
+        failureRedirect : '/signup',
+        failureFlash : true
     }));
 
 
@@ -45,7 +49,7 @@ module.exports = function(app, passport) {
     });
 
     // =====================================
-    // ERROR PAGE - This is displayed when someone who's not logged in attempts to access a protected page
+    // ERROR PAGE - This is displayed when someone accesses a forbidden page (not logged in, not member of project)
     // =====================================
     app.get('/error', function(req,res) {
         res.render('error.jade', { errorMessage: req.flash('errorMessage') } );
@@ -61,8 +65,6 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        //req.flash('errorMessage', 'You are not logged in and cannot see this page.');
-        //res.redirect('/error');
         res.redirect('/login');
     }
 }
