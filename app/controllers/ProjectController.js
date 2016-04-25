@@ -91,7 +91,8 @@ module.exports = function(app, passport) {
     });
 
     app.post('/p/:projectid/createtask', isLoggedIn, isUserProjectMember, function(req,res) {
-
+        var newTask = new Task();
+        
 
     });
 
@@ -99,7 +100,7 @@ module.exports = function(app, passport) {
     app.get('/p/:projectid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         var projectId = req.params.projectid;
 
-        // Knowing the project id because it's passed in by the url, the entire project database entry can be accessed using mongoose's findById method  
+        // Knowing the project id because it's passed in by the url, the entire project database entry can be accessed using mongoose's findById method
         Project.findById(projectId, function(err, proj) {
             if (err)
                 throw err;
