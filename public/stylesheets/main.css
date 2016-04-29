@@ -6,3 +6,8 @@ body {
 .btn-button-name.btn-lg {
     border: 2px solid #6f5499;
 }
+.btn-is-disabled {
+  pointer-events: none;
+  @include opacity(0.7);
+  
+}

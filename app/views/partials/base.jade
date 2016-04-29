@@ -27,13 +27,19 @@ html(lang="en")
                             ul(class="nav navbar-nav")
                                 li #[a(href="#" style="font-size:20px;") About]
                                 li(class="dropdown")
-                                    a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;") Projects
+                                    if notLoggedIn 
+                                        a(href="#" class="dropdown-toggle btn-is-disabled" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;color:#4D4C4C;") Projects
+                                    else
+                                        a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;") Projects
                                     ul(class="dropdown-menu")
                                         li #[a(href="#") Project1]
                                         li #[a(href="#") Project2]
                                         li #[a(href="#") Create New Project]
                                 li
-                                    a(role="button" class="btn btn-button-name btn-lg" href="#" style="font-size:20px;") Create Task 
+                                    if notLoggedIn 
+                                        a(role="button" class="btn btn-button-name btn-is-disabled" href="#" style="font-size:20px;color:#4D4C4C;") Create Task 
+                                    else 
+                                        a(role="button" class="btn btn-button-name btn-lg" href="#" style="font-size:20px;") Create Task 
                     if notLoggedIn                
                         div(class="col-xs-6")
                             div(class="row" style="padding-top:5px;")
