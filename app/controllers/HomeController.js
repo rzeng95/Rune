@@ -4,25 +4,43 @@
 */
 
 module.exports = function(app, passport) {
+/*
+    // not logged in - we render the login prompt
+    app.get('/', function(req, res) {
+        res.render('homepage.jade', { notLoggedIn: 1, message: req.flash('loginMessage') });
+    });
+*/
+    // logged in - we don't need to do that
+    app.get('/', function(req, res) {
+
+        res.render('homepage.jade', {
+            notLoggedIn: !req.isAuthenticated(), //if not logged in, display the login form
+            message: req.flash('loginMessage')   //handle errors with logging in
+        });
+    });
+
+
+/*
 
     // =====================================
     // HOME PAGE
     // =====================================
     app.get('/', function(req, res) {
-        res.render('index.jade');
+        res.render('homepage.jade', { message: req.flash('loginMessage') });
     });
-
+*/
+/*
     // =====================================
     // LOGIN PAGE - This may be incorporated into the homepage
     // =====================================
     app.get('/login', function(req, res) {
-        res.render('login.jade', { message: req.flash('loginMessage') });
+        res.render('homepage.jade', { message: req.flash('loginMessage') });
     });
-
+*/
     // Successful logins direct the user to their profile page
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/profile',
-        failureRedirect : '/login',
+        failureRedirect : '/',
         failureFlash : true
     }));
 
@@ -65,6 +83,6 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        res.redirect('/login');
+        res.redirect('/');
     }
 }

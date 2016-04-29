@@ -1,6 +1,6 @@
 /*
  * ProfileController controls anything related to user profile
- * Right now it only renders profile, but most likely will control the student finder feature 
+ * Right now it only renders profile, but most likely will control the student finder feature
 */
 
 module.exports = function(app, passport) {
@@ -21,6 +21,6 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        res.redirect('/login');
+        res.redirect('/');
     }
 }

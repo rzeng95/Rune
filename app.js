@@ -4,6 +4,7 @@ var app = express();
 var port = process.env.PORT || 5000;
 var path = require('path');
 app.set('views', path.join(__dirname, './app/views'));
+app.use(express.static(__dirname + "/public"));
 app.set('view engine', 'jade');
 
 // Middleware Setup

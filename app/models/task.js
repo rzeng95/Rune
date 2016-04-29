@@ -9,11 +9,13 @@ var taskSchema = mongoose.Schema({
     createdby       : String,   // email of the account who used it
     assignedto      : String,   // email of the person who will handle the task
     status          : String,   // todo, in progress, etc.
-    datecreated     : Date,     // current date at creation of the task
+    datecreated     : Date,     // current date at creation of the task (date.now)
     priority        : String,   // high / medium / low
     issuetype       : String   // core / feature / bug
 
 
 });
+
+
 
 module.exports = mongoose.model('Task', taskSchema);

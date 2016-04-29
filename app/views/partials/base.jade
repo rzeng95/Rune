@@ -3,7 +3,46 @@ html(lang="en")
     head
         link(rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
         
+        link(rel="stylesheet" type="text/css" href="./stylesheets/main.css")
+        
+        title Rune
+        
         block headContent
     
     body
+        header 
+            nav(class="navbar navbar-inverse")
+                div(class="container-fluid")
+                    div(class="navbar-header")
+                        a(class="navbar-brand" href="#")
+                            span(class="glyphicon glyphicon-menu-hamburger" aria-hidden="true")
+                        a(class="navbar-brand" href="/") Rune
+                    ul(class="nav navbar-nav")
+                        li
+                            a(href="#") Projects 
+                        li 
+                            a(href="#") Tasks 
+                        li
+                            a(href="#") Student Finder
+
+                    if notLoggedIn 
+                        //- This looks so ugly, just a temp login. Need to change.
+                        ul(class="navbar-form navbar-right")
+                            form(action="/login" method="post")
+                                div(class="form-group")
+                                    input(type="text" class="form-control" name="email" placeholder="Username")
+                                div(class="form-group")
+                                    input(type="password" class="form-control" name="password" placeholder="Password")
+                                button(type="submit" class="btn btn-default") Log In
+                    else
+                        ul(class="navbar-form navbar-right" style="color:red")
+                            p hello, user
+                //- This is for the error message (wrong password, etc.)
+                //- need to change this. this is just a temporary change 
+                p(class="text-right" style="color:red")=message  
+        
+        
         block bodyContent
+        
+        
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous")
