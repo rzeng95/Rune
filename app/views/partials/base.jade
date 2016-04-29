@@ -1,6 +1,10 @@
 doctype html 
 html(lang="en")
     head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        
         link(rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
         
         link(rel="stylesheet" type="text/css" href="/stylesheets/main.css")
@@ -11,41 +15,50 @@ html(lang="en")
     
     body
         header 
-            nav(class="navbar navbar-inverse")
-                div(class="container-fluid")
-                    div(class="navbar-header")
-                        a(class="navbar-brand" href="#")
-                            span(class="glyphicon glyphicon-menu-hamburger" aria-hidden="true")
-                        a(class="navbar-brand" href="/") Rune
-                    ul(class="nav navbar-nav")
-                        li
-                            a(href="#") Projects 
-                        li 
-                            a(href="#") Tasks 
-                        li
-                            a(href="#") Student Finder
-
-                    if notLoggedIn 
-                        //- This looks so ugly, just a temp login. Need to change.
-                        ul(class="navbar-form navbar-right")
-                            form(action="/login" method="post")
-                                div(class="form-group")
-                                    input(type="text" class="form-control" name="email" placeholder="Username")
-                                div(class="form-group")
-                                    input(type="password" class="form-control" name="password" placeholder="Password")
-                                button(type="submit" class="btn btn-default") Log In
-                    else
-                        ul(class="navbar-form navbar-right")
-                            div(class="dropdown")
-                                button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{firstname}
-                                div(class="dropdown-menu" aria-labelledby="dropdownMenu1")
-                                    a(class="dropdown-item" href="/profile") Profile 
-                                    a(class="dropdown-item" href="/logout") Log Out
-                            
-                //- This is for the error message (wrong password, etc.)
-                //- need to change this. this is just a temporary change 
-                p(class="text-right" style="color:red")=message  
         
+        nav(class="navbar navbar-inverse")
+        
+            div(class="container-fluid")
+                div(class="row" style="height:85px;")
+                    div(class="col-xs-6" style="padding-top:18px;")
+                        div(class="navbar-header")
+                            a(class="navbar-brand" href="/" style="font-size:40px;") Rune 
+                        div(id="navbar" class="navbar-collapse collapse" style="padding-top:4px;")
+                            ul(class="nav navbar-nav")
+                                li #[a(href="#" style="font-size:20px;") About]
+                                li(class="dropdown")
+                                    a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;") Projects
+                                    ul(class="dropdown-menu")
+                                        li #[a(href="#") Project1]
+                                        li #[a(href="#") Project2]
+                                        li #[a(href="#") Create New Project]
+                                li
+                                    a(role="button" class="btn btn-button-name btn-lg" href="#" style="font-size:20px;") Create Task 
+                    if notLoggedIn                
+                        div(class="col-xs-6")
+                            div(class="row" style="padding-top:5px;")
+                                div(class="col-xs-12")
+                                    form(class="navbar-form navbar-right" action="/login" method="post")
+                                        
+                                        div(class="form-group")
+                                            input(type="text" class="form-control" name="email" placeholder="Email")
+                                        div(class="form-group")
+                                            input(type="password" class="form-control" name="password" placeholder="Password" style="width:100px;")
+                                        button(type="submit" class="btn btn-default") Sign In
+                                div(class="col-xs-12")
+                                        p(class="text-right" style="color:red;padding-right:190px;") #{message}
+                    
+                    if !notLoggedIn 
+                        div(class="col-xs-6" style="padding-top:18px;")
+                            div(id="navbar" class="navbar-collapse collapse" style="padding-top:4px;")
+                                ul(class="nav navbar-nav navbar-right")
+                                    li(class="dropdown")
+                                        a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;") #{firstname}
+                                        ul(class="dropdown-menu" style="text-align:right;")
+                                            li #[a(href="/profile") My Profile]
+                                            li #[a(href="#") Student Finder]
+                                
+                
         
         block bodyContent
         

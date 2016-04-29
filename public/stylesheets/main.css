@@ -3,3 +3,6 @@ body {
     background-size: cover;
 
 }
+.btn-button-name.btn-lg {
+    border: 2px solid #6f5499;
+}
