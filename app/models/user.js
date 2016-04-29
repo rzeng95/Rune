@@ -8,6 +8,7 @@ var userSchema = mongoose.Schema({
         lastname     : String,
         email        : String,
         password     : String,
+        userid       : String,
         projects     : [String]
     }
     // Maybe add github integration here

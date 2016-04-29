@@ -20,18 +20,19 @@ module.exports = function(app, passport) {
 
     app.get('/u/:userid', isLoggedIn, doesUserExist, function(req,res) {
 
-        User.findOne({'_id' : req.params.userid}, function(err,usr) {
+        User.findOne({'local.userid' : req.params.userid}, function(err,usr) {
             if (err)
-                return done(err);
+                throw err;
             else {
                 //we're accessing the logged in user if the queried url userid = authenticated userid
                 //and if isMe is true, then grey out the "add to project" button
-                var isMe = ((usr._id).toString() === (req.user._id).toString());
+                var isMe = ((usr.local.userid).toString() === (req.user.local.userid).toString());
                 var fullname = usr.local.firstname + ' ' + usr.local.lastname;
                 res.render('profile.jade', { name: fullname, isMe: isMe });
             }
         });
 
+    
     })
 
 };
@@ -48,7 +49,7 @@ function isLoggedIn(req, res, next) {
 
 function doesUserExist(req,res,next) {
     //Make sure that if the user url is manually entered, that it exists
-    User.findOne({'_id': req.params.userid}, function(err,user){
+    User.findOne({'local.userid': req.params.userid}, function(err,user){
         if (err)
             return done(err);
         else if (!user) {
