@@ -3,6 +3,8 @@
  * Right now it only renders profile, but most likely will control the student finder feature
 */
 
+var User = require('../models/user.js');
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -10,8 +12,27 @@ module.exports = function(app, passport) {
     // =====================================
     // The isLoggedIn function makes this page protected so that only logged in users can access it
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.jade', { user : req.user });
+        //find logged in user and render that information.
+        //var fullname = req.user.local.firstname + ' ' + req.user.local.lastname;
+        //res.render('profile.jade', { name:fullname, isMe: 1 });
+        res.redirect('/u/'+req.user._id);
     });
+
+    app.get('/u/:userid', isLoggedIn, doesUserExist, function(req,res) {
+
+        User.findOne({'_id' : req.params.userid}, function(err,usr) {
+            if (err)
+                return done(err);
+            else {
+                //we're accessing the logged in user if the queried url userid = authenticated userid
+                //and if isMe is true, then grey out the "add to project" button
+                var isMe = ((usr._id).toString() === (req.user._id).toString());
+                var fullname = usr.local.firstname + ' ' + usr.local.lastname;
+                res.render('profile.jade', { name: fullname, isMe: isMe });
+            }
+        });
+
+    })
 
 };
 
@@ -23,4 +44,18 @@ function isLoggedIn(req, res, next) {
     else {
         res.redirect('/');
     }
+}
+
+function doesUserExist(req,res,next) {
+    //Make sure that if the user url is manually entered, that it exists
+    User.findOne({'_id': req.params.userid}, function(err,user){
+        if (err)
+            return done(err);
+        else if (!user) {
+            req.flash('errorMessage', 'User does not exist');
+            res.redirect('/error');
+        } else
+            return next();
+    });
+
 }
