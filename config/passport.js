@@ -90,9 +90,14 @@ module.exports = function(passport) {
                     // create the user
                     var newUser = new User();
 
+                    var firstNameRaw = req.body.firstname;
+                    var lastNameRaw = req.body.lastname;
+                    var firstNameProcessed = firstNameRaw[0].toUpperCase() + firstNameRaw.slice(1);
+                    var lastNameProcessed = lastNameRaw[0].toUpperCase() + lastNameRaw.slice(1);
+
                     // set the user's local credentials
-                    newUser.local.firstname = req.body.firstname;
-                    newUser.local.lastname = req.body.lastname;
+                    newUser.local.firstname = firstNameProcessed;
+                    newUser.local.lastname = lastNameProcessed;
                     newUser.local.email    = email;
                     newUser.local.password = newUser.generateHash(password);
                     newUser.local.userid = (newUser._id).toString();
