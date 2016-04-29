@@ -28,11 +28,16 @@ module.exports = function(app, passport) {
                 //and if isMe is true, then grey out the "add to project" button
                 var isMe = ((usr.local.userid).toString() === (req.user.local.userid).toString());
                 var fullname = usr.local.firstname + ' ' + usr.local.lastname;
-                res.render('profile.jade', { name: fullname, isMe: isMe });
+                res.render('profile.jade', {
+                    name : fullname,
+                    isMe : isMe,
+                    firstname : usr.local.firstname
+
+                });
             }
         });
 
-    
+
     })
 
 };
@@ -51,7 +56,7 @@ function doesUserExist(req,res,next) {
     //Make sure that if the user url is manually entered, that it exists
     User.findOne({'local.userid': req.params.userid}, function(err,user){
         if (err)
-            return done(err);
+            throw err;
         else if (!user) {
             req.flash('errorMessage', 'User does not exist');
             res.redirect('/error');

@@ -35,8 +35,13 @@ html(lang="en")
                                     input(type="password" class="form-control" name="password" placeholder="Password")
                                 button(type="submit" class="btn btn-default") Log In
                     else
-                        ul(class="navbar-form navbar-right" style="color:red")
-                            p hello, user
+                        ul(class="navbar-form navbar-right")
+                            div(class="dropdown")
+                                button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") #{firstname}
+                                div(class="dropdown-menu" aria-labelledby="dropdownMenu1")
+                                    a(class="dropdown-item" href="/profile") Profile 
+                                    a(class="dropdown-item" href="/logout") Log Out
+                            
                 //- This is for the error message (wrong password, etc.)
                 //- need to change this. this is just a temporary change 
                 p(class="text-right" style="color:red")=message  
@@ -44,5 +49,5 @@ html(lang="en")
         
         block bodyContent
         
-        
+        script(src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous")
