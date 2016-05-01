@@ -28,10 +28,12 @@ module.exports = function(app, passport) {
                 //and if isMe is true, then grey out the "add to project" button
                 var isMe = ((usr.local.userid).toString() === (req.user.local.userid).toString());
                 var fullname = usr.local.firstname + ' ' + usr.local.lastname;
+                var projectList = usr.local.projects;
                 res.render('profile.jade', {
                     name : fullname,
                     isMe : isMe,
-                    firstname : usr.local.firstname
+                    firstname : usr.local.firstname,
+                    projlist : projectList
 
                 });
             }

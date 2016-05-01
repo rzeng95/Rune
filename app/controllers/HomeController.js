@@ -13,12 +13,16 @@ module.exports = function(app, passport) {
     // logged in - we don't need to do that
     app.get('/', function(req, res) {
         var firstname = '';
-        if (req.isAuthenticated())
+        var projectList = [];
+        if (req.isAuthenticated()) {
             firstname = req.user.local.firstname;
+            projectList = req.user.local.projects;
+        }
         res.render('homepage.jade', {
             firstname: firstname,
             notLoggedIn: !req.isAuthenticated(), //if not logged in, display the login form
-            message: req.flash('loginMessage')   //handle errors with logging in
+            message: req.flash('loginMessage'),   //handle errors with logging in
+            projList: projectList 
         });
     });
 

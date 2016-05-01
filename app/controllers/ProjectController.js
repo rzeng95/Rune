@@ -72,7 +72,8 @@ module.exports = function(app, passport) {
                 res.redirect('/error');
             } else {
 
-                user.local.projects.push( (newProject.projectid).toString() );
+                var projectPair = [ (newProject.projectid).toString(),  (newProject.projectname).toString()]
+                user.local.projects.push(projectPair);
 
                 user.save(function(err) {
                     console.log('project added to user');
@@ -133,7 +134,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        res.redirect('/login');
+        res.redirect('/');
     }
 }
 
