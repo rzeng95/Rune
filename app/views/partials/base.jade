@@ -54,7 +54,7 @@ html(lang="en")
                                 div(class="col-xs-12")
                                         p(class="text-right" style="color:red;padding-right:190px;") #{message}
                     
-                    if !notLoggedIn 
+                    else 
                         div(class="col-xs-6" style="padding-top:18px;")
                             div(id="navbar" class="navbar-collapse collapse" style="padding-top:4px;")
                                 ul(class="nav navbar-nav navbar-right")
@@ -63,7 +63,8 @@ html(lang="en")
                                         ul(class="dropdown-menu" style="text-align:right;")
                                             li #[a(href="/profile") My Profile]
                                             li #[a(href="#") Student Finder]
-                                
+                                            li #[a(href="/logout") Log Out]
+
                 
         
         block bodyContent
