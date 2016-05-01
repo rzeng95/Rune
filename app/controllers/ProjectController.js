@@ -32,7 +32,8 @@ module.exports = function(app, passport) {
 
     // Project creation will probably be done using a pop-up modal object, which can be done via front-end bootstrap magic. Right now it's a separate page of its own located at /createproject
     app.get('/createproject', isLoggedIn, function(req,res) {
-        res.render('createproject.jade');
+
+        res.render('createproject.jade', {firstname:req.user.local.firstname});
 
     });
 
