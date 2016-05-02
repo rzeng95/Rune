@@ -17,7 +17,7 @@ module.exports = function(app, passport) {
         res.render('home.jade', {
             firstname : firstname,
             loggedIn : req.isAuthenticated(), //if not logged in, display the login form
-            message : req.flash('loginMessage'),   //handle errors with logging in
+            //message : req.flash('loginMessage'),   //handle errors with logging in
             signupMessage : req.flash('signupMessage'),
             projList : projectList
         });

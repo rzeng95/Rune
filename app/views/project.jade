@@ -1,20 +1,18 @@
-html
+extends ./partials/base.jade
 
-    head
-        title A Project
-    
-    body
-        h2 Project Name: #{projName}
-        br
-        h2 Project ID: #{projId}
-        br
-        h2 Project Members: #{projMembers}
-        br 
-        h2 This project is accessible to you because you are a member of it.
-        br
-        h4 Create New Task: #[a(href= "/p/" + projId + "/createtask") Here] 
-        br
-        a(href="/") Home
-        br
-        br
-        a(href="/projects") Projects 
+block bodyContent 
+    h2 Project Name: #{projName}
+    br
+    h2 Project ID: #{projId}
+    br
+    h2 Project Members: #{projMembers}
+    br 
+    h2 This project is accessible to you because you are a member of it.
+    br
+    //h4 Create New Task: #[a(href= "/p/" + projId + "/createtask") Here] 
+    h4 Create New Task: #[a(href= "createtask/") Here]
+    br
+    a(href="/") Home
+    br
+    br
+    a(href="/projects") Projects 
