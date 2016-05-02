@@ -1,15 +1,109 @@
-extends ./partials/base.jade
-
-block bodyContent 
-
-    h2 homepage content goes here  
-    p this includes stuff like the signup form, and the site description (what is kanban, etc)
-    p For now, a two-column main page body that contains site description + signup form (similar to facebook layout) would suffice
+doctype html 
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="IE=edge")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        
+        link(rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
+        
+        link(rel="stylesheet" type="text/css" href="/stylesheets/main.css")
+        
+        title Rune
+        
+        block headContent
     
-    p Is there any way to separate the username, password, and "sign in" fields? right now they are all squished together.
-
-    p The page contents are found in /views/partials/base.jade, but it would probably be a better idea to develop in html first and upload the html mockup to the mockups folder.
-    p Or, if you are confident with understanding jade, the source code for homepage is mainly found under "views/partials/base.jade"
-    p Do "npm install -g nodemon" which auto refreshes the app whenever you save, so you don't have to exit and re-start.
-    p Run nodemon with "nodemon app.js"
-    p This lets you view your changes immediately after you make them, so you don't have to develop first on html, and can directly work on jade.
+    body(style="background-image:url('/images/edgybackground.jpg'); background-size:cover")
+        header 
+        
+        nav(class="navbar navbar-inverse")
+        
+            div(class="container-fluid")
+                div(class="row" style="height:85px;")
+                    div(class="col-xs-6" style="padding-top:18px;")
+                        div(class="navbar-header")
+                            a(class="navbar-brand" href="/" style="font-size:40px;") Rune 
+                        div(id="navbar" class="navbar-collapse collapse" style="padding-top:4px;")
+                            ul(class="nav navbar-nav")
+                                li #[a(href="#" style="font-size:20px;") About]
+                                li(class="dropdown")
+                                    if notLoggedIn 
+                                        a(href="#" class="dropdown-toggle btn-is-disabled" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;color:#4D4C4C;") Projects
+                                    else
+                                        a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;") Projects
+                                        ul(class="dropdown-menu")
+                                            li #[a(href="#") Project 1]
+                                            li #[a(href="/createproject") Create New Project]
+                                        //
+                                            ul(class="dropdown-menu")
+                                                each proj in projlist
+                                                    li #[a(href='/p/' + proj) localhost:5000/p/#{proj}]
+                                                li #[a(href="/projects") See All Projects]
+                                                li #[a(href="/createproject") Create New Project]
+                                li
+                                    if notLoggedIn 
+                                        a(role="button" class="btn btn-button-name btn-is-disabled" href="#" style="font-size:20px;color:#4D4C4C;") Create Task 
+                                    else 
+                                        a(role="button" class="btn btn-button-name btn-lg" href="#" style="font-size:20px;") Create Task 
+                    if notLoggedIn                
+                        div(class="col-xs-6")
+                            div(class="row" style="padding-top:5px;")
+                                div(class="col-xs-12")
+                                    form(class="navbar-form navbar-right" action="/login" method="post")
+                                        
+                                        div(class="form-group")
+                                            input(type="text" class="form-control" name="email" placeholder="Email")
+                                        div(class="form-group")
+                                            input(type="password" class="form-control" name="password" placeholder="Password" style="width:100px;")
+                                        button(type="submit" class="btn btn-default") Sign In
+                                div(class="col-xs-12")
+                                        p(class="text-right" style="color:red;padding-right:190px;") #{message}
+                    
+                    else 
+                        div(class="col-xs-6" style="padding-top:18px;")
+                            div(id="navbar" class="navbar-collapse collapse" style="padding-top:4px;")
+                                ul(class="nav navbar-nav navbar-right")
+                                    li(class="dropdown")
+                                        a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;") #{firstname}
+                                        ul(class="dropdown-menu" style="text-align:right;")
+                                            li #[a(href="/profile") My Profile]
+                                            li #[a(href="#") Student Finder]
+                                            li #[a(href="/logout") Log Out]      
+        
+        div(class="row" style="height:80px")
+        div(class="row")
+            div(class="col-xs-2")
+            div(class="col-xs-4" style="padding:14px; background-color:white; opacity:0.85; border-radius:8px")
+                div(class="row" style="padding:4px")
+                    h2(style="margin-top:0px; padding:4px") Accelerate your productivity with Rune.
+                    div(class="col-xs-12" style="padding:4px; margin-left:10px; font-size:20px")
+                        p(style="margin-left:-4px; font-style:italic; font-size:16px") Rune is an elegant and intuitive kanban project management system.
+                        p #[span(style="font-weight:bold") Create] individual tasks vital to your project.
+                        p #[span(style="font-weight:bold") Assign] tasks to specific members of your team.
+                        p #[span(style="font-weight:bold") Build] your project.
+                        p #[span(style="font-weight:bold") Pound] me in the butt.
+            div(class="col-xs-1") 
+            div(class="col-xs-3" style="padding:14px; background-color:white; opacity:0.85; border-radius:8px")
+                div(class="row" style="padding:4px")
+                    h2(style="margin-top:-2px; padding:4px") Sign Up
+                div(class="row" style="padding:4px")
+                    div(class="col-xs-6" style="padding:4px")
+                        input(type="text" class="form-control" placeholder="First Name")
+                    div(class="col-xs-6" style="padding:4px")
+                        input(type="text" class="form-control" placeholder="Last Name")
+                div(class="row" style="padding:4px")
+                    div(class="col-xs-12" style="padding:4px")
+                        input(type="text" class="form-control" placeholder="Email")
+                div(class="row" style="padding:4px")
+                    div(class="col-xs-12" style="padding:4px")
+                        input(type="text" class="form-control" placeholder="Password")
+                div(class="row" style="margin-bottom:-10px; padding:4px")
+                    div(class="col-xs-12" style="padding:4px")
+                        p(style="font-size:xx-small") By clicking Sign Up, you consent to eating Noodle World once a week for the rest of your life.
+                div(class="row" style="padding:4px")
+                    div(class="col-xs-12" style="padding:4px")
+                        button(type="button" class="btn btn-success" style="width:140px") Sign Up
+            div(class="col-xs-2")
+            
+        script(src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous")
