@@ -1,0 +1,43 @@
+extends ./partials/base.jade
+
+block bodyContent 
+    if !loggedIn
+        div(class="row" style="padding: 15px")
+            div(class="col-xs-4 col-xs-offset-2" style="padding:14px; background-color:white; opacity:0.85; border-radius:4px")
+                div(class="row" style="padding:4px")
+                    h2(style="margin-top:0px; padding:4px") Accelerate your productivity with Rune.
+                    div(class="col-xs-12" style="padding:4px; margin-left:10px; font-size:20px")
+                        p(style="margin-left:-4px; font-style:italic; font-size:16px")
+                            | Rune is an elegant and intuitive kanban project management system.
+                        p #[span(style="font-weight:bold") Create] individual tasks vital to your project.
+                        p #[span(style="font-weight:bold") Assign] tasks to specific members of your team.
+                        p #[span(style="font-weight:bold") Build] your project.
+                        p #[span(style="font-weight:bold") Pound] me in the butt.
+            div(class="col-xs-3 col-xs-offset-1" style="padding:14px; background-color:white; opacity:0.85; border-radius:4px")
+                div(class="row" style="padding:4px")
+                    h2(style="margin-top:-2px; padding:4px") Sign Up
+                div(class="row" style="padding:4px")
+                    div(class="col-xs-6" style="padding:4px")
+                        input(type="text" class="form-control" placeholder="First Name")
+                    div(class="col-xs-6" style="padding:4px")
+                        input(type="text" class="form-control" placeholder="Last Name")
+                div(class="row" style="padding:4px")
+                    div(class="col-xs-12" style="padding:4px")
+                        input(type="text" class="form-control" placeholder="Email")
+                div(class="row" style="padding:4px")
+                    div(class="col-xs-12" style="padding:4px")
+                        input(type="text" class="form-control" placeholder="Password")
+                div(class="row" style="margin-bottom:-10px; padding:4px")
+                    div(class="col-xs-12" style="padding:4px")
+                        p(style="font-size:xx-small") By clicking Sign Up, you consent to eating Noodle World once a week for the rest of your life.
+                div(class="row" style="padding:4px")
+                    div(class="col-xs-12" style="padding:4px")
+                        button(type="button" class="btn btn-success" style="width:140px") Sign Up
+    else
+        div(class="row" style="padding: 15px")
+            div(class="col-xs-4 col-xs-offset-4" style="padding:14px; background-color:white; opacity:0.85; border-radius:4px; text-align: center;")
+                | You have logged in!
+
+    script
+        | document.body.style.backgroundImage = "url('/images/edgybackground.jpg')";
+        | document.body.style.backgroundSize = "cover";

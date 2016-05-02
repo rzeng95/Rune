@@ -6,21 +6,8 @@
 // Global variables.
 $color-1: #53847F;
 $color-2: #F8F8F8;
-$color-3: #F0F0F0;
+$color-3: #EEEEEE;
 $color-border: #E8E8E8;
-
-#main-header {
-    // z-index: 100;
-}
-
-.navbar {
-    margin: 0;
-}
-
-// Project page CSS style specifications.
-#project-header {
-
-}
 
 // Kanban board CSS style specifications.
 .kanban-header {
@@ -32,7 +19,7 @@ $color-border: #E8E8E8;
     margin-top: 45px;
     padding: 20px;
     font-size: 20px;
-    z-index: 0;
+    z-index: 900;
 }
 
 .kanban-board {
@@ -42,15 +29,16 @@ $color-border: #E8E8E8;
     width: 100%;
 }
 
+.kanban-board-header {
+    margin-top: 114px;
+    z-index: 800;
+}
+
 .kanban-board-row {
     display: table;
     margin: 0;
     padding: 0 10px;
     z-index: -1;
-}
-
-.kanban-board-row-header {
-    margin-top: 115px;
 }
 
 .kanban-board-member {
@@ -93,7 +81,7 @@ $color-border: #E8E8E8;
 .kanban-col-header-text {
     border-bottom-width: 4px;
     border-bottom-style: solid;
-    border-bottom-color: $color-border;
+    border-bottom-color: $color-3;
     padding-bottom: 10px;
 }
 
@@ -121,19 +109,4 @@ $color-border: #E8E8E8;
 
 .kanban-task-tags {
     padding: 5px 0;
-}
-
-.login {
-    padding: 15px;
-    margin: 0 auto;
-    width: 100%;
-}
-
-.form-signin {
-    margin: 0 auto;
-    width: 20%;
-}
-
-.form-control {
-    width: 100%;
 }

@@ -30,16 +30,14 @@ module.exports = function(app, passport) {
                 var fullname = usr.local.firstname + ' ' + usr.local.lastname;
                 var projectList = usr.local.projects;
                 res.render('profile.jade', {
+                    loggedIn : req.isAuthenticated(),
                     name : fullname,
                     isMe : isMe,
                     firstname : usr.local.firstname,
                     projlist : projectList
-
                 });
             }
         });
-
-
     })
 
 };
@@ -48,7 +46,6 @@ module.exports = function(app, passport) {
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
-
     else {
         res.redirect('/login');
     }

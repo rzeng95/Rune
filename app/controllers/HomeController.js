@@ -1,7 +1,9 @@
-/*
+/**
+ *
  * HomeController controls all routes related to the homepage and general pages.
  * Currently it controls rendering homepage, login, signup, logout, and error
-*/
+ *
+ **/
 
 module.exports = function(app, passport) {
 /*
@@ -18,11 +20,11 @@ module.exports = function(app, passport) {
             firstname = req.user.local.firstname;
             projectList = req.user.local.projects;
         }
-        res.render('homepage.jade', {
-            firstname: firstname,
-            notLoggedIn: !req.isAuthenticated(), //if not logged in, display the login form
-            message: req.flash('loginMessage'),   //handle errors with logging in
-            projList: projectList
+        res.render('home.jade', {
+            firstname : firstname,
+            loggedIn : req.isAuthenticated(), //if not logged in, display the login form
+            message : req.flash('loginMessage'),   //handle errors with logging in
+            projList : projectList
         });
     });
 
@@ -78,18 +80,14 @@ module.exports = function(app, passport) {
     // =====================================
     app.get('/error', function(req,res) {
         res.render('error.jade', { errorMessage: req.flash('errorMessage') } );
-
     });
-
-
 };
 
 // Check if user is logged in, redirect to error page if they aren't
 function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
+    if (req.isAuthenticated()) {
         return next();
-
-    else {
+    } else {
         res.redirect('/login');
     }
 }
