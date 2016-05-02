@@ -6,13 +6,7 @@
  **/
 
 module.exports = function(app, passport) {
-/*
-    // not logged in - we render the login prompt
-    app.get('/', function(req, res) {
-        res.render('homepage.jade', { notLoggedIn: 1, message: req.flash('loginMessage') });
-    });
-*/
-    // logged in - we don't need to do that
+
     app.get('/', function(req, res) {
         var firstname = '';
         var projectList = [];
@@ -24,26 +18,25 @@ module.exports = function(app, passport) {
             firstname : firstname,
             loggedIn : req.isAuthenticated(), //if not logged in, display the login form
             message : req.flash('loginMessage'),   //handle errors with logging in
+            signupMessage : req.flash('signupMessage'),
             projList : projectList
         });
     });
 
-
-/*
-
-    // =====================================
-    // HOME PAGE
-    // =====================================
-    app.get('/', function(req, res) {
-        res.render('homepage.jade', { message: req.flash('loginMessage') });
-    });
-*/
+    app.post('/', passport.authenticate('local-signup', {
+        successRedirect : '/profile',
+        failureRedirect : '/',
+        failureFlash : true
+    }));
 
     // =====================================
     // LOGIN PAGE - This is a separate form
     // =====================================
     app.get('/login', function(req, res) {
-        res.render('login.jade', { message: req.flash('loginMessage')});
+        res.render('login.jade', {
+            message : req.flash('loginMessage')
+
+        });
     });
 
     // Successful logins direct the user to their profile page
@@ -53,11 +46,14 @@ module.exports = function(app, passport) {
         failureFlash : true
     }));
 
+/*
     // =====================================
     // SIGNUP - This may or may not be its own page
     // =====================================
     app.get('/signup', function(req, res) {
         res.render('signup.jade', { message: req.flash('signupMessage') });
+        //res.render('home.jade', { signupMessage: req.flash('signupMessage') });
+        //res.redirect('/')
     });
 
     app.post('/signup', passport.authenticate('local-signup', {
@@ -65,7 +61,7 @@ module.exports = function(app, passport) {
         failureRedirect : '/signup',
         failureFlash : true
     }));
-
+*/
 
     // =====================================
     // LOGOUT
