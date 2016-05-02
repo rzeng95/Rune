@@ -1,0 +1,139 @@
+// Compass imports.
+@import "bootstrap-compass";
+@import "bootstrap-variables";
+@import "bootstrap";
+
+// Global variables.
+$color-1: #53847F;
+$color-2: #F8F8F8;
+$color-3: #F0F0F0;
+$color-border: #E8E8E8;
+
+#main-header {
+    // z-index: 100;
+}
+
+.navbar {
+    margin: 0;
+}
+
+// Project page CSS style specifications.
+#project-header {
+
+}
+
+// Kanban board CSS style specifications.
+.kanban-header {
+    background-color: $color-3;
+    border-style: solid;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-color: $color-border;
+    margin-top: 45px;
+    padding: 20px;
+    font-size: 20px;
+    z-index: 0;
+}
+
+.kanban-board {
+    padding: 0 0 0 0;
+    margin: 0;
+    margin-top: 180px;
+    width: 100%;
+}
+
+.kanban-board-row {
+    display: table;
+    margin: 0;
+    padding: 0 10px;
+    z-index: -1;
+}
+
+.kanban-board-row-header {
+    margin-top: 115px;
+}
+
+.kanban-board-member {
+    margin: 0 20px;
+    padding: 20px 0 10px 0;
+    border: none;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: $color-border;
+}
+
+.kanban-col {
+    display: table-cell;
+    float: none;
+    vertical-align: top;
+    border: none;
+    min-height: 140px;
+    border: 10px solid $color-2;
+    padding: 0;
+    position: relative;
+    width: 20%;
+    background-color: $color-3;
+}
+
+.kanban-col-header {
+    display: table-cell;
+    position: relative;
+    float: none;
+    vertical-align: top;
+    width: 20%;
+    min-height: 140px;
+    height: 100%;
+    margin: 0;
+    border: 10px solid $color-2;
+    padding: 10px 0 0 0;
+    font-weight: bold;
+    background-color: $color-2;
+}
+
+.kanban-col-header-text {
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
+    border-bottom-color: $color-border;
+    padding-bottom: 10px;
+}
+
+.kanban-task-filler {
+    min-height: 160px;
+}
+
+.kanban-task {
+    background-color: $color-2;
+    border: 1px solid $color-border;
+    padding: 15px;
+    min-height: 160px;
+    height: 100%;
+    z-index: 10;
+}
+
+.kanban-task-header {
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+.kanban-task-body {
+    padding: 5px 0;
+}
+
+.kanban-task-tags {
+    padding: 5px 0;
+}
+
+.login {
+    padding: 15px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.form-signin {
+    margin: 0 auto;
+    width: 20%;
+}
+
+.form-control {
+    width: 100%;
+}
