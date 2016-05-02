@@ -94,7 +94,7 @@ module.exports = function(app, passport) {
 
     app.post('/p/:projectid/createtask', isLoggedIn, isUserProjectMember, function(req,res) {
         var newTask = new Task();
-        
+
 
     });
 
@@ -134,7 +134,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        res.redirect('/');
+        res.redirect('/login');
     }
 }
 

@@ -22,7 +22,7 @@ module.exports = function(app, passport) {
             firstname: firstname,
             notLoggedIn: !req.isAuthenticated(), //if not logged in, display the login form
             message: req.flash('loginMessage'),   //handle errors with logging in
-            projList: projectList 
+            projList: projectList
         });
     });
 
@@ -36,18 +36,18 @@ module.exports = function(app, passport) {
         res.render('homepage.jade', { message: req.flash('loginMessage') });
     });
 */
-/*
+
     // =====================================
-    // LOGIN PAGE - This may be incorporated into the homepage
+    // LOGIN PAGE - This is a separate form
     // =====================================
     app.get('/login', function(req, res) {
-        res.render('homepage.jade', { message: req.flash('loginMessage') });
+        res.render('login.jade', { message: req.flash('loginMessage')});
     });
-*/
+
     // Successful logins direct the user to their profile page
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/profile',
-        failureRedirect : '/',
+        failureRedirect : '/login',
         failureFlash : true
     }));
 
@@ -90,6 +90,6 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else {
-        res.redirect('/');
+        res.redirect('/login');
     }
 }

@@ -32,10 +32,14 @@ html(lang="en")
                                     else
                                         a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:20px;") Projects
                                         ul(class="dropdown-menu")
-                                            each proj in projlist
-                                                li #[a(href='/p/' + proj) localhost:5000/p/#{proj}]
-                                            li #[a(href="/projects") See All Projects]
+                                            li #[a(href="#") Project 1]
                                             li #[a(href="/createproject") Create New Project]
+                                        //
+                                            ul(class="dropdown-menu")
+                                                each proj in projlist
+                                                    li #[a(href='/p/' + proj) localhost:5000/p/#{proj}]
+                                                li #[a(href="/projects") See All Projects]
+                                                li #[a(href="/createproject") Create New Project]
                                 li
                                     if notLoggedIn 
                                         a(role="button" class="btn btn-button-name btn-is-disabled" href="#" style="font-size:20px;color:#4D4C4C;") Create Task 
