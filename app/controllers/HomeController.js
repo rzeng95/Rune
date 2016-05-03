@@ -46,14 +46,12 @@ module.exports = function(app, passport) {
         failureFlash : true
     }));
 
-/*
+
     // =====================================
     // SIGNUP - This may or may not be its own page
     // =====================================
     app.get('/signup', function(req, res) {
         res.render('signup.jade', { message: req.flash('signupMessage') });
-        //res.render('home.jade', { signupMessage: req.flash('signupMessage') });
-        //res.redirect('/')
     });
 
     app.post('/signup', passport.authenticate('local-signup', {
@@ -61,7 +59,7 @@ module.exports = function(app, passport) {
         failureRedirect : '/signup',
         failureFlash : true
     }));
-*/
+
 
     // =====================================
     // LOGOUT
@@ -75,7 +73,7 @@ module.exports = function(app, passport) {
     // ERROR PAGE - This is displayed when someone accesses a forbidden page (not logged in, not member of project)
     // =====================================
     app.get('/error', function(req,res) {
-        res.render('error.jade', { errorMessage: req.flash('errorMessage') } );
+        res.render('error.jade', { errorMessage : req.flash('errorMessage') } );
     });
 };
 

@@ -29,12 +29,13 @@ module.exports = function(app, passport) {
                 var isMe = ((usr.local.userid).toString() === (req.user.local.userid).toString());
                 var fullname = usr.local.firstname + ' ' + usr.local.lastname;
                 var projectList = usr.local.projects;
+                //console.log(projectList);
                 res.render('profile.jade', {
                     loggedIn : req.isAuthenticated(),
                     name : fullname,
                     isMe : isMe,
                     firstname : usr.local.firstname,
-                    projlist : projectList
+                    projList : projectList
                 });
             }
         });

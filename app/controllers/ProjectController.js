@@ -28,7 +28,7 @@ module.exports = function(app, passport) {
                 res.render('projects.jade', {
                     user : req.user,
                     projlist : projectList,
-                    loggedIn: req.isAuthenticated()
+                    loggedIn : req.isAuthenticated()
                 });
             }
         });
@@ -56,8 +56,8 @@ module.exports = function(app, passport) {
     // Project creation will probably be done using a pop-up modal object, which can be done via front-end bootstrap magic. Right now it's a separate page of its own located at /createproject
     app.get('/createproject', isLoggedIn, function(req,res) {
         res.render('createproject.jade', {
-            firstname:req.user.local.firstname,
-            loggedIn: req.isAuthenticated()
+            firstname : req.user.local.firstname,
+            loggedIn : req.isAuthenticated()
         });
     });
 
@@ -93,8 +93,15 @@ module.exports = function(app, passport) {
                 req.flash('errorMessage', 'Something pretty bad happened...');
                 res.redirect('/error');
             } else {
-                var projectPair = [ (newProject.projectid).toString(),  (newProject.projectname).toString()]
-                user.local.projects.push(projectPair);
+                //user.local.projectNames.push((newProject.projectname).toString());
+                //user.local.projectIDs.push((newProject.projectid).toString());
+
+                //user.local.projectkeys.push( projectKey );
+                //user.local.projectids.push( (newProject.projectid).toString() );
+                user.local.projects.push({
+                    projectkey : projectKey,
+                    projectid : (newProject.projectid).toString()
+                });
                 user.save(function(err) {
                     console.log('project added to user');
                     res.redirect('/p/'+newProject.projectid+'/');
@@ -105,7 +112,7 @@ module.exports = function(app, passport) {
 
     // Right now, task creation is handled through a separate web form
     // This can probably be handled later by front-end pop-up modal
-    app.get('/p/:projectid/createtask', isLoggedIn, isUserProjectMember, function(req,res) {
+    app.get('/p/:projectid/createtask', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         res.render('createtask.jade');
     });
 
@@ -116,7 +123,6 @@ module.exports = function(app, passport) {
     // Each project gets its own site with its own unique url. Only logged-in users who are members of that project can access it.
     app.get('/p/:projectid/', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         var projectId = req.params.projectid;
-
         // Knowing the project id because it's passed in by the url, the entire project database entry can be accessed using mongoose's findById method
         Project.findById(projectId, function(err, proj) {
             if (err) {
@@ -127,7 +133,8 @@ module.exports = function(app, passport) {
                     projId : proj.projectid,
                     projMembers : proj.members,
                     loggedIn : req.isAuthenticated(),
-                    isProjectPage : true
+                    firstname: req.user.local.firstname,
+                    isProjectPage : true,
                 });
             }
         });

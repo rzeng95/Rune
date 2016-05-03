@@ -9,7 +9,14 @@ var userSchema = mongoose.Schema({
         email        : String,
         password     : String,
         userid       : String,
-        projects     : [String]
+        projects : [
+            {
+                projectkey : String,
+                projectid  : String
+
+            }
+
+        ]
     }
     // Maybe add github integration here
 });
