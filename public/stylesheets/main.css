@@ -3660,12 +3660,12 @@ button.close { padding: 0; cursor: pointer; background: transparent; border: 0; 
 .btn-is-disabled { pointer-events: none; filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70); opacity: 0.7; }
 
 /* line 22, ../../sass/main.scss */
-#rune-logo-img { display: inline; padding-left: 30px; }
+#rune-logo-img { display: inline; }
 /* line 25, ../../sass/main.scss */
-#rune-logo-img > img { position: relative; top: -5px; height: 30px; }
+#rune-logo-img > img { position: relative; top: -6px; height: 30px; }
 
 /* line 32, ../../sass/main.scss */
-#rune-logo-text { display: inline; padding-left: 5px; position: relative; top: -1px; font-family: "Roboto-Black"; font-size: 24px; }
+#rune-logo-text { display: inline; padding-left: 5px; position: relative; top: -2px; font-family: "Roboto-Black"; font-size: 24px; }
 
 /* line 42, ../../sass/main.scss */
 .kanban-header { background-color: #EEEEEE; margin-top: 45px; border-style: solid; border-width: 0 0 1px 0; border-color: #E8E8E8; padding: 20px; font-size: 20px; z-index: 900; }
