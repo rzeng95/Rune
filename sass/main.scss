@@ -2,6 +2,10 @@
 @import "bootstrap-compass";
 @import "bootstrap-variables";
 @import "bootstrap";
+@import "compass/css3";
+
+// SCSS includes.
+@include font-face('Roboto-Black', font-files('RobotoBlack/Roboto-Black.ttf', 'RobotoBlack/Roboto-Black.eot', 'RobotoBlack/Roboto-Black.woff'));
 
 // Global variables.
 $color-1: #53847F;
@@ -9,14 +13,38 @@ $color-2: #F8F8F8;
 $color-3: #EEEEEE;
 $color-border: #E8E8E8;
 
+// Navbar CSS style specifications.
+.btn-is-disabled {
+    pointer-events: none;
+    @include opacity(0.7);
+}
+
+#rune-logo-img {
+    display: inline;
+    padding-left: 30px;
+    > img {
+        position: relative;
+        top: -5px;
+        height: 30px;
+    }
+}
+
+#rune-logo-text {
+    display: inline;
+    padding-left: 5px;
+    position: relative;
+    top: -1px;
+    font-family: "Roboto-Black";
+    font-size: 24px;
+}
+
 // Kanban board CSS style specifications.
 .kanban-header {
     background-color: $color-3;
-    border-style: solid;
-    border-width: 0;
-    border-bottom-width: 1px;
-    border-color: $color-border;
     margin-top: 45px;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: $color-border;
     padding: 20px;
     font-size: 20px;
     z-index: 900;
@@ -38,7 +66,13 @@ $color-border: #E8E8E8;
     display: table;
     margin: 0;
     padding: 0 10px;
+    width: 100%;
+    min-height: 200px;
     z-index: -1;
+}
+
+.kanban-board-row-header {
+    min-height: 100%;
 }
 
 .kanban-board-member {
@@ -53,35 +87,21 @@ $color-border: #E8E8E8;
 .kanban-col {
     display: table-cell;
     float: none;
-    vertical-align: top;
-    border: none;
-    min-height: 140px;
-    border: 10px solid $color-2;
-    padding: 0;
-    position: relative;
     width: 20%;
+    vertical-align: top;
+    border: 10px solid $color-2;
+    padding: 0 0 20px 0;
     background-color: $color-3;
 }
 
 .kanban-col-header {
-    display: table-cell;
-    position: relative;
-    float: none;
-    vertical-align: top;
-    width: 20%;
-    min-height: 140px;
-    height: 100%;
-    margin: 0;
-    border: 10px solid $color-2;
     padding: 10px 0 0 0;
     font-weight: bold;
     background-color: $color-2;
 }
 
 .kanban-col-header-text {
-    border-bottom-width: 4px;
-    border-bottom-style: solid;
-    border-bottom-color: $color-3;
+    border-bottom: 4px solid $color-3;
     padding-bottom: 10px;
 }
 

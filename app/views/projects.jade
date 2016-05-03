@@ -1,22 +1,26 @@
 extends ./partials/base.jade
+
 block bodyContent 
-        h2 Projects Page - You can only see this page if you are logged in 
-        br
-        br
-        h4 Showing projects for: 
-        h4!= user.local.firstname
-        br
-        
-        each proj in projlist
-            div
-                a(href='/p/' + proj) localhost:5000/p/#{proj}
-
-        br
-        h4 Create New Project: #[a(href="/createproject") Here] 
-
-        br
-        br
-        a(href="/") Home
-        br
-        br
-        a(href="/logout") Logout 
+    div(class="container-fluid")
+        div(class="row")
+            div(class="col-sm-12")
+                h2 All Projects
+                table(class="table")
+                    thead
+                        tr
+                            th Project
+                            th Project Lead
+                            th URL
+                    tbody
+                        tr
+                            td Project Simulator 2016
+                            td Gabe Newell
+                            td https://www.github.com/volvoPS16
+                        tr
+                            td Weed Tracker
+                            td Snoop Dogg
+                            td https://www.github.com/420blazeit
+                        tr
+                            td Dank Meme Generator
+                            td Andy Salad Slayer
+                            td https://www.github.com/ilovememes

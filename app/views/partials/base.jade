@@ -18,8 +18,10 @@ html(lang="en")
                         a(class="navbar-brand" href="#")
                             span(class="glyphicon glyphicon-menu-hamburger" aria-hidden="true")
                     div(class="navbar-header")
-                        img(id="roo-icon" class="navbar-brand"  src = "/images/Roo_White.png")
-                        a(class="navbar-brand" href="/") RUNE 
+                        a(id="rune-logo" class="navbar-brand" href="/")
+                            div(id="rune-logo-img")
+                                img(src="/images/Roo.svg")
+                            div(id="rune-logo-text") Rune
                     ul(class="nav navbar-nav")
                         if loggedIn
                             li(class="dropdown")
@@ -37,12 +39,12 @@ html(lang="en")
                             else
                                 li
                                     a(role="button" class="btn-is-disabled") Create Task
-                                    
                         else 
                             li(class="dropdown")
                                 a(class="dropdown-toggle btn-is-disabled" data-toggle="dropdown") Projects
                             li
                                 a(role="button" class="btn-is-disabled") Create Task
+
                     if loggedIn
                         ul(class="nav navbar-nav navbar-right")
                             li(class="dropdown")
