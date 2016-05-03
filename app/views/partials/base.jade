@@ -5,6 +5,7 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet" type="text/css" href="/stylesheets/main.css")
+        link(rel="stylesheet" type="text/css" href="/stylesheets/custom.css")
         title Rune
         block headContent
 
@@ -17,7 +18,8 @@ html(lang="en")
                         a(class="navbar-brand" href="#")
                             span(class="glyphicon glyphicon-menu-hamburger" aria-hidden="true")
                     div(class="navbar-header")
-                        a(class="navbar-brand" href="/") Rune 
+                        img(id="roo-icon" class="navbar-brand"  src = "/images/Roo_White.png")
+                        a(class="navbar-brand" href="/") RUNE 
                     ul(class="nav navbar-nav")
                         if loggedIn
                             li(class="dropdown")
