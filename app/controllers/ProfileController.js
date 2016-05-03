@@ -5,6 +5,8 @@
 
 var User = require('../models/user.js');
 
+var async = require('async');
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -20,28 +22,50 @@ module.exports = function(app, passport) {
 
     app.get('/u/:userid', isLoggedIn, doesUserExist, function(req,res) {
 
-        User.findOne({'local.userid' : req.params.userid}, function(err,usr) {
-            if (err)
+        async.waterfall([
+            function getUser(callback) {
+                // Find the user details of the logged-in user by passing in the session-stored email as a search query
+                User.findOne({'local.email': req.user.local.email}, function(err,usr){
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, usr);
+                    }
+                });
+            },
+            function checkIfMe(userBlob, callback) {
+                // Check if the URL UserID parameter matches the logged in user's UserID.
+                // If they match, then the logged in user is accessing his own profile.
+                // When this happens, set var isMe = 1. This makes the user unable to add himself to a project
+
+                var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
+                var loggedInID = (userBlob.local.userid).toString() // Pulled from the logged in user's info
+                var isMe = (accessorID === loggedInID);
+
+                callback(null, userBlob, isMe);
+            }
+
+        ], function(err,userBlob, isMe) {
+            if (err) {
                 throw err;
-            else {
-                //we're accessing the logged in user if the queried url userid = authenticated userid
-                //and if isMe is true, then grey out the "add to project" button
-                var isMe = ((usr.local.userid).toString() === (req.user.local.userid).toString());
-                var fullname = usr.local.firstname + ' ' + usr.local.lastname;
-                var projectList = usr.local.projects;
-                //console.log(projectList);
+            } else {
                 res.render('profile.jade', {
+                    // These are navbar variables
                     loggedIn : req.isAuthenticated(),
-                    name : fullname,
-                    isMe : isMe,
-                    firstname : usr.local.firstname,
-                    projList : projectList
+                    projList : userBlob.local.projects,
+                    firstname : userBlob.local.firstname,
+
+                    // These are profile variables
+                    fullname : userBlob.local.firstname + ' ' + userBlob.local.lastname,
+                    isMe : isMe
+
                 });
             }
-        });
-    })
+        }); // End of async waterfall
 
-};
+    }) // End of app.get('/u/:userid')
+
+}; // End of module exports
 
 // Check if user is logged in, redirect to error page if they aren't
 function isLoggedIn(req, res, next) {

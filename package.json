@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "UCLA Spring 2016 CS130 Capstone Project",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/rzeng95/Rune.git"
+    "type": "git",
+    "url": "https://github.com/rzeng95/Rune.git"
   },
   "homepage": "https://github.com/rzeng95/Rune",
   "main": "app.js",
@@ -15,16 +15,31 @@
   },
   "keywords": [],
   "contributors": [
-      { "name" : "Justin Hou <apjhou@gmail.com>" },
-      { "name" : "Brandon Ly <brandonly101@g.ucla.edu>" },
-      { "name" : "Brendan Sio <bsio@ucla.edu>" },
-      { "name" : "Kevin Tong <kevin_tong100@gmail.com>" },
-      { "name" : "Alex Wang <alexlw92@yahoo.com>" },
-      { "name" : "Roland Zeng <roland.zeng@gmail.com>" },
-      { "name" : "Kevin Zuo <deliciousfishsticks@gmail.com>" }
+    {
+      "name": "Justin Hou <apjhou@gmail.com>"
+    },
+    {
+      "name": "Brandon Ly <brandonly101@g.ucla.edu>"
+    },
+    {
+      "name": "Brendan Sio <bsio@ucla.edu>"
+    },
+    {
+      "name": "Kevin Tong <kevin_tong100@gmail.com>"
+    },
+    {
+      "name": "Alex Wang <alexlw92@yahoo.com>"
+    },
+    {
+      "name": "Roland Zeng <roland.zeng@gmail.com>"
+    },
+    {
+      "name": "Kevin Zuo <deliciousfishsticks@gmail.com>"
+    }
   ],
   "license": "ISC",
   "dependencies": {
+    "async": "^1.5.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.0",
     "connect-flash": "^0.1.1",
