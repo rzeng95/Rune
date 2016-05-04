@@ -22,46 +22,27 @@ module.exports = function(app, passport) {
 
     app.get('/u/:userid', isLoggedIn, doesUserExist, function(req,res) {
 
-        async.waterfall([
-            function getUser(callback) {
-                // Find the user details of the logged-in user by passing in the session-stored email as a search query
-                User.findOne({'local.email': req.user.local.email}, function(err,usr){
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(null, usr);
-                    }
-                });
-            },
-            function checkIfMe(userBlob, callback) {
-                // Check if the URL UserID parameter matches the logged in user's UserID.
-                // If they match, then the logged in user is accessing his own profile.
-                // When this happens, set var isMe = 1. This makes the user unable to add himself to a project
-
-                var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
-                var loggedInID = (userBlob.local.userid).toString() // Pulled from the logged in user's info
-                var isMe = (accessorID === loggedInID);
-
-                callback(null, userBlob, isMe);
-            }
-
-        ], function(err,userBlob, isMe) {
+        User.findOne({'local.email': req.user.local.email}, function(err,usr){
             if (err) {
                 throw err;
             } else {
+                var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
+                var loggedInID = (usr.local.userid).toString() // Pulled from the logged in user's info
+                var isMe = (accessorID === loggedInID);
+
                 res.render('profile.jade', {
                     // These are navbar variables
                     loggedIn : req.isAuthenticated(),
-                    projList : userBlob.local.projects,
-                    firstname : userBlob.local.firstname,
+                    projList : req.user.local.projects,
+                    firstname : req.user.local.firstname,
 
                     // These are profile variables
-                    fullname : userBlob.local.firstname + ' ' + userBlob.local.lastname,
+                    fullname : req.user.local.firstname + ' ' + req.user.local.lastname,
                     isMe : isMe
 
                 });
             }
-        }); // End of async waterfall
+        });
 
     }) // End of app.get('/u/:userid')
 

@@ -45,10 +45,14 @@ module.exports = function(app, passport) {
             projectList = req.user.local.projects;
         }
         res.render('kanban.jade', {
+
+            // These are navbar variables
+            loggedIn : req.isAuthenticated(),
+            projList : projectList,
             firstname : firstname,
-            loggedIn : req.isAuthenticated(), // if not logged in, display the login form
+
             message : req.flash('loginMessage'),   // handle errors with logging in
-            projList : projectList
+
         });
     });
 
@@ -56,8 +60,11 @@ module.exports = function(app, passport) {
     // Project creation will probably be done using a pop-up modal object, which can be done via front-end bootstrap magic. Right now it's a separate page of its own located at /createproject
     app.get('/createproject', isLoggedIn, function(req,res) {
         res.render('createproject.jade', {
+            // These are navbar variables
+            loggedIn : req.isAuthenticated(),
+            projList : req.user.local.projects,
             firstname : req.user.local.firstname,
-            loggedIn : req.isAuthenticated()
+
         });
     });
 
@@ -93,11 +100,7 @@ module.exports = function(app, passport) {
                 req.flash('errorMessage', 'Something pretty bad happened...');
                 res.redirect('/error');
             } else {
-                //user.local.projectNames.push((newProject.projectname).toString());
-                //user.local.projectIDs.push((newProject.projectid).toString());
 
-                //user.local.projectkeys.push( projectKey );
-                //user.local.projectids.push( (newProject.projectid).toString() );
                 user.local.projects.push({
                     projectkey : projectKey,
                     projectid : (newProject.projectid).toString()
@@ -129,11 +132,15 @@ module.exports = function(app, passport) {
                 throw err;
             } else {
                 res.render('project.jade', {
+                    // These are navbar variables
+                    loggedIn : req.isAuthenticated(),
+                    projList : req.user.local.projects,
+                    firstname : req.user.local.firstname,
+
+                    // These are project variables
                     projName : proj.projectname,
                     projId : proj.projectid,
                     projMembers : proj.members,
-                    loggedIn : req.isAuthenticated(),
-                    firstname: req.user.local.firstname,
                     isProjectPage : true,
                 });
             }
