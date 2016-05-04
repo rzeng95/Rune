@@ -71,12 +71,14 @@ module.exports = function(app, passport) {
     });
 
     app.post('/createproject', Helper.isLoggedIn, function(req,res) {
+
         // Three things need to happen when a project is created:
         // 1. The project must contain the name and other relevant details passed to it from the web form
         // 2. The current logged-in user must automatically added to the project's member list
         // 3. The current logged-in user's database entry must be modified to add the project id to the user's "project" list
-        var projectName = req.body.projectname;
-        var projectKey = req.body.projectkey;
+        var rawProjectName = req.body.projectname;
+        var projectName = rawProjectName.trim();;
+        var projectKey = rawProjectName.replace(/\s+/g, "").substring(0,4).toUpperCase();
         var userEmail = req.user.local.email;
 
         // Add the user's email to the project's "members" array
@@ -113,6 +115,8 @@ module.exports = function(app, passport) {
                 });
             }
         });
+
+
     });
 
     // Right now, task creation is handled through a separate web form
