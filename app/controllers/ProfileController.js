@@ -20,14 +20,14 @@ module.exports = function(app, passport) {
         res.redirect('/u/'+req.user._id);
     });
 
-    app.get('/u/:userid', Helper.isLoggedIn, Helper.doesUserExist, function(req,res) {
+    app.get('/u/:userid', Helper.isLoggedIn, Helper.doesUserExist, function(req, res) {
 
-        User.findOne({'local.email': req.user.local.email}, function(err,usr){
+        User.findOne({'local.email': req.user.local.email}, function(err, usr){
             if (err) {
                 throw err;
             } else {
                 var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
-                var loggedInID = (usr.local.userid).toString() // Pulled from the logged in user's info
+                var loggedInID = (usr.local.userid).toString(); // Pulled from the logged in user's info
                 var isMe = (accessorID === loggedInID);
 
                 res.render('profile.jade', {
