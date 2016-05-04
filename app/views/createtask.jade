@@ -4,7 +4,7 @@ block bodyContent
     
     div(class="container")
         div(class="createtask login")
-            form(class="form-createtask" action="/createtask" method="post")
+            form(class="form-createtask" action="" method="post")
                 h2(class="form-signin-heading") Create a new task
                 div(class="col-xs-12" style="padding:4px")
                     label(for="taskname") Task Name
@@ -21,10 +21,10 @@ block bodyContent
                 div(class="col-xs-12" style="padding:4px")
                     label(for="status") Status
                     select(class="form-control" style="margin:2px" name="status")
-                        option(value=1) To-do
-                        option(value=2) In Progress
-                        option(value=3) Code Review
-                        option(value=4) Completed 
+                        option To-do
+                        option In Progress
+                        option Code Review
+                        option Completed 
                 div(class="col-xs-12" style="padding:4px")
                     label(for="priority") Priority
                     select(class="form-control" style="margin:2px" name="priority")
