@@ -27,8 +27,12 @@ module.exports = function(app, passport) {
                 throw err;
             } else {
                 var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
-                var loggedInID = (usr.local.userid).toString(); // Pulled from the logged in user's info
+                var loggedInID = (req.user.local.userid).toString(); // Pulled from the logged in user's info
+                console.log(accessorID);
+                console.log(loggedInID);
+
                 var isMe = (accessorID === loggedInID);
+                console.log(isMe);
 
                 res.render('profile.jade', {
                     // These are navbar variables
@@ -48,7 +52,7 @@ module.exports = function(app, passport) {
 
     //generates a page with all users, and a link to their profiles
     app.get('/users', Helper.isLoggedIn, function(req,res) {
-        
+
         User.find({}, function(err,users) {
             if (err) {
                 throw err;
