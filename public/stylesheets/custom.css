@@ -1,3 +1,7 @@
 #roo-icon{
 	padding: 12px 8px;
 }
+
+@media (max-width: 768px){
+	body{ margin-top:224px;}
+}

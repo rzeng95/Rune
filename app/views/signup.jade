@@ -1,28 +1,20 @@
-html
+extends ./partials/base.jade
 
-    head
-        title Signup 
-
-    body
-        h2 Signup Form
-        br
-        br
-        h4!= message 
-        br
-        br
-        form(action="/signup" method="post")
-            div
-                label First Name  
-                input(type="text" name="firstname")
-            div 
-                label Last Name 
-                input(type="text" name="lastname")
-            div
-                label Email 
-                input(type="text" name="email")
-            div
-                label Password 
-                input(type="text" name="password")
-            button(type="submit") Signup 
+block bodyContent 
+    
+    div(class="container")
+        div(class="login")
+            form(class="form-signup" action="/signup" method="post")
+                h2(class="form-signin-heading") Create a Rune account
+                div(class="col-xs-6" style="padding:4px")
+                    input(class="form-control" type="text" style="margin:2px" name="firstname" placeholder="First Name")
+                div(class="col-xs-6" style="padding:4px")
+                    input(class="form-control" type="text" style="margin:2px" name="lastname" placeholder="Last Name")
+                div(class="col-xs-12" style="padding:4px")
+                    input(class="form-control" type="text" style="margin:2px" name="email" placeholder="Email")
+                div(class="col-xs-12" style="padding:4px")
+                    input(class="form-control" type="password" style="margin:2px; margin-bottom:20px" name="password" placeholder="Password")
+                button(class="btn btn-primary btn-block" type="submit") Register! 
+                
+                
             
-        
