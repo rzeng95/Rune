@@ -17,15 +17,11 @@ block bodyContent
                             ul(class="nav nav-stacked")
                                 li
                                     div(class="btn-group")
-                                        button(class="btn dropdown-toggle" data-toggle="dropdown" href="#") Add to Project 
-                                            i(class="caret")
+                                        button(class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#") Add to Project 
+                                            span(class="glyphicon glyphicon-menu-right")
                                         ul(class="dropdown-menu" style="top: 0;left: 100%;")
-                                            li #[a(href="#") choice 1] 
-                                            li #[a(href="#") choice 2] 
-                                            li #[a(href="#") choice 3] 
-                                        
-                            //-form(action="adduser/" method="post")
-                            //-    button(type="submit" class="btn btn-primary") Add to Project
+                                            each proj in projList
+                                                li #[a(href="adduser/"+proj['projectid']) #{ proj['projectkey'] }]
                                 
                 div(class="col-sm-7")
                     div(class="row")
