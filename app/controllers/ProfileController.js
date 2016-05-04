@@ -20,7 +20,7 @@ module.exports = function(app, passport) {
         res.redirect('/u/'+req.user._id);
     });
 
-    app.get('/u/:userid', Helper.isLoggedIn, Helper.doesUserExist, function(req, res) {
+    app.get('/u/:userid/', Helper.isLoggedIn, Helper.doesUserExist, function(req, res) {
 
         User.findOne({'local.userid': req.params.userid}, function(err, usr){
             if (err) {
@@ -28,11 +28,8 @@ module.exports = function(app, passport) {
             } else {
                 var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
                 var loggedInID = (req.user.local.userid).toString(); // Pulled from the logged in user's info
-                console.log(accessorID);
-                console.log(loggedInID);
 
                 var isMe = (accessorID === loggedInID);
-                console.log(isMe);
 
                 res.render('profile.jade', {
                     // These are navbar variables

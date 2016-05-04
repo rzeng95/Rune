@@ -13,5 +13,5 @@ block bodyContent
                         each user in userlist
                             tr
                                 userlist
-                                td #[a(href='/u/'+user.local.userid) #{user.local.firstname+' '+user.local.lastname}]
+                                td #[a(href='/u/'+user.local.userid+'/') #{user.local.firstname+' '+user.local.lastname}]
                     
