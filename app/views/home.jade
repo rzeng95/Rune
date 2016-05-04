@@ -39,8 +39,23 @@ block bodyContent
                     h5=signupMessage
     else
         div(class="row" style="padding: 15px")
-            div(class="col-xs-4 col-xs-offset-4" style="padding:14px; background-color:white; opacity:0.85; border-radius:4px; text-align: center;")
-                | You have logged in! This area could possibly display a list of the projects you are a member of. 
+            //
+                div(class="col-xs-4 col-xs-offset-4" style="padding:14px; background-color:white; opacity:0.85; border-radius:4px; text-align: center;")
+                    | You have logged in! This area could possibly display a list of the projects you are a member of. 
+            div(class="col-sm-12" style="background-color:white; opacity:0.85; border-radius:4px;")
+                h2 My Projects 
+                if projList 
+                    table(class="table") 
+                        thead
+                            tr
+                                th Project Name
+                        tbody
+                            each proj in projList
+                                tr
+                                    projList
+                                    td #[a(href="/p/"+proj['projectid']+'/') #{ proj['projectkey'] }]
+                else
+                    p You have no projects! 
 
     script
         | document.body.style.backgroundImage = "url('/images/runite.png')";

@@ -81,7 +81,6 @@ module.exports = function(app, passport) {
             },
             function checkIfUserIsAlreadyMember(foundUser, foundProject, callback) {
                 var membersList = foundProject.members;
-                console.log(membersList);
                 if (membersList.indexOf(foundUser.local.email) === -1) {
                     callback(null, foundUser, foundProject);
                 } else {
