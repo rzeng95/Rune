@@ -9,6 +9,8 @@ var User = require('../models/user.js');
 var Project = require('../models/project.js');
 var Task = require('../models/task.js');
 
+var Helper = require('../models/helpers.js');
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -16,7 +18,7 @@ module.exports = function(app, passport) {
     // This will most likely be integrated with the profile screen, but currently exists as a stand-alone page.
     // =====================================
 
-    app.get('/projects', isLoggedIn, function(req,res) {
+    app.get('/projects', Helper.isLoggedIn, function(req,res) {
         // To get the list of all projects, we parse the variable 'req', which stores the user in the current session (this is handled by passport user authentication)
         // Each User database model contains a list of projects that the user is a member of (See /app/models/user.js).
         // Find the User matching the current user's email, and return the corresponding project list
@@ -58,7 +60,7 @@ module.exports = function(app, passport) {
 
 
     // Project creation will probably be done using a pop-up modal object, which can be done via front-end bootstrap magic. Right now it's a separate page of its own located at /createproject
-    app.get('/createproject', isLoggedIn, function(req,res) {
+    app.get('/createproject', Helper.isLoggedIn, function(req,res) {
         res.render('createproject.jade', {
             // These are navbar variables
             loggedIn : req.isAuthenticated(),
@@ -68,7 +70,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.post('/createproject', isLoggedIn, function(req,res) {
+    app.post('/createproject', Helper.isLoggedIn, function(req,res) {
         // Three things need to happen when a project is created:
         // 1. The project must contain the name and other relevant details passed to it from the web form
         // 2. The current logged-in user must automatically added to the project's member list
@@ -115,16 +117,16 @@ module.exports = function(app, passport) {
 
     // Right now, task creation is handled through a separate web form
     // This can probably be handled later by front-end pop-up modal
-    app.get('/p/:projectid/createtask', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
+    app.get('/p/:projectid/createtask', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
         res.render('createtask.jade');
     });
 
-    app.post('/p/:projectid/createtask', isLoggedIn, isUserProjectMember, function(req,res) {
+    app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.isUserProjectMember, function(req,res) {
         var newTask = new Task();
     });
 
     // Each project gets its own site with its own unique url. Only logged-in users who are members of that project can access it.
-    app.get('/p/:projectid/', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
+    app.get('/p/:projectid/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
         var projectId = req.params.projectid;
         // Knowing the project id because it's passed in by the url, the entire project database entry can be accessed using mongoose's findById method
         Project.findById(projectId, function(err, proj) {
@@ -146,7 +148,7 @@ module.exports = function(app, passport) {
             }
         });
     });
-
+/*
     app.post('/p/:projectid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         //handle creating new tasks
 
@@ -155,42 +157,5 @@ module.exports = function(app, passport) {
     app.get('/p/:projectid/:taskid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
 
     });
-
-};
-
-// Check if user is logged in, redirect to error page if they aren't
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-         res.redirect('/login');
-    }
-}
-
-function isUserProjectMember(req,res,next) {
-    //Find the current user and make sure they're part of the project being accessed
-    Project.findOne({'members': req.user.local.email, 'projectid': req.params.projectid}, function(err,user) {
-        if (err) {
-            throw err;
-        } else if (!user) {
-            req.flash('errorMessage', 'Not a member of project');
-            res.redirect('/error');
-        } else {
-            return next();
-        }
-    });
-}
-
-function doesProjectExist(req,res,next) {
-    //Make sure that if the project url is manually entered, that it exists
-    Project.findOne({'projectid': req.params.projectid}, function(err,proj){
-        if (err) {
-            throw err;
-        } else if (!proj) {
-            req.flash('errorMessage', 'Project does not exist');
-            res.redirect('/error');
-        } else {
-            return next();
-        }
-    });
-}
+*/
+}; // End of module.exports

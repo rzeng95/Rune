@@ -4,6 +4,7 @@
  * Currently it controls rendering homepage, login, signup, logout, and error
  *
  **/
+var Helper = require('../models/helpers.js');
 
 module.exports = function(app, passport) {
 
@@ -76,12 +77,3 @@ module.exports = function(app, passport) {
         res.render('error.jade', { errorMessage : req.flash('errorMessage') } );
     });
 };
-
-// Check if user is logged in, redirect to error page if they aren't
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        res.redirect('/login');
-    }
-}
