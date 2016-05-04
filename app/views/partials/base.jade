@@ -24,6 +24,8 @@ html(lang="en")
                             div(id="rune-logo-text") Rune
                     ul(class="nav navbar-nav")
                         if loggedIn
+                            li(class="dropdown") 
+                                a(href='/users') Users
                             li(class="dropdown")
                                 a(href="#" class="dropdown-toggle" data-toggle="dropdown") Projects
                                 ul(class="dropdown-menu")

@@ -22,7 +22,7 @@ module.exports = function(app, passport) {
 
     app.get('/u/:userid', Helper.isLoggedIn, Helper.doesUserExist, function(req, res) {
 
-        User.findOne({'local.email': req.user.local.email}, function(err, usr){
+        User.findOne({'local.userid': req.params.userid}, function(err, usr){
             if (err) {
                 throw err;
             } else {
@@ -37,7 +37,7 @@ module.exports = function(app, passport) {
                     firstname : req.user.local.firstname,
 
                     // These are profile variables
-                    fullname : req.user.local.firstname + ' ' + req.user.local.lastname,
+                    fullname : usr.local.firstname + ' ' + usr.local.lastname,
                     isMe : isMe
 
                 });
@@ -45,5 +45,24 @@ module.exports = function(app, passport) {
         });
 
     }) // End of app.get('/u/:userid')
+
+    //generates a page with all users, and a link to their profiles
+    app.get('/users', Helper.isLoggedIn, function(req,res) {
+        
+        User.find({}, function(err,users) {
+            if (err) {
+                throw err;
+            } else {
+                console.log(users);
+                var projectList = req.user.local.projects;
+                res.render('users.jade', {
+                    user : req.user,
+                    userlist : users,
+                    loggedIn : req.isAuthenticated(),
+                    firstname: req.user.local.firstname
+                });
+            }
+        });
+    }); //End of app.get('/users')
 
 }; // End of module exports

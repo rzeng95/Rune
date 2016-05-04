@@ -161,6 +161,24 @@ module.exports = function(app, passport) {
             }
         });
     });
+
+    app.get('/users', /*Helper.isLoggedIn,*/ function(req,res) {
+        
+        User.find({}, function(err,users) {
+            if (err) {
+                throw err;
+            } else {
+                console.log(users);
+                // var projectList = req.user.local.projects;
+                res.render('users.jade', {
+                    user : req.user,
+                    userlist : users,
+                    loggedIn : req.isAuthenticated()
+                });
+            }
+        });
+    });
+
 /*
     app.post('/p/:projectid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
         //handle creating new tasks

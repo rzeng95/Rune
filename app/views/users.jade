@@ -1,0 +1,17 @@
+extends ./partials/base.jade
+
+block bodyContent 
+    div(class="container-fluid")
+        div(class="row")
+            div(class="col-sm-12")
+                h2 All Users
+                table(class="table") 
+                    thead
+                        tr
+                            th Profile
+                    tbody
+                        each user in userlist
+                            tr
+                                userlist
+                                td #[a(href='/u/'+user.local.userid) #{user.local.firstname+' '+user.local.lastname}]
+                    
