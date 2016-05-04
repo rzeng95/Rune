@@ -1,18 +1,35 @@
-html
+extends ./partials/base.jade
 
-    head
-        title Create Task
+block bodyContent 
     
-    body
-        h2 Create Task
-        br 
-        br
-        form(action="" method="post")
-            div
-                label Task Name
-                input(type="text" name="taskname")
-            div 
-                label Task Description
-                input(type="text" name="taskdescription")
-
-            button(type="submit") Create Task  
+    div(class="container")
+        div(class="createtask login")
+            form(class="form-createtask" action="/createtask" method="post")
+                h2(class="form-signin-heading") Create a new task
+                div(class="col-xs-12" style="padding:4px")
+                    label(for="taskname") Task Name
+                    input(class="form-control" type="text" style="margin:2px" name="taskname" placeholder="Task Name")
+                div(class="col-xs-12" style="padding:4px")
+                    label(for="taskdescription") Task Description
+                    textarea(class="form-control" rows="4" style="margin:2px" name="taskdescription" placeholder="Description")
+                div(class="col-xs-12" style="padding:4px")
+                    label(for="assignedto") Assigned to
+                    select(class="form-control" style="margin:2px" name="assignedto")
+                        option Alex
+                        option Roland
+                        option Can you not
+                div(class="col-xs-12" style="padding:4px")
+                    label(for="status") Status
+                    select(class="form-control" style="margin:2px" name="status")
+                        option(value=1) To-do
+                        option(value=2) In Progress
+                        option(value=3) Code Review
+                        option(value=4) Completed 
+                div(class="col-xs-12" style="padding:4px")
+                    label(for="priority") Priority
+                    select(class="form-control" style="margin:2px" name="priority")
+                        option High
+                        option Medium
+                        option Low
+                button(class="btn btn-primary btn-block" type="submit") Submit 
+                
