@@ -122,7 +122,13 @@ module.exports = function(app, passport) {
     // Right now, task creation is handled through a separate web form
     // This can probably be handled later by front-end pop-up modal
     app.get('/p/:projectid/createtask/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
-        res.render('createtask.jade');
+        res.render('createtask.jade', {
+            // These are navbar variables
+            loggedIn : req.isAuthenticated(),
+            projList : req.user.local.projects,
+            firstname : req.user.local.firstname,
+
+        });
     });
 
     app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.isUserProjectMember, function(req,res) {
