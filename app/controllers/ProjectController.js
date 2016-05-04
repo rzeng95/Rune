@@ -151,9 +151,10 @@ module.exports = function(app, passport) {
 
                     // These are project variables
                     projName : proj.projectname,
+                    projKey : proj.projectkey,
                     projId : proj.projectid,
                     projMembers : proj.members,
-                    isProjectPage : true,
+                    isProjectPage : true
                 });
             }
         });
