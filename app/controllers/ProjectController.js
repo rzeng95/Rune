@@ -125,10 +125,12 @@ module.exports = function(app, passport) {
         console.log("\n\n==============");
         console.log("Project ID: " + req.params.projectid);
         console.log("User: " + req.user.local);
+        console.log("Form Parameters: " + req.body.taskname + " , " + req.body.taskdescription);
         console.log("==============\n\n");
         // We want to create a new Task object (see models/task.js)
         // To see how mongoose creates and saves objects, see app.post('/createproject') endpoint
         // make sure the current logged in user (saved under req.user.local) is the "reporter" of the task
+        // Make sure the project key (e.g. JIRA) is appended to the task ID (so our task ID is called JIRA-649 for example)
         var newTask = new Task();
 
 
