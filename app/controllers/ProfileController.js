@@ -53,7 +53,6 @@ module.exports = function(app, passport) {
             if (err) {
                 throw err;
             } else {
-                console.log(users);
                 var projectList = req.user.local.projects;
                 res.render('users.jade', {
                     user : req.user,
