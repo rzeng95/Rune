@@ -157,4 +157,4 @@ module.exports = function(app, passport) {
         });
     }); //End of app.get('/users')
 
-}; // End of module exports
+} // End of module exports

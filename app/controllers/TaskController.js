@@ -4,6 +4,7 @@
 
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
+var Task = require('../models/task.js');
 
 var Helper = require('../models/helpers.js');
 
@@ -31,7 +32,26 @@ module.exports = function(app, passport) {
         // To see how mongoose creates and saves objects, see app.post('/createproject') endpoint
         // make sure the current logged in user (saved under req.user.local) is the "reporter" of the task
         // Make sure the project key (e.g. JIRA) is appended to the task ID (so our task ID is called JIRA-649 for example)
+
         var newTask = new Task();
+        newTask.projectid = req.params.projectid;
+        newTask.taskname = req.body.taskname;
+        newTask.taskid = 1;
+        newTask.taskdescription = req.body.taskdescription;
+        newTask.createdby = req.user.local.firstname + ' ' + req.user.local.lastname;
+        newTask.assignedto = req.body.assignedto;
+        newTask.status = req.body.status;
+        newTask.datecreated = new Date().toJSON().slice(0,10);
+        newTask.priority = req.body.priority;
+        newTask.issuetype = req.body.issuetype;
+
+        newTask.save(function(err) {
+            if (err) {
+                throw err;
+            } else {
+                console.log('task created ');
+            }
+        });
 
 
         res.redirect('/p/' + req.params.projectid + '/');

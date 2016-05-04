@@ -76,4 +76,4 @@ module.exports = function(app, passport) {
     app.get('/error', function(req,res) {
         res.render('error.jade', { errorMessage : req.flash('errorMessage') } );
     });
-};
+}
