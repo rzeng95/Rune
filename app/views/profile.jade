@@ -7,10 +7,10 @@ block bodyContent
             div(class="row")
                 div(class="col-sm-3" style="padding-top:24px")
                     div(class="row")
-                        img(src="/images/apple.png" class="img-rounded" alt="" width="200px" height="200px")
+                        img(src="/images/" + picCode + ".png" class="img-rounded" alt="" width="100px" height="100px")
                     div(class="row")
                         h2=fullname
-                        h4 #[i Subcaption goes here]
+                        h4=email
                         if isMe
                             button(type="button" class="btn btn-primary" disabled) Add to Project
                         else 
@@ -24,10 +24,30 @@ block bodyContent
                                                 li #[a(href="adduser/"+proj['projectid']) #{ proj['projectkey'] }]
                                 
                 div(class="col-sm-7")
-                    div(class="row")
-                        h2(class="col-sm-7") Description
-                    div(class="row")
-                        h4(class="col-sm-7") description goes here 
+                    //
+                        div(class="row")
+                            h2(class="col-sm-7") Description
+                        div(class="row")
+                            h4(class="col-sm-7") description goes here 
+
+                    if userProjects 
+                        table(class="table") 
+                            thead
+                                tr
+                                    th Project Name
+                            tbody
+                                each proj in userProjects
+                                    tr
+                                        projList
+                                        td #[a(href="/p/"+proj['projectid']+'/') #{ proj['projectkey'] }]
+                    else
+                        p You have no projects! 
+
+
+
+
+
+
 
                         
             div(class="row" style="height:20px")

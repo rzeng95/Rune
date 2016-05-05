@@ -34,6 +34,7 @@ module.exports = function(app, passport) {
 
                 var isMe = (accessorID === loggedInID);
 
+                var picCode = 'roo_red';
                 res.render('profile.jade', {
                     // These are navbar variables
                     loggedIn : req.isAuthenticated(),
@@ -42,7 +43,10 @@ module.exports = function(app, passport) {
 
                     // These are profile variables
                     fullname : usr.local.firstname + ' ' + usr.local.lastname,
-                    isMe : isMe
+                    email : usr.local.email,
+                    isMe : isMe,
+                    picCode : picCode,
+                    userProjects : usr.local.projects 
 
                 });
             }
