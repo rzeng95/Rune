@@ -94,6 +94,15 @@ module.exports = function(app, passport) {
 
     // Each project gets its own site with its own unique url. Only logged-in users who are members of that project can access it.
     app.get('/p/:projectid/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
+
+        // Variables that need to be passed into the view:
+            // Overview Tab:
+                // Project Name
+                // Project Key
+                // Project ID
+
+
+        
         var projectId = req.params.projectid;
         // Knowing the project id because it's passed in by the url, the entire project database entry can be accessed using mongoose's findById method
         Project.findById(projectId, function(err, proj) {
@@ -115,6 +124,9 @@ module.exports = function(app, passport) {
                 });
             }
         });
+
+
+
     });
 
 /*
