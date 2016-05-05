@@ -36,8 +36,8 @@ block bodyContent
                     div(class="row" style="padding:4px 4px 0px 4px")
                         div(class="col-xs-12" style="padding:4px 4px 0px 4px")
                             p Pick a user colour:
-                            div(id="rune-icon-small-red" onclick='selectIcon(0)')
-                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                            div(id="rune-icon-small-red"  onclick='selectIcon(0)')
+                                img(class="roo-icon-small" src="/images/Roo.svg")
                                 img(class="check-icon-small" src="/images/check.svg" style="opacity: 1")
                             div(id="rune-icon-small-redorange" onclick='selectIcon(1)')
                                 img(class="roo-icon-small"  src="/images/Roo.svg")
@@ -79,8 +79,9 @@ block bodyContent
                             p(style="font-size:xx-small") By clicking Sign Up, your consent to mining rune for the rest of your life.
                     div(class="row" style="padding:4px")
                         div(class="col-xs-12" style="padding:4px")
-                            button(type="submit" class="btn btn-primary" style="width:140px") Sign Up
+                            button(id="submit" type="submit" class="btn btn-primary" style="width:140px") Sign Up
                     h5(style="color:#e60000")=signupMessage
+
     else
         div(class="row" style="padding: 15px")
             //
@@ -148,11 +149,13 @@ block bodyContent
         confirmPassword.onkeyup = validatePwd;
         confirmPassword.onfocus = enableConfirmPwdBorderColor;
         confirmPassword.onblur = disableConfirmPwdBorderColor;
-
+    
+    script(src="https://code.jquery.com/jquery-1.10.2.js")
+    
     script.
         var checks = document.getElementsByClassName("check-icon-small");
         var selected = 0;
-        
+        console.log(selected);
         var selectIcon = function(selectColor) {
             if(selected != selectColor) {
                 checks[selected].style.opacity = 0;
@@ -160,3 +163,26 @@ block bodyContent
                 selected = selectColor;
             }         
         }
+        
+        $(document).ready(function(){
+            $('#submit').click(function() {
+                console.log('button pushed')
+                // get value of password 
+                //var pw = document.findbyname(name="password") // for example, password = hello 
+                // get value of name
+                //var name = document.findbyname(name="firstname")
+                // get value of roo 
+                // get value of email 
+                // make ajax post request with those results 
+                
+            
+            })
+        });
+          
+        
+        
+
+            
+        
+        
+        
