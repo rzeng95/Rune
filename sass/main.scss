@@ -63,6 +63,24 @@ $color-border: #E8E8E8;
     }
 }
 
+// Project page CSS style specifications.
+.project-header {
+    background-color: $color-3;
+    margin-top: 45px;
+    // border-style: solid;
+    // border-width: 0 0 1px 0;
+    // border-color: $color-border;
+    // padding: 0 20px;
+    font-size: 20px;
+    z-index: 900;
+}
+
+.project-pages {
+    li {
+        float: right;
+    }
+}
+
 // Kanban board CSS style specifications.
 .kanban-header {
     background-color: $color-3;
@@ -76,23 +94,26 @@ $color-border: #E8E8E8;
 }
 
 .kanban-board {
-    padding: 0 0 0 0;
+    padding: 0;
+    padding-bottom: 40px;
     margin: 0;
-    margin-top: 180px;
+    margin-top: 220px;
     width: 100%;
 }
 
 .kanban-board-header {
-    margin-top: 114px;
+    margin-top: 158px;
     z-index: 800;
 }
 
 .kanban-board-row {
     display: table;
+    box-sizing: border-box;
+    table-layout: fixed;
     margin: 0;
-    padding: 0 10px;
+    border-spacing: 10px 0;
     width: 100%;
-    min-height: 200px;
+    min-height: 160px;
     z-index: -1;
 }
 
@@ -101,7 +122,8 @@ $color-border: #E8E8E8;
 }
 
 .kanban-board-member {
-    margin: 0 20px;
+    margin: 0 22px;
+    margin-bottom: 10px;
     padding: 20px 0 10px 0;
     border: none;
     border-width: 0 0 1px 0;
@@ -112,14 +134,17 @@ $color-border: #E8E8E8;
 .kanban-col {
     display: table-cell;
     float: none;
-    width: 20%;
+    width: 25%;
     vertical-align: top;
-    border: 10px solid $color-2;
     padding: 0 0 20px 0;
     background-color: $color-3;
 }
 
 .kanban-col-header {
+    display: table-cell;
+    float: none;
+    width: 25%;
+    vertical-align: top;
     padding: 10px 0 0 0;
     font-weight: bold;
     background-color: $color-2;
@@ -130,15 +155,11 @@ $color-border: #E8E8E8;
     padding-bottom: 10px;
 }
 
-.kanban-task-filler {
-    min-height: 160px;
-}
-
 .kanban-task {
     background-color: $color-2;
     border: 1px solid $color-border;
     padding: 15px;
-    min-height: 160px;
+    min-height: 140px;
     height: 100%;
     z-index: 10;
 }

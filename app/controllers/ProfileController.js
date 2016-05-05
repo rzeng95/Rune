@@ -5,9 +5,7 @@
 
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
-
 var Helper = require('../models/helpers.js');
-
 var async = require('async');
 
 module.exports = function(app, passport) {
@@ -47,7 +45,6 @@ module.exports = function(app, passport) {
                     isMe : isMe,
                     picCode : picCode,
                     userProjects : usr.local.projects 
-
                 });
             }
         });
@@ -61,9 +58,7 @@ module.exports = function(app, passport) {
         // Make sure the user isn't already a member of the project
         // Add the user to that project. Save
         // Add the project to the user's list of projects. Save
-
         async.waterfall([
-
             function findUser(callback) {
                 User.findOne({'local.userid' : req.params.userid}, function(err,foundUser) {
                     if (err) {
@@ -118,7 +113,6 @@ module.exports = function(app, passport) {
 
                 });
             }
-
         ], function(err){
             if (err) {
                 if (err == 1) {
@@ -131,17 +125,11 @@ module.exports = function(app, passport) {
             } else {
                 res.redirect('/p/' + req.params.projectid + '/');
             }
-
         });
-
     });
-
-
-
 
     //generates a page with all users, and a link to their profiles
     app.get('/users', Helper.isLoggedIn, function(req,res) {
-
         User.find({}, function(err,users) {
             if (err) {
                 throw err;
@@ -152,8 +140,6 @@ module.exports = function(app, passport) {
                     loggedIn : req.isAuthenticated(),
                     projList : req.user.local.projects,
                     firstname : req.user.local.firstname,
-
-
                     user : req.user,
                     userlist : users
                 });

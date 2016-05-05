@@ -8,7 +8,6 @@
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
 var Task = require('../models/task.js');
-
 var Helper = require('../models/helpers.js');
 
 module.exports = function(app, passport) {
@@ -17,11 +16,11 @@ module.exports = function(app, passport) {
     // PROJECT LIST
     // This will most likely be integrated with the profile screen, but currently exists as a stand-alone page.
     // =====================================
-
     app.get('/projects', Helper.isLoggedIn, function(req,res) {
-        // To get the list of all projects, we parse the variable 'req', which stores the user in the current session (this is handled by passport user authentication)
-        // Each User database model contains a list of projects that the user is a member of (See /app/models/user.js).
-        // Find the User matching the current user's email, and return the corresponding project list
+        // To get the list of all projects, we parse the variable 'req', which stores the user in the current session
+        // (this is handled by passport user authentication). Each User database model contains a list of projects
+        // that the user is a member of (See /app/models/user.js). Find the User matching the current user's email,
+        // and return the corresponding project list.
         User.findOne({'local.email': req.user.local.email}, function(err,user) {
             if (err) {
                 throw err;
@@ -36,42 +35,18 @@ module.exports = function(app, passport) {
         });
     });
 
-
-
-    // Render the kanban page.
-    app.get('/kanban', function(req, res) {
-        var firstname = '';
-        var projectList = [];
-        if (req.isAuthenticated()) {
-            firstname = req.user.local.firstname;
-            projectList = req.user.local.projects;
-        }
-        res.render('kanban.jade', {
-
-            // These are navbar variables
-            loggedIn : req.isAuthenticated(),
-            projList : projectList,
-            firstname : firstname,
-
-            message : req.flash('loginMessage'),   // handle errors with logging in
-
-        });
-    });
-
-
-    // Project creation will probably be done using a pop-up modal object, which can be done via front-end bootstrap magic. Right now it's a separate page of its own located at /createproject
+    // Project creation will probably be done using a pop-up modal object, which can be done via front-end bootstrap magic.
+    // Right now it's a separate page of its own located at /createproject
     app.get('/createproject', Helper.isLoggedIn, function(req,res) {
         res.render('createproject.jade', {
             // These are navbar variables
             loggedIn : req.isAuthenticated(),
             projList : req.user.local.projects,
-            firstname : req.user.local.firstname,
-
+            firstname : req.user.local.firstname
         });
     });
 
     app.post('/createproject', Helper.isLoggedIn, function(req,res) {
-
         // Three things need to happen when a project is created:
         // 1. The project must contain the name and other relevant details passed to it from the web form
         // 2. The current logged-in user must automatically added to the project's member list
@@ -115,8 +90,6 @@ module.exports = function(app, passport) {
                 });
             }
         });
-
-
     });
 
     // Each project gets its own site with its own unique url. Only logged-in users who are members of that project can access it.
