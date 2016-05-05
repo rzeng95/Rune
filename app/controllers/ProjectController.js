@@ -100,7 +100,7 @@ module.exports = function(app, passport) {
             if (err) {
                 throw err;
             } else {
-                res.render('project.jade', {
+                res.render('project_test.jade', {
                     // These are navbar variables
                     loggedIn : req.isAuthenticated(),
                     projList : req.user.local.projects,
