@@ -7,7 +7,10 @@ block bodyContent
             div(class="row")
                 div(class="col-sm-3" style="padding-top:24px")
                     div(class="row")
-                        img(src="/images/" + color + ".png" class="img-rounded" alt="" width="100px" height="100px")
+                        div(id="rune-icon-profile-" + userColor)
+                            img(class="roo-icon-profile" src="/images/Roo.svg")
+                            div(class="initials-icon-profile") 
+                                p=initials
                     div(class="row")
                         h2=fullname
                         h4=email

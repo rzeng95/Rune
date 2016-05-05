@@ -982,7 +982,7 @@ img { vertical-align: middle; }
 .img-responsive { display: block; max-width: 100%; height: auto; }
 
 /* line 86, ../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/bootstrap-sass-3.3.6/assets/stylesheets/bootstrap/_scaffolding.scss */
-.img-rounded, #rune-icon-small-red .roo-icon-small, #rune-icon-small-red .check-icon-small, #rune-icon-small-redorange .roo-icon-small, #rune-icon-small-redorange .check-icon-small, #rune-icon-small-orange .roo-icon-small, #rune-icon-small-orange .check-icon-small, #rune-icon-small-yelloworange .roo-icon-small, #rune-icon-small-yelloworange .check-icon-small, #rune-icon-small-yellow .roo-icon-small, #rune-icon-small-yellow .check-icon-small, #rune-icon-small-yellowgreen .roo-icon-small, #rune-icon-small-yellowgreen .check-icon-small, #rune-icon-small-green .roo-icon-small, #rune-icon-small-green .check-icon-small, #rune-icon-small-bluegreen .roo-icon-small, #rune-icon-small-bluegreen .check-icon-small, #rune-icon-small-blue .roo-icon-small, #rune-icon-small-blue .check-icon-small, #rune-icon-small-bluepurple .roo-icon-small, #rune-icon-small-bluepurple .check-icon-small, #rune-icon-small-purple .roo-icon-small, #rune-icon-small-purple .check-icon-small, #rune-icon-small-redpurple .roo-icon-small, #rune-icon-small-redpurple .check-icon-small { border-radius: 6px; }
+.img-rounded, #rune-icon-small-red .roo-icon-small, #rune-icon-small-red .check-icon-small, #rune-icon-small-redorange .roo-icon-small, #rune-icon-small-redorange .check-icon-small, #rune-icon-small-orange .roo-icon-small, #rune-icon-small-orange .check-icon-small, #rune-icon-small-yelloworange .roo-icon-small, #rune-icon-small-yelloworange .check-icon-small, #rune-icon-small-yellow .roo-icon-small, #rune-icon-small-yellow .check-icon-small, #rune-icon-small-yellowgreen .roo-icon-small, #rune-icon-small-yellowgreen .check-icon-small, #rune-icon-small-green .roo-icon-small, #rune-icon-small-green .check-icon-small, #rune-icon-small-bluegreen .roo-icon-small, #rune-icon-small-bluegreen .check-icon-small, #rune-icon-small-blue .roo-icon-small, #rune-icon-small-blue .check-icon-small, #rune-icon-small-bluepurple .roo-icon-small, #rune-icon-small-bluepurple .check-icon-small, #rune-icon-small-purple .roo-icon-small, #rune-icon-small-purple .check-icon-small, #rune-icon-small-redpurple .roo-icon-small, #rune-icon-small-redpurple .check-icon-small, #rune-icon-profile-red .roo-icon-profile, #rune-icon-profile-redorange .roo-icon-profile, #rune-icon-profile-orange .roo-icon-profile, #rune-icon-profile-yelloworange .roo-icon-profile, #rune-icon-profile-yellow .roo-icon-profile, #rune-icon-profile-yellowgreen .roo-icon-profile, #rune-icon-profile-green .roo-icon-profile, #rune-icon-profile-bluegreen .roo-icon-profile, #rune-icon-profile-blue .roo-icon-profile, #rune-icon-profile-bluepurple .roo-icon-profile, #rune-icon-profile-purple .roo-icon-profile, #rune-icon-profile-redpurple .roo-icon-profile { border-radius: 6px; }
 
 /* line 93, ../../../../../../Ruby23-x64/lib/ruby/gems/2.3.0/gems/bootstrap-sass-3.3.6/assets/stylesheets/bootstrap/_scaffolding.scss */
 .img-thumbnail { padding: 4px; line-height: 1.42857143; background-color: #F8F8F8; border: 1px solid #ddd; border-radius: 4px; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out; display: inline-block; max-width: 100%; height: auto; }
@@ -3667,147 +3667,207 @@ button.close { padding: 0; cursor: pointer; background: transparent; border: 0; 
 /* line 35, ../../sass/main.scss */
 #rune-logo-text { display: inline; padding-left: 5px; position: relative; top: -2px; font-family: "Roboto-Black"; font-size: 24px; }
 
-/* line 65, ../../sass/main.scss */
+/* line 83, ../../sass/main.scss */
 #rune-icon-small-red { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-red .roo-icon-small { background-color: #EB222A; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-red .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 66, ../../sass/main.scss */
+/* line 84, ../../sass/main.scss */
 #rune-icon-small-redorange { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-redorange .roo-icon-small { background-color: #F36F26; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-redorange .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 67, ../../sass/main.scss */
+/* line 85, ../../sass/main.scss */
 #rune-icon-small-orange { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-orange .roo-icon-small { background-color: #F68F22; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-orange .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 68, ../../sass/main.scss */
+/* line 86, ../../sass/main.scss */
 #rune-icon-small-yelloworange { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-yelloworange .roo-icon-small { background-color: #FEC317; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-yelloworange .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 69, ../../sass/main.scss */
+/* line 87, ../../sass/main.scss */
 #rune-icon-small-yellow { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-yellow .roo-icon-small { background-color: #F4EA28; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-yellow .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 70, ../../sass/main.scss */
+/* line 88, ../../sass/main.scss */
 #rune-icon-small-yellowgreen { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-yellowgreen .roo-icon-small { background-color: #9BCA3C; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-yellowgreen .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 71, ../../sass/main.scss */
+/* line 89, ../../sass/main.scss */
 #rune-icon-small-green { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-green .roo-icon-small { background-color: #04AA51; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-green .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 72, ../../sass/main.scss */
+/* line 90, ../../sass/main.scss */
 #rune-icon-small-bluegreen { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-bluegreen .roo-icon-small { background-color: #1991CD; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-bluegreen .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 73, ../../sass/main.scss */
+/* line 91, ../../sass/main.scss */
 #rune-icon-small-blue { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-blue .roo-icon-small { background-color: #0857A3; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-blue .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 74, ../../sass/main.scss */
+/* line 92, ../../sass/main.scss */
 #rune-icon-small-bluepurple { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-bluepurple .roo-icon-small { background-color: #6C459B; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-bluepurple .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 75, ../../sass/main.scss */
+/* line 93, ../../sass/main.scss */
 #rune-icon-small-purple { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-purple .roo-icon-small { background-color: #A54499; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-purple .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 76, ../../sass/main.scss */
+/* line 94, ../../sass/main.scss */
 #rune-icon-small-redpurple { display: inline; margin: 0px 4px 0px 0px; }
-/* line 48, ../../sass/main.scss */
+/* line 61, ../../sass/main.scss */
 #rune-icon-small-redpurple .roo-icon-small { background-color: #E34197; position: relative; height: 40px; z-index: -1; }
-/* line 56, ../../sass/main.scss */
+/* line 65, ../../sass/main.scss */
 #rune-icon-small-redpurple .check-icon-small { position: absolute; height: 40px; margin: 0px -40px; opacity: 0; }
 
-/* line 78, ../../sass/main.scss */
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-red .roo-icon-profile { background-color: #EB222A; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-red .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-redorange .roo-icon-profile { background-color: #F36F26; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-redorange .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-orange .roo-icon-profile { background-color: #F68F22; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-orange .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-yelloworange .roo-icon-profile { background-color: #FEC317; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-yelloworange .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-yellow .roo-icon-profile { background-color: #F4EA28; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-yellow .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-yellowgreen .roo-icon-profile { background-color: #9BCA3C; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-yellowgreen .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-green .roo-icon-profile { background-color: #04AA51; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-green .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-bluegreen .roo-icon-profile { background-color: #1991CD; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-bluegreen .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-blue .roo-icon-profile { background-color: #0857A3; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-blue .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-bluepurple .roo-icon-profile { background-color: #6C459B; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-bluepurple .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-purple .roo-icon-profile { background-color: #A54499; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-purple .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 45, ../../sass/main.scss */
+#rune-icon-profile-redpurple .roo-icon-profile { background-color: #E34197; position: relative; height: 200px; z-index: -1; }
+/* line 49, ../../sass/main.scss */
+#rune-icon-profile-redpurple .initials-icon-profile { position: absolute; margin: -190px 20px; color: white; font-family: "Roboto-Black"; font-size: 56px; }
+
+/* line 109, ../../sass/main.scss */
 #hidden-color-input { position: absolute; visibility: hidden; }
 
-/* line 83, ../../sass/main.scss */
+/* line 114, ../../sass/main.scss */
 .login { width: 300px; margin-left: auto; margin-right: auto; padding: 15px; padding-top: 50px; }
-/* line 89, ../../sass/main.scss */
+/* line 120, ../../sass/main.scss */
 .login h2 { text-align: center; }
-/* line 92, ../../sass/main.scss */
+/* line 123, ../../sass/main.scss */
 .login input { margin: 15px 0; }
-/* line 95, ../../sass/main.scss */
+/* line 126, ../../sass/main.scss */
 .login input:hover { background-color: rgba(255, 255, 255, 0.4); }
-/* line 98, ../../sass/main.scss */
+/* line 129, ../../sass/main.scss */
 .login button { margin: 8px 0; }
-/* line 101, ../../sass/main.scss */
+/* line 132, ../../sass/main.scss */
 .login a { padding-right: 58px; }
 
-/* line 107, ../../sass/main.scss */
+/* line 138, ../../sass/main.scss */
 .project-header { background-color: #EEEEEE; margin-top: 45px; font-size: 20px; z-index: 900; }
 
-/* line 119, ../../sass/main.scss */
+/* line 150, ../../sass/main.scss */
 .project-pages li { float: right; }
 
-/* line 125, ../../sass/main.scss */
+/* line 156, ../../sass/main.scss */
 .kanban-header { background-color: #EEEEEE; margin-top: 45px; border-style: solid; border-width: 0 0 1px 0; border-color: #E8E8E8; padding: 20px; font-size: 20px; z-index: 900; }
 
-/* line 136, ../../sass/main.scss */
+/* line 167, ../../sass/main.scss */
 .kanban-board { padding: 0; padding-bottom: 40px; margin: 0; margin-top: 220px; width: 100%; }
 
-/* line 144, ../../sass/main.scss */
+/* line 175, ../../sass/main.scss */
 .kanban-board-header { margin-top: 158px; z-index: 800; }
 
-/* line 149, ../../sass/main.scss */
+/* line 180, ../../sass/main.scss */
 .kanban-board-row { display: table; box-sizing: border-box; table-layout: fixed; margin: 0; border-spacing: 10px 0; width: 100%; min-height: 160px; z-index: -1; }
 
-/* line 160, ../../sass/main.scss */
+/* line 191, ../../sass/main.scss */
 .kanban-board-row-header { min-height: 100%; }
 
-/* line 164, ../../sass/main.scss */
+/* line 195, ../../sass/main.scss */
 .kanban-board-member { margin: 0 22px; margin-bottom: 10px; padding: 20px 0 10px 0; border: none; border-width: 0 0 1px 0; border-style: solid; border-color: #E8E8E8; }
 
-/* line 174, ../../sass/main.scss */
+/* line 205, ../../sass/main.scss */
 .kanban-col { display: table-cell; float: none; width: 25%; vertical-align: top; padding: 0 0 20px 0; background-color: #EEEEEE; }
 
-/* line 183, ../../sass/main.scss */
+/* line 214, ../../sass/main.scss */
 .kanban-col-header { display: table-cell; float: none; width: 25%; vertical-align: top; padding: 10px 0 0 0; font-weight: bold; background-color: #F8F8F8; }
 
-/* line 193, ../../sass/main.scss */
+/* line 224, ../../sass/main.scss */
 .kanban-col-header-text { border-bottom: 4px solid #EEEEEE; padding-bottom: 10px; }
 
-/* line 198, ../../sass/main.scss */
+/* line 229, ../../sass/main.scss */
 .kanban-task { background-color: #F8F8F8; border: 1px solid #E8E8E8; padding: 15px; min-height: 140px; height: 100%; z-index: 10; }
 
-/* line 207, ../../sass/main.scss */
+/* line 238, ../../sass/main.scss */
 .kanban-task-header { font-weight: bold; padding: 5px 0; }
 
-/* line 212, ../../sass/main.scss */
+/* line 243, ../../sass/main.scss */
 .kanban-task-body { padding: 5px 0; }
 
-/* line 216, ../../sass/main.scss */
+/* line 247, ../../sass/main.scss */
 .kanban-task-tags { padding: 5px 0; }

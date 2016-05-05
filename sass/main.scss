@@ -41,16 +41,25 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     font-size: 24px;
 }
 
+@mixin rune-icon-profile($color-index) {
+    .roo-icon-profile {
+        @include roo-image($color-index, 200px);
+    }
+    
+    .initials-icon-profile {
+        position: absolute;
+        margin: -190px 20px;
+        color: white;
+        font-family: "Roboto-Black";
+        font-size: 56px;
+    }
+}
+
 @mixin rune-icon-small($color-index) {
     display: inline;
-    // padding-left: 30px;
     margin: 0px 4px 0px 0px;
     .roo-icon-small {
-        @extend .img-rounded;
-        background-color: nth($rainbow, $color-index);
-        position: relative;
-        height: 40px;  
-        z-index:-1;
+        @include roo-image($color-index, 40px);
     }
     
     .check-icon-small {
@@ -60,6 +69,15 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
         margin: 0px -40px;
         opacity: 0;
     }
+}
+
+@mixin roo-image($color-index, $height)
+{
+    @extend .img-rounded;
+    background-color: nth($rainbow, $color-index);
+    position: relative;
+    height: $height;  
+    z-index:-1;
 }
 
 #rune-icon-small-red { @include rune-icon-small(1); }
@@ -74,6 +92,19 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 #rune-icon-small-bluepurple { @include rune-icon-small(10); }
 #rune-icon-small-purple { @include rune-icon-small(11); }
 #rune-icon-small-redpurple { @include rune-icon-small(12); }
+
+#rune-icon-profile-red { @include rune-icon-profile(1); }
+#rune-icon-profile-redorange { @include rune-icon-profile(2); }
+#rune-icon-profile-orange { @include rune-icon-profile(3); }
+#rune-icon-profile-yelloworange { @include rune-icon-profile(4); }
+#rune-icon-profile-yellow { @include rune-icon-profile(5); }
+#rune-icon-profile-yellowgreen { @include rune-icon-profile(6); }
+#rune-icon-profile-green { @include rune-icon-profile(7); }
+#rune-icon-profile-bluegreen { @include rune-icon-profile(8); }
+#rune-icon-profile-blue { @include rune-icon-profile(9); }
+#rune-icon-profile-bluepurple { @include rune-icon-profile(10); }
+#rune-icon-profile-purple { @include rune-icon-profile(11); }
+#rune-icon-profile-redpurple { @include rune-icon-profile(12); }
 
 #hidden-color-input {
     position: absolute;

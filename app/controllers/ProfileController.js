@@ -31,7 +31,6 @@ module.exports = function(app, passport) {
                 var loggedInID = (req.user.local.userid).toString(); // Pulled from the logged in user's info
 
                 var isMe = (accessorID === loggedInID);
-
                 res.render('profile.jade', {
                     // These are navbar variables
                     loggedIn : req.isAuthenticated(),
@@ -40,9 +39,10 @@ module.exports = function(app, passport) {
 
                     // These are profile variables
                     fullname : usr.local.firstname + ' ' + usr.local.lastname,
+                    initials : usr.local.firstname.charAt(0) + usr.local.lastname.charAt(0),
                     email : usr.local.email,
                     isMe : isMe,
-                    color : usr.local.userColor,
+                    userColor : usr.local.userColor,
                     userProjects : usr.local.projects
                 });
             }
