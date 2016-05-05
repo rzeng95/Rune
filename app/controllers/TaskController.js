@@ -15,14 +15,21 @@ module.exports = function(app, passport) {
     // Right now, task creation is handled through a separate web form
     // This can probably be handled later by front-end pop-up modal
     app.get('/p/:projectid/createtask/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
-        
+
         Project.findById(req.params.projectid, function(err, proj) {
             if (err) {
                 throw err;
             } else {
-                User.find({'local.email':proj.members}, function(err, users)
+                var userslist = [];
+
+                User.find({'local.email': {$in: proj.members}}, function(err, users)
                 {
-                    
+                    if (err) {
+                        throw err;
+                    } else {
+                        console.log("found");
+                        console.log(users);
+                    }
                     async.waterfall([
                         function(callback) {
                             var userslist = [];
@@ -31,6 +38,7 @@ module.exports = function(app, passport) {
                             {
                                 userslist.push({"name":users[i].local.firstname+" "+users[i].local.lastname, "email":users[i].local.email})
                             }
+                            console.log(userslist);
                             callback(null, userslist);
                         },
 
@@ -41,15 +49,16 @@ module.exports = function(app, passport) {
                                 loggedIn : req.isAuthenticated(),
                                 projList : req.user.local.projects,
                                 firstname : req.user.local.firstname,
+
                                 usersList: userslist
                             })
                         }
                         ])
 
-                       
+
                 });
-                    
-                
+
+
             }
         });
 
