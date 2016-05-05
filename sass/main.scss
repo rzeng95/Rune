@@ -75,6 +75,11 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 #rune-icon-small-purple { @include rune-icon-small(11); }
 #rune-icon-small-redpurple { @include rune-icon-small(12); }
 
+#hidden-color-input {
+    position: absolute;
+    visibility: hidden;
+}
+
 .login {
     width: 300px;
     margin-left: auto;

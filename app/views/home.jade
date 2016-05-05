@@ -34,6 +34,7 @@ block bodyContent
                         div(class="col-xs-12" style="padding:4px")
                             input(type="password" class="form-control" id="confirmPwd" placeholder="Confirm Password" name="password" required="required")
                     div(class="row" style="padding:4px 4px 0px 4px")
+                        input(id="hidden-color-input" type="color" class="form-control" placeholder="Color" name="color" required="required" value="red")
                         div(class="col-xs-12" style="padding:4px 4px 0px 4px")
                             p Pick a user colour:
                             div(id="rune-icon-small-red"  onclick='selectIcon(0)')
@@ -154,12 +155,16 @@ block bodyContent
     
     script.
         var checks = document.getElementsByClassName("check-icon-small");
+        var colors = ["red", "redorange", "orange", "yelloworange", "yellow", "yellowgreen",
+                      "green", "bluegreen", "blue", "bluepurple", "purple", "redpurple"];
+        var colorInput = document.getElementById("hidden-color-input");
         var selected = 0;
         console.log(selected);
         var selectIcon = function(selectColor) {
             if(selected != selectColor) {
-                checks[selected].style.opacity = 0;
                 checks[selectColor].style.opacity = "1";
+                colorInput.value = colors[selectColor];
+                checks[selected].style.opacity = 0;
                 selected = selectColor;
             }         
         }
