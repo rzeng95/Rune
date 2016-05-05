@@ -11,9 +11,8 @@ block bodyContent
                             | Rune is an elegant and intuitive kanban project management system.
                         p #[span(style="font-weight:bold") Create] individual tasks vital to your project.
                         p #[span(style="font-weight:bold") Assign] tasks to specific members of your team.
+                        p #[span(style="font-weight:bold") Navigate] established tasks and responsibilities.
                         p #[span(style="font-weight:bold") Build] your project.
-                        p #[span(style="font-weight:bold") Pound] me in the butt.
-                        p #[span(style="font-weight:bold") Praise] Godliver
             
             form(action="/" method="post")
                 div(class="col-xs-3 col-xs-offset-1" style="padding:14px; background-color:white; opacity:0.85; border-radius:4px")
@@ -21,22 +20,25 @@ block bodyContent
                         h2(style="margin-top:-2px; padding:4px") Sign Up
                     div(class="row" style="padding:4px")
                         div(class="col-xs-6" style="padding:4px")
-                            input(type="text" class="form-control" placeholder="First Name" name="firstname")
+                            input(type="text" class="form-control" placeholder="First Name" name="firstname" required="required")
                         div(class="col-xs-6" style="padding:4px")
-                            input(type="text" class="form-control" placeholder="Last Name" name="lastname")
+                            input(type="text" class="form-control" placeholder="Last Name" name="lastname" required="required")
                     div(class="row" style="padding:4px")
                         div(class="col-xs-12" style="padding:4px")
-                            input(type="text" class="form-control" placeholder="Email" name="email")
+                            input(type="email" class="form-control" id="email" placeholder="Email" name="email" required="required")
                     div(class="row" style="padding:4px")
                         div(class="col-xs-12" style="padding:4px")
-                            input(type="password" class="form-control" placeholder="Password" name="password")
+                            input(type="password" class="form-control" id="pwd" placeholder="Password" name="password" required="required")
+                    div(class="row" style="padding:4px")
+                        div(class="col-xs-12" style="padding:4px")
+                            input(type="password" class="form-control" id="confirmPwd" placeholder="Confirm Password" name="password" required="required")
                     div(class="row" style="margin-bottom:-10px; padding:4px")
                         div(class="col-xs-12" style="padding:4px")
                             p(style="font-size:xx-small") By clicking Sign Up, you consent to eating Noodle World once a week for the rest of your life.
                     div(class="row" style="padding:4px")
                         div(class="col-xs-12" style="padding:4px")
-                            button(type="submit" class="btn btn-success" style="width:140px") Sign Up
-                    h5=signupMessage
+                            button(type="submit" class="btn btn-primary" style="width:140px") Sign Up
+                    h5(style="color:#e60000")=signupMessage
     else
         div(class="row" style="padding: 15px")
             //
@@ -44,7 +46,7 @@ block bodyContent
                     | You have logged in! This area could possibly display a list of the projects you are a member of. 
             div(class="col-sm-12" style="background-color:white; opacity:0.85; border-radius:4px;")
                 h2 My Projects 
-                if projList 
+                if projList
                     table(class="table") 
                         thead
                             tr
@@ -58,5 +60,50 @@ block bodyContent
                     p You have no projects! 
 
     script
-        | document.body.style.backgroundImage = "url('/images/runite.png')";
+        | document.body.style.background = "url('/images/runite.png') no-repeat center center fixed";
         | document.body.style.backgroundSize = "cover";
+        | document.body.style.webkitBackgroundSize = "cover";
+        | document.body.style.mozBackgroundSize = "cover";
+        | document.body.style.oBackgroundSize = "cover"
+
+    script.
+        var valid = "#66afe9";
+        var invalid = "#e60000";
+        var unselected = "#ccc";
+
+        var password = document.getElementById("pwd");
+        var confirmPassword = document.getElementById("confirmPwd");
+        var confirmValid = false;
+
+        function validatePwd() {
+            if (password.value != confirmPassword.value) {
+                confirmValid = false;
+                confirmPassword.setCustomValidity("Please enter passwords that match.");
+                confirmPassword.style.borderColor = invalid;
+            }
+            else {
+                confirmValid = true;
+                confirmPassword.setCustomValidity("");
+                confirmPassword.style.borderColor = valid;
+            }
+        }
+
+        function enableConfirmPwdBorderColor() {
+            if (confirmValid) {
+                confirmPassword.style.borderColor = valid;
+            }
+            else {
+                confirmPassword.style.borderColor = invalid;
+            }
+        }
+
+        function disableConfirmPwdBorderColor() {
+            confirmPassword.style.borderColor = unselected;
+
+        }
+
+        password.onchange = validatePwd;
+        confirmPassword.onkeyup = validatePwd;
+        confirmPassword.onfocus = enableConfirmPwdBorderColor;
+        confirmPassword.onblur = disableConfirmPwdBorderColor;
+
