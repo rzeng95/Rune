@@ -32,6 +32,47 @@ block bodyContent
                     div(class="row" style="padding:4px")
                         div(class="col-xs-12" style="padding:4px")
                             input(type="password" class="form-control" id="confirmPwd" placeholder="Confirm Password" name="password" required="required")
+                    div(class="row" style="padding:4px 4px 0px 4px")
+                        div(class="col-xs-12" style="padding:4px 4px 0px 4px")
+                            p Pick a user color:
+                            div(id="rune-icon-small-red" onclick='selectIcon(0)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg" style="opacity: 1")
+                            div(id="rune-icon-small-redorange" onclick='selectIcon(1)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                            div(id="rune-icon-small-orange" onclick='selectIcon(2)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                            div(id="rune-icon-small-yelloworange" onclick='selectIcon(3)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                            div(id="rune-icon-small-yellow" onclick='selectIcon(4)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                            div(id="rune-icon-small-yellowgreen" onclick='selectIcon(5)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                    div(class="row" style="padding:4px 4px 0px 4px")
+                        div(class="col-xs-12" style="padding:0px 4px 0px 4px")
+                            div(id="rune-icon-small-green" onclick='selectIcon(6)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                            div(id="rune-icon-small-bluegreen" onclick='selectIcon(7)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                            div(id="rune-icon-small-blue" onclick='selectIcon(8)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                            div(id="rune-icon-small-bluepurple" onclick='selectIcon(9)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                            div(id="rune-icon-small-purple" onclick='selectIcon(10)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
+                            div(id="rune-icon-small-redpurple" onclick='selectIcon(11)')
+                                img(class="roo-icon-small"  src="/images/Roo.svg")
+                                img(class="check-icon-small" src="/images/check.svg")
                     div(class="row" style="margin-bottom:-10px; padding:4px")
                         div(class="col-xs-12" style="padding:4px")
                             p(style="font-size:xx-small") By clicking Sign Up, you consent to eating Noodle World once a week for the rest of your life.
@@ -107,3 +148,14 @@ block bodyContent
         confirmPassword.onfocus = enableConfirmPwdBorderColor;
         confirmPassword.onblur = disableConfirmPwdBorderColor;
 
+    script.
+        var checks = document.getElementsByClassName("check-icon-small");
+        var selected = 0;
+        
+        var selectIcon = function(selectColor) {
+            if(selected != selectColor) {
+                checks[selected].style.opacity = 0;
+                checks[selectColor].style.opacity = "1";
+                selected = selectColor;
+            }         
+        }

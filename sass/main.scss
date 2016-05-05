@@ -13,6 +13,9 @@ $color-2: #F8F8F8;
 $color-3: #EEEEEE;
 $color-border: #E8E8E8;
 
+$rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
+          #04AA51, #1991CD, #0857A3, #6C459B, #A54499, #E34197;
+
 // Navbar CSS style specifications.
 .btn-is-disabled {
     pointer-events: none;
@@ -38,7 +41,39 @@ $color-border: #E8E8E8;
     font-size: 24px;
 }
 
+@mixin rune-icon-small($color-index) {
+    display: inline;
+    // padding-left: 30px;
+    margin: 0px 4px 0px 0px;
+    .roo-icon-small {
+        @extend .img-rounded;
+        background-color: nth($rainbow, $color-index);
+        position: relative;
+        height: 40px;  
+        z-index:-1;
+    }
+    
+    .check-icon-small {
+        @extend .img-rounded;
+        position: absolute;
+        height: 40px; 
+        margin: 0px -40px;
+        opacity: 0;
+    }
+}
 
+#rune-icon-small-red { @include rune-icon-small(1); }
+#rune-icon-small-redorange { @include rune-icon-small(2); }
+#rune-icon-small-orange { @include rune-icon-small(3); }
+#rune-icon-small-yelloworange { @include rune-icon-small(4); }
+#rune-icon-small-yellow { @include rune-icon-small(5); }
+#rune-icon-small-yellowgreen { @include rune-icon-small(6); }
+#rune-icon-small-green { @include rune-icon-small(7); }
+#rune-icon-small-bluegreen { @include rune-icon-small(8); }
+#rune-icon-small-blue { @include rune-icon-small(9); }
+#rune-icon-small-bluepurple { @include rune-icon-small(10); }
+#rune-icon-small-purple { @include rune-icon-small(11); }
+#rune-icon-small-redpurple { @include rune-icon-small(12); }
 
 .login {
     width: 300px;
