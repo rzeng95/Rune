@@ -8,18 +8,52 @@ var Task = require('../models/task.js');
 
 var Helper = require('../models/helpers.js');
 
+var async = require('async');
+
 module.exports = function(app, passport) {
 
     // Right now, task creation is handled through a separate web form
     // This can probably be handled later by front-end pop-up modal
     app.get('/p/:projectid/createtask/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
-        res.render('createtask.jade', {
-            // These are navbar variables
-            loggedIn : req.isAuthenticated(),
-            projList : req.user.local.projects,
-            firstname : req.user.local.firstname,
+        
+        Project.findById(req.params.projectid, function(err, proj) {
+            if (err) {
+                throw err;
+            } else {
+                User.find({'local.email':proj.members}, function(err, users)
+                {
+                    
+                    async.waterfall([
+                        function(callback) {
+                            var userslist = [];
+                            console.log("TEST");
+                            for(var i=0; i<users.length; i++)
+                            {
+                                userslist.push({"name":users[i].local.firstname+" "+users[i].local.lastname, "email":users[i].local.email})
+                            }
+                            callback(null, userslist);
+                        },
 
+                        function(userslist, callback){
+                            console.log(userslist);
+                            res.render('createtask.jade', {
+                                // These are navbar variables
+                                loggedIn : req.isAuthenticated(),
+                                projList : req.user.local.projects,
+                                firstname : req.user.local.firstname,
+                                usersList: userslist
+                            })
+                        }
+                        ])
+
+                       
+                });
+                    
+                
+            }
         });
+
+
     });
 
     app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.isUserProjectMember, function(req,res) {

@@ -15,9 +15,8 @@ block bodyContent
                 div(class="col-xs-12" style="padding:4px")
                     label(for="assignedto") Assigned to
                     select(class="form-control" style="margin:2px" name="assignedto")
-                        option Alex
-                        option Roland
-                        option Can you not
+                        each user in usersList
+                            option(value="#{user['email']}") #{user['name']}
                 div(class="col-xs-12" style="padding:4px")
                     label(for="status") Status
                     select(class="form-control" style="margin:2px" name="status")
