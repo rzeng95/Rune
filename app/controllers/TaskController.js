@@ -164,31 +164,19 @@ module.exports = function(app, passport) {
                 }
                 res.send('error');
             } else {
+                foundTask.status = app.locals.statuses[req.params.status];
 
-                foundTask.status = app.locals.statuses[3];
-                res.send('hello');
-            }
-        });
-
-/*
-        Project.findById(req.params.projectid, function(err, foundProj){
-            if (err) {
-                throw err;
-            } else {
-
-                var taskList = foundProj.tasks;
-                for (var i = 0; i < taskList.length; i++) {
-                    console.log(taskList[i].taskid + ' ' + req.params.taskid)
-                    if (taskList[i].taskid == req.params.taskid) {
-                        console.log('found');
-                        res.send('hey');
+                foundProj.save(function(err2,done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+                        console.log('project created');
+                        res.send('done');
                     }
-                }
-
-                res.send('hello')
+                })
             }
         });
-*/
+
     });
 
 
