@@ -8,11 +8,12 @@ var projectSchema = mongoose.Schema({
     projectname    : String,
     projectkey     : String,
     members        : [String],  // roland.zeng@gmail.com, alexlw92@yahoo.com
+    counter        : Number,    // Stores the task number
     tasks          :  [
         {
             projectid       : String,   // 571b042d4bd894d80a71c2a2
             taskname        : String,   // "As a user I wish to see updated tasks"
-            taskid          : Number,   // BSH-001 where BSH is the prefix of the project
+            taskid          : String,   // BSH-001 where BSH is the prefix of the project
             taskdescription : String,   // "implement task schema"
             createdby       : String,   // email of the account who used it
             assignedto      : String,   // email of the person who will handle the task

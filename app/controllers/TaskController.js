@@ -80,10 +80,13 @@ module.exports = function(app, passport) {
             if (err) {
                 throw err;
             } else {
+                foundProj.counter++;
+                //console.log(foundProj.counter);
+                //console.log( foundProj.projectkey + '-' + Helper.zeroPad(foundProj.counter, 3));
                 foundProj.tasks.push({
                     projectid       :   req.params.projectid,
                     taskname        :   req.body.taskname,
-                    taskid          :   1,
+                    taskid          :   foundProj.projectkey + '-' + Helper.zeroPad(foundProj.counter, 3),
                     taskdescription :   req.body.taskdescription,
                     createdby       :   req.user.local.firstname + ' ' + req.user.local.lastname,
                     assignedto      :   req.body.assignedto,

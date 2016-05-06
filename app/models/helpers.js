@@ -25,7 +25,7 @@ module.exports = {
                 return next();
         });
     } ,
-    
+
     //Find the current user and make sure they're part of the project being accessed
     isUserProjectMember : function(req,res,next) {
 
@@ -53,6 +53,11 @@ module.exports = {
                 return next();
             }
         });
+    } ,
+
+    zeroPad : function(num, places) {
+        var zero = places - num.toString().length + 1;
+        return Array(+(zero > 0 && zero)).join("0") + num;
     }
 /*
     // Navbar variables:

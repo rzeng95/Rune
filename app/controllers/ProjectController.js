@@ -8,6 +8,7 @@
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
 var Task = require('../models/task.js');
+
 var Helper = require('../models/helpers.js');
 
 var async = require('async');
@@ -64,6 +65,7 @@ module.exports = function(app, passport) {
         newProject.projectkey = projectKey;
         newProject.projectid = (newProject._id).toString();
         newProject.members.push(userEmail);
+        newProject.counter = 0;
         newProject.save(function(err) {
             if (err) {
                 throw err;
