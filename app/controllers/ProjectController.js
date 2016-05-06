@@ -143,51 +143,15 @@ module.exports = function(app, passport) {
                     projId : foundProj.projectid,
 
                     // User tab variables
-                    projMembers : memberList
+                    projMembers : memberList,
 
                     // Task tab variables
-
+                    taskList : foundProj.tasks
                 });
             }
         });
 
 
+    }); //end of app.post('/p/:projectid/')
 
-
-/*
-        var projectId = req.params.projectid;
-        // Knowing the project id because it's passed in by the url, the entire project database entry can be accessed using mongoose's findById method
-        Project.findById(projectId, function(err, proj) {
-            if (err) {
-                throw err;
-            } else {
-                res.render('project_test.jade', {
-                    // These are navbar variables
-                    loggedIn : req.isAuthenticated(),
-                    projList : req.user.local.projects,
-                    firstname : req.user.local.firstname,
-
-                    // These are project variables
-                    projName : proj.projectname,
-                    projKey : proj.projectkey,
-                    projId : proj.projectid,
-                    projMembers : proj.members,
-                    isProjectPage : true
-                });
-            }
-        });
-*/
-
-    });
-
-/*
-    app.post('/p/:projectid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
-        //handle creating new tasks
-
-    });
-
-    app.get('/p/:projectid/:taskid', isLoggedIn, doesProjectExist, isUserProjectMember, function(req,res) {
-
-    });
-*/
 } // End of module.exports
