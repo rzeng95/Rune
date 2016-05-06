@@ -1,6 +1,13 @@
 div(style="margin-top: 158px;")
-
-h4 List of all project members
-
-each user in projMembers
-    h5 #{user['name']}  #{user['email']}
+	div(class="container")
+		h2 List of all project members
+		table(class="table table-hover")
+			thead
+				tr
+					th Name
+					th Email
+			tbody
+				each user in projMembers
+					tr
+						td #[a(href='/u/'+user.id+'/') #{user.name}]
+						td #{user.email}
