@@ -45,7 +45,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     .roo-icon-profile {
         @include roo-image($color-index, 200px);
     }
-    
+
     .initials-icon-profile {
         position: absolute;
         margin: -190px 20px;
@@ -61,11 +61,11 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     .roo-icon-small {
         @include roo-image($color-index, 40px);
     }
-    
+
     .check-icon-small {
         @extend .img-rounded;
         position: absolute;
-        height: 40px; 
+        height: 40px;
         margin: 0px -40px;
         opacity: 0;
     }
@@ -76,7 +76,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     @extend .img-rounded;
     background-color: nth($rainbow, $color-index);
     position: relative;
-    height: $height;  
+    height: $height;
     z-index:-1;
 }
 
@@ -109,6 +109,41 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 #hidden-color-input {
     position: absolute;
     visibility: hidden;
+}
+
+//create project page style specifications
+.createproject {
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    padding-top: 70px;
+    h2 {
+        text-align: center;
+    }
+    p {
+        font-style: italic;
+    }
+    .boxes {
+         padding:4px
+    }
+    .chatbox{
+        border-width: 10px;
+        border-style: solid;
+        line-height: 1;
+        color: #6E6A6B;
+        text-align: left;
+        border: 3px solid #969293;
+        width: 100%;
+        height: 2em;
+    }
+    #only-see-login {
+        text-align: center;
+    }
+    button{
+        float: right;
+    }
+
 }
 
 // Login page style specifications.
