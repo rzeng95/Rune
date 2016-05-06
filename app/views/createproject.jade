@@ -2,23 +2,29 @@ extends ./partials/base.jade
 
 block bodyContent 
 
-    h2 Create Project - You can only see this page if you are logged in 
-    br 
-    br
-
-    form(action="/createproject" method="post")
-        div
-            label Project Name  
-            input(type="text" name="projectname" class="chatinput" id="chatinput")
-        div 
-            label Project Key 
-            div(class="printchatbox" name="projectkey" id="printchatbox" style="border-width: 10px;border-style: solid; line-height: 2; color: #6E6A6B;text-align: left;border: 3px solid #969293;width: 40%;height: 2em;")
-            p The project key prefixes every task made. Example: JIRA-649
-        button(type="submit") Create Project  
-        
-        
-    script.
-        var inputBox = document.getElementById('chatinput');
-        inputBox.onkeyup = function() {
-            document.getElementById("printchatbox").innerHTML = inputBox.value.replace(/\s+/g, "").substring(0,4).toUpperCase();
-        }
+    div(class="container")
+        div(class="createproject")
+            form(class="form-createtask" action="" method="post")
+                h2(class="form-signin-heading") Create Project
+                div(id="only-see-login") 
+                    p You can only see this page if you are logged in
+                form(action="/createproject" method="post")
+                    br
+                    div(class="col-xs-12 boxes")
+                        label Project Name  
+                        input(id="chatinput" class="form-control" type="text" style="margin:2px" name="projectname")
+                        p Max. 80 Characters.
+                        //input(type="text" name="projectname" class="chatinput" id="chatinput")
+                    div(class="col-xs-12 boxes")
+                        label Project Key 
+                        div(id="printchatbox" class="form-control chatbox" name="projectkey")
+                        p The project key prefixes every task made. Example: JIRA-649
+                        br
+                    button(class="btn btn-primary" type="submit") Submit 
+                    
+                    
+                script.
+                    var inputBox = document.getElementById('chatinput');
+                    inputBox.onkeyup = function() {
+                        document.getElementById("printchatbox").innerHTML = inputBox.value.replace(/\s+/g, "").substring(0,4).toUpperCase();
+                    }
