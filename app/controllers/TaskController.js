@@ -67,7 +67,7 @@ module.exports = function(app, passport) {
 
     });
 
-    app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.isUserProjectMember, function(req,res) {
+    app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
         //console.log("\n\n==============");
         //console.log("Project ID: " + req.params.projectid);
         //console.log("User: " + req.user.local);
@@ -129,6 +129,68 @@ module.exports = function(app, passport) {
 */
 
     });
+
+    app.post('/p/:projectid/movetask/:taskid/s/:status', /*Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember,*/ function(req,res) {
+
+        async.waterfall([
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj){
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            } ,
+            function searchForTask(foundProj, callback) {
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid == req.params.taskid) {
+                        var foundTask = taskList[i];
+                        console.log('found task');
+                        return callback(null, foundProj, foundTask);
+                    }
+                }
+                console.log('couldn\'t find task');
+                callback(1);
+
+            }
+
+        ], function(err, foundProj, foundTask) {
+            if (err) {
+                if (err == 1) {
+                    console.log('couldn\'t find task');
+                }
+                res.send('error');
+            } else {
+
+                foundTask.status = app.locals.statuses[3];
+                res.send('hello');
+            }
+        });
+
+/*
+        Project.findById(req.params.projectid, function(err, foundProj){
+            if (err) {
+                throw err;
+            } else {
+
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid == req.params.taskid) {
+                        console.log('found');
+                        res.send('hey');
+                    }
+                }
+
+                res.send('hello')
+            }
+        });
+*/
+    });
+
 
 
 } // End of module exports
