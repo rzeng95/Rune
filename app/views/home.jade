@@ -158,7 +158,7 @@ block scripts
                       "green", "bluegreen", "blue", "bluepurple", "purple", "redpurple"];
         var colorInput = document.getElementById("hidden-color-input");
         var selected = 0;
-        console.log(selected);
+
         var selectIcon = function(selectColor) {
             if(selected != selectColor) {
                 checks[selectColor].style.opacity = "1";
@@ -167,16 +167,3 @@ block scripts
                 selected = selectColor;
             }         
         }
-        
-        $(document).ready(function(){
-            $('#submit').click(function() {
-                console.log('button pushed')
-                // get value of password 
-                //var pw = document.findbyname(name="password") // for example, password = hello 
-                // get value of name
-                //var name = document.findbyname(name="firstname")
-                // get value of roo 
-                // get value of email 
-                // make ajax post request with those results 
-            })
-        });

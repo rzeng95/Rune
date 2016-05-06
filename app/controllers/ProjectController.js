@@ -117,7 +117,7 @@ module.exports = function(app, passport) {
                         callback(err);
                     } else {
                         var memberList = [];
-                        console.log(foundUsers);
+
                         for (var i=0; i<foundUsers.length; i++) {
                             memberList.push({"name":foundUsers[i].local.firstname+" "+foundUsers[i].local.lastname, "email":foundUsers[i].local.email, "id":foundUsers[i].local.userid});
                         }
