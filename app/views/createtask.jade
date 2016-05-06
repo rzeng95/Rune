@@ -20,10 +20,8 @@ block bodyContent
                 div(class="col-xs-12" style="padding:4px")
                     label(for="status") Status
                     select(class="form-control" style="margin:2px" name="status")
-                        option To-do
-                        option In Progress
-                        option Code Review
-                        option Completed 
+                        each status in statuses
+                            option #{status}
                 div(class="col-xs-12" style="padding:4px")
                     label(for="priority") Priority
                     select(class="form-control" style="margin:2px" name="priority")

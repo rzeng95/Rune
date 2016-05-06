@@ -50,7 +50,9 @@ module.exports = function(app, passport) {
                                 projList : req.user.local.projects,
                                 firstname : req.user.local.firstname,
 
-                                usersList: userslist
+                                usersList: userslist,
+
+                                statuses: app.locals.statuses
                             })
                         }
                         ])
