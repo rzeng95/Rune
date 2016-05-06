@@ -1,7 +1,24 @@
 div(style="margin-top: 158px;")
+	div(class="container")
+		h2 Tasks List Goes Here
+		table(class="table table-hover")
+			thead
+				tr
+					th Task ID
+					th Task Name
+					th Description
+					th Status
+					th Priority
+					th Assigned to
+					th Created by
+			tbody
+				each task in taskList
+					tr
+						td #{task.taskid}
+						td #{task.taskname}
+						td #{task.taskdescription}
+						td #{task.status}
+						td #{task.priority}
+						td #{task.assignedto}
+						td #{task.createdby}
 
-h4 Tasks List Goes Here
-
-each task in taskList 
-    h4 #{task} 
-    //- to get each individual attribute do something like task.projectid
