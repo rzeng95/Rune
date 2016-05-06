@@ -7,3 +7,39 @@
 }
 
 .createtask {width: 400px;}
+
+
+/* line 150, ../../sass/main.scss */
+.login, .signup {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+  padding-top: 50px;
+}
+/* line 156, ../../sass/main.scss */
+.login h2, .signup h2{
+  text-align: center;
+}
+/* line 159, ../../sass/main.scss */
+.login input, .signup input {
+  margin: 0px 0;
+}
+/* line 162, ../../sass/main.scss */
+.login input:hover, .signup input:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+/* line 165, ../../sass/main.scss */
+.login button, .signup button {
+  margin: 8px 0;
+}
+/* line 168, ../../sass/main.scss */
+.login #forgot-pw, .signup #forgot-pw {
+  text-align: right;
+}
+/* line 171, ../../sass/main.scss */
+.login .no-user-error, .signup .no-user-error {
+  color: #c80000;
+  min-height: 20px;
+  text-align: center;
+}
