@@ -22,9 +22,14 @@
   text-align: center;
 }
 /* line 159, ../../sass/main.scss */
-.login input, .signup input {
-  margin: 0px 0;
+.login input{
+  margin: 15px 0;
 }
+
+ .signup input {
+ 	margin: 0;
+ }
+
 /* line 162, ../../sass/main.scss */
 .login input:hover, .signup input:hover {
   background-color: rgba(255, 255, 255, 0.4);
