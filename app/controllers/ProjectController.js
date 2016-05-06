@@ -132,7 +132,7 @@ module.exports = function(app, passport) {
                 throw err;
             } else {
                 console.log("done waterfalling");
-                res.render('project_test.jade', {
+                res.render('project.jade', {
                     // These are navbar variables
                     loggedIn : req.isAuthenticated(),
                     projList : req.user.local.projects,
