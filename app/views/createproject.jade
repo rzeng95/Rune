@@ -5,9 +5,7 @@ block bodyContent
     div(class="container")
         div(class="createproject")
             form(class="form-createtask" action="" method="post")
-                h2(class="form-signin-heading") Create Project
-                div(id="only-see-login") 
-                    p You can only see this page if you are logged in
+                h2(class="form-signin-heading") Create a New Project
                 form(action="/createproject" method="post")
                     br
                     div(class="col-xs-12 boxes")
@@ -20,7 +18,8 @@ block bodyContent
                         div(id="printchatbox" class="form-control chatbox" name="projectkey")
                         p The project key prefixes every task made. Example: JIRA-649
                         br
-                    button(class="btn btn-primary" type="submit") Submit 
+                    div(class="button-center")
+                        button(class="btn btn-primary" type="submit") Submit 
                     
                     
                 script.
