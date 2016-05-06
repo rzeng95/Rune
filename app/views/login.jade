@@ -13,9 +13,9 @@ block bodyContent
                     //- label Password 
                     input(class="form-control" type="password" name="password" placeholder="Password")
                 button(class="btn btn-primary btn-block" type="submit") Login 
-                div
-                    a(href='/signup') Sign up for Rune
-                    a(href='#') Forgot Password
+                div(class="row")
+                    a(id="sign-up" class="col-xs-6" href='/signup') Sign up for Rune
+                    a(id="forgot-pw" class="col-xs-6" href='#') Forgot Password
                 
     p=message
                 

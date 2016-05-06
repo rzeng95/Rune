@@ -111,6 +111,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     visibility: hidden;
 }
 
+// Login page style specifications.
 .login {
     width: 300px;
     margin-left: auto;
@@ -129,8 +130,8 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     button {
         margin: 8px 0;
     }
-    a {
-        padding-right: 58px;
+    #forgot-pw {
+        text-align: right;
     }
 }
 
