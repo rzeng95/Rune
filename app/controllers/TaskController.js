@@ -5,9 +5,7 @@
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
 var Task = require('../models/task.js');
-
 var Helper = require('../models/helpers.js');
-
 var async = require('async');
 
 module.exports = function(app, passport) {
@@ -15,69 +13,51 @@ module.exports = function(app, passport) {
     // Right now, task creation is handled through a separate web form
     // This can probably be handled later by front-end pop-up modal
     app.get('/p/:projectid/createtask/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
-
         Project.findById(req.params.projectid, function(err, proj) {
             if (err) {
                 throw err;
             } else {
                 var userslist = [];
-
-                User.find({'local.email': {$in: proj.members}}, function(err, users)
-                {
+                User.find({
+                    'local.email' : {
+                        $in : proj.members
+                    }
+                }, function(err, users) {
                     if (err) {
                         throw err;
-                    } else {
-                        //console.log("found");
-                        //console.log(users);
                     }
                     async.waterfall([
                         function(callback) {
                             var userslist = [];
-                            //console.log("TEST");
-                            for(var i=0; i<users.length; i++)
-                            {
-                                userslist.push({"name":users[i].local.firstname+" "+users[i].local.lastname, "email":users[i].local.email})
+                            for (var i = 0; i < users.length; i++) {
+                                userslist.push({
+                                    "name" : users[i].local.firstname + " " + users[i].local.lastname,
+                                    "email" : users[i].local.email
+                                });
                             }
-                            //console.log(userslist);
                             callback(null, userslist);
                         },
-
-                        function(userslist, callback){
-                            //console.log(userslist);
-                            res.render('createtask.jade', {
+                        function(userslist, callback) {
+                            res.render('includes/createtask.jade', {
                                 // These are navbar variables
                                 loggedIn : req.isAuthenticated(),
                                 projList : req.user.local.projects,
                                 firstname : req.user.local.firstname,
-
-                                usersList: userslist,
-
-                                statuses: app.locals.statuses
+                                usersList : userslist,
+                                statuses : app.locals.statuses
                             })
                         }
-                        ])
-
-
+                    ])
                 });
-
-
             }
         });
-
-
     });
 
-    app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
-        //console.log("\n\n==============");
-        //console.log("Project ID: " + req.params.projectid);
-        //console.log("User: " + req.user.local);
-        //console.log("Form Parameters: " + req.body.taskname + " , " + req.body.taskdescription);
-        //console.log("==============\n\n");
+    app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
         // We want to create a new Task object (see models/task.js)
         // To see how mongoose creates and saves objects, see app.post('/createproject') endpoint
         // make sure the current logged in user (saved under req.user.local) is the "reporter" of the task
         // Make sure the project key (e.g. JIRA) is appended to the task ID (so our task ID is called JIRA-649 for example)
-
         Project.findById(req.params.projectid, function(err, foundProj){
             if (err) {
                 throw err;
@@ -96,52 +76,26 @@ module.exports = function(app, passport) {
                     datecreated     :   new Date().toDateString(),
                     priority        :   req.body.priority,
                     issuetype       :   req.body.issuetype
-
                 });
                 foundProj.save(function(err) {
                     console.log('project updated with new task');
                     res.redirect('/p/' + req.params.projectid + '/');
                 });
-                //res.redirect('/p/' + req.params.projectid + '/');
             }
         });
-/*
-        var newTask = new Task();
-        newTask.projectid = req.params.projectid;
-        newTask.taskname = req.body.taskname;
-        newTask.taskid = 1;
-        newTask.taskdescription = req.body.taskdescription;
-        newTask.createdby = req.user.local.firstname + ' ' + req.user.local.lastname;
-        newTask.assignedto = req.body.assignedto;
-        newTask.status = req.body.status;
-        newTask.datecreated = new Date().toJSON().slice(0,10);
-        newTask.priority = req.body.priority;
-        newTask.issuetype = req.body.issuetype;
-
-        newTask.save(function(err) {
-            if (err) {
-                throw err;
-            } else {
-                console.log('task created ');
-            }
-        });
-
-*/
-
     });
 
-    app.post('/p/:projectid/movetask/:taskid/s/:status', /*Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember,*/ function(req,res) {
-
+    app.post('/p/:projectid/movetask/', function(req, res) {
         async.waterfall([
             function findProject(callback) {
-                Project.findById(req.params.projectid, function(err, foundProj){
+                Project.findById(req.params.projectid, function(err, foundProj) {
                     if (err) {
                         callback(err);
                     } else {
                         callback(null, foundProj);
                     }
                 });
-            } ,
+            },
             function searchForTask(foundProj, callback) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
@@ -154,9 +108,7 @@ module.exports = function(app, passport) {
                 }
                 console.log('couldn\'t find task');
                 callback(1);
-
             }
-
         ], function(err, foundProj, foundTask) {
             if (err) {
                 if (err == 1) {
@@ -165,7 +117,6 @@ module.exports = function(app, passport) {
                 res.send('error');
             } else {
                 foundTask.status = app.locals.statuses[req.params.status];
-
                 foundProj.save(function(err2,done) {
                     if (err2) {
                         throw err2;
@@ -173,12 +124,9 @@ module.exports = function(app, passport) {
                         console.log('project created');
                         res.send('done');
                     }
-                })
+                });
             }
         });
-
     });
-
-
 
 } // End of module exports

@@ -32,6 +32,10 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     }
 }
 
+.btn-submit {
+    text-align: center;
+}
+
 #rune-logo-text {
     display: inline;
     padding-left: 5px;
@@ -284,4 +288,14 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 
 .kanban-task-tags {
     padding: 5px 0;
+}
+
+// Task styling specifications.
+.task-create {
+    h2 {
+        text-align: center;
+        padding: 15px;
+    }
+    width: 400px;
+    margin: 20px auto;
 }

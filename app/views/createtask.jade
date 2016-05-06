@@ -1,32 +1,31 @@
 extends ./partials/base.jade
 
-block bodyContent 
-    
-    div(class="container")
-        div(class="createtask login")
-            form(class="form-createtask" action="" method="post")
-                h2(class="form-signin-heading") Create a new task
-                div(class="col-xs-12" style="padding:4px")
+block bodyContent
+    div(class="container-fluid")
+        div(class="task-create")
+            form(class="form-group" action="" method="post")
+                h2(class="form-signin-heading") Create New Task
+                div(class="form-group")
                     label(for="taskname") Task Name
-                    input(class="form-control" type="text" style="margin:2px" name="taskname" placeholder="Task Name")
-                div(class="col-xs-12" style="padding:4px")
+                    input(class="form-control" type="text" name="taskname" placeholder="Task Name")
+                div(class="form-group")
                     label(for="taskdescription") Task Description
-                    textarea(class="form-control" rows="4" style="margin:2px" name="taskdescription" placeholder="Description")
-                div(class="col-xs-12" style="padding:4px")
-                    label(for="assignedto") Assigned to
-                    select(class="form-control" style="margin:2px" name="assignedto")
+                    textarea(class="form-control" rows="4" name="taskdescription" placeholder="Description")
+                div(class="form-group")
+                    label(for="assignedto") Assign to
+                    select(class="form-control" name="assignedto")
                         each user in usersList
                             option(value="#{user['email']}") #{user['name']}
-                div(class="col-xs-12" style="padding:4px")
+                div(class="form-group")
                     label(for="status") Status
-                    select(class="form-control" style="margin:2px" name="status")
+                    select(class="form-control" name="status")
                         each status in statuses
                             option #{status}
-                div(class="col-xs-12" style="padding:4px")
+                div(class="form-group")
                     label(for="priority") Priority
-                    select(class="form-control" style="margin:2px" name="priority")
+                    select(class="form-control" name="priority")
                         option High
                         option Medium
                         option Low
-                button(class="btn btn-primary btn-block" type="submit") Submit 
-                
+                div(class="btn-submit")
+                    button(class="btn btn-primary" type="submit") Submit

@@ -8,9 +8,7 @@
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
 var Task = require('../models/task.js');
-
 var Helper = require('../models/helpers.js');
-
 var async = require('async');
 
 module.exports = function(app, passport) {
@@ -24,7 +22,9 @@ module.exports = function(app, passport) {
         // (this is handled by passport user authentication). Each User database model contains a list of projects
         // that the user is a member of (See /app/models/user.js). Find the User matching the current user's email,
         // and return the corresponding project list.
-        User.findOne({'local.email': req.user.local.email}, function(err,user) {
+        User.findOne({
+            'local.email' : req.user.local.email
+        }, function(err, user) {
             if (err) {
                 throw err;
             } else {
@@ -40,7 +40,7 @@ module.exports = function(app, passport) {
 
     // Project creation will probably be done using a pop-up modal object, which can be done via front-end bootstrap magic.
     // Right now it's a separate page of its own located at /createproject
-    app.get('/createproject', Helper.isLoggedIn, function(req,res) {
+    app.get('/createproject', Helper.isLoggedIn, function(req, res) {
         res.render('createproject.jade', {
             // These are navbar variables
             loggedIn : req.isAuthenticated(),
@@ -49,7 +49,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.post('/createproject', Helper.isLoggedIn, function(req,res) {
+    app.post('/createproject', Helper.isLoggedIn, function(req, res) {
         // Three things need to happen when a project is created:
         // 1. The project must contain the name and other relevant details passed to it from the web form
         // 2. The current logged-in user must automatically added to the project's member list
@@ -76,7 +76,9 @@ module.exports = function(app, passport) {
         });
 
         // Add this project's ID to the user's "projects" array
-        User.findOne({'local.email': userEmail}, function(err,user) {
+        User.findOne({
+            'local.email' : userEmail
+        }, function(err, user) {
             if (err) {
                 throw err;
             } else if (!user) {
@@ -97,7 +99,7 @@ module.exports = function(app, passport) {
     });
 
     // Each project gets its own site with its own unique url. Only logged-in users who are members of that project can access it.
-    app.get('/p/:projectid/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
+    app.get('/p/:projectid/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
         var statuses = app.locals.statuses;
         async.waterfall([
             function createTasks(callback) {
@@ -113,12 +115,9 @@ module.exports = function(app, passport) {
                     if (err) {
                         callback(err);
                     } else {
-                        for(var i=0; i<foundProj.tasks.length; i++)
-                        {
-                            for(var k=0; k<statuses.length; k++)
-                            {
-                                if(foundProj.tasks[i].status == statuses[k])
-                                {
+                        for (var i=0; i<foundProj.tasks.length; i++) {
+                            for (var k=0; k<statuses.length; k++) {
+                                if (foundProj.tasks[i].status == statuses[k]) {
                                     tasks[statuses[k]].push(foundProj.tasks[i]);
                                     break;
                                 }
@@ -130,23 +129,24 @@ module.exports = function(app, passport) {
                 });
             },
             function getProjectUserInfo(foundProj, tasks, callback) {
-                User.find({'local.email': {$in: foundProj.members}}, function(err, foundUsers){
+                User.find({
+                    'local.email' : {
+                        $in : foundProj.members
+                    }
+                }, function(err, foundUsers) {
                     if (err) {
                         callback(err);
                     } else {
                         var memberList = [];
-
                         for (var i=0; i<foundUsers.length; i++) {
                             memberList.push({"name":foundUsers[i].local.firstname+" "+foundUsers[i].local.lastname, "email":foundUsers[i].local.email, "id":foundUsers[i].local.userid});
                         }
                         callback(null, foundProj, tasks, memberList); // Now we pass in the project and the project members list
                     }
-
                 });
             }
-
-        ], function(err,foundProj, tasks, memberList){
-            if(err) {
+        ], function(err, foundProj, tasks, memberList){
+            if (err) {
                 throw err;
             } else {
                 console.log("done waterfalling");
@@ -156,7 +156,6 @@ module.exports = function(app, passport) {
                     loggedIn : req.isAuthenticated(),
                     projList : req.user.local.projects,
                     firstname : req.user.local.firstname,
-
                     isProjectPage : true,
 
                     // Overview tab variables
@@ -181,8 +180,6 @@ module.exports = function(app, passport) {
                 });
             }
         });
-
-
     }); //end of app.post('/p/:projectid/')
 
 } // End of module.exports

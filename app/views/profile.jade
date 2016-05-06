@@ -3,10 +3,8 @@ extends ./partials/base.jade
 block bodyContent 
 
     div(class="container-fluid")
-        div(class="col-sm-12")
-            div(class="col-sm-2" style="padding-top:24px")
-            div(class="col-sm-4" style="padding-top:24px")
-
+        div(class="row")
+            div(class="col-xs-4 col-xs-offset-2" style="padding-top:24px")
                 div(id="rune-icon-profile-" + userColor)
                     img(class="roo-icon-profile" src="/images/Roo.svg")
                     div(class="initials-icon-profile") 
@@ -68,10 +66,3 @@ block bodyContent
                                                 | Assigned To
                                             td(class="col-md-8")
                                                 | #{task.assignedto}
-            div(class="col-sm-2" style="padding-top:24px")
-
-
-
-            
-               
-                            
