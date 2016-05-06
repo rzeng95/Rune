@@ -98,20 +98,38 @@ module.exports = function(app, passport) {
 
     // Each project gets its own site with its own unique url. Only logged-in users who are members of that project can access it.
     app.get('/p/:projectid/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
-
+        var statuses = app.locals.statuses;
         async.waterfall([
-
+            function createTasks(callback) {
+                var tasks = [];
+                for(var j=0; j<statuses.length; j++) {
+                    tasks[statuses[j]] =[];
+                }
+                callback(null, tasks)
+            },
             // find the Project specified by the accessed URL. We need this for the project's member list
-            function getProjectByID(callback) {
+            function getProjectByID(tasks, callback) {
                 Project.findById(req.params.projectid, function(err, foundProj){
                     if (err) {
                         callback(err);
                     } else {
-                        callback(null, foundProj); // Pass the project members list to the next function
+                        for(var i=0; i<foundProj.tasks.length; i++)
+                        {
+                            for(var k=0; k<statuses.length; k++)
+                            {
+                                if(foundProj.tasks[i].status == statuses[k])
+                                {
+                                    tasks[statuses[k]].push(foundProj.tasks[i]);
+                                    break;
+                                }
+                            }
+                            
+                        }
+                        callback(null, foundProj, tasks); // Pass the project members list to the next function
                     }
                 });
             },
-            function getProjectUserInfo(foundProj, callback) {
+            function getProjectUserInfo(foundProj, tasks, callback) {
                 User.find({'local.email': {$in: foundProj.members}}, function(err, foundUsers){
                     if (err) {
                         callback(err);
@@ -121,17 +139,18 @@ module.exports = function(app, passport) {
                         for (var i=0; i<foundUsers.length; i++) {
                             memberList.push({"name":foundUsers[i].local.firstname+" "+foundUsers[i].local.lastname, "email":foundUsers[i].local.email, "id":foundUsers[i].local.userid});
                         }
-                        callback(null, foundProj, memberList); // Now we pass in the project and the project members list
+                        callback(null, foundProj, tasks, memberList); // Now we pass in the project and the project members list
                     }
 
                 });
             }
 
-        ], function(err,foundProj, memberList){
+        ], function(err,foundProj, tasks, memberList){
             if(err) {
                 throw err;
             } else {
                 console.log("done waterfalling");
+                console.log(tasks);
                 res.render('project.jade', {
                     // These are navbar variables
                     loggedIn : req.isAuthenticated(),
@@ -149,7 +168,16 @@ module.exports = function(app, passport) {
                     projMembers : memberList,
 
                     // Task tab variables
-                    taskList : foundProj.tasks
+                    taskList : foundProj.tasks,
+
+                    //statuses
+                    statuses: statuses,
+
+                    //kanban tab variables
+                    tasks1 : tasks[statuses[0]],
+                    tasks2 : tasks[statuses[1]],
+                    tasks3 : tasks[statuses[2]],
+                    tasks4 : tasks[statuses[3]]
                 });
             }
         });

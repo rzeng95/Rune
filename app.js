@@ -32,6 +32,8 @@ var mongoose = require('mongoose');
 var configDB = require('./config/db.js');
 mongoose.connect(configDB.url);
 
+app.locals.statuses = ["Backlog", "Selected for Development", "In Progress", "Completed"];
+
 // All the routes are stored in routes.js, which point to individual controllers
 require('./app/routes.js')(app, passport);
 
