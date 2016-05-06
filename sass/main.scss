@@ -59,7 +59,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     }
 }
 
-@mixin rune-icon-small($color-index) {
+@mixin rune-check-small($color-index) {
     display: inline;
     margin: 0px 4px 0px 0px;
     .roo-icon-small {
@@ -75,6 +75,27 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     }
 }
 
+@mixin rune-kanban-small($color-index) {
+    display: inline-block;
+    .roo-icon-kanban {
+        @include roo-image($color-index, 30px);
+    }
+
+    .initials-icon-kanban {
+        position: absolute;
+        margin: -28px 2px;
+        color: white;
+        font-family: "Roboto-Black";
+        font-size: 9px;
+    }
+    
+    .user-name {
+        display: inline-block;
+        position: relative;
+        left: 2px;
+    }
+}
+
 @mixin roo-image($color-index, $height)
 {
     @extend .img-rounded;
@@ -84,18 +105,18 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     z-index:-1;
 }
 
-#rune-icon-small-red { @include rune-icon-small(1); }
-#rune-icon-small-redorange { @include rune-icon-small(2); }
-#rune-icon-small-orange { @include rune-icon-small(3); }
-#rune-icon-small-yelloworange { @include rune-icon-small(4); }
-#rune-icon-small-yellow { @include rune-icon-small(5); }
-#rune-icon-small-yellowgreen { @include rune-icon-small(6); }
-#rune-icon-small-green { @include rune-icon-small(7); }
-#rune-icon-small-bluegreen { @include rune-icon-small(8); }
-#rune-icon-small-blue { @include rune-icon-small(9); }
-#rune-icon-small-bluepurple { @include rune-icon-small(10); }
-#rune-icon-small-purple { @include rune-icon-small(11); }
-#rune-icon-small-redpurple { @include rune-icon-small(12); }
+#rune-icon-small-red { @include rune-check-small(1); }
+#rune-icon-small-redorange { @include rune-check-small(2); }
+#rune-icon-small-orange { @include rune-check-small(3); }
+#rune-icon-small-yelloworange { @include rune-check-small(4); }
+#rune-icon-small-yellow { @include rune-check-small(5); }
+#rune-icon-small-yellowgreen { @include rune-check-small(6); }
+#rune-icon-small-green { @include rune-check-small(7); }
+#rune-icon-small-bluegreen { @include rune-check-small(8); }
+#rune-icon-small-blue { @include rune-check-small(9); }
+#rune-icon-small-bluepurple { @include rune-check-small(10); }
+#rune-icon-small-purple { @include rune-check-small(11); }
+#rune-icon-small-redpurple { @include rune-check-small(12); }
 
 #rune-icon-profile-red { @include rune-icon-profile(1); }
 #rune-icon-profile-redorange { @include rune-icon-profile(2); }
@@ -109,6 +130,19 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 #rune-icon-profile-bluepurple { @include rune-icon-profile(10); }
 #rune-icon-profile-purple { @include rune-icon-profile(11); }
 #rune-icon-profile-redpurple { @include rune-icon-profile(12); }
+
+#rune-icon-kanban-red { @include rune-kanban-small(1); }
+#rune-icon-kanban-redorange { @include rune-kanban-small(2); }
+#rune-icon-kanban-orange { @include rune-kanban-small(3); }
+#rune-icon-kanban-yelloworange { @include rune-kanban-small(4); }
+#rune-icon-kanban-yellow { @include rune-kanban-small(5); }
+#rune-icon-kanban-yellowgreen { @include rune-kanban-small(6); }
+#rune-icon-kanban-green { @include rune-kanban-small(7); }
+#rune-icon-kanban-bluegreen { @include rune-kanban-small(8); }
+#rune-icon-kanban-blue { @include rune-kanban-small(9); }
+#rune-icon-kanban-bluepurple { @include rune-kanban-small(10); }
+#rune-icon-kanban-purple { @include rune-kanban-small(11); }
+#rune-icon-kanban-redpurple { @include rune-kanban-small(12); }
 
 #hidden-color-input {
     position: absolute;

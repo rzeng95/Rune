@@ -9,5 +9,9 @@ div(style="margin-top: 158px;")
 			tbody
 				each user in projMembers
 					tr
-						td #[a(href='/u/'+user.id+'/') #{user.name}]
+						td                   
+							div(id="rune-icon-kanban-" + user.color)
+								img(class="roo-icon-kanban" src="/images/Roo.svg")
+								div(class="user-name") #[a(href='/u/'+user.id+'/') #{user.name}]
+								div(class="initials-icon-kanban") #{user.initials}
 						td #{user.email}

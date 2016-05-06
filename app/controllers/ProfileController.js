@@ -148,6 +148,7 @@ module.exports = function(app, passport) {
                     loggedIn : req.isAuthenticated(),
                     projList : req.user.local.projects,
                     firstname : req.user.local.firstname,
+                    color: req.user.local.userColor,
                     user : req.user,
                     userlist : users
                 });

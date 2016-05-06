@@ -310,8 +310,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?1462172998);
-  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?&1462172998#iefix) format("embedded-opentype"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff2?1462172998) format("woff2"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff?1462172998) format("woff"), url(../fonts/bootstrap/glyphicons-halflings-regular.ttf?1462172998) format("truetype"), url(../fonts/bootstrap/glyphicons-halflings-regular.svg?1462172998#glyphicons_halflingsregular) format("svg");
+  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?1462197633);
+  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?&1462197633#iefix) format("embedded-opentype"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff2?1462197633) format("woff2"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff?1462197633) format("woff"), url(../fonts/bootstrap/glyphicons-halflings-regular.ttf?1462197633) format("truetype"), url(../fonts/bootstrap/glyphicons-halflings-regular.svg?1462197633#glyphicons_halflingsregular) format("svg");
 }
 .glyphicon {
   position: relative;
@@ -1437,7 +1437,7 @@ img {
   height: auto;
 }
 
-.img-rounded, #rune-icon-small-red .roo-icon-small, #rune-icon-small-red .check-icon-small, #rune-icon-small-redorange .roo-icon-small, #rune-icon-small-redorange .check-icon-small, #rune-icon-small-orange .roo-icon-small, #rune-icon-small-orange .check-icon-small, #rune-icon-small-yelloworange .roo-icon-small, #rune-icon-small-yelloworange .check-icon-small, #rune-icon-small-yellow .roo-icon-small, #rune-icon-small-yellow .check-icon-small, #rune-icon-small-yellowgreen .roo-icon-small, #rune-icon-small-yellowgreen .check-icon-small, #rune-icon-small-green .roo-icon-small, #rune-icon-small-green .check-icon-small, #rune-icon-small-bluegreen .roo-icon-small, #rune-icon-small-bluegreen .check-icon-small, #rune-icon-small-blue .roo-icon-small, #rune-icon-small-blue .check-icon-small, #rune-icon-small-bluepurple .roo-icon-small, #rune-icon-small-bluepurple .check-icon-small, #rune-icon-small-purple .roo-icon-small, #rune-icon-small-purple .check-icon-small, #rune-icon-small-redpurple .roo-icon-small, #rune-icon-small-redpurple .check-icon-small, #rune-icon-profile-red .roo-icon-profile, #rune-icon-profile-redorange .roo-icon-profile, #rune-icon-profile-orange .roo-icon-profile, #rune-icon-profile-yelloworange .roo-icon-profile, #rune-icon-profile-yellow .roo-icon-profile, #rune-icon-profile-yellowgreen .roo-icon-profile, #rune-icon-profile-green .roo-icon-profile, #rune-icon-profile-bluegreen .roo-icon-profile, #rune-icon-profile-blue .roo-icon-profile, #rune-icon-profile-bluepurple .roo-icon-profile, #rune-icon-profile-purple .roo-icon-profile, #rune-icon-profile-redpurple .roo-icon-profile {
+.img-rounded, #rune-icon-small-red .roo-icon-small, #rune-icon-small-red .check-icon-small, #rune-icon-small-redorange .roo-icon-small, #rune-icon-small-redorange .check-icon-small, #rune-icon-small-orange .roo-icon-small, #rune-icon-small-orange .check-icon-small, #rune-icon-small-yelloworange .roo-icon-small, #rune-icon-small-yelloworange .check-icon-small, #rune-icon-small-yellow .roo-icon-small, #rune-icon-small-yellow .check-icon-small, #rune-icon-small-yellowgreen .roo-icon-small, #rune-icon-small-yellowgreen .check-icon-small, #rune-icon-small-green .roo-icon-small, #rune-icon-small-green .check-icon-small, #rune-icon-small-bluegreen .roo-icon-small, #rune-icon-small-bluegreen .check-icon-small, #rune-icon-small-blue .roo-icon-small, #rune-icon-small-blue .check-icon-small, #rune-icon-small-bluepurple .roo-icon-small, #rune-icon-small-bluepurple .check-icon-small, #rune-icon-small-purple .roo-icon-small, #rune-icon-small-purple .check-icon-small, #rune-icon-small-redpurple .roo-icon-small, #rune-icon-small-redpurple .check-icon-small, #rune-icon-profile-red .roo-icon-profile, #rune-icon-profile-redorange .roo-icon-profile, #rune-icon-profile-orange .roo-icon-profile, #rune-icon-profile-yelloworange .roo-icon-profile, #rune-icon-profile-yellow .roo-icon-profile, #rune-icon-profile-yellowgreen .roo-icon-profile, #rune-icon-profile-green .roo-icon-profile, #rune-icon-profile-bluegreen .roo-icon-profile, #rune-icon-profile-blue .roo-icon-profile, #rune-icon-profile-bluepurple .roo-icon-profile, #rune-icon-profile-purple .roo-icon-profile, #rune-icon-profile-redpurple .roo-icon-profile, #rune-icon-kanban-red .roo-icon-kanban, #rune-icon-kanban-redorange .roo-icon-kanban, #rune-icon-kanban-orange .roo-icon-kanban, #rune-icon-kanban-yelloworange .roo-icon-kanban, #rune-icon-kanban-yellow .roo-icon-kanban, #rune-icon-kanban-yellowgreen .roo-icon-kanban, #rune-icon-kanban-green .roo-icon-kanban, #rune-icon-kanban-bluegreen .roo-icon-kanban, #rune-icon-kanban-blue .roo-icon-kanban, #rune-icon-kanban-bluepurple .roo-icon-kanban, #rune-icon-kanban-purple .roo-icon-kanban, #rune-icon-kanban-redpurple .roo-icon-kanban {
   border-radius: 6px;
 }
 
@@ -7339,7 +7339,7 @@ button.close {
 }
 @font-face {
   font-family: "Roboto-Black";
-  src: url('../fonts/RobotoBlack/Roboto-Black.ttf?1329484638') format('truetype'), url('../fonts/RobotoBlack/Roboto-Black.eot?1329484638') format('embedded-opentype'), url('../fonts/RobotoBlack/Roboto-Black.woff?1329484638') format('woff');
+  src: url('../fonts/RobotoBlack/Roboto-Black.ttf?1462314952') format('truetype'), url('../fonts/RobotoBlack/Roboto-Black.eot?1462314952') format('embedded-opentype'), url('../fonts/RobotoBlack/Roboto-Black.woff?1462314953') format('woff');
 }
 .btn-is-disabled {
   pointer-events: none;
@@ -7739,6 +7739,270 @@ button.close {
   color: white;
   font-family: "Roboto-Black";
   font-size: 56px;
+}
+
+#rune-icon-kanban-red {
+  display: inline-block;
+}
+#rune-icon-kanban-red .roo-icon-kanban {
+  background-color: #EB222A;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-red .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-red .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-redorange {
+  display: inline-block;
+}
+#rune-icon-kanban-redorange .roo-icon-kanban {
+  background-color: #F36F26;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-redorange .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-redorange .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-orange {
+  display: inline-block;
+}
+#rune-icon-kanban-orange .roo-icon-kanban {
+  background-color: #F68F22;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-orange .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-orange .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-yelloworange {
+  display: inline-block;
+}
+#rune-icon-kanban-yelloworange .roo-icon-kanban {
+  background-color: #FEC317;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-yelloworange .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-yelloworange .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-yellow {
+  display: inline-block;
+}
+#rune-icon-kanban-yellow .roo-icon-kanban {
+  background-color: #F4EA28;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-yellow .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-yellow .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-yellowgreen {
+  display: inline-block;
+}
+#rune-icon-kanban-yellowgreen .roo-icon-kanban {
+  background-color: #9BCA3C;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-yellowgreen .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-yellowgreen .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-green {
+  display: inline-block;
+}
+#rune-icon-kanban-green .roo-icon-kanban {
+  background-color: #04AA51;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-green .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-green .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-bluegreen {
+  display: inline-block;
+}
+#rune-icon-kanban-bluegreen .roo-icon-kanban {
+  background-color: #1991CD;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-bluegreen .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-bluegreen .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-blue {
+  display: inline-block;
+}
+#rune-icon-kanban-blue .roo-icon-kanban {
+  background-color: #0857A3;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-blue .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-blue .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-bluepurple {
+  display: inline-block;
+}
+#rune-icon-kanban-bluepurple .roo-icon-kanban {
+  background-color: #6C459B;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-bluepurple .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-bluepurple .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-purple {
+  display: inline-block;
+}
+#rune-icon-kanban-purple .roo-icon-kanban {
+  background-color: #A54499;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-purple .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-purple .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
+}
+
+#rune-icon-kanban-redpurple {
+  display: inline-block;
+}
+#rune-icon-kanban-redpurple .roo-icon-kanban {
+  background-color: #E34197;
+  position: relative;
+  height: 30px;
+  z-index: -1;
+}
+#rune-icon-kanban-redpurple .initials-icon-kanban {
+  position: absolute;
+  margin: -28px 2px;
+  color: white;
+  font-family: "Roboto-Black";
+  font-size: 9px;
+}
+#rune-icon-kanban-redpurple .user-name {
+  display: inline-block;
+  position: relative;
+  left: 2px;
 }
 
 #hidden-color-input {
