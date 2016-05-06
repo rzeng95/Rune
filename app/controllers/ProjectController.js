@@ -10,6 +10,8 @@ var Project = require('../models/project.js');
 var Task = require('../models/task.js');
 var Helper = require('../models/helpers.js');
 
+var async = require('async');
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -94,6 +96,65 @@ module.exports = function(app, passport) {
 
     // Each project gets its own site with its own unique url. Only logged-in users who are members of that project can access it.
     app.get('/p/:projectid/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
+
+        async.waterfall([
+
+            // find the Project specified by the accessed URL. We need this for the project's member list
+            function getProjectByID(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj){
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj); // Pass the project members list to the next function
+                    }
+                });
+            },
+            function getProjectUserInfo(foundProj, callback) {
+                User.find({'local.email': {$in: foundProj.members}}, function(err, foundUsers){
+                    if (err) {
+                        callback(err);
+                    } else {
+                        var memberList = [];
+                        for (var i=0; i<foundUsers.length; i++) {
+                            memberList.push({"name":foundUsers[i].local.firstname+" "+foundUsers[i].local.lastname, "email":foundUsers[i].local.email});
+                        }
+                        callback(null, foundProj, memberList); // Now we pass in the project and the project members list
+                    }
+
+                });
+            }
+
+        ], function(err,foundProj, memberList){
+            if(err) {
+                throw err;
+            } else {
+                console.log("done waterfalling");
+                res.render('project_test.jade', {
+                    // These are navbar variables
+                    loggedIn : req.isAuthenticated(),
+                    projList : req.user.local.projects,
+                    firstname : req.user.local.firstname,
+
+                    isProjectPage : true,
+
+                    // Overview tab variables
+                    projName : foundProj.projectname,
+                    projKey : foundProj.projectkey,
+                    projId : foundProj.projectid,
+
+                    // User tab variables
+                    projMembers : memberList
+
+                    // Task tab variables
+
+                });
+            }
+        });
+
+
+
+
+/*
         var projectId = req.params.projectid;
         // Knowing the project id because it's passed in by the url, the entire project database entry can be accessed using mongoose's findById method
         Project.findById(projectId, function(err, proj) {
@@ -115,6 +176,8 @@ module.exports = function(app, passport) {
                 });
             }
         });
+*/
+
     });
 
 /*

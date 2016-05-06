@@ -1,5 +1,6 @@
 div(style="margin-top: 158px;")
 
-h4 List of all users
+h4 List of all project members
 
-h5 Project Members: #{projMembers}
+each user in projMembers
+    h5 #{user['name']}  #{user['email']}
