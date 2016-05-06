@@ -4,71 +4,74 @@ block bodyContent
 
     div(class="container-fluid")
         div(class="col-sm-12")
-            div(class="row")
-                div(class="col-sm-3" style="padding-top:24px")
-                    div(class="row")
-                        div(id="rune-icon-profile-" + userColor)
-                            img(class="roo-icon-profile" src="/images/Roo.svg")
-                            div(class="initials-icon-profile") 
-                                p=initials
-                    div(class="row")
-                        h2=fullname
-                        h4=email
-                        if isMe
-                            button(type="button" class="btn btn-primary" disabled) Add to Project
-                        else 
-                            ul(class="nav nav-stacked")
-                                li
-                                    div(class="btn-group")
-                                        button(class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#") Add to Project 
-                                            span(class="glyphicon glyphicon-menu-right")
-                                        ul(class="dropdown-menu" style="top: 0;left: 100%;")
-                                            each proj in projList
-                                                li #[a(href="adduser/"+proj['projectid']) #{ proj['projectkey'] }]
-                                
-                div(class="col-sm-7")
-                    //
-                        div(class="row")
-                            h2(class="col-sm-7") Description
-                        div(class="row")
-                            h4(class="col-sm-7") description goes here 
+            div(class="col-sm-2" style="padding-top:24px")
+            div(class="col-sm-4" style="padding-top:24px")
 
-                    if userProjects 
-                        table(class="table") 
-                            thead
-                                tr
-                                    th Project Name
-                            tbody
-                                each proj in userProjects
+                div(id="rune-icon-profile-" + userColor)
+                    img(class="roo-icon-profile" src="/images/Roo.svg")
+                    div(class="initials-icon-profile") 
+                        p=initials
+
+                div
+                    h2=fullname
+                    h4=email
+                    if isMe
+                        button(type="button" class="btn btn-primary" disabled) Add to Project
+                    else 
+                        ul(class="nav nav-stacked")
+                            li
+                                div(class="btn-group")
+                                    button(class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#") Add to Project 
+                                        span(class="glyphicon glyphicon-menu-right")
+                                    ul(class="dropdown-menu" style="top: 0;left: 100%;")
+                                        each proj in projList
+                                            li #[a(href="adduser/"+proj['projectid']) #{ proj['projectkey'] }]
+                div(style="padding-top:48px")                              
+                    div(class="panel panel-primary" style="max-width:400px")
+                        div(class="panel-heading" style="text-color=white")
+                            |My Projects
+                        div(class="panel-content")
+                            table(class="table table-hover")
+                                if myProjects
+                                    each proj in myProjects 
+                                        tr
+                                            td(class="text-center")
+                                                #[a(href="/p/"+proj['projectid']+'/') #{ proj['projectkey']}]
+                                            td(class="text-center")
+                                                |#{proj['projectname']}
+                                else
                                     tr
-                                        projList
-                                        td #[a(href="/p/"+proj['projectid']+'/') #{ proj['projectkey'] }]
-                    else
-                        p You have no projects! 
+                                        td(class="text-center")
+                                            You have no projects! 
+
+            div(class="col-sm-4" style="padding-top:24px")
+                if myProjects
+                    each proj in myProjects
+                        each task in proj.tasks
+                            div(class="panel panel-success")
+                                div(class="panel-heading" style="text-color=white")
+                                    #[a(href="/p/"+proj['projectid']+'/' class="kanban-task-header") #{task.taskid+' '+task.taskname}]
+                                div(class="panel-content")
+                                    table(class="table table-striped")
+                                        tr
+                                            th(class="text-right col-md-4")
+                                                | Task Description
+                                            td(class="col-md-8")
+                                                | #{task.taskdescription}
+                                        tr
+                                            th(class="text-right col-md-4")
+                                                | Issue Priority: 
+                                            td(class="col-md-8")
+                                                | #{task.priority}
+                                        tr
+                                            th(class="text-right col-md-4")
+                                                | Assigned To
+                                            td(class="col-md-8")
+                                                | #{task.assignedto}
+            div(class="col-sm-2" style="padding-top:24px")
 
 
 
-
-
-
-
-                        
-            div(class="row" style="height:20px")
-            div(class="row")
-                div(class="col-xs-2" style="padding:6px; margin:6px; background-color:blue; opacity:0.85; border-radius:8px; color:white")
-                    p Project Name
-                    p Team Size
-                    p Description
-                div(class="col-xs-2" style="padding:6px; margin:6px; background-color:green; opacity:0.85; border-radius:8px; color:white")
-                    p Project Name
-                    p Team Size
-                    p Description
-                div(class="col-xs-2" style="padding:6px; margin:6px; background-color:orange; opacity:0.85; border-radius:8px; color:white")
-                    p Project Name
-                    p Team Size
-                    p Description
-                div(class="col-xs-2" style="padding:6px; margin:6px; background-color:red; opacity:0.85; border-radius:8px; color:white")
-                    p Project Name
-                    p Team Size
-                    p Description
+            
+               
                             

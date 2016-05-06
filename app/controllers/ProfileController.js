@@ -27,24 +27,33 @@ module.exports = function(app, passport) {
             if (err) {
                 throw err;
             } else {
-                var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
-                var loggedInID = (req.user.local.userid).toString(); // Pulled from the logged in user's info
+                Project.find({'members': usr.local.email}, function(err, projects)
+                {
+                    console.log(projects);
+                    console.log(req.user.local.projects);
+                    var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
+                    var loggedInID = (req.user.local.userid).toString(); // Pulled from the logged in user's info
 
-                var isMe = (accessorID === loggedInID);
-                res.render('profile.jade', {
-                    // These are navbar variables
-                    loggedIn : req.isAuthenticated(),
-                    projList : req.user.local.projects,
-                    firstname : req.user.local.firstname,
+                    var isMe = (accessorID === loggedInID);
+                    res.render('profile.jade', {
+                        // These are navbar variables
+                        loggedIn : req.isAuthenticated(),
+                        projList : req.user.local.projects,
+                        firstname : req.user.local.firstname,
 
-                    // These are profile variables
-                    fullname : usr.local.firstname + ' ' + usr.local.lastname,
-                    initials : usr.local.firstname.charAt(0) + usr.local.lastname.charAt(0),
-                    email : usr.local.email,
-                    isMe : isMe,
-                    userColor : usr.local.userColor,
-                    userProjects : usr.local.projects
+                        // These are profile variables
+                        fullname : usr.local.firstname + ' ' + usr.local.lastname,
+                        initials : usr.local.firstname.charAt(0) + usr.local.lastname.charAt(0),
+                        email : usr.local.email,
+                        isMe : isMe,
+                        userColor : usr.local.userColor,
+                        userProjects : usr.local.projects,
+                        myProjects : projects
+                    });
                 });
+
+
+                
             }
         });
 
