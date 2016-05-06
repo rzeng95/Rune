@@ -34,10 +34,15 @@ module.exports = function(app, passport) {
     // LOGIN PAGE - This is a separate form
     // =====================================
     app.get('/login', function(req, res) {
-        res.render('login.jade', {
-            message : req.flash('loginMessage')
+        if(req.isAuthenticated()) {
+            res.redirect('/profile');
+        }
+        else {
+            res.render('login.jade', {
+                message : req.flash('loginMessage')
 
-        });
+            });
+        }
     });
 
     // Successful logins direct the user to their profile page
