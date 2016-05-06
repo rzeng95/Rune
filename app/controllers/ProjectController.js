@@ -122,7 +122,7 @@ module.exports = function(app, passport) {
                                     break;
                                 }
                             }
-                            
+
                         }
                         callback(null, foundProj, tasks); // Pass the project members list to the next function
                     }
@@ -139,7 +139,11 @@ module.exports = function(app, passport) {
                     } else {
                         var memberList = [];
                         for (var i=0; i<foundUsers.length; i++) {
-                            memberList.push({"name":foundUsers[i].local.firstname+" "+foundUsers[i].local.lastname, "email":foundUsers[i].local.email, "id":foundUsers[i].local.userid});
+                            memberList.push({
+                                            "name":foundUsers[i].local.firstname+" "+foundUsers[i].local.lastname,
+                                            "email":foundUsers[i].local.email, "id":foundUsers[i].local.userid,
+                                            "color":foundUsers[i].local.userColor
+                                        });
                         }
                         callback(null, foundProj, tasks, memberList); // Now we pass in the project and the project members list
                     }
