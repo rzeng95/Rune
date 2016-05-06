@@ -9289,8 +9289,14 @@ button.close {
 .login #forgot-pw {
   text-align: right;
 }
+/* line 136, ../../sass/main.scss */
+.login .no-user-error {
+  color: #c80000;
+  min-height: 20px;
+  text-align: center;
+}
 
-/* line 139, ../../sass/main.scss */
+/* line 144, ../../sass/main.scss */
 .project-header {
   background-color: #EEEEEE;
   margin-top: 45px;
@@ -9298,12 +9304,12 @@ button.close {
   z-index: 900;
 }
 
-/* line 151, ../../sass/main.scss */
+/* line 156, ../../sass/main.scss */
 .project-pages li {
   float: right;
 }
 
-/* line 157, ../../sass/main.scss */
+/* line 162, ../../sass/main.scss */
 .kanban-header {
   background-color: #EEEEEE;
   margin-top: 45px;
@@ -9315,7 +9321,7 @@ button.close {
   z-index: 900;
 }
 
-/* line 168, ../../sass/main.scss */
+/* line 173, ../../sass/main.scss */
 .kanban-board {
   padding: 0;
   padding-bottom: 40px;
@@ -9324,13 +9330,13 @@ button.close {
   width: 100%;
 }
 
-/* line 176, ../../sass/main.scss */
+/* line 181, ../../sass/main.scss */
 .kanban-board-header {
   margin-top: 158px;
   z-index: 800;
 }
 
-/* line 181, ../../sass/main.scss */
+/* line 186, ../../sass/main.scss */
 .kanban-board-row {
   display: table;
   box-sizing: border-box;
@@ -9342,12 +9348,12 @@ button.close {
   z-index: -1;
 }
 
-/* line 192, ../../sass/main.scss */
+/* line 197, ../../sass/main.scss */
 .kanban-board-row-header {
   min-height: 100%;
 }
 
-/* line 196, ../../sass/main.scss */
+/* line 201, ../../sass/main.scss */
 .kanban-board-member {
   margin: 0 22px;
   margin-bottom: 10px;
@@ -9358,7 +9364,7 @@ button.close {
   border-color: #E8E8E8;
 }
 
-/* line 206, ../../sass/main.scss */
+/* line 211, ../../sass/main.scss */
 .kanban-col {
   display: table-cell;
   float: none;
@@ -9368,7 +9374,7 @@ button.close {
   background-color: #EEEEEE;
 }
 
-/* line 215, ../../sass/main.scss */
+/* line 220, ../../sass/main.scss */
 .kanban-col-header {
   display: table-cell;
   float: none;
@@ -9379,13 +9385,13 @@ button.close {
   background-color: #F8F8F8;
 }
 
-/* line 225, ../../sass/main.scss */
+/* line 230, ../../sass/main.scss */
 .kanban-col-header-text {
   border-bottom: 4px solid #EEEEEE;
   padding-bottom: 10px;
 }
 
-/* line 230, ../../sass/main.scss */
+/* line 235, ../../sass/main.scss */
 .kanban-task {
   background-color: #F8F8F8;
   border: 1px solid #E8E8E8;
@@ -9395,18 +9401,18 @@ button.close {
   z-index: 10;
 }
 
-/* line 239, ../../sass/main.scss */
+/* line 244, ../../sass/main.scss */
 .kanban-task-header {
   font-weight: bold;
   padding: 5px 0;
 }
 
-/* line 244, ../../sass/main.scss */
+/* line 249, ../../sass/main.scss */
 .kanban-task-body {
   padding: 5px 0;
 }
 
-/* line 248, ../../sass/main.scss */
+/* line 253, ../../sass/main.scss */
 .kanban-task-tags {
   padding: 5px 0;
 }

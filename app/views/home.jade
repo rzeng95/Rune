@@ -103,12 +103,13 @@ block bodyContent
                 else
                     p You have no projects! 
 
-    script
-        | document.body.style.background = "url('/images/runite.png') no-repeat center center fixed";
-        | document.body.style.backgroundSize = "cover";
-        | document.body.style.webkitBackgroundSize = "cover";
-        | document.body.style.mozBackgroundSize = "cover";
-        | document.body.style.oBackgroundSize = "cover"
+block scripts
+    script.
+        document.body.style.background = "url('/images/runite.png') no-repeat center center fixed";
+        document.body.style.backgroundSize = "cover";
+        document.body.style.webkitBackgroundSize = "cover";
+        document.body.style.mozBackgroundSize = "cover";
+        document.body.style.oBackgroundSize = "cover"
 
     script.
         var valid = "#66afe9";
@@ -150,16 +151,14 @@ block bodyContent
         confirmPassword.onkeyup = validatePwd;
         confirmPassword.onfocus = enableConfirmPwdBorderColor;
         confirmPassword.onblur = disableConfirmPwdBorderColor;
-    
-    script(src="https://code.jquery.com/jquery-1.10.2.js")
-    
+
     script.
         var checks = document.getElementsByClassName("check-icon-small");
         var colors = ["red", "redorange", "orange", "yelloworange", "yellow", "yellowgreen",
                       "green", "bluegreen", "blue", "bluepurple", "purple", "redpurple"];
         var colorInput = document.getElementById("hidden-color-input");
         var selected = 0;
-        console.log(selected);
+
         var selectIcon = function(selectColor) {
             if(selected != selectColor) {
                 checks[selectColor].style.opacity = "1";
@@ -168,26 +167,3 @@ block bodyContent
                 selected = selectColor;
             }         
         }
-        
-        $(document).ready(function(){
-            $('#submit').click(function() {
-                console.log('button pushed')
-                // get value of password 
-                //var pw = document.findbyname(name="password") // for example, password = hello 
-                // get value of name
-                //var name = document.findbyname(name="firstname")
-                // get value of roo 
-                // get value of email 
-                // make ajax post request with those results 
-                
-            
-            })
-        });
-          
-        
-        
-
-            
-        
-        
-        
