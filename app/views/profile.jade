@@ -34,7 +34,7 @@ block bodyContent
                                     each proj in myProjects 
                                         tr
                                             td(class="text-center")
-                                                #[a(href="/p/"+proj['projectid']+'/') #{ proj['projectkey']}]
+                                                |#[a(href="/p/" + proj['projectid'] + '/') #{ proj['projectkey']}]
                                             td(class="text-center")
                                                 |#{proj['projectname']}
                                 else
@@ -48,7 +48,7 @@ block bodyContent
                         each task in proj.tasks
                             div(class="panel panel-success")
                                 div(class="panel-heading" style="text-color=white")
-                                    #[a(href="/p/"+proj['projectid']+'/' class="kanban-task-header") #{task.taskid+' '+task.taskname}]
+                                    |#[a(href="/p/"+proj['projectid']+'/' class="kanban-task-header") #{task.taskid+' '+task.taskname}]
                                 div(class="panel-content")
                                     table(class="table table-striped")
                                         tr

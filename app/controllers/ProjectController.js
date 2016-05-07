@@ -146,7 +146,7 @@ module.exports = function(app, passport) {
                                             "color":foundUsers[i].local.userColor
                                         });
                         }
-                        callback(null, foundProj, tasks, memberList); // Now we pass in the project and the project members list
+                        callback(null, foundProj, tasks, memberList);
                     }
                 });
             }

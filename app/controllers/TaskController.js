@@ -99,20 +99,20 @@ module.exports = function(app, passport) {
             function searchForTask(foundProj, callback) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
-                    console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
                     if (taskList[i].taskid == req.params.taskid) {
                         var foundTask = taskList[i];
                         console.log('found task');
                         return callback(null, foundProj, foundTask);
                     }
                 }
-                console.log('couldn\'t find task');
+                console.log('1. couldn\'t find task');
                 callback(1);
             }
         ], function(err, foundProj, foundTask) {
             if (err) {
                 if (err == 1) {
-                    console.log('couldn\'t find task');
+                    console.log('2. couldn\'t find task');
                 }
                 res.send('error');
             } else {
@@ -121,7 +121,7 @@ module.exports = function(app, passport) {
                     if (err2) {
                         throw err2;
                     } else {
-                        console.log('project created');
+                        console.log('task updated');
                         res.send('done');
                     }
                 });
