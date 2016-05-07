@@ -1437,7 +1437,7 @@ img {
   height: auto;
 }
 
-.img-rounded, #rune-icon-small-red .roo-icon-small, #rune-icon-small-red .check-icon-small, #rune-icon-small-redorange .roo-icon-small, #rune-icon-small-redorange .check-icon-small, #rune-icon-small-orange .roo-icon-small, #rune-icon-small-orange .check-icon-small, #rune-icon-small-yelloworange .roo-icon-small, #rune-icon-small-yelloworange .check-icon-small, #rune-icon-small-yellow .roo-icon-small, #rune-icon-small-yellow .check-icon-small, #rune-icon-small-yellowgreen .roo-icon-small, #rune-icon-small-yellowgreen .check-icon-small, #rune-icon-small-green .roo-icon-small, #rune-icon-small-green .check-icon-small, #rune-icon-small-bluegreen .roo-icon-small, #rune-icon-small-bluegreen .check-icon-small, #rune-icon-small-blue .roo-icon-small, #rune-icon-small-blue .check-icon-small, #rune-icon-small-bluepurple .roo-icon-small, #rune-icon-small-bluepurple .check-icon-small, #rune-icon-small-purple .roo-icon-small, #rune-icon-small-purple .check-icon-small, #rune-icon-small-redpurple .roo-icon-small, #rune-icon-small-redpurple .check-icon-small, #rune-icon-profile-red .roo-icon-profile, #rune-icon-profile-redorange .roo-icon-profile, #rune-icon-profile-orange .roo-icon-profile, #rune-icon-profile-yelloworange .roo-icon-profile, #rune-icon-profile-yellow .roo-icon-profile, #rune-icon-profile-yellowgreen .roo-icon-profile, #rune-icon-profile-green .roo-icon-profile, #rune-icon-profile-bluegreen .roo-icon-profile, #rune-icon-profile-blue .roo-icon-profile, #rune-icon-profile-bluepurple .roo-icon-profile, #rune-icon-profile-purple .roo-icon-profile, #rune-icon-profile-redpurple .roo-icon-profile, #rune-icon-kanban-red .roo-icon-kanban, #rune-icon-kanban-redorange .roo-icon-kanban, #rune-icon-kanban-orange .roo-icon-kanban, #rune-icon-kanban-yelloworange .roo-icon-kanban, #rune-icon-kanban-yellow .roo-icon-kanban, #rune-icon-kanban-yellowgreen .roo-icon-kanban, #rune-icon-kanban-green .roo-icon-kanban, #rune-icon-kanban-bluegreen .roo-icon-kanban, #rune-icon-kanban-blue .roo-icon-kanban, #rune-icon-kanban-bluepurple .roo-icon-kanban, #rune-icon-kanban-purple .roo-icon-kanban, #rune-icon-kanban-redpurple .roo-icon-kanban {
+.img-rounded, #error-message, #rune-icon-small-red .roo-icon-small, #rune-icon-small-red .check-icon-small, #rune-icon-small-redorange .roo-icon-small, #rune-icon-small-redorange .check-icon-small, #rune-icon-small-orange .roo-icon-small, #rune-icon-small-orange .check-icon-small, #rune-icon-small-yelloworange .roo-icon-small, #rune-icon-small-yelloworange .check-icon-small, #rune-icon-small-yellow .roo-icon-small, #rune-icon-small-yellow .check-icon-small, #rune-icon-small-yellowgreen .roo-icon-small, #rune-icon-small-yellowgreen .check-icon-small, #rune-icon-small-green .roo-icon-small, #rune-icon-small-green .check-icon-small, #rune-icon-small-bluegreen .roo-icon-small, #rune-icon-small-bluegreen .check-icon-small, #rune-icon-small-blue .roo-icon-small, #rune-icon-small-blue .check-icon-small, #rune-icon-small-bluepurple .roo-icon-small, #rune-icon-small-bluepurple .check-icon-small, #rune-icon-small-purple .roo-icon-small, #rune-icon-small-purple .check-icon-small, #rune-icon-small-redpurple .roo-icon-small, #rune-icon-small-redpurple .check-icon-small, #rune-icon-profile-red .roo-icon-profile, #rune-icon-profile-redorange .roo-icon-profile, #rune-icon-profile-orange .roo-icon-profile, #rune-icon-profile-yelloworange .roo-icon-profile, #rune-icon-profile-yellow .roo-icon-profile, #rune-icon-profile-yellowgreen .roo-icon-profile, #rune-icon-profile-green .roo-icon-profile, #rune-icon-profile-bluegreen .roo-icon-profile, #rune-icon-profile-blue .roo-icon-profile, #rune-icon-profile-bluepurple .roo-icon-profile, #rune-icon-profile-purple .roo-icon-profile, #rune-icon-profile-redpurple .roo-icon-profile, #rune-icon-kanban-red .roo-icon-kanban, #rune-icon-kanban-redorange .roo-icon-kanban, #rune-icon-kanban-orange .roo-icon-kanban, #rune-icon-kanban-yelloworange .roo-icon-kanban, #rune-icon-kanban-yellow .roo-icon-kanban, #rune-icon-kanban-yellowgreen .roo-icon-kanban, #rune-icon-kanban-green .roo-icon-kanban, #rune-icon-kanban-bluegreen .roo-icon-kanban, #rune-icon-kanban-blue .roo-icon-kanban, #rune-icon-kanban-bluepurple .roo-icon-kanban, #rune-icon-kanban-purple .roo-icon-kanban, #rune-icon-kanban-redpurple .roo-icon-kanban {
   border-radius: 6px;
 }
 
@@ -7345,6 +7345,27 @@ button.close {
   pointer-events: none;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
+}
+
+#error-message {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #53847F;
+  margin-top: 200px;
+  width: 400px;
+  height: 400px;
+}
+#error-message > img {
+  display: inline-block;
+  height: 300px;
+  margin-left: 40px;
+  margin-top: 20px;
+}
+#error-message > h1 {
+  font-family: "Roboto-Black";
+  font-size: 30px;
+  margin-bottom: auto;
+  color: white;
 }
 
 #rune-logo-img {

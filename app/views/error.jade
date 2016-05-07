@@ -1,6 +1,6 @@
 extends ./partials/base.jade
 
 block bodyContent 
-    div(class="container")
+    div(id="error-message")
+        img(src="/images/No.svg" class="img-responsive")
         h1(class="text-center") #{errorMessage}
-        img(src="/images/tsundere404.png" class="img-responsive")

@@ -21,6 +21,27 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     pointer-events: none;
     @include opacity(0.7);
 }
+#error-message {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: $color-1;
+    @extend .img-rounded;
+    margin-top: 200px;
+    width: 400px;
+    height: 400px;
+    >img {
+        display: inline-block;
+        height: 300px;
+        margin-left: 40px;
+        margin-top: 20px;
+    }
+    > h1 {
+        font-family: "Roboto-Black";
+        font-size: 30px;
+        margin-bottom: auto;
+        color: white;
+    }
+}
 
 #rune-logo-img {
     display: inline;
