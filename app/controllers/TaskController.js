@@ -85,7 +85,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/p/:projectid/t/:taskid/', /* todo: add catches */function(req, res){
+    app.get('/p/:projectid/t/:taskid/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
 
         async.waterfall([
             function findProject(callback) {
@@ -143,7 +143,7 @@ module.exports = function(app, passport) {
 
     }); // end app.get
 
-    app.post('/p/:projectid/t/:taskid/delete/', /* todo: add catches */function(req, res){
+    app.post('/p/:projectid/t/:taskid/delete/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
         async.waterfall([
             function findProject(callback) {
                 Project.findById(req.params.projectid, function(err, foundProj) {
@@ -196,7 +196,7 @@ module.exports = function(app, passport) {
         }); // end async waterfall
     }); // end delete task
 
-    app.post('/p/:projectid/t/:taskid/modify/', /* todo: add catches */function(req, res){
+    app.post('/p/:projectid/t/:taskid/modify/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
         async.waterfall([
             function findProject(callback) {
                 Project.findById(req.params.projectid, function(err, foundProj) {

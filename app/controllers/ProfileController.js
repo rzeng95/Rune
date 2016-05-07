@@ -29,8 +29,8 @@ module.exports = function(app, passport) {
             } else {
                 Project.find({'members': usr.local.email}, function(err, projects)
                 {
-                    console.log(projects);
-                    console.log(req.user.local.projects);
+                    //console.log(projects);
+                    //console.log(req.user.local.projects);
                     var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
                     var loggedInID = (req.user.local.userid).toString(); // Pulled from the logged in user's info
 
@@ -53,7 +53,7 @@ module.exports = function(app, passport) {
                 });
 
 
-                
+
             }
         });
 
