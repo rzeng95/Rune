@@ -13,6 +13,18 @@ var cookieParser = require('cookie-parser');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
+// Custom middleware to append trailing slashes to URL
+app.use(function(req, res, next) {
+    var url = req.path;
+    var lastChar = url.substr(-1);
+
+    if (lastChar != '/' && req.method == 'GET') {
+        res.redirect(301, url+'/');
+    } else {
+        next();
+    }
+});
+
 // Morgan Logging Setup
 var morgan = require('morgan');
 app.use(morgan('dev'));
