@@ -154,8 +154,8 @@ module.exports = function(app, passport) {
             if (err) {
                 throw err;
             } else {
-                console.log("done waterfalling");
-                console.log(tasks);
+                //console.log("done waterfalling");
+                //console.log(tasks);
                 res.render('project.jade', {
                     // These are navbar variables
                     loggedIn : req.isAuthenticated(),

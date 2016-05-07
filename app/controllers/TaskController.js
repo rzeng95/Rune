@@ -85,7 +85,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/p/:projectid/t/:taskid', /* todo: add catches */function(req, res){
+    app.get('/p/:projectid/t/:taskid/', /* todo: add catches */function(req, res){
 
         async.waterfall([
             function findProject(callback) {
@@ -125,8 +125,15 @@ module.exports = function(app, passport) {
                     } else {
 
                         res.render('task.jade', {
+                            // These are navbar variables
+                            loggedIn : req.isAuthenticated(),
+                            projList : req.user.local.projects,
+                            firstname : req.user.local.firstname,
+                            isProjectPage : true,
+
                             taskname : foundTask.taskname,
-                            taskdescription : foundTask.taskdescription
+                            taskdescription : foundTask.taskdescription,
+                            statuses : app.locals.statuses
                         });
                     }
                 });
@@ -136,7 +143,7 @@ module.exports = function(app, passport) {
 
     }); // end app.get
 
-    app.delete('/p/:projectid/t/:taskid', /* todo: add catches */function(req, res){
+    app.post('/p/:projectid/t/:taskid/delete/', /* todo: add catches */function(req, res){
         async.waterfall([
             function findProject(callback) {
                 Project.findById(req.params.projectid, function(err, foundProj) {
@@ -159,6 +166,20 @@ module.exports = function(app, passport) {
                 }
                 console.log('1. couldn\'t find task');
                 callback(1);
+            } ,
+            function deleteTask(foundProj, taskList, index, callback) {
+                taskList.splice(index,1);
+                // save this updated project
+                foundProj.save(function(err2,done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+                        console.log('task deleted and project updated');
+                        //res.redirect('/p/' + req.params.projectid + '/');
+                        callback(null, 'done');
+                    }
+                });
+
             }
 
         ], function(err, foundProj, taskList, index) {
@@ -168,21 +189,73 @@ module.exports = function(app, passport) {
                 }
                 res.send('error');
             } else {
-                // delete the task from the tasks array
-                taskList.splice(index,1);
+                res.redirect('/p/' + req.params.projectid + '/');
+                //res.redirect('/');
+            }
+
+        }); // end async waterfall
+    }); // end delete task
+
+    app.post('/p/:projectid/t/:taskid/modify/', /* todo: add catches */function(req, res){
+        async.waterfall([
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            } ,
+            function searchForTask(foundProj, callback) {
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid == req.params.taskid) {
+                        var foundTask = taskList[i];
+                        console.log('found task');
+                        return callback(null, foundProj, taskList, i);
+                    }
+                }
+                console.log('1. couldn\'t find task');
+                callback(1);
+            } ,
+            function modifyTask(foundProj, taskList, index, callback) {
+                taskList[index].status = req.body.status;
                 // save this updated project
                 foundProj.save(function(err2,done) {
                     if (err2) {
                         throw err2;
                     } else {
-                        console.log('task deleted and project updated');
-                        res.redirect('/p/' + req.params.projectid + '/');
+                        console.log('task modified and project updated');
+                        //res.redirect('/p/' + req.params.projectid + '/');
+                        callback(null, 'done');
                     }
                 });
+
+            }
+
+        ], function(err, foundProj, taskList, index) {
+            if (err) {
+                if (err == 1) {
+                    console.log('2. couldn\'t find task');
+                }
+                res.send('error');
+            } else {
+                res.redirect('/p/' + req.params.projectid + '/');
+                //res.redirect('/');
             }
 
         }); // end async waterfall
-    }); // end app.delete
+    }); // end modify
+
+
+
+
+
+
+
+
 
     app.post('/p/:projectid/movetask/', function(req, res) {
         async.waterfall([

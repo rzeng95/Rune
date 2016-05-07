@@ -5,4 +5,25 @@ block bodyContent
 
     h4 Name of task: #{taskname}
     
-    h3 Description of task: #{taskdescription}
+    h5 Description of task: #{taskdescription}
+    
+    form(action="modify/" method="POST")
+        select(class="form-control" name="status" style="width:120px;")
+            each status in statuses
+                option #{status}
+        button(class="btn btn-primary" type="submit") Change Status
+    br
+    br
+    form(action="delete/" method="POST")
+        button(class="btn btn-primary" type="submit") Delete Task
+//
+    script.
+        function deleteTask() {
+            $.ajax({
+                type : 'DELETE',
+                url : ''
+            }).done(function(res){
+                console.log('hello i am done');
+                
+            });
+        }
