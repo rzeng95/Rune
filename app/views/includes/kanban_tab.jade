@@ -9,7 +9,7 @@ div(class="container-fluid kanban-board")
         div(class="kanban-col")
             each task in tasks1
                 div(class="kanban-task")
-                    a(href="#" class="kanban-task-header") #{task.taskid+': '+task.taskname}
+                    a(href="t/"+task.taskid class="kanban-task-header") #{task.taskid+': '+task.taskname}
                     div(class="kanban-task-body") #{task.taskdescription}
                     div(class="kanban-task-tags") Issue Priority: #{task.priority}
                     div(class="kanban-task-tags") Assignee: #{task.assignedto}

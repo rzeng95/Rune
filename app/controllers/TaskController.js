@@ -85,6 +85,105 @@ module.exports = function(app, passport) {
         });
     });
 
+    app.get('/p/:projectid/t/:taskid', /* todo: add catches */function(req, res){
+
+        async.waterfall([
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            } ,
+            function searchForTask(foundProj, callback) {
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid == req.params.taskid) {
+                        var foundTask = taskList[i];
+                        console.log('found task');
+                        return callback(null, foundProj, foundTask);
+                    }
+                }
+                console.log('1. couldn\'t find task');
+                callback(1);
+            }
+
+        ], function(err, foundProj, foundTask) {
+            if (err) {
+                if (err == 1) {
+                    console.log('2. couldn\'t find task');
+                }
+                res.send('error');
+            } else {
+                //foundTask.status = app.locals.statuses[req.params.status];
+                foundProj.save(function(err2,done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+
+                        res.render('task.jade', {
+                            taskname : foundTask.taskname,
+                            taskdescription : foundTask.taskdescription
+                        });
+                    }
+                });
+            }
+
+        }); // end async waterfall
+
+    }); // end app.get
+
+    app.delete('/p/:projectid/t/:taskid', /* todo: add catches */function(req, res){
+        async.waterfall([
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            } ,
+            function searchForTask(foundProj, callback) {
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid == req.params.taskid) {
+                        var foundTask = taskList[i];
+                        console.log('found task');
+                        return callback(null, foundProj, taskList, i);
+                    }
+                }
+                console.log('1. couldn\'t find task');
+                callback(1);
+            }
+
+        ], function(err, foundProj, taskList, index) {
+            if (err) {
+                if (err == 1) {
+                    console.log('2. couldn\'t find task');
+                }
+                res.send('error');
+            } else {
+                // delete the task from the tasks array
+                taskList.splice(index,1);
+                // save this updated project
+                foundProj.save(function(err2,done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+                        console.log('task deleted and project updated');
+                        res.redirect('/p/' + req.params.projectid + '/');
+                    }
+                });
+            }
+
+        }); // end async waterfall
+    }); // end app.delete
+
     app.post('/p/:projectid/movetask/', function(req, res) {
         async.waterfall([
             function findProject(callback) {
