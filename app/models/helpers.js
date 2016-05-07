@@ -2,6 +2,8 @@ var User = require('./user.js');
 var Project = require('./project.js');
 var Task = require('./task.js');
 
+var async = require('async');
+
 module.exports = {
 
     // Check if user is logged in, redirect to error page if they aren't
@@ -55,9 +57,54 @@ module.exports = {
         });
     } ,
 
+    // This is used to pad the task number with 0s. For example, it creates JIRA-001
     zeroPad : function(num, places) {
         var zero = places - num.toString().length + 1;
         return Array(+(zero > 0 && zero)).join("0") + num;
+    } ,
+
+
+    getProjectMemberList : function(projectid, done) {
+        async.waterfall([
+
+            // Look for the project to make sure it exists
+            function getProjectById(callback) {
+                Project.findById(projectid, function(err, foundProj) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            } ,
+
+            function findUsers(foundProj, callback) {
+                User.find( {'local.email' : {$in : foundProj.members} }, function(err, users) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        var usersList = [];
+                        for (var i = 0; i < users.length; i++) {
+                            usersList.push({
+                                "name" : users[i].local.firstname + " " + users[i].local.lastname,
+                                "email" : users[i].local.email,
+                                "color" : users[i].local.userColor
+                            });
+                        }
+                        callback(null, usersList);
+                    }
+                });
+            }
+
+        ], function(err,usersList){
+            if (err) {
+                done(err);
+            } else {
+                //console.log(userList);
+                done(null, usersList);
+            }
+
+        });
     }
 /*
     // Navbar variables:

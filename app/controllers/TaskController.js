@@ -109,9 +109,19 @@ module.exports = function(app, passport) {
                 }
                 console.log('1. couldn\'t find task');
                 callback(1);
+            } ,
+            function getUsersList(foundProj, foundTask, callback) {
+                Helper.getProjectMemberList(req.params.projectid, function(err,usersList) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj, foundTask, usersList);
+                    }
+
+                });
             }
 
-        ], function(err, foundProj, foundTask) {
+        ], function(err, foundProj, foundTask, usersList) {
             if (err) {
                 if (err == 1) {
                     console.log('2. couldn\'t find task');
@@ -123,7 +133,9 @@ module.exports = function(app, passport) {
                     if (err2) {
                         throw err2;
                     } else {
-
+                        console.log('=====\n\n');
+                        //Helper.getProjectMemberList(req.params.projectid);
+                        console.log(foundTask.assignedto);
                         res.render('task.jade', {
                             // These are navbar variables
                             loggedIn : req.isAuthenticated(),
@@ -133,7 +145,11 @@ module.exports = function(app, passport) {
 
                             taskname : foundTask.taskname,
                             taskdescription : foundTask.taskdescription,
-                            statuses : app.locals.statuses
+                            statuses : app.locals.statuses,
+                            usersList : usersList,
+                            curAssignee : foundTask.assignedto,
+                            curStatus : foundTask.status,
+                            curPriority : foundTask.priority
                         });
                     }
                 });
@@ -221,7 +237,13 @@ module.exports = function(app, passport) {
                 callback(1);
             } ,
             function modifyTask(foundProj, taskList, index, callback) {
+                console.log(req.body);
+                taskList[index].taskname = req.body.taskname;
+                taskList[index].taskdescription = req.body.taskdescription;
                 taskList[index].status = req.body.status;
+                taskList[index].assignedto = req.body.assignedto;
+                taskList[index].priority = req.body.priority;
+
                 // save this updated project
                 foundProj.save(function(err2,done) {
                     if (err2) {
