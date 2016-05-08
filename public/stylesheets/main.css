@@ -1437,7 +1437,7 @@ img {
   height: auto;
 }
 
-.img-rounded, #error-message, #rune-icon-small-red .roo-icon-small, #rune-icon-small-red .check-icon-small, #rune-icon-small-redorange .roo-icon-small, #rune-icon-small-redorange .check-icon-small, #rune-icon-small-orange .roo-icon-small, #rune-icon-small-orange .check-icon-small, #rune-icon-small-yelloworange .roo-icon-small, #rune-icon-small-yelloworange .check-icon-small, #rune-icon-small-yellow .roo-icon-small, #rune-icon-small-yellow .check-icon-small, #rune-icon-small-yellowgreen .roo-icon-small, #rune-icon-small-yellowgreen .check-icon-small, #rune-icon-small-green .roo-icon-small, #rune-icon-small-green .check-icon-small, #rune-icon-small-bluegreen .roo-icon-small, #rune-icon-small-bluegreen .check-icon-small, #rune-icon-small-blue .roo-icon-small, #rune-icon-small-blue .check-icon-small, #rune-icon-small-bluepurple .roo-icon-small, #rune-icon-small-bluepurple .check-icon-small, #rune-icon-small-purple .roo-icon-small, #rune-icon-small-purple .check-icon-small, #rune-icon-small-redpurple .roo-icon-small, #rune-icon-small-redpurple .check-icon-small, #rune-icon-profile-red .roo-icon-profile, #rune-icon-profile-redorange .roo-icon-profile, #rune-icon-profile-orange .roo-icon-profile, #rune-icon-profile-yelloworange .roo-icon-profile, #rune-icon-profile-yellow .roo-icon-profile, #rune-icon-profile-yellowgreen .roo-icon-profile, #rune-icon-profile-green .roo-icon-profile, #rune-icon-profile-bluegreen .roo-icon-profile, #rune-icon-profile-blue .roo-icon-profile, #rune-icon-profile-bluepurple .roo-icon-profile, #rune-icon-profile-purple .roo-icon-profile, #rune-icon-profile-redpurple .roo-icon-profile, #rune-icon-kanban-red .roo-icon-kanban, #rune-icon-kanban-redorange .roo-icon-kanban, #rune-icon-kanban-orange .roo-icon-kanban, #rune-icon-kanban-yelloworange .roo-icon-kanban, #rune-icon-kanban-yellow .roo-icon-kanban, #rune-icon-kanban-yellowgreen .roo-icon-kanban, #rune-icon-kanban-green .roo-icon-kanban, #rune-icon-kanban-bluegreen .roo-icon-kanban, #rune-icon-kanban-blue .roo-icon-kanban, #rune-icon-kanban-bluepurple .roo-icon-kanban, #rune-icon-kanban-purple .roo-icon-kanban, #rune-icon-kanban-redpurple .roo-icon-kanban {
+.img-rounded, #error-message, #rune-icon-small-red .roo-icon-small, #rune-icon-small-red .check-icon-small, #rune-icon-small-redorange .roo-icon-small, #rune-icon-small-redorange .check-icon-small, #rune-icon-small-orange .roo-icon-small, #rune-icon-small-orange .check-icon-small, #rune-icon-small-yelloworange .roo-icon-small, #rune-icon-small-yelloworange .check-icon-small, #rune-icon-small-yellow .roo-icon-small, #rune-icon-small-yellow .check-icon-small, #rune-icon-small-yellowgreen .roo-icon-small, #rune-icon-small-yellowgreen .check-icon-small, #rune-icon-small-green .roo-icon-small, #rune-icon-small-green .check-icon-small, #rune-icon-small-bluegreen .roo-icon-small, #rune-icon-small-bluegreen .check-icon-small, #rune-icon-small-blue .roo-icon-small, #rune-icon-small-blue .check-icon-small, #rune-icon-small-bluepurple .roo-icon-small, #rune-icon-small-bluepurple .check-icon-small, #rune-icon-small-purple .roo-icon-small, #rune-icon-small-purple .check-icon-small, #rune-icon-small-redpurple .roo-icon-small, #rune-icon-small-redpurple .check-icon-small, #rune-icon-profile-red .roo-icon-profile, #rune-icon-profile-redorange .roo-icon-profile, #rune-icon-profile-orange .roo-icon-profile, #rune-icon-profile-yelloworange .roo-icon-profile, #rune-icon-profile-yellow .roo-icon-profile, #rune-icon-profile-yellowgreen .roo-icon-profile, #rune-icon-profile-green .roo-icon-profile, #rune-icon-profile-bluegreen .roo-icon-profile, #rune-icon-profile-blue .roo-icon-profile, #rune-icon-profile-bluepurple .roo-icon-profile, #rune-icon-profile-purple .roo-icon-profile, #rune-icon-profile-redpurple .roo-icon-profile, #rune-icon-kanban-red .roo-icon-kanban, #rune-icon-kanban-redorange .roo-icon-kanban, #rune-icon-kanban-orange .roo-icon-kanban, #rune-icon-kanban-yelloworange .roo-icon-kanban, #rune-icon-kanban-yellow .roo-icon-kanban, #rune-icon-kanban-yellowgreen .roo-icon-kanban, #rune-icon-kanban-green .roo-icon-kanban, #rune-icon-kanban-bluegreen .roo-icon-kanban, #rune-icon-kanban-blue .roo-icon-kanban, #rune-icon-kanban-bluepurple .roo-icon-kanban, #rune-icon-kanban-purple .roo-icon-kanban, #rune-icon-kanban-redpurple .roo-icon-kanban, .kanban-priority-icon-Low > #priority-icon, .kanban-priority-icon-Medium > #priority-icon, .kanban-priority-icon-High > #priority-icon {
   border-radius: 6px;
 }
 
@@ -7341,6 +7341,13 @@ button.close {
   font-family: "Roboto-Black";
   src: url('../fonts/RobotoBlack/Roboto-Black.ttf?1462314952') format('truetype'), url('../fonts/RobotoBlack/Roboto-Black.eot?1462314952') format('embedded-opentype'), url('../fonts/RobotoBlack/Roboto-Black.woff?1462314953') format('woff');
 }
+*.unselectable, #rune-icon-small-red *.roo-icon-small, #rune-icon-small-redorange *.roo-icon-small, #rune-icon-small-orange *.roo-icon-small, #rune-icon-small-yelloworange *.roo-icon-small, #rune-icon-small-yellow *.roo-icon-small, #rune-icon-small-yellowgreen *.roo-icon-small, #rune-icon-small-green *.roo-icon-small, #rune-icon-small-bluegreen *.roo-icon-small, #rune-icon-small-blue *.roo-icon-small, #rune-icon-small-bluepurple *.roo-icon-small, #rune-icon-small-purple *.roo-icon-small, #rune-icon-small-redpurple *.roo-icon-small, #rune-icon-profile-red *.roo-icon-profile, #rune-icon-profile-redorange *.roo-icon-profile, #rune-icon-profile-orange *.roo-icon-profile, #rune-icon-profile-yelloworange *.roo-icon-profile, #rune-icon-profile-yellow *.roo-icon-profile, #rune-icon-profile-yellowgreen *.roo-icon-profile, #rune-icon-profile-green *.roo-icon-profile, #rune-icon-profile-bluegreen *.roo-icon-profile, #rune-icon-profile-blue *.roo-icon-profile, #rune-icon-profile-bluepurple *.roo-icon-profile, #rune-icon-profile-purple *.roo-icon-profile, #rune-icon-profile-redpurple *.roo-icon-profile, #rune-icon-kanban-red *.roo-icon-kanban, #rune-icon-kanban-redorange *.roo-icon-kanban, #rune-icon-kanban-orange *.roo-icon-kanban, #rune-icon-kanban-yelloworange *.roo-icon-kanban, #rune-icon-kanban-yellow *.roo-icon-kanban, #rune-icon-kanban-yellowgreen *.roo-icon-kanban, #rune-icon-kanban-green *.roo-icon-kanban, #rune-icon-kanban-bluegreen *.roo-icon-kanban, #rune-icon-kanban-blue *.roo-icon-kanban, #rune-icon-kanban-bluepurple *.roo-icon-kanban, #rune-icon-kanban-purple *.roo-icon-kanban, #rune-icon-kanban-redpurple *.roo-icon-kanban {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
 .btn-is-disabled {
   pointer-events: none;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
@@ -7773,7 +7780,7 @@ button.close {
 }
 #rune-icon-kanban-red .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7795,7 +7802,7 @@ button.close {
 }
 #rune-icon-kanban-redorange .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7817,7 +7824,7 @@ button.close {
 }
 #rune-icon-kanban-orange .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7839,7 +7846,7 @@ button.close {
 }
 #rune-icon-kanban-yelloworange .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7861,7 +7868,7 @@ button.close {
 }
 #rune-icon-kanban-yellow .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7883,7 +7890,7 @@ button.close {
 }
 #rune-icon-kanban-yellowgreen .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7905,7 +7912,7 @@ button.close {
 }
 #rune-icon-kanban-green .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7927,7 +7934,7 @@ button.close {
 }
 #rune-icon-kanban-bluegreen .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7949,7 +7956,7 @@ button.close {
 }
 #rune-icon-kanban-blue .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7971,7 +7978,7 @@ button.close {
 }
 #rune-icon-kanban-bluepurple .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -7993,7 +8000,7 @@ button.close {
 }
 #rune-icon-kanban-purple .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -8015,7 +8022,7 @@ button.close {
 }
 #rune-icon-kanban-redpurple .initials-icon-kanban {
   position: absolute;
-  margin: -28px 2px;
+  margin: -26.6px 2.8px;
   color: white;
   font-family: "Roboto-Black";
   font-size: 9px;
@@ -8173,13 +8180,121 @@ button.close {
   padding-bottom: 10px;
 }
 
-.kanban-task {
+.kanban-task, .kanban-task-glow-red, .kanban-task-glow-redorange, .kanban-task-glow-orange, .kanban-task-glow-yelloworange, .kanban-task-glow-yellow, .kanban-task-glow-yellowgreen, .kanban-task-glow-green, .kanban-task-glow-bluegreen, .kanban-task-glow-blue, .kanban-task-glow-bluepurple, .kanban-task-glow-purple, .kanban-task-glow-redpurple {
   background-color: #F8F8F8;
   border: 1px solid #E8E8E8;
   padding: 15px;
   min-height: 140px;
   height: 100%;
   z-index: 10;
+}
+
+.kanban-task-glow-red {
+  border: 1px solid #EB222A;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(235, 34, 42, 0.8);
+}
+
+.kanban-task-glow-redorange {
+  border: 1px solid #F36F26;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(243, 111, 38, 0.8);
+}
+
+.kanban-task-glow-orange {
+  border: 1px solid #F68F22;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(246, 143, 34, 0.8);
+}
+
+.kanban-task-glow-yelloworange {
+  border: 1px solid #FEC317;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(254, 195, 23, 0.8);
+}
+
+.kanban-task-glow-yellow {
+  border: 1px solid #F4EA28;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(244, 234, 40, 0.8);
+}
+
+.kanban-task-glow-yellowgreen {
+  border: 1px solid #9BCA3C;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(155, 202, 60, 0.8);
+}
+
+.kanban-task-glow-green {
+  border: 1px solid #04AA51;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(4, 170, 81, 0.8);
+}
+
+.kanban-task-glow-bluegreen {
+  border: 1px solid #1991CD;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(25, 145, 205, 0.8);
+}
+
+.kanban-task-glow-blue {
+  border: 1px solid #0857A3;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(8, 87, 163, 0.8);
+}
+
+.kanban-task-glow-bluepurple {
+  border: 1px solid #6C459B;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(108, 69, 155, 0.8);
+}
+
+.kanban-task-glow-purple {
+  border: 1px solid #A54499;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(165, 68, 153, 0.8);
+}
+
+.kanban-task-glow-redpurple {
+  border: 1px solid #E34197;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(227, 65, 151, 0.8);
+}
+
+.kanban-priority-icon-Low {
+  display: inline-block;
+}
+.kanban-priority-icon-Low > #priority-icon {
+  margin-left: 2px;
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  background-color: #8EC975;
+}
+.kanban-priority-icon-Low > #priority-text {
+  left: 2px;
+  display: inline-block;
+  position: relative;
+}
+
+.kanban-priority-icon-Medium {
+  display: inline-block;
+}
+.kanban-priority-icon-Medium > #priority-icon {
+  margin-left: 2px;
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  background-color: #FCB54E;
+}
+.kanban-priority-icon-Medium > #priority-text {
+  left: 2px;
+  display: inline-block;
+  position: relative;
+}
+
+.kanban-priority-icon-High {
+  display: inline-block;
+}
+.kanban-priority-icon-High > #priority-icon {
+  margin-left: 2px;
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  background-color: #F15B41;
+}
+.kanban-priority-icon-High > #priority-text {
+  left: 2px;
+  display: inline-block;
+  position: relative;
 }
 
 .kanban-task-header {

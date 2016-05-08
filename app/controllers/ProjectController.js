@@ -45,7 +45,7 @@ module.exports = function(app, passport) {
             // These are navbar variables
             loggedIn : req.isAuthenticated(),
             projList : req.user.local.projects,
-            firstname : req.user.local.firstname
+            firstname : req.user.local.firstname,
         });
     });
 
@@ -161,6 +161,8 @@ module.exports = function(app, passport) {
                     loggedIn : req.isAuthenticated(),
                     projList : req.user.local.projects,
                     firstname : req.user.local.firstname,
+                    userColor : req.user.local.userColor,
+                    email : req.user.local.email,
                     isProjectPage : true,
 
                     // Overview tab variables

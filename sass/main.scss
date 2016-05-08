@@ -13,14 +13,25 @@ $color-2: #F8F8F8;
 $color-3: #EEEEEE;
 $color-border: #E8E8E8;
 
+$color-prioritiy: #F15B41, #FCB54E, #8EC975;
+
 $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
           #04AA51, #1991CD, #0857A3, #6C459B, #A54499, #E34197;
+          
+*.unselectable {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+}
 
 // Navbar CSS style specifications.
 .btn-is-disabled {
     pointer-events: none;
     @include opacity(0.7);
 }
+
+// Error styling
 #error-message {
     margin-left: auto;
     margin-right: auto;
@@ -43,6 +54,8 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     }
 }
 
+
+// Roo icon stylings
 #rune-logo-img {
     display: inline;
     // padding-left: 30px;
@@ -72,11 +85,8 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     }
 
     .initials-icon-profile {
-        position: absolute;
-        margin: -190px 20px;
-        color: white;
-        font-family: "Roboto-Black";
-        font-size: 56px;
+        @include roo-initials(56px, 200px);
+
     }
 }
 
@@ -103,11 +113,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     }
 
     .initials-icon-kanban {
-        position: absolute;
-        margin: -28px 2px;
-        color: white;
-        font-family: "Roboto-Black";
-        font-size: 9px;
+        @include roo-initials(9px, 28px);
     }
     
     .user-name {
@@ -117,13 +123,21 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     }
 }
 
-@mixin roo-image($color-index, $height)
-{
+@mixin roo-image($color-index, $height) {
     @extend .img-rounded;
+    @extend .unselectable;
     background-color: nth($rainbow, $color-index);
     position: relative;
     height: $height;
     z-index:-1;
+}
+
+@mixin roo-initials($font-size, $height) {
+    position: absolute;
+    margin:  $height * -19 / 20 $height / 10;
+    color: white;
+    font-family: "Roboto-Black";
+    font-size: $font-size;
 }
 
 #rune-icon-small-red { @include rune-check-small(1); }
@@ -331,6 +345,48 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     height: 100%;
     z-index: 10;
 }
+
+
+@mixin kanban-task-glow($color-index) {
+    @extend .kanban-task;
+    border: 1px solid nth($rainbow, $color-index);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(nth($rainbow, $color-index), .8);
+}
+
+.kanban-task-glow-red { @include kanban-task-glow(1); }
+.kanban-task-glow-redorange { @include kanban-task-glow(2); }
+.kanban-task-glow-orange { @include kanban-task-glow(3); }
+.kanban-task-glow-yelloworange { @include kanban-task-glow(4); }
+.kanban-task-glow-yellow { @include kanban-task-glow(5); }
+.kanban-task-glow-yellowgreen { @include kanban-task-glow(6); }
+.kanban-task-glow-green { @include kanban-task-glow(7); }
+.kanban-task-glow-bluegreen { @include kanban-task-glow(8); }
+.kanban-task-glow-blue { @include kanban-task-glow(9); }
+.kanban-task-glow-bluepurple { @include kanban-task-glow(10); }
+.kanban-task-glow-purple { @include kanban-task-glow(11); }
+.kanban-task-glow-redpurple { @include kanban-task-glow(12); }
+
+@mixin kanban-priority-icon($color-index) {
+        display: inline-block;
+
+    > #priority-icon {
+        @extend .img-rounded;
+        margin-left: 2px;
+        height: 10px;
+        width: 10px;
+        display: inline-block;
+        background-color: nth($color-prioritiy, $color-index);
+    }
+    > #priority-text {
+        left: 2px;
+        display: inline-block;
+        position: relative;
+    }
+}
+
+.kanban-priority-icon-Low { @include kanban-priority-icon(3); }
+.kanban-priority-icon-Medium { @include kanban-priority-icon(2); }
+.kanban-priority-icon-High { @include kanban-priority-icon(1); }
 
 .kanban-task-header {
     font-weight: bold;
