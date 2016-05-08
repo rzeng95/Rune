@@ -10,8 +10,8 @@ div(class="container-fluid kanban-board")
             each task in tasks1
                 if(email == task.assignedto)
                     div(class="kanban-task-glow-" + userColor)
-                        a(href="t/"+task.taskid+"/" class="kanban-task-header") #{task.taskid+': '+task.taskname}
-                        div(class="kanban-task-body") #{task.taskdescription}
+                        a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp") #{task.taskid+': '+task.taskname}
+                        div(class="kanban-task-body js-clamp") #{task.taskdescription}
                         div(class="kanban-task-tags") Issue Priority:
                             div(class="kanban-priority-icon-" + task.priority)
                                 div(id="priority-icon")
@@ -19,19 +19,19 @@ div(class="container-fluid kanban-board")
                         div(class="kanban-task-tags") Assignee: #{task.assignedto}
                 else
                     div(class="kanban-task")
-                        a(href="t/"+task.taskid+"/" class="kanban-task-header") #{task.taskid+': '+task.taskname}
-                        div(class="kanban-task-body") #{task.taskdescription}
+                        a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp") #{task.taskid+': '+task.taskname}
+                        div(class="kanban-task-body js-clamp") #{task.taskdescription}
                         div(class="kanban-task-tags") Issue Priority:
                             div(class="kanban-priority-icon-" + task.priority)
                                 div(id="priority-icon")
                                 div(id="priority-text") #{task.priority}
-                        div(class="kanban-task-tags") Assignee: #{task.assignedto}  
+                        div(class="kanban-task-tags") Assignee: #{task.assignedto}    
         div(class="kanban-col")
             each task in tasks2
                 if(email == task.assignedto)
                     div(class="kanban-task-glow-" + userColor)
-                        a(href="t/"+task.taskid+"/" class="kanban-task-header") #{task.taskid+': '+task.taskname}
-                        div(class="kanban-task-body") #{task.taskdescription}
+                        a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp") #{task.taskid+': '+task.taskname}
+                        div(class="kanban-task-body js-clamp") #{task.taskdescription}
                         div(class="kanban-task-tags") Issue Priority:
                             div(class="kanban-priority-icon-" + task.priority)
                                 div(id="priority-icon")
@@ -39,19 +39,19 @@ div(class="container-fluid kanban-board")
                         div(class="kanban-task-tags") Assignee: #{task.assignedto}
                 else
                     div(class="kanban-task")
-                        a(href="t/"+task.taskid+"/" class="kanban-task-header") #{task.taskid+': '+task.taskname}
-                        div(class="kanban-task-body") #{task.taskdescription}
+                        a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp") #{task.taskid+': '+task.taskname}
+                        div(class="kanban-task-body js-clamp") #{task.taskdescription}
                         div(class="kanban-task-tags") Issue Priority:
                             div(class="kanban-priority-icon-" + task.priority)
                                 div(id="priority-icon")
                                 div(id="priority-text") #{task.priority}
-                        div(class="kanban-task-tags") Assignee: #{task.assignedto}  
+                        div(class="kanban-task-tags") Assignee: #{task.assignedto}   
         div(class="kanban-col")
             each task in tasks3
                 if(email == task.assignedto)
                     div(class="kanban-task-glow-" + userColor)
-                        a(href="t/"+task.taskid+"/" class="kanban-task-header") #{task.taskid+': '+task.taskname}
-                        div(class="kanban-task-body") #{task.taskdescription}
+                        a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp") #{task.taskid+': '+task.taskname}
+                        div(class="kanban-task-body js-clamp") #{task.taskdescription}
                         div(class="kanban-task-tags") Issue Priority:
                             div(class="kanban-priority-icon-" + task.priority)
                                 div(id="priority-icon")
@@ -59,8 +59,8 @@ div(class="container-fluid kanban-board")
                         div(class="kanban-task-tags") Assignee: #{task.assignedto}
                 else
                     div(class="kanban-task")
-                        a(href="t/"+task.taskid+"/" class="kanban-task-header") #{task.taskid+': '+task.taskname}
-                        div(class="kanban-task-body") #{task.taskdescription}
+                        a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp") #{task.taskid+': '+task.taskname}
+                        div(class="kanban-task-body js-clamp") #{task.taskdescription}
                         div(class="kanban-task-tags") Issue Priority:
                             div(class="kanban-priority-icon-" + task.priority)
                                 div(id="priority-icon")
@@ -70,8 +70,8 @@ div(class="container-fluid kanban-board")
             each task in tasks4
                 if(email == task.assignedto)
                     div(class="kanban-task-glow-" + userColor)
-                        a(href="t/"+task.taskid+"/" class="kanban-task-header") #{task.taskid+': '+task.taskname}
-                        div(class="kanban-task-body") #{task.taskdescription}
+                        a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp") #{task.taskid+': '+task.taskname}
+                        div(class="kanban-task-body js-clamp") #{task.taskdescription}
                         div(class="kanban-task-tags") Issue Priority:
                             div(class="kanban-priority-icon-" + task.priority)
                                 div(id="priority-icon")
@@ -79,8 +79,8 @@ div(class="container-fluid kanban-board")
                         div(class="kanban-task-tags") Assignee: #{task.assignedto}
                 else
                     div(class="kanban-task")
-                        a(href="t/"+task.taskid+"/" class="kanban-task-header") #{task.taskid+': '+task.taskname}
-                        div(class="kanban-task-body") #{task.taskdescription}
+                        a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp") #{task.taskid+': '+task.taskname}
+                        div(class="kanban-task-body js-clamp") #{task.taskdescription}
                         div(class="kanban-task-tags") Issue Priority:
                             div(class="kanban-priority-icon-" + task.priority)
                                 div(id="priority-icon")

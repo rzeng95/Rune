@@ -17,13 +17,35 @@ $color-prioritiy: #F15B41, #FCB54E, #8EC975;
 
 $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
           #04AA51, #1991CD, #0857A3, #6C459B, #A54499, #E34197;
-          
+
+// General Utility Classes
 *.unselectable {
    -moz-user-select: -moz-none;
    -khtml-user-select: none;
    -webkit-user-select: none;
    -ms-user-select: none;
 }
+
+*.nowrap {
+    white-space: nowrap;
+}
+
+@mixin truncate($line-width) {
+    width: $line-width;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin line-clamp($font-size, $line-height, $line-count) {
+    display: block;
+    overflow: hidden;
+    height: $font-size*$line-height*$line-count;
+    text-overflow: ellipsis;
+    font-size: $font-size;
+    line-height: $line-height;
+}
+
 
 // Navbar CSS style specifications.
 .btn-is-disabled {
@@ -117,9 +139,10 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     }
     
     .user-name {
+        vertical-align: middle;
         display: inline-block;
         position: relative;
-        left: 2px;
+        left: 6px;
     }
 }
 
@@ -133,6 +156,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 }
 
 @mixin roo-initials($font-size, $height) {
+    @extend .unselectable;
     position: absolute;
     margin:  $height * -19 / 20 $height / 10;
     color: white;
@@ -182,6 +206,15 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 #hidden-color-input {
     position: absolute;
     visibility: hidden;
+}
+
+//user list stylings
+.user-name {
+    @include truncate(400px);
+}
+
+.user-email {
+    @include truncate(400px);
 }
 
 //create project page style specifications
@@ -340,7 +373,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 .kanban-task {
     background-color: $color-2;
     border: 1px solid $color-border;
-    padding: 15px;
+    padding: 6px 12px;
     min-height: 140px;
     height: 100%;
     z-index: 10;
@@ -349,8 +382,8 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 
 @mixin kanban-task-glow($color-index) {
     @extend .kanban-task;
-    border: 1px solid nth($rainbow, $color-index);
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(nth($rainbow, $color-index), .8);
+    border: 1px solid rgba(nth($rainbow, $color-index), .4);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(nth($rainbow, $color-index), .2);
 }
 
 .kanban-task-glow-red { @include kanban-task-glow(1); }
@@ -371,14 +404,14 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 
     > #priority-icon {
         @extend .img-rounded;
-        margin-left: 2px;
+        margin-left: 4px;
         height: 10px;
         width: 10px;
         display: inline-block;
         background-color: nth($color-prioritiy, $color-index);
     }
     > #priority-text {
-        left: 2px;
+        left: 4px;
         display: inline-block;
         position: relative;
     }
@@ -399,6 +432,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 
 .kanban-task-tags {
     padding: 5px 0;
+    @include truncate(420px);
 }
 
 // Task styling specifications.
@@ -409,4 +443,58 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     }
     width: 400px;
     margin: 20px auto;
+}
+
+// Task List Styling
+.task-list {
+    @extend .table;
+    @extend .table-hover;
+    margin: 0px auto;
+    width: 1200px;
+    table-layout: fixed;
+    
+    .task-id {
+        width: 100px;
+    }
+    .task-name {
+        width: 220px;
+    }
+    .task-description {
+        width: 400px;
+    }
+    .task-status {
+        width: 100px;
+    }
+    .task-priority {
+        width: 100px;
+    }
+    .task-assignedto {
+        width: 120px;
+    }
+    .task-createdby {
+        width: 120px;
+    }
+}
+.task-list-body {
+    .task-id-element {
+        @extend .nowrap;
+    }
+    .task-name-element {
+    }
+    .task-description-element {
+    }
+    .task-status-element { 
+    }
+    .task-priority-element {
+    }
+    .task-assignedto-element {
+        > div {
+            @include truncate(100px);
+        }
+    }
+    .task-createdby-element {
+        > div {
+            @include truncate(100px);
+        }
+    }
 }

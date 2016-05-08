@@ -1,24 +1,38 @@
 div(style="margin-top: 158px;")
 	div(class="container")
-		h2 Tasks List Goes Here
-		table(class="table table-hover")
-			thead
+		h2
+	table(class="task-list")
+		col(class="task-id")
+		col(class="task-name")
+		col(class="task-description")
+		col(class="task-status")
+		col(class="task-priority")
+		col(class="task-assignedto")
+		col(class="task-createdby")
+		thead(class="task-list-header")
+			tr
+				th Task ID
+				th Task Name
+				th Description
+				th Status
+				th Priority
+				th Assigned to
+				th Created by
+		tbody(class="task-list-body")
+			each task in taskList
 				tr
-					th Task ID
-					th Task Name
-					th Description
-					th Status
-					th Priority
-					th Assigned to
-					th Created by
-			tbody
-				each task in taskList
-					tr
-						td #{task.taskid}
-						td #{task.taskname}
-						td #{task.taskdescription}
-						td #{task.status}
-						td #{task.priority}
-						td #{task.assignedto}
-						td #{task.createdby}
-
+					td(class="task-id-element") 
+						a(href="t/"+task.taskid+"/") #{task.taskid}
+					td(class="task-name-element")
+						div(class="js-clamp") #{task.taskname}
+					td(class="task-description-element")
+						div(class="js-clamp") #{task.taskdescription}
+					td(class="task-status-element") #{task.status}
+					td(class="task-priority-element")
+						div(class="kanban-priority-icon-" + task.priority)
+							div(id="priority-icon")
+							div(id="priority-text") #{task.priority}
+					td(class="task-assignedto-element")
+						div #{task.assignedto}
+					td(class="task-createdby-element")
+						div #{task.createdby}

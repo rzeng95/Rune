@@ -1,7 +1,7 @@
 div(style="margin-top: 158px;")
 	div(class="container")
 		h2 List of all project members
-		table(class="table table-hover")
+		table(class="table")
 			thead
 				tr
 					th Name
@@ -9,9 +9,10 @@ div(style="margin-top: 158px;")
 			tbody
 				each user in projMembers
 					tr
-						td                   
+						td
 							div(id="rune-icon-kanban-" + user.color)
 								img(class="roo-icon-kanban" src="/images/Roo.svg")
 								div(class="user-name") #[a(href='/u/'+user.id+'/') #{user.name}]
 								div(class="initials-icon-kanban") #{user.initials}
-						td #{user.email}
+						td
+							div(class="user-email") #{user.email}
