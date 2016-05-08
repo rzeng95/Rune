@@ -10,9 +10,9 @@ var async = require('async');
 
 module.exports = function(app, passport) {
 
-    // Right now, task creation is handled through a separate web form
-    // This can probably be handled later by front-end pop-up modal
-    app.get('/p/:projectid/createtask/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req,res) {
+    // Task creation is handled through a front-end pop-up modal.
+    app.get('/p/:projectid/createtask/', Helper.isLoggedIn, Helper.doesProjectExist,
+            Helper.isUserProjectMember, Helper.isAjaxRequest, function(req, res) {
         Project.findById(req.params.projectid, function(err, proj) {
             if (err) {
                 throw err;
@@ -53,12 +53,14 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
+    // Task creation POST request.
+    app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.doesProjectExist,
+            Helper.isUserProjectMember, function(req, res) {
         // We want to create a new Task object (see models/task.js)
         // To see how mongoose creates and saves objects, see app.post('/createproject') endpoint
         // make sure the current logged in user (saved under req.user.local) is the "reporter" of the task
         // Make sure the project key (e.g. JIRA) is appended to the task ID (so our task ID is called JIRA-649 for example)
-        Project.findById(req.params.projectid, function(err, foundProj){
+        Project.findById(req.params.projectid, function(err, foundProj) {
             if (err) {
                 throw err;
             } else {
@@ -142,7 +144,6 @@ module.exports = function(app, passport) {
                             projList : req.user.local.projects,
                             firstname : req.user.local.firstname,
                             isProjectPage : true,
-
                             taskname : foundTask.taskname,
                             taskdescription : foundTask.taskdescription,
                             statuses : app.locals.statuses,
@@ -159,6 +160,7 @@ module.exports = function(app, passport) {
 
     }); // end app.get
 
+    // A task-delete AJAX POST request.
     app.post('/p/:projectid/t/:taskid/delete/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
         async.waterfall([
             function findProject(callback) {
@@ -212,6 +214,7 @@ module.exports = function(app, passport) {
         }); // end async waterfall
     }); // end delete task
 
+    // A task-modify AJAX POST request.
     app.post('/p/:projectid/t/:taskid/modify/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
         async.waterfall([
             function findProject(callback) {
@@ -254,7 +257,6 @@ module.exports = function(app, passport) {
                         callback(null, 'done');
                     }
                 });
-
             }
 
         ], function(err, foundProj, taskList, index) {
@@ -271,14 +273,7 @@ module.exports = function(app, passport) {
         }); // end async waterfall
     }); // end modify
 
-
-
-
-
-
-
-
-
+    // A task-move AJAX request.
     app.post('/p/:projectid/movetask/', function(req, res) {
         async.waterfall([
             function findProject(callback) {

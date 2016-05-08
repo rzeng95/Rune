@@ -1,29 +1,22 @@
-function loadCreateTask() {
-    $.get('createtask/', function(data) {
-        $('.modal-content').html(data);
-    });
-}
+// Create project page namespace.
+var Page = Page || {};
+Page.Project = Page.Project || {};
 
-function submitCreateTask() {
+Page.Project.taskCreateLoad = function() {
     $.ajax({
-        type : 'POST',
-        data : $('form').serializeArray(),
         url : 'createtask/',
         success : function(data) {
-            console.log('IT WORKS');
-            location.reload();
-        }
+            $('.modal-content').html(data);
+        },
     });
 }
 
 // Add a sortable property to Kanban board task objects.
 $('.kanban-col').sortable({
-    // revert: true
     connectWith : '.kanban-col',
     stop : function(event, ui) {
         $.ajax({
             type : 'POST',
-            // data : $('form').serializeArray(),
             url : window.location.href + 'movetask/',
             success : function(data) {
                 console.log('success');

@@ -57,6 +57,15 @@ module.exports = {
         });
     } ,
 
+    // Check if HTTP request made is from AJAX or not.
+    isAjaxRequest : function(req, res, next) {
+        if (req.xhr)
+            return next();
+        else {
+            res.redirect('/error');
+        }
+    },
+
     // This is used to pad the task number with 0s. For example, it creates JIRA-001
     zeroPad : function(num, places) {
         var zero = places - num.toString().length + 1;
