@@ -12,46 +12,50 @@ html(lang="en")
 
     body
         //- The main markup for the header for most pages on Rune.
-        header 
-            nav(id="main-header" class="navbar navbar-default navbar-fixed-top")
-                div(class="container-fluid")
-                    div(class="navbar-header")
-                        a(id="rune-logo" class="navbar-brand" href="/")
-                            div(id="rune-logo-img")
-                                img(src="/images/Roo.svg")
-                            div(id="rune-logo-text") Rune
-                    ul(class="nav navbar-nav")
-                        if loggedIn
-                            li(class="dropdown") 
-                                a(href='/users') Users
-                            li(class="dropdown")
-                                a(href="#" class="dropdown-toggle" data-toggle="dropdown") Projects
-                                ul(class="dropdown-menu")
-                                    if projList
-                                        each proj in projList
-                                            li #[a(href="/p/"+proj['projectid']+'/') #{ proj['projectkey'] }]
-                                    li(class="divider")
-                                    li #[a(href="/createproject") Create New Project]
-                            if isProjectPage
-                                li
-                                    a(role="button" data-toggle="modal" data-target="#task-modal" onclick="Page.Project.taskCreateLoad();") Create Task
-                        else
-                            li(class="dropdown btn-is-disabled") 
-                                a(href='/users') Users
-                            li(class="dropdown")
-                                a(class="dropdown-toggle btn-is-disabled" data-toggle="dropdown") Projects
+        header(id="main-header" class="navbar navbar-default navbar-fixed-top") 
+            div(class="container-fluid")
+                div(class="navbar-header")
+                    a(id="rune-logo" class="navbar-brand" href="/")
+                        div(id="rune-logo-img")
+                            img(src="/images/Roo.svg")
+                        div(id="rune-logo-text") Rune
+                ul(class="nav navbar-nav")
                     if loggedIn
-                        ul(class="nav navbar-nav navbar-right")
-                            li(class="dropdown")
-                                a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") #{firstname}
-                                ul(class="dropdown-menu" style="text-align:right;")
-                                    li #[a(href="/profile") My Profile]
-                                    li #[a(href="#") Student Finder]
-                                    li #[a(href="/logout") Log Out]
+                        li(class="dropdown") 
+                            a(href='/users') Users
+                        li(class="dropdown")
+                            a(href="#" class="dropdown-toggle" data-toggle="dropdown") Projects
+                            ul(class="dropdown-menu")
+                                if projList
+                                    each proj in projList
+                                        li #[a(href="/p/"+proj['projectid']+'/') #{ proj['projectkey'] }]
+                                li(class="divider")
+                                li #[a(href="/createproject") Create New Project]
+                        if isProjectPage
+                            li
+                                a(role="button" data-toggle="modal" href="#task-modal" onclick="Page.Project.taskCreateLoad();") Create Task
                     else
-                        ul(class="nav navbar-nav navbar-right")
-                            li #[a(href="/login") Log in]
-        
+                        li(class="dropdown btn-is-disabled") 
+                            a(href='/users') Users
+                        li(class="dropdown")
+                            a(class="dropdown-toggle btn-is-disabled" data-toggle="dropdown") Projects
+                if loggedIn
+                    ul(class="nav navbar-nav navbar-right")
+                        li(class="dropdown")
+                            a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") #{firstname}
+                            ul(class="dropdown-menu" style="text-align:right;")
+                                li #[a(href="/profile") My Profile]
+                                li #[a(href="#") Student Finder]
+                                li #[a(href="/logout") Log Out]
+                else
+                    ul(class="nav navbar-nav navbar-right")
+                        li #[a(href="/login") Log in]
+
+        //- Modal
+        div(id="task-modal" class="modal fade" role="dialog")
+            div(class="modal-dialog")
+                div(class="modal-content")
+
         //- Random 45px spacer to space out margin.
         div(style="margin-top: 45px;")
         block bodyContent

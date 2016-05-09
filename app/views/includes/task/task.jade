@@ -1,0 +1,53 @@
+div(class="row task-header")
+    div(class="col-xs-12")
+        h4 #{projName} (#{projKey})
+    div(class="col-xs-12")
+        h2 #{taskid}: #{taskname}
+div(style="margin-top: 103px;")
+div(class="task-body")
+    div(class="row")
+        div(class="col-xs-8")
+            h4 Description
+            table(class="table")
+                tbody
+                    tr
+                        td #{taskdescription}
+                    tr
+                        td
+            h4 Comments
+            table(class="table")
+                tbody
+                    tr
+                        td User 1
+                        td Filler comment 1.
+                    tr
+                        td User 2
+                        td Filler comment 2.
+                    tr
+                        td User 3
+                        td Filler comment 3.
+                    tr
+                        td
+        div(class="col-xs-4")
+            h4 Details
+            div(class="task-tags")
+                table(class="table")
+                    tbody
+                        tr
+                            td Assignee:
+                            td #{curAssignee}
+                        tr
+                            td Priority:
+                            td
+                                div(class="kanban-priority-icon-" + curPriority)
+                                    div(id="priority-icon")
+                                    div(id="priority-text") #{curPriority}
+                        tr
+                            td
+                                a(role="button" data-toggle="modal" href="#task-modal" onclick="Task.taskEditLoad()") Edit Task
+                            td
+                                form(action="delete/" method="post")
+                                    button(type="submit") Delete Task
+                        tr
+                            td
+                            td

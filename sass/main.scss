@@ -11,7 +11,7 @@
 $color-1: #53847F;
 $color-2: #F8F8F8;
 $color-3: #EEEEEE;
-$color-border: #E8E8E8;
+$color-border: #D7D7D7;
 
 $color-prioritiy: #F15B41, #FCB54E, #8EC975;
 
@@ -86,10 +86,6 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
         top: -6px;
         height: 30px;
     }
-}
-
-.btn-submit {
-    text-align: center;
 }
 
 #rune-logo-text {
@@ -279,13 +275,17 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 }
 
 // Project page CSS style specifications.
+.project-container {
+    position: relative;
+    .project-tabs {
+        padding: 0;
+    }
+}
+
 .project-header {
+    position: fixed;
+    width: 100%;
     background-color: $color-3;
-    margin-top: 45px;
-    // border-style: solid;
-    // border-width: 0 0 1px 0;
-    // border-color: $color-border;
-    // padding: 0 20px;
     font-size: 20px;
     z-index: 900;
 }
@@ -297,53 +297,34 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 }
 
 // Kanban board CSS style specifications.
-.kanban-header {
-    background-color: $color-3;
-    margin-top: 45px;
-    border-style: solid;
-    border-width: 0 0 1px 0;
-    border-color: $color-border;
-    padding: 20px;
-    font-size: 20px;
-    z-index: 900;
-}
-
 .kanban-board {
-    padding: 0;
-    padding-bottom: 40px;
-    margin: 0;
-    margin-top: 220px;
-    width: 100%;
+    display: relative;
+    margin: 0 -15px;
 }
 
 .kanban-board-header {
-    margin-top: 158px;
-    z-index: 800;
+    position: fixed;
+    width: 100%;
+}
+
+.kanban-board-body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    z-index: 700;
 }
 
 .kanban-board-row {
     display: table;
     box-sizing: border-box;
     table-layout: fixed;
-    margin: 0;
-    border-spacing: 10px 0;
-    width: 100%;
+    border-spacing: 15px 0;
     min-height: 160px;
     z-index: -1;
 }
 
 .kanban-board-row-header {
+    width: 100%;
     min-height: 100%;
-}
-
-.kanban-board-member {
-    margin: 0 22px;
-    margin-bottom: 10px;
-    padding: 20px 0 10px 0;
-    border: none;
-    border-width: 0 0 1px 0;
-    border-style: solid;
-    border-color: $color-border;
 }
 
 .kanban-col {
@@ -353,32 +334,35 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     vertical-align: top;
     padding: 0 0 20px 0;
     background-color: $color-3;
+    z-index: 600;
 }
 
 .kanban-col-header {
-    display: table-cell;
-    float: none;
-    width: 25%;
-    vertical-align: top;
     padding: 10px 0 0 0;
     font-weight: bold;
     background-color: $color-2;
-}
-
-.kanban-col-header-text {
-    border-bottom: 4px solid $color-3;
-    padding-bottom: 10px;
+    .kanban-col-header-text {
+        border-bottom: 4px solid $color-3;
+        padding-bottom: 10px;
+    }
 }
 
 .kanban-task {
     background-color: $color-2;
     border: 1px solid $color-border;
-    padding: 6px 12px;
+    padding: 10px 15px;
     min-height: 140px;
     height: 100%;
     z-index: 10;
+    .kanban-task-header {
+        font-weight: bold;
+    }
+    .kanban-task-header,
+    .kanban-task-body,
+    .kanban-task-tags {
+        padding: 5px 0;
+    }
 }
-
 
 @mixin kanban-task-glow($color-index) {
     @extend .kanban-task;
@@ -400,8 +384,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 .kanban-task-glow-redpurple { @include kanban-task-glow(12); }
 
 @mixin kanban-priority-icon($color-index) {
-        display: inline-block;
-
+    display: inline-block;
     > #priority-icon {
         @extend .img-rounded;
         margin-left: 4px;
@@ -421,28 +404,43 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
 .kanban-priority-icon-Medium { @include kanban-priority-icon(2); }
 .kanban-priority-icon-High { @include kanban-priority-icon(1); }
 
-.kanban-task-header {
-    font-weight: bold;
-    padding: 5px 0;
-}
-
-.kanban-task-body {
-    padding: 5px 0;
-}
-
-.kanban-task-tags {
-    padding: 5px 0;
-    @include truncate(420px);
-}
-
 // Task styling specifications.
+.task-container {
+    position: relative;
+}
+
+.task-header {
+    position: fixed;
+    width: 100%;
+    background-color: $color-3;
+    border: 0 solid $color-border;
+    border-bottom-width: 1px;
+    font-size: 20px;
+    z-index: 900;
+}
+
+.task-body {
+    padding: 10px 0;
+    .task-description,
+    .task-tags {
+        padding: 0 15px;
+    }
+}
+
 .task-create {
+    width: 440px;
+    margin: 20px auto;
     h2 {
         text-align: center;
         padding: 15px;
     }
-    width: 400px;
-    margin: 20px auto;
+    .btn-submit {
+        margin: 0 auto;
+    }
+    // .btn-primary {
+    //     margin: 0 10px;
+    //     width: 50%;
+    // }
 }
 
 // Task List Styling
@@ -450,7 +448,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
     @extend .table;
     @extend .table-hover;
     margin: 0px auto;
-    width: 1200px;
+    // width: 1200px;
     table-layout: fixed;
     
     .task-id {

@@ -1,0 +1,112 @@
+div(class="kanban-board")
+    div(class="kanban-board-header")
+        div(class="kanban-board-row kanban-board-row-header")
+            each status in statuses
+                div(class="kanban-col kanban-col-header")
+                    div(class="kanban-col-header-text") #{status}
+    div(class="kanban-board-body")
+        div(class="kanban-board-row")
+            div(class="kanban-col")
+                each task in tasks1
+                    if(email == task.assignedto)
+                        div(class="kanban-task-glow-" + userColor)
+                            a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp")
+                                | #{task.taskid+': '+task.taskname}
+                            div(class="kanban-task-body js-clamp") #{task.taskdescription}
+                            div(class="kanban-task-tags") Assignee: #{task.assignedto}
+                            div(class="kanban-task-tags")
+                                div(class="row")
+                                    div(class="col-xs-6")
+                                        div(class="kanban-priority-icon-" + task.priority)
+                                            div(id="priority-icon")
+                                            div(id="priority-text") #{task.priority}
+                    else
+                        div(class="kanban-task")
+                            a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp")
+                                | #{task.taskid+': '+task.taskname}
+                            div(class="kanban-task-body js-clamp") #{task.taskdescription}
+                            div(class="kanban-task-tags") Assignee: #{task.assignedto}    
+                            div(class="kanban-task-tags")
+                                div(class="row")
+                                    div(class="col-xs-6")
+                                        div(class="kanban-priority-icon-" + task.priority)
+                                            div(id="priority-icon")
+                                            div(id="priority-text") #{task.priority}
+            div(class="kanban-col")
+                each task in tasks2
+                    if(email == task.assignedto)
+                        div(class="kanban-task-glow-" + userColor)
+                            a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp")
+                                | #{task.taskid+': '+task.taskname}
+                            div(class="kanban-task-body js-clamp") #{task.taskdescription}
+                            div(class="kanban-task-tags") Assignee: #{task.assignedto}
+                            div(class="kanban-task-tags")
+                                div(class="row")
+                                    div(class="col-xs-6")
+                                        div(class="kanban-priority-icon-" + task.priority)
+                                            div(id="priority-icon")
+                                            div(id="priority-text") #{task.priority}
+                    else
+                        div(class="kanban-task")
+                            a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp")
+                                | #{task.taskid+': '+task.taskname}
+                            div(class="kanban-task-body js-clamp") #{task.taskdescription}
+                            div(class="kanban-task-tags") Assignee: #{task.assignedto}   
+                            div(class="kanban-task-tags")
+                                div(class="row")
+                                    div(class="col-xs-6")
+                                        div(class="kanban-priority-icon-" + task.priority)
+                                            div(id="priority-icon")
+                                            div(id="priority-text") #{task.priority}
+            div(class="kanban-col")
+                each task in tasks3
+                    if(email == task.assignedto)
+                        div(class="kanban-task-glow-" + userColor)
+                            a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp")
+                                | #{task.taskid+': '+task.taskname}
+                            div(class="kanban-task-body js-clamp") #{task.taskdescription}
+                            div(class="kanban-task-tags") Assignee: #{task.assignedto}
+                            div(class="kanban-task-tags")
+                                div(class="row")
+                                    div(class="col-xs-6")
+                                        div(class="kanban-priority-icon-" + task.priority)
+                                            div(id="priority-icon")
+                                            div(id="priority-text") #{task.priority}
+                    else
+                        div(class="kanban-task")
+                            a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp")
+                                | #{task.taskid+': '+task.taskname}
+                            div(class="kanban-task-body js-clamp") #{task.taskdescription}
+                            div(class="kanban-task-tags") Assignee: #{task.assignedto}  
+                            div(class="kanban-task-tags")
+                                div(class="row")
+                                    div(class="col-xs-6")
+                                        div(class="kanban-priority-icon-" + task.priority)
+                                            div(id="priority-icon")
+                                            div(id="priority-text") #{task.priority}
+            div(class="kanban-col")
+                each task in tasks4
+                    if(email == task.assignedto)
+                        div(class="kanban-task-glow-" + userColor)
+                            a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp")
+                                | #{task.taskid+': '+task.taskname}
+                            div(class="kanban-task-body js-clamp") #{task.taskdescription}
+                            div(class="kanban-task-tags") Assignee: #{task.assignedto}
+                            div(class="kanban-task-tags")
+                                div(class="row")
+                                    div(class="col-xs-6")
+                                        div(class="kanban-priority-icon-" + task.priority)
+                                            div(id="priority-icon")
+                                            div(id="priority-text") #{task.priority}
+                    else
+                        div(class="kanban-task")
+                            a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp")
+                                | #{task.taskid+': '+task.taskname}
+                            div(class="kanban-task-body js-clamp") #{task.taskdescription}
+                            div(class="kanban-task-tags") Assignee: #{task.assignedto}  
+                            div(class="kanban-task-tags")
+                                div(class="row")
+                                    div(class="col-xs-6")
+                                        div(class="kanban-priority-icon-" + task.priority)
+                                            div(id="priority-icon")
+                                            div(id="priority-text") #{task.priority}

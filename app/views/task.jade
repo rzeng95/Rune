@@ -1,59 +1,8 @@
 extends ./partials/base.jade
 
-block bodyContent 
+block bodyContent
+    div(class="container-fluid task-container")
+        include ./includes/task/task.jade
 
-    div(class="task-create")
-        form(class="form-group" action="modify/" method="POST")
-            h2(class="form-signin-heading") Modify Existing Task
-            div(class="form-group")
-                label(for="taskname") Task Name
-                input(class="form-control" type="text" name="taskname" placeholder="Task Name" value=taskname)
-            div(class="form-group")
-                label(for="taskdescription") Task Description
-                textarea(class="form-control" rows="4" name="taskdescription" placeholder="Description") #{taskdescription}
-            div(class="form-group")
-                label(for="assignedto") Assign to
-                select(class="form-control" name="assignedto")
-                    each user in usersList
-                        option( selected=(user['email']==curAssignee) value= user['email'] ) #{user['name']} -- #{user['email']}
-            div(class="form-group")
-                label(for="status") Status
-                select(class="form-control" name="status")
-                    each status in statuses
-                        option( selected=(status==curStatus) ) #{status}
-            div(class="form-group")
-                label(for="priority") Priority
-                select(class="form-control" name="priority")
-                    each priority in ['High', 'Medium', 'Low']
-                        option( selected=(priority==curPriority) )= priority
-            div(class="btn-submit")
-                button(class="btn btn-primary" type="submit") Modify Task
-            br
-        form(action="delete/" method="POST")
-            button(class="btn btn-primary" type="submit") Delete Task
-
-//
-    h4 Name of task: #{taskname}
-    
-    h5 Description of task: #{taskdescription}
-    
-    form(action="modify/" method="POST")
-        select(class="form-control" name="status" style="width:120px;")
-            each status in statuses
-                option #{status}
-        button(class="btn btn-primary" type="submit") Change Status
-    br
-    br
-    form(action="delete/" method="POST")
-        button(class="btn btn-primary" type="submit") Delete Task
-//
-    script.
-        function deleteTask() {
-            $.ajax({
-                type : 'DELETE',
-                url : ''
-            }).done(function(res){
-                console.log('hello i am done');
-                
-            });
-        }
+block scripts
+    script(src="/javascripts/task.js")

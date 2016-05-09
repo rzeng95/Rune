@@ -11,6 +11,10 @@ Page.Project.taskCreateLoad = function() {
     });
 }
 
+$('a.kanban-task-header').click(function(e) {
+    // Page.Project.taskEditLoad("t/" + this.id + "/");
+});
+
 // Add a sortable property to Kanban board task objects.
 $('.kanban-col').sortable({
     connectWith : '.kanban-col',

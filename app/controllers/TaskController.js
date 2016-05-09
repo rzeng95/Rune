@@ -38,7 +38,7 @@ module.exports = function(app, passport) {
                             callback(null, userslist);
                         },
                         function(userslist, callback) {
-                            res.render('includes/createtask.jade', {
+                            res.render('includes/task/create.jade', {
                                 // These are navbar variables
                                 loggedIn : req.isAuthenticated(),
                                 projList : req.user.local.projects,
@@ -87,8 +87,150 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/p/:projectid/t/:taskid/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
+    // A Task page GET request.
+    app.get('/p/:projectid/t/:taskid/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
+        async.waterfall([
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            },
+            function searchForTask(foundProj, callback) {
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid == req.params.taskid) {
+                        var foundTask = taskList[i];
+                        console.log('found task');
+                        return callback(null, foundProj, foundTask);
+                    }
+                }
+                callback(1);
+            },
+            function getUsersList(foundProj, foundTask, callback) {
+                Helper.getProjectMemberList(req.params.projectid, function(err,usersList) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj, foundTask, usersList);
+                    }
+                });
+            }
+        ],
+        function(err, foundProj, foundTask, usersList) {
+            if (err) {
+                res.send('error');
+            } else {
+                foundProj.save(function(err2, done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+                        var taskRender = (!req.xhr) ? 'task.jade' : 'includes/task/task.jade';
+                        res.render(taskRender, {
+                            // These are navbar variables
+                            loggedIn : req.isAuthenticated(),
+                            isAjax : req.xhr,
 
+                            // Project information.
+                            projKey : foundProj.projectkey,
+                            projName : foundProj.projectname,
+                            projId : foundProj.projectid,
+                            projList : req.user.local.projects,
+                            firstname : req.user.local.firstname,
+                            isProjectPage : false,
+
+                            // Task information.
+                            taskid : req.params.taskid,
+                            taskname : foundTask.taskname,
+                            taskdescription : foundTask.taskdescription,
+                            statuses : app.locals.statuses,
+                            usersList : usersList,
+                            curAssignee : foundTask.assignedto,
+                            curStatus : foundTask.status,
+                            curPriority : foundTask.priority
+                        });
+                    }
+                });
+            }
+        }); // end async waterfall
+    }); // end app.get
+
+    // Task edit AJAX GET request.
+    app.get('/p/:projectid/t/:taskid/edit/', Helper.isLoggedIn, Helper.doesProjectExist,
+            Helper.isUserProjectMember, Helper.isAjaxRequest, function(req, res) {
+        async.waterfall([
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            },
+            function searchForTask(foundProj, callback) {
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid == req.params.taskid) {
+                        var foundTask = taskList[i];
+                        console.log('found task');
+                        return callback(null, foundProj, foundTask);
+                    }
+                }
+                console.log('1. couldn\'t find task');
+                callback(1);
+            },
+            function getUsersList(foundProj, foundTask, callback) {
+                Helper.getProjectMemberList(req.params.projectid, function(err,usersList) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj, foundTask, usersList);
+                    }
+                });
+            }
+        ],
+        function(err, foundProj, foundTask, usersList) {
+            if (err) {
+                if (err == 1) {
+                    console.log('2. couldn\'t find task');
+                }
+                res.send('error');
+            } else {
+                //foundTask.status = app.locals.statuses[req.params.status];
+                foundProj.save(function(err2,done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+                        console.log('=====\n\n');
+                        //Helper.getProjectMemberList(req.params.projectid);
+                        console.log(foundTask.assignedto);
+                        res.render('includes/task/edit.jade', {
+                            // These are navbar variables
+                            loggedIn : req.isAuthenticated(),
+                            projList : req.user.local.projects,
+                            firstname : req.user.local.firstname,
+                            taskname : foundTask.taskname,
+                            taskdescription : foundTask.taskdescription,
+                            statuses : app.locals.statuses,
+                            usersList : usersList,
+                            curAssignee : foundTask.assignedto,
+                            curStatus : foundTask.status,
+                            curPriority : foundTask.priority
+                        });
+                    }
+                });
+            }
+        }); // end async waterfall
+    }); // end app.get
+
+    // A task-edit AJAX POST request.
+    app.post('/p/:projectid/t/:taskid/edit/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
         async.waterfall([
             function findProject(callback) {
                 Project.findById(req.params.projectid, function(err, foundProj) {
@@ -106,62 +248,48 @@ module.exports = function(app, passport) {
                     if (taskList[i].taskid == req.params.taskid) {
                         var foundTask = taskList[i];
                         console.log('found task');
-                        return callback(null, foundProj, foundTask);
+                        return callback(null, foundProj, taskList, i);
                     }
                 }
                 console.log('1. couldn\'t find task');
                 callback(1);
             } ,
-            function getUsersList(foundProj, foundTask, callback) {
-                Helper.getProjectMemberList(req.params.projectid, function(err,usersList) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(null, foundProj, foundTask, usersList);
-                    }
+            function editTask(foundProj, taskList, index, callback) {
+                console.log(req.body);
+                taskList[index].taskname = req.body.taskname;
+                taskList[index].taskdescription = req.body.taskdescription;
+                taskList[index].status = req.body.status;
+                taskList[index].assignedto = req.body.assignedto;
+                taskList[index].priority = req.body.priority;
 
+                // save this updated project
+                foundProj.save(function(err2,done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+                        console.log('task modified and project updated');
+                        //res.redirect('/p/' + req.params.projectid + '/');
+                        callback(null, 'done');
+                    }
                 });
             }
 
-        ], function(err, foundProj, foundTask, usersList) {
+        ], function(err, foundProj, taskList, index) {
             if (err) {
                 if (err == 1) {
                     console.log('2. couldn\'t find task');
                 }
                 res.send('error');
             } else {
-                //foundTask.status = app.locals.statuses[req.params.status];
-                foundProj.save(function(err2,done) {
-                    if (err2) {
-                        throw err2;
-                    } else {
-                        console.log('=====\n\n');
-                        //Helper.getProjectMemberList(req.params.projectid);
-                        console.log(foundTask.assignedto);
-                        res.render('task.jade', {
-                            // These are navbar variables
-                            loggedIn : req.isAuthenticated(),
-                            projList : req.user.local.projects,
-                            firstname : req.user.local.firstname,
-                            isProjectPage : true,
-                            taskname : foundTask.taskname,
-                            taskdescription : foundTask.taskdescription,
-                            statuses : app.locals.statuses,
-                            usersList : usersList,
-                            curAssignee : foundTask.assignedto,
-                            curStatus : foundTask.status,
-                            curPriority : foundTask.priority
-                        });
-                    }
-                });
+                res.redirect('/p/' + req.params.projectid + '/');
+                //res.redirect('/');
             }
 
         }); // end async waterfall
+    }); // end edit
 
-    }); // end app.get
-
-    // A task-delete AJAX POST request.
-    app.post('/p/:projectid/t/:taskid/delete/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
+    // A Task delete AJAX POST request.
+    app.post('/p/:projectid/t/:taskid/delete/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
         async.waterfall([
             function findProject(callback) {
                 Project.findById(req.params.projectid, function(err, foundProj) {
@@ -205,6 +333,7 @@ module.exports = function(app, passport) {
                 if (err == 1) {
                     console.log('2. couldn\'t find task');
                 }
+                console.log("lmao");
                 res.send('error');
             } else {
                 res.redirect('/p/' + req.params.projectid + '/');
@@ -213,65 +342,6 @@ module.exports = function(app, passport) {
 
         }); // end async waterfall
     }); // end delete task
-
-    // A task-modify AJAX POST request.
-    app.post('/p/:projectid/t/:taskid/modify/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
-        async.waterfall([
-            function findProject(callback) {
-                Project.findById(req.params.projectid, function(err, foundProj) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(null, foundProj);
-                    }
-                });
-            } ,
-            function searchForTask(foundProj, callback) {
-                var taskList = foundProj.tasks;
-                for (var i = 0; i < taskList.length; i++) {
-                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
-                    if (taskList[i].taskid == req.params.taskid) {
-                        var foundTask = taskList[i];
-                        console.log('found task');
-                        return callback(null, foundProj, taskList, i);
-                    }
-                }
-                console.log('1. couldn\'t find task');
-                callback(1);
-            } ,
-            function modifyTask(foundProj, taskList, index, callback) {
-                console.log(req.body);
-                taskList[index].taskname = req.body.taskname;
-                taskList[index].taskdescription = req.body.taskdescription;
-                taskList[index].status = req.body.status;
-                taskList[index].assignedto = req.body.assignedto;
-                taskList[index].priority = req.body.priority;
-
-                // save this updated project
-                foundProj.save(function(err2,done) {
-                    if (err2) {
-                        throw err2;
-                    } else {
-                        console.log('task modified and project updated');
-                        //res.redirect('/p/' + req.params.projectid + '/');
-                        callback(null, 'done');
-                    }
-                });
-            }
-
-        ], function(err, foundProj, taskList, index) {
-            if (err) {
-                if (err == 1) {
-                    console.log('2. couldn\'t find task');
-                }
-                res.send('error');
-            } else {
-                res.redirect('/p/' + req.params.projectid + '/');
-                //res.redirect('/');
-            }
-
-        }); // end async waterfall
-    }); // end modify
 
     // A task-move AJAX request.
     app.post('/p/:projectid/movetask/', function(req, res) {

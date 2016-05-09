@@ -1,0 +1,16 @@
+div(class="container")
+	table(class="table")
+		thead
+			tr
+				th Name
+				th Email
+		tbody
+			each user in projMembers
+				tr
+					td
+						div(id="rune-icon-kanban-" + user.color)
+							img(class="roo-icon-kanban" src="/images/Roo.svg")
+							div(class="user-name") #[a(href='/u/'+user.id+'/') #{user.name}]
+							div(class="initials-icon-kanban") #{user.initials}
+					td
+						div(class="user-email") #{user.email}
