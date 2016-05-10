@@ -11,17 +11,17 @@ Page.Project.taskCreateLoad = function() {
     });
 }
 
-$('a.kanban-task-header').click(function(e) {
-    // Page.Project.taskEditLoad("t/" + this.id + "/");
-});
-
 // Add a sortable property to Kanban board task objects.
 $('.kanban-col').sortable({
     connectWith : '.kanban-col',
     stop : function(event, ui) {
         $.ajax({
             type : 'POST',
-            url : window.location.href + 'movetask/',
+            data : {
+                status : $(ui.item).parent().attr('id'),
+                taskid : $(ui.item).attr('id')
+            },
+            url : 'movetask/',
             success : function(data) {
                 console.log('success');
             }

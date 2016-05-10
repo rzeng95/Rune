@@ -176,14 +176,11 @@ module.exports = function(app, passport) {
                     // Task tab variables
                     taskList : foundProj.tasks,
 
-                    //statuses
+                    // Statuses
                     statuses: statuses,
 
-                    //kanban tab variables
-                    tasks1 : tasks[statuses[0]],
-                    tasks2 : tasks[statuses[1]],
-                    tasks3 : tasks[statuses[2]],
-                    tasks4 : tasks[statuses[3]]
+                    // Kanban tab variables
+                    tasks : tasks
                 });
             }
         });
