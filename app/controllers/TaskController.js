@@ -54,8 +54,7 @@ module.exports = function(app, passport) {
     });
 
     // Task creation POST request.
-    app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.doesProjectExist,
-            Helper.isUserProjectMember, function(req, res) {
+    app.post('/p/:projectid/createtask', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
         // We want to create a new Task object (see models/task.js)
         // To see how mongoose creates and saves objects, see app.post('/createproject') endpoint
         // make sure the current logged in user (saved under req.user.local) is the "reporter" of the task
@@ -65,8 +64,6 @@ module.exports = function(app, passport) {
                 throw err;
             } else {
                 foundProj.counter++;
-                //console.log(foundProj.counter);
-                //console.log( foundProj.projectkey + '-' + Helper.zeroPad(foundProj.counter, 3));
                 foundProj.tasks.push({
                     projectid       :   req.params.projectid,
                     taskname        :   req.body.taskname,
@@ -80,7 +77,6 @@ module.exports = function(app, passport) {
                     issuetype       :   req.body.issuetype
                 });
                 foundProj.save(function(err) {
-                    console.log('project updated with new task');
                     res.redirect('/p/' + req.params.projectid + '/');
                 });
             }
@@ -102,10 +98,8 @@ module.exports = function(app, passport) {
             function searchForTask(foundProj, callback) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
-                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
                     if (taskList[i].taskid == req.params.taskid) {
                         var foundTask = taskList[i];
-                        console.log('found task');
                         return callback(null, foundProj, foundTask);
                     }
                 }
@@ -240,7 +234,7 @@ module.exports = function(app, passport) {
                         callback(null, foundProj);
                     }
                 });
-            } ,
+            },
             function searchForTask(foundProj, callback) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
@@ -253,7 +247,7 @@ module.exports = function(app, passport) {
                 }
                 console.log('1. couldn\'t find task');
                 callback(1);
-            } ,
+            },
             function editTask(foundProj, taskList, index, callback) {
                 console.log(req.body);
                 taskList[index].taskname = req.body.taskname;
@@ -273,7 +267,6 @@ module.exports = function(app, passport) {
                     }
                 });
             }
-
         ], function(err, foundProj, taskList, index) {
             if (err) {
                 if (err == 1) {
@@ -284,67 +277,11 @@ module.exports = function(app, passport) {
                 res.redirect('/p/' + req.params.projectid + '/');
                 //res.redirect('/');
             }
-
         }); // end async waterfall
     }); // end edit
 
     // A Task delete AJAX POST request.
     app.post('/p/:projectid/t/:taskid/delete/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
-        async.waterfall([
-            function findProject(callback) {
-                Project.findById(req.params.projectid, function(err, foundProj) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(null, foundProj);
-                    }
-                });
-            } ,
-            function searchForTask(foundProj, callback) {
-                var taskList = foundProj.tasks;
-                for (var i = 0; i < taskList.length; i++) {
-                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
-                    if (taskList[i].taskid == req.params.taskid) {
-                        var foundTask = taskList[i];
-                        console.log('found task');
-                        return callback(null, foundProj, taskList, i);
-                    }
-                }
-                console.log('1. couldn\'t find task');
-                callback(1);
-            } ,
-            function deleteTask(foundProj, taskList, index, callback) {
-                taskList.splice(index,1);
-                // save this updated project
-                foundProj.save(function(err2,done) {
-                    if (err2) {
-                        throw err2;
-                    } else {
-                        console.log('task deleted and project updated');
-                        //res.redirect('/p/' + req.params.projectid + '/');
-                        callback(null, 'done');
-                    }
-                });
-
-            }
-
-        ], function(err, foundProj, taskList, index) {
-            if (err) {
-                if (err == 1) {
-                    console.log('2. couldn\'t find task');
-                }
-                console.log("lmao");
-                res.send('error');
-            } else {
-                res.redirect('/p/' + req.params.projectid + '/');
-                //res.redirect('/');
-            }
-
-        }); // end async waterfall
-    }); // end delete task
-
-    // A task-move AJAX request.
-    app.post('/p/:projectid/movetask/', function(req, res) {
         async.waterfall([
             function findProject(callback) {
                 Project.findById(req.params.projectid, function(err, foundProj) {
@@ -362,30 +299,78 @@ module.exports = function(app, passport) {
                     if (taskList[i].taskid == req.params.taskid) {
                         var foundTask = taskList[i];
                         console.log('found task');
-                        return callback(null, foundProj, foundTask);
+                        return callback(null, foundProj, taskList, i);
                     }
                 }
                 console.log('1. couldn\'t find task');
                 callback(1);
+            },
+            function deleteTask(foundProj, taskList, index, callback) {
+                taskList.splice(index,1);
+                // save this updated project
+                foundProj.save(function(err2,done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+                        console.log('task deleted and project updated');
+                        //res.redirect('/p/' + req.params.projectid + '/');
+                        callback(null, 'done');
+                    }
+                });
             }
-        ], function(err, foundProj, foundTask) {
+        ], function(err, foundProj, taskList, index) {
             if (err) {
                 if (err == 1) {
                     console.log('2. couldn\'t find task');
                 }
                 res.send('error');
             } else {
-                foundTask.status = app.locals.statuses[req.params.status];
-                foundProj.save(function(err2,done) {
+                res.redirect('/p/' + req.params.projectid + '/');
+            }
+        }); // end async waterfall
+    }); // end delete task
+
+    // A task-move AJAX request.
+    app.post('/p/:projectid/movetask/', Helper.isLoggedIn, Helper.doesProjectExist,
+            Helper.isUserProjectMember, Helper.isAjaxRequest, function(req, res) {
+        async.waterfall([
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            },
+            function searchForTask(foundProj, callback) {
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    if (taskList[i].taskid == req.body.taskid) {
+                        var foundTask = taskList[i];
+                        return callback(null, foundProj, taskList, i);
+                    }
+                }
+                callback(1);
+            },
+            function moveTask(foundProj, taskList, index, callback) {
+                // Update the task's status and save it the project state.
+                taskList[index].status = req.body.status;
+                foundProj.save(function(err2, done) {
                     if (err2) {
                         throw err2;
                     } else {
-                        console.log('task updated');
-                        res.send('done');
+                        callback(null, 'done');
                     }
                 });
             }
-        });
-    });
+        ], function(err, foundProj, taskList, index) {
+            if (err) {
+                res.send('error');
+            } else {
+                res.redirect('/p/' + req.params.projectid + '/');
+            }
+        }); // end async waterfall
+    }); // end movetask
 
 } // End of module exports
