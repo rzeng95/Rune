@@ -34,10 +34,13 @@ module.exports = function(passport) {
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     }, function(req, email, password, done) { // callback with email and password from our form
+
+        var emailProcessed = email.replace(/\s/g,'');
+        
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({
-            'local.email' :  email
+            'local.email' :  emailProcessed
         }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err) {
@@ -91,11 +94,12 @@ module.exports = function(passport) {
                     var lastNameRaw = req.body.lastname;
                     var firstNameProcessed = firstNameRaw[0].toUpperCase() + firstNameRaw.slice(1);
                     var lastNameProcessed = lastNameRaw[0].toUpperCase() + lastNameRaw.slice(1);
+                    var emailProcessed = email.replace(/\s/g,'');
 
                     // set the user's local credentials
                     newUser.local.firstname = firstNameProcessed;
                     newUser.local.lastname = lastNameProcessed;
-                    newUser.local.email    = email;
+                    newUser.local.email    = emailProcessed;
                     newUser.local.password = newUser.generateHash(password);
                     newUser.local.userid = (newUser._id).toString();
                     newUser.local.userColor = req.body.userColor;
