@@ -38,5 +38,5 @@ h=k[0],f,q;"auto"==g?g=t():v&&(g=t(parseInt(g)));var w;z&&b.useNativeClamp?(e.ov
 var clamps = document.getElementsByClassName("js-clamp");
 for(var i = 0; i < clamps.length; i++)
 {
-    $clamp(clamps[i], {clamp: 4});
+    $clamp(clamps[i], {clamp: 2});
 }
