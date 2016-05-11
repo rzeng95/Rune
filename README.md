@@ -1,3 +1,6 @@
+# RUNE 
+### An intuitive and student-focused Kanban project management tool   
+
 How to get this running:
 
 1. Fork repo    
@@ -9,12 +12,3 @@ npm install
 npm start
 ```
 The app will then start on localhost:5000
-
-
-
-ToDo:
-* Make database logins, session key, and other private data into environment variables    
-* Remove EJS from project dependencies  
-* Client-side validation for valid email and usernames  
-* ~~Move bootstrap css, js, and jquery cdn links to local files~~
-* Remove html mockups folder  
