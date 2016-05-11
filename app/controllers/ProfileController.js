@@ -1,26 +1,26 @@
 /*
  * ProfileController controls anything related to user profile
- * Right now it only renders profile, but most likely will control the student finder feature
 */
 
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
 var Helper = require('../models/helpers.js');
+
 var async = require('async');
 
 module.exports = function(app, passport) {
 
     // =====================================
-    // PROFILE
+    // PROFILE - User profile pages display basic information on the user, depending on who's accessing the page.
     // =====================================
-    // The isLoggedIn function makes this page protected so that only logged in users can access it
+
+    // The /profile endpoint is hit upon successful login, and takes the user to their own profile page
     app.get('/profile', Helper.isLoggedIn, function(req, res) {
-        //find logged in user and render that information.
-        //var fullname = req.user.local.firstname + ' ' + req.user.local.lastname;
-        //res.render('profile.jade', { name:fullname, isMe: 1 });
-        res.redirect('/u/'+req.user._id);
+        res.redirect('/u/' + req.user._id);
     });
 
+    // To get a user's list of projects, first look up their ID to find their email,
+    // and then query the projects database to get all projects that the user is a member of.
     app.get('/u/:userid/', Helper.isLoggedIn, Helper.doesUserExist, function(req, res) {
 
         User.findOne({'local.userid': req.params.userid}, function(err, usr){
@@ -29,12 +29,11 @@ module.exports = function(app, passport) {
             } else {
                 Project.find({'members': usr.local.email}, function(err, projects)
                 {
-                    //console.log(projects);
-                    //console.log(req.user.local.projects);
+                    // If the URL matches the logged-in user's ID, then it means the user is attempting to access their own page.
                     var accessorID = (req.params.userid).toString(); // e.g. /u/5728007c04d268850e2c7ef3
                     var loggedInID = (req.user.local.userid).toString(); // Pulled from the logged in user's info
-
                     var isMe = (accessorID === loggedInID);
+
                     res.render('profile.jade', {
                         // These are navbar variables
                         loggedIn : req.isAuthenticated(),
@@ -50,12 +49,10 @@ module.exports = function(app, passport) {
                         userProjects : usr.local.projects,
                         myProjects : projects
                     });
-                });
+                }); //end project.find
 
-
-
-            }
-        });
+            } //end else
+        }); // end User.findOne
 
     }); // End of app.get('/u/:userid')
 
@@ -83,7 +80,7 @@ module.exports = function(app, passport) {
                     } else {
                         callback(null, foundUser, foundProject); // now both the found user and the found project can be modified in the next function
                     }
-                })
+                });
 
             },
             function checkIfUserIsAlreadyMember(foundUser, foundProject, callback) {
@@ -123,8 +120,8 @@ module.exports = function(app, passport) {
             }
         ], function(err){
             if (err) {
-                if (err == 1) {
-                    console.log("user already a member of project");
+                if (err === 1) {
+                    console.log('user already a member of project');
                     //ToDo: error popup modal
                     res.redirect('/p/' + req.params.projectid + '/');
                 } else {
@@ -156,4 +153,4 @@ module.exports = function(app, passport) {
         });
     }); //End of app.get('/users')
 
-} // End of module exports
+}; // End of module exports

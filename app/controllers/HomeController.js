@@ -8,6 +8,9 @@ var Helper = require('../models/helpers.js');
 
 module.exports = function(app, passport) {
 
+    // =====================================
+    // HOME PAGE - This endpoint handles both the logged-out and logged-in homepage.
+    // =====================================
     app.get('/', function(req, res) {
         var firstname = '';
         var projectList = [];
@@ -16,11 +19,13 @@ module.exports = function(app, passport) {
             projectList = req.user.local.projects;
         }
         res.render('home.jade', {
+            // These variables are required for the navbar
             firstname : firstname,
-            loggedIn : req.isAuthenticated(), //if not logged in, display the login form
-            //message : req.flash('loginMessage'),   //handle errors with logging in
-            signupMessage : req.flash('signupMessage'),
-            projList : projectList
+            loggedIn : req.isAuthenticated(),
+            projList : projectList,
+
+            // This message is displayed upon unsuccessful signups
+            signupMessage : req.flash('signupMessage')
         });
     });
 
@@ -31,7 +36,7 @@ module.exports = function(app, passport) {
     }));
 
     // =====================================
-    // LOGIN PAGE - This is a separate form
+    // LOGIN PAGE - The login page is only rendered if the user is not logged in.
     // =====================================
     app.get('/login', function(req, res) {
         if(req.isAuthenticated()) {
@@ -54,10 +59,12 @@ module.exports = function(app, passport) {
 
 
     // =====================================
-    // SIGNUP - This may or may not be its own page
+    // SIGNUP - This is a copy of the signup form from the homepage.
     // =====================================
     app.get('/signup', function(req, res) {
-        res.render('signup.jade', { message: req.flash('signupMessage') });
+        res.render('signup.jade', {
+            message: req.flash('signupMessage')
+        });
     });
 
     app.post('/signup', passport.authenticate('local-signup', {
@@ -79,6 +86,9 @@ module.exports = function(app, passport) {
     // ERROR PAGE - This is displayed when someone accesses a forbidden page (not logged in, not member of project)
     // =====================================
     app.get('/error', function(req,res) {
-        res.render('error.jade', { errorMessage : req.flash('errorMessage') } );
+        res.render('error.jade', {
+            errorMessage : req.flash('errorMessage')
+        });
     });
-}
+    
+}; // End module exports

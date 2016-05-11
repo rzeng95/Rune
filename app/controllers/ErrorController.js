@@ -13,4 +13,5 @@ module.exports = function(app, passport) {
     app.use(function(error, req, res, next) {
         res.status(500).render('error.jade', {errorMessage :'500: Internal Server Error'});
     });
-}
+    
+};
