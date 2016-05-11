@@ -41,8 +41,7 @@ module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
         if(req.isAuthenticated()) {
             res.redirect('/profile');
-        }
-        else {
+        } else {
             res.render('login.jade', {
                 message : req.flash('loginMessage')
 
@@ -90,5 +89,5 @@ module.exports = function(app, passport) {
             errorMessage : req.flash('errorMessage')
         });
     });
-    
+
 }; // End module exports
