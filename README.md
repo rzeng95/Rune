@@ -1,6 +1,8 @@
 # RUNE 
 ### An intuitive and student-focused Kanban project management tool   
 
+##### Live Site : https://rune130.herokuapp.com
+
 How to get this running:
 
 1. Fork repo    
