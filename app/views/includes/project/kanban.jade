@@ -2,7 +2,7 @@ div(class="kanban-board")
     div(class="kanban-board-header")
         div(class="kanban-board-row kanban-board-row-header")
             each status in statuses
-                div(class="kanban-col kanban-col-header")
+                div(class="kanban-col-header")
                     div(class="kanban-col-header-text") #{status}
     div(class="kanban-board-body")
         div(class="kanban-board-row")
@@ -19,8 +19,8 @@ div(class="kanban-board")
                                     div(class="row")
                                         div(class="col-xs-6")
                                             div(class="kanban-priority-icon-" + task.priority)
-                                                div(id="priority-icon")
-                                                div(id="priority-text") #{task.priority}
+                                                div(class="priority-icon")
+                                                div(class="priority-text") #{task.priority}
                         else
                             div(id=task.taskid class="kanban-task")
                                 a(href="t/"+task.taskid+"/" class="kanban-task-header js-clamp")
@@ -31,5 +31,5 @@ div(class="kanban-board")
                                     div(class="row")
                                         div(class="col-xs-6")
                                             div(class="kanban-priority-icon-" + task.priority)
-                                                div(id="priority-icon")
-                                                div(id="priority-text") #{task.priority}
+                                                div(class="priority-icon")
+                                                div(class="priority-text") #{task.priority}

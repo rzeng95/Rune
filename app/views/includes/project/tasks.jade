@@ -28,8 +28,8 @@ table(class="task-list")
 				td(class="task-status-element") #{task.status}
 				td(class="task-priority-element")
 					div(class="kanban-priority-icon-" + task.priority)
-						div(id="priority-icon")
-						div(id="priority-text") #{task.priority}
+						div(class="priority-icon")
+						div(class="priority-text") #{task.priority}
 				td(class="task-assignedto-element")
 					div #{task.assignedto}
 				td(class="task-createdby-element")

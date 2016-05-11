@@ -40,9 +40,9 @@ div(class="task-body")
                         tr
                             td Priority:
                             td
-                                div(class="kanban-priority-icon-" + curPriority)
-                                    div(id="priority-icon")
-                                    div(id="priority-text") #{curPriority}
+                                div(class="kanban-priority-icon-" + task.priority)
+                                    div(class="priority-icon")
+                                    div(class="priority-text") #{task.priority}
                         tr
                             td
                                 a(class="btn btn-primary" role="button" data-toggle="modal" href="#task-modal" onclick="Task.taskEditLoad()") Edit Task

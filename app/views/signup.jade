@@ -1,79 +1,63 @@
 extends ./partials/base.jade
 
 block bodyContent 
-    
-    div(class="container")
-        form(action="/" method="post")
-            div(class="signup" style="width:500px; padding:14px; background-color:white; opacity:0.85; border-radius:4px;")
-                div(class="row" style="padding:4px")
-                    h2(style="margin-top:-2px; padding:4px") Sign Up
-                div(class="row" style="padding:4px")
-                    div(class="col-xs-6" style="padding:4px")
+    div(class="container-fluid")
+        div(class="signup")
+            form(action="/" method="post")
+                h2 Sign Up
+                div(class="row")
+                    div(class="col-xs-6")
                         input(type="text" class="form-control" placeholder="First Name" name="firstname" required="required")
-                    div(class="col-xs-6" style="padding:4px")
+                    div(class="col-xs-6")
                         input(type="text" class="form-control" placeholder="Last Name" name="lastname" required="required")
-                div(class="row" style="padding:4px")
-                    div(class="col-xs-12" style="padding:4px")
-                        input(type="email" class="form-control" id="email" placeholder="Email" name="email" required="required")
-                div(class="row" style="padding:4px")
-                    div(class="col-xs-12" style="padding:4px")
-                        input(type="password" class="form-control" id="pwd" placeholder="Password" required="required")
-                div(class="row" style="padding:4px")
-                    div(class="col-xs-12" style="padding:4px")
-                        input(type="password" class="form-control" id="confirmPwd" placeholder="Confirm Password" name="password" required="required")
-                div(class="row" style="padding:4px 4px 0px 4px")
-                    input(id="hidden-color-input" type="userColor" class="form-control" placeholder="User Color" name="userColor" required="required" value="red")
-                    div(class="col-xs-12" style="padding:4px 4px 0px 4px")
-                        p Pick a user colour:
-                        div(id="rune-icon-small-red"  onclick='selectIcon(0)')
-                            img(class="roo-icon-small" src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg" style="opacity: 1")
-                        div(id="rune-icon-small-redorange" onclick='selectIcon(1)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                        div(id="rune-icon-small-orange" onclick='selectIcon(2)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                        div(id="rune-icon-small-yelloworange" onclick='selectIcon(3)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                        div(id="rune-icon-small-yellow" onclick='selectIcon(4)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                        div(id="rune-icon-small-yellowgreen" onclick='selectIcon(5)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                div(class="row" style="padding:4px 4px 0px 4px; margin-bottom:14px")
-                    div(class="col-xs-12" style="padding:0px 4px 0px 4px")
-                        div(id="rune-icon-small-green" onclick='selectIcon(6)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                        div(id="rune-icon-small-bluegreen" onclick='selectIcon(7)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                        div(id="rune-icon-small-blue" onclick='selectIcon(8)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                        div(id="rune-icon-small-bluepurple" onclick='selectIcon(9)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                        div(id="rune-icon-small-purple" onclick='selectIcon(10)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                        div(id="rune-icon-small-redpurple" onclick='selectIcon(11)')
-                            img(class="roo-icon-small"  src="/images/Roo.svg")
-                            img(class="check-icon-small" src="/images/check.svg")
-                div(class="row" style="margin-bottom:-10px; padding:4px")
-                    div(class="col-xs-12" style="padding:4px; margin-bottom:-10px")
-                        p(style="font-size:xx-small") By clicking Sign Up, your consent to mining rune for the rest of your life.
-                div(class="row" style="padding:4px")
-                    div(class="col-xs-12" style="padding:4px")
-                        button(id="submit" type="submit" class="btn btn-primary" style="width:140px") Sign Up
+                input(type="email" class="form-control" id="email" placeholder="Email" name="email" required="required")
+                input(type="password" class="form-control" id="pwd" placeholder="Password" required="required")
+                input(type="password" class="form-control" id="confirmPwd" placeholder="Confirm Password" name="password" required="required")
+                input(id="hidden-color-input" type="userColor" class="form-control" placeholder="User Color" name="userColor" required="required" value="red")
+                p Pick a user colour:
+                div(class="row")
+                    div(id="rune-icon-small-red" class="col-xs-2" onclick='selectIcon(0)')
+                        img(class="roo-icon-small" src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg" style="opacity: 1")
+                    div(id="rune-icon-small-redorange" class="col-xs-2" onclick='selectIcon(1)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-orange" class="col-xs-2" onclick='selectIcon(2)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-yelloworange" class="col-xs-2" onclick='selectIcon(3)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-yellow" class="col-xs-2" onclick='selectIcon(4)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-yellowgreen" class="col-xs-2" onclick='selectIcon(5)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-green" class="col-xs-2" onclick='selectIcon(6)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-bluegreen" class="col-xs-2" onclick='selectIcon(7)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-blue" class="col-xs-2" onclick='selectIcon(8)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-bluepurple" class="col-xs-2" onclick='selectIcon(9)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-purple" class="col-xs-2" onclick='selectIcon(10)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                    div(id="rune-icon-small-redpurple" class="col-xs-2" onclick='selectIcon(11)')
+                        img(class="roo-icon-small"  src="/images/Roo.svg")
+                        img(class="check-icon-small" src="/images/check.svg")
+                p(style="font-size:xx-small") By signing up, you consent to the terms of service of Rune.
+                div(class="signup-btn")
+                    button(id="submit" type="submit" class="btn btn-primary" style="width:140px") Sign Up
                 h5(style="color:#e60000")=signupMessage
-            
-        
-block scripts
 
+block scripts
     script.
         var valid = "#66afe9";
         var invalid = "#e60000";
@@ -115,7 +99,6 @@ block scripts
         confirmPassword.onfocus = enableConfirmPwdBorderColor;
         confirmPassword.onblur = disableConfirmPwdBorderColor;
 
-    script.
         var checks = document.getElementsByClassName("check-icon-small");
         var colors = ["red", "redorange", "orange", "yelloworange", "yellow", "yellowgreen",
                       "green", "bluegreen", "blue", "bluepurple", "purple", "redpurple"];
