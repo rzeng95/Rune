@@ -186,4 +186,19 @@ module.exports = function(app, passport) {
         });
     }); //end of app.post('/p/:projectid/')
 
+/*
+    // Only the project creator can delete projects.
+    app.post('/p/:projectid/deleteproject', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
+
+        Project.remove({ projectid : req.params.projectid }, function(err){
+            if (err) {
+                throw err;
+            } else {
+                console.log("project successfully deleted");
+                res.redirect('/profile');
+            }
+        });
+    });
+*/
+
 } // End of module.exports
