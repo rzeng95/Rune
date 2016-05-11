@@ -86,6 +86,11 @@ module.exports = function(app, passport) {
     // =====================================
     app.get('/error', function(req,res) {
         res.render('error.jade', {
+            // These variables are required for the navbar
+            loggedIn : req.isAuthenticated(),
+            projList : req.user.local.projects,
+            firstname : req.user.local.firstname,
+
             errorMessage : req.flash('errorMessage')
         });
     });
