@@ -1,3 +1,5 @@
+//ToDo: DELETE THIS 
+
 var mongoose = require('mongoose');
 
 var taskSchema = mongoose.Schema({
