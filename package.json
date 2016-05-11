@@ -9,9 +9,10 @@
   "homepage": "https://github.com/rzeng95/Rune",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "lint": "eslint config/** app/** app.js"
+    "lint": "eslint config/** app/** app.js",
+    "test": "./node_modules/.bin/mocha -t 10000",
+    "dev": "./node_modules/.bin/nodemon app.js"
   },
   "keywords": [],
   "contributors": [
@@ -52,5 +53,11 @@
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "nodemon": "^1.9.2",
+    "supertest": "^1.2.0"
   }
 }

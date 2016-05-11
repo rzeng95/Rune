@@ -38,7 +38,7 @@ module.exports = function(app, passport) {
     // =====================================
     // LOGIN PAGE - The login page is only rendered if the user is not logged in.
     // =====================================
-    app.get('/login', function(req, res) {
+    app.get('/login/', function(req, res) {
         if(req.isAuthenticated()) {
             res.redirect('/profile');
         } else {
