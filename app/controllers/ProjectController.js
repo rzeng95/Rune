@@ -64,6 +64,7 @@ module.exports = function(app, passport) {
         newProject.projectname = projectName;
         newProject.projectkey = projectKey;
         newProject.projectid = (newProject._id).toString();
+        newProject.admin = req.user.local.email;
         newProject.members.push(userEmail);
         newProject.counter = 0;
         newProject.save(function(err) {
@@ -186,19 +187,33 @@ module.exports = function(app, passport) {
         });
     }); //end of app.post('/p/:projectid/')
 
-/*
+
     // Only the project creator can delete projects.
     app.post('/p/:projectid/deleteproject', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
 
-        Project.remove({ projectid : req.params.projectid }, function(err){
+        // Get project details so we can access the project's admin
+        Project.findById(req.params.projectid, function(err, foundProj){
             if (err) {
                 throw err;
             } else {
-                console.log("project successfully deleted");
-                res.redirect('/profile');
+                // Found the project, compare admin with current logged in user
+                if (foundProj.admin === req.user.local.email) {
+                    Project.remove({ projectid : req.params.projectid }, function(err){
+                        if (err) {
+                            throw err;
+                        } else {
+                            console.log("project successfully deleted");
+                            res.redirect('/profile');
+                        }
+                    });
+                } else {
+                    console.log('invalid permissions for deletion');
+                    res.redirect('/p/' + newProject.projectid + '/');
+                }
             }
         });
-    });
-*/
+
+    }); //end app.post
+
 
 } // End of module.exports

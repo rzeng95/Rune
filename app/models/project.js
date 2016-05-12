@@ -7,6 +7,7 @@ var projectSchema = mongoose.Schema({
     projectid      : String,
     projectname    : String,
     projectkey     : String,
+    admin          : String,
     members        : [String],  // roland.zeng@gmail.com, alexlw92@yahoo.com
     counter        : Number,    // Stores the task number
     tasks          :  [
