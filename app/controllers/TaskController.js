@@ -11,46 +11,23 @@ var async = require('async');
 module.exports = function(app, passport) {
 
     // Task creation is handled through a front-end pop-up modal.
-    app.get('/p/:projectid/createtask/', Helper.isLoggedIn, Helper.doesProjectExist,
-            Helper.isUserProjectMember, Helper.isAjaxRequest, function(req, res) {
-        Project.findById(req.params.projectid, function(err, proj) {
-            if (err) {
-                throw err;
-            } else {
-                var userslist = [];
-                User.find({
-                    'local.email' : {
-                        $in : proj.members
-                    }
-                }, function(err, users) {
-                    if (err) {
-                        throw err;
-                    }
-                    async.waterfall([
-                        function(callback) {
-                            var userslist = [];
-                            for (var i = 0; i < users.length; i++) {
-                                userslist.push({
-                                    "name" : users[i].local.firstname + " " + users[i].local.lastname,
-                                    "email" : users[i].local.email
-                                });
-                            }
-                            callback(null, userslist);
-                        },
-                        function(userslist, callback) {
-                            res.render('includes/task/create.jade', {
-                                // These are navbar variables
-                                loggedIn : req.isAuthenticated(),
-                                projList : req.user.local.projects,
-                                firstname : req.user.local.firstname,
-                                usersList : userslist,
-                                statuses : app.locals.statuses
-                            })
-                        }
-                    ])
-                });
-            }
+    app.get('/p/:projectid/createtask/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, Helper.isAjaxRequest, function(req, res) {
+
+        Helper.getProjectMemberList(req.params.projectid, function(err, userList) {
+            if (err) throw err;
+
+            res.render('includes/task/create.jade', {
+                // These are navbar variables
+                loggedIn : req.isAuthenticated(),
+                projList : req.user.local.projects,
+                firstname : req.user.local.firstname,
+
+                usersList : userList,
+                statuses : app.locals.statuses
+            });
+
         });
+
     });
 
     // Task creation POST request.
