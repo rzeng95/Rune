@@ -153,7 +153,7 @@ module.exports = function(app, passport) {
         });
     }); //End of app.get('/users')
 
-    app.post('/u/:userid/deleteuser', Helper.isLoggedIn, Helper.doesUserExist, function(req, res) {
+    app.post('/u/:userid/delete', Helper.isLoggedIn, Helper.doesUserExist, function(req, res) {
         async.waterfall([
             function getUser(callback) {
                 User.findOne({'local.userid': req.params.userid}, function(err, foundUser) {
