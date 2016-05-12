@@ -311,8 +311,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?1462172998);
-  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?&1462172998#iefix) format("embedded-opentype"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff2?1462172998) format("woff2"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff?1462172998) format("woff"), url(../fonts/bootstrap/glyphicons-halflings-regular.ttf?1462172998) format("truetype"), url(../fonts/bootstrap/glyphicons-halflings-regular.svg?1462172998#glyphicons_halflingsregular) format("svg");
+  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?1462183387);
+  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?&1462183387#iefix) format("embedded-opentype"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff2?1462183387) format("woff2"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff?1462183387) format("woff"), url(../fonts/bootstrap/glyphicons-halflings-regular.ttf?1462183387) format("truetype"), url(../fonts/bootstrap/glyphicons-halflings-regular.svg?1462183387#glyphicons_halflingsregular) format("svg");
 }
 .glyphicon {
   position: relative;
@@ -1931,31 +1931,31 @@ pre code {
   overflow-y: scroll;
 }
 
-.container {
+.container, .user-list-container {
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
 }
-.container:before, .container:after {
+.container:before, .user-list-container:before, .container:after, .user-list-container:after {
   content: " ";
   display: table;
 }
-.container:after {
+.container:after, .user-list-container:after {
   clear: both;
 }
 @media (min-width: 768px) {
-  .container {
+  .container, .user-list-container {
     width: 750px;
   }
 }
 @media (min-width: 992px) {
-  .container {
+  .container, .user-list-container {
     width: 970px;
   }
 }
 @media (min-width: 1200px) {
-  .container {
+  .container, .user-list-container {
     width: 1170px;
   }
 }
@@ -4802,16 +4802,18 @@ tbody.collapse.in {
   }
 }
 
-.container > .navbar-header,
+.container > .navbar-header, .user-list-container > .navbar-header,
 .container > .navbar-collapse,
+.user-list-container > .navbar-collapse,
 .container-fluid > .navbar-header,
 .container-fluid > .navbar-collapse {
   margin-right: -15px;
   margin-left: -15px;
 }
 @media (min-width: 768px) {
-  .container > .navbar-header,
+  .container > .navbar-header, .user-list-container > .navbar-header,
   .container > .navbar-collapse,
+  .user-list-container > .navbar-collapse,
   .container-fluid > .navbar-header,
   .container-fluid > .navbar-collapse {
     margin-right: 0;
@@ -4868,7 +4870,7 @@ tbody.collapse.in {
   display: block;
 }
 @media (min-width: 768px) {
-  .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+  .navbar > .container .navbar-brand, .navbar > .user-list-container .navbar-brand, .navbar > .container-fluid .navbar-brand {
     margin-left: -15px;
   }
 }
@@ -5537,12 +5539,12 @@ a.badge:hover, a.badge:focus {
 .jumbotron > hr {
   border-top-color: #d5d5d5;
 }
-.container .jumbotron, .container-fluid .jumbotron {
+.container .jumbotron, .user-list-container .jumbotron, .container-fluid .jumbotron {
   border-radius: 6px;
   padding-left: 15px;
   padding-right: 15px;
 }
-.jumbotron .container {
+.jumbotron .container, .jumbotron .user-list-container {
   max-width: 100%;
 }
 @media screen and (min-width: 768px) {
@@ -5550,7 +5552,7 @@ a.badge:hover, a.badge:focus {
     padding-top: 48px;
     padding-bottom: 48px;
   }
-  .container .jumbotron, .container-fluid .jumbotron {
+  .container .jumbotron, .user-list-container .jumbotron, .container-fluid .jumbotron {
     padding-left: 60px;
     padding-right: 60px;
   }
@@ -7447,7 +7449,7 @@ button.close {
 }
 @font-face {
   font-family: "Roboto-Black";
-  src: url('../fonts/RobotoBlack/Roboto-Black.ttf?1329484638') format('truetype'), url('../fonts/RobotoBlack/Roboto-Black.eot?1329484638') format('embedded-opentype'), url('../fonts/RobotoBlack/Roboto-Black.woff?1329484638') format('woff');
+  src: url('../fonts/RobotoBlack/Roboto-Black.ttf?1462413094') format('truetype'), url('../fonts/RobotoBlack/Roboto-Black.eot?1462413094') format('embedded-opentype'), url('../fonts/RobotoBlack/Roboto-Black.woff?1462413094') format('woff');
 }
 *.unselectable, #rune-icon-small-red *.roo-icon-small, #rune-icon-small-redorange *.roo-icon-small, #rune-icon-small-orange *.roo-icon-small, #rune-icon-small-yelloworange *.roo-icon-small, #rune-icon-small-yellow *.roo-icon-small, #rune-icon-small-yellowgreen *.roo-icon-small, #rune-icon-small-green *.roo-icon-small, #rune-icon-small-bluegreen *.roo-icon-small, #rune-icon-small-blue *.roo-icon-small, #rune-icon-small-bluepurple *.roo-icon-small, #rune-icon-small-purple *.roo-icon-small, #rune-icon-small-redpurple *.roo-icon-small, #rune-icon-profile-red *.roo-icon-profile, #rune-icon-profile-red *.initials-icon-profile, #rune-icon-profile-redorange *.roo-icon-profile, #rune-icon-profile-redorange *.initials-icon-profile, #rune-icon-profile-orange *.roo-icon-profile, #rune-icon-profile-orange *.initials-icon-profile, #rune-icon-profile-yelloworange *.roo-icon-profile, #rune-icon-profile-yelloworange *.initials-icon-profile, #rune-icon-profile-yellow *.roo-icon-profile, #rune-icon-profile-yellow *.initials-icon-profile, #rune-icon-profile-yellowgreen *.roo-icon-profile, #rune-icon-profile-yellowgreen *.initials-icon-profile, #rune-icon-profile-green *.roo-icon-profile, #rune-icon-profile-green *.initials-icon-profile, #rune-icon-profile-bluegreen *.roo-icon-profile, #rune-icon-profile-bluegreen *.initials-icon-profile, #rune-icon-profile-blue *.roo-icon-profile, #rune-icon-profile-blue *.initials-icon-profile, #rune-icon-profile-bluepurple *.roo-icon-profile, #rune-icon-profile-bluepurple *.initials-icon-profile, #rune-icon-profile-purple *.roo-icon-profile, #rune-icon-profile-purple *.initials-icon-profile, #rune-icon-profile-redpurple *.roo-icon-profile, #rune-icon-profile-redpurple *.initials-icon-profile, #rune-icon-kanban-red *.roo-icon-kanban, #rune-icon-kanban-red *.initials-icon-kanban, #rune-icon-kanban-redorange *.roo-icon-kanban, #rune-icon-kanban-redorange *.initials-icon-kanban, #rune-icon-kanban-orange *.roo-icon-kanban, #rune-icon-kanban-orange *.initials-icon-kanban, #rune-icon-kanban-yelloworange *.roo-icon-kanban, #rune-icon-kanban-yelloworange *.initials-icon-kanban, #rune-icon-kanban-yellow *.roo-icon-kanban, #rune-icon-kanban-yellow *.initials-icon-kanban, #rune-icon-kanban-yellowgreen *.roo-icon-kanban, #rune-icon-kanban-yellowgreen *.initials-icon-kanban, #rune-icon-kanban-green *.roo-icon-kanban, #rune-icon-kanban-green *.initials-icon-kanban, #rune-icon-kanban-bluegreen *.roo-icon-kanban, #rune-icon-kanban-bluegreen *.initials-icon-kanban, #rune-icon-kanban-blue *.roo-icon-kanban, #rune-icon-kanban-blue *.initials-icon-kanban, #rune-icon-kanban-bluepurple *.roo-icon-kanban, #rune-icon-kanban-bluepurple *.initials-icon-kanban, #rune-icon-kanban-purple *.roo-icon-kanban, #rune-icon-kanban-purple *.initials-icon-kanban, #rune-icon-kanban-redpurple *.roo-icon-kanban, #rune-icon-kanban-redpurple *.initials-icon-kanban {
   -moz-user-select: -moz-none;
@@ -8284,6 +8286,8 @@ button.close {
 .kanban-board {
   display: relative;
   margin: 0 -15px;
+  overflow-y: scroll;
+  height: calc(100vh - 158px);
 }
 
 .kanban-board-header {
@@ -8525,6 +8529,11 @@ button.close {
   margin: 0 auto;
 }
 
+.task-list-container {
+  overflow-y: scroll;
+  height: calc(100vh - 158px);
+}
+
 .task-list {
   margin: 0px auto;
   table-layout: fixed;
@@ -8562,4 +8571,9 @@ button.close {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.user-list-container {
+  overflow-y: scroll;
+  height: calc(100vh - 158px);
 }
