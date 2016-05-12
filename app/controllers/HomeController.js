@@ -14,14 +14,15 @@ module.exports = function(app, passport) {
     app.get('/', function(req, res) {
         if (req.isAuthenticated()) {
             res.redirect('/profile');
-        }
-        res.render('home.jade', {
-            // These variables are required for the navbar
-            loggedIn : req.isAuthenticated(),
+        } else {
+            res.render('home.jade', {
+                // These variables are required for the navbar
+                loggedIn : req.isAuthenticated(),
 
-            // This message is displayed upon unsuccessful signups
-            signupMessage : req.flash('signupMessage')
-        });
+                // This message is displayed upon unsuccessful signups
+                signupMessage : req.flash('signupMessage')
+            });
+        }
     });
 
     app.post('/', passport.authenticate('local-signup', {
