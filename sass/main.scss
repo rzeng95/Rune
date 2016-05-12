@@ -19,9 +19,8 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
           #04AA51, #1991CD, #0857A3, #6C459B, #A54499, #E34197;
 
 // Used for calculating size of the container divs for each tab of the project page
-$header-height: 45px;
-$project-header-height: 113px;
-$project-page-offset: $header-height + $project-header-height;
+$project-header-offset: 113px;
+$project-body-offset: $navbar-height + $project-header-offset;
 
 // General Utility Classes
 *.unselectable {
@@ -56,6 +55,10 @@ $project-page-offset: $header-height + $project-header-height;
 .btn-is-disabled {
     pointer-events: none;
     @include opacity(0.7);
+}
+
+.header-offset {
+    margin-top: $navbar-height + 1px;
 }
 
 // Error styling
@@ -320,6 +323,10 @@ $project-page-offset: $header-height + $project-header-height;
     z-index: 900;
 }
 
+.project-header-offset {
+    margin-top: $project-header-offset;
+}
+
 .project-pages {
     li {
         float: right;
@@ -331,7 +338,7 @@ $project-page-offset: $header-height + $project-header-height;
     display: relative;
     margin: 0 -15px;
     overflow-y: scroll; 
-    height: calc(100vh - #{$project-page-offset});
+    height: calc(100vh - #{$project-body-offset});
 }
 
 .kanban-board-header {
@@ -485,7 +492,7 @@ $project-page-offset: $header-height + $project-header-height;
 // Task List Styling
 .task-list-container {
     overflow-y: scroll;
-    height: calc(100vh - #{$project-page-offset});
+    height: calc(100vh - #{$project-body-offset});
 }
 
 .task-list {
@@ -545,5 +552,5 @@ $project-page-offset: $header-height + $project-header-height;
 .user-list-container {
     @extend .container;
     overflow-y: scroll;
-    height: calc(100vh - #{$project-page-offset});
+    height: calc(100vh - #{$project-body-offset});
 }

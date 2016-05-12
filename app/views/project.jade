@@ -12,7 +12,7 @@ block bodyContent
                     li(id="project-tab-2" class="active" ) #[a(href="#kanban" data-toggle="tab") Kanban Board]
                     li(id="project-tab-1") #[a(href="#overview" data-toggle="tab") Overview]
 
-        div(style="margin-top: 113px;")
+        div(class="project-header-offset")
         div(class="tab-content")
             div(id="tasks" class="tab-pane fade")
                 include ./includes/project/tasks.jade
