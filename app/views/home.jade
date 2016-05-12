@@ -104,66 +104,10 @@ block bodyContent
                     p You have no projects! 
 
 block scripts
+    script(src="/javascripts/home.js")
     script.
         document.body.style.background = "url('/images/runite.png') no-repeat center center fixed";
         document.body.style.backgroundSize = "cover";
         document.body.style.webkitBackgroundSize = "cover";
         document.body.style.mozBackgroundSize = "cover";
         document.body.style.oBackgroundSize = "cover"
-
-    script.
-        var valid = "#66afe9";
-        var invalid = "#e60000";
-        var unselected = "#ccc";
-
-        var password = document.getElementById("pwd");
-        var confirmPassword = document.getElementById("confirmPwd");
-        var confirmValid = false;
-
-        function validatePwd() {
-            if (password.value != confirmPassword.value) {
-                confirmValid = false;
-                confirmPassword.setCustomValidity("Please enter passwords that match.");
-                confirmPassword.style.borderColor = invalid;
-            }
-            else {
-                confirmValid = true;
-                confirmPassword.setCustomValidity("");
-                confirmPassword.style.borderColor = valid;
-            }
-        }
-
-        function enableConfirmPwdBorderColor() {
-            if (confirmValid) {
-                confirmPassword.style.borderColor = valid;
-            }
-            else {
-                confirmPassword.style.borderColor = invalid;
-            }
-        }
-
-        function disableConfirmPwdBorderColor() {
-            confirmPassword.style.borderColor = unselected;
-
-        }
-
-        password.onchange = validatePwd;
-        confirmPassword.onkeyup = validatePwd;
-        confirmPassword.onfocus = enableConfirmPwdBorderColor;
-        confirmPassword.onblur = disableConfirmPwdBorderColor;
-
-    script.
-        var checks = document.getElementsByClassName("check-icon-small");
-        var colors = ["red", "redorange", "orange", "yelloworange", "yellow", "yellowgreen",
-                      "green", "bluegreen", "blue", "bluepurple", "purple", "redpurple"];
-        var colorInput = document.getElementById("hidden-color-input");
-        var selected = 0;
-
-        var selectIcon = function(selectColor) {
-            if(selected != selectColor) {
-                checks[selectColor].style.opacity = "1";
-                colorInput.value = colors[selectColor];
-                checks[selected].style.opacity = 0;
-                selected = selectColor;
-            }         
-        }
