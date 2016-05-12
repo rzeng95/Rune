@@ -189,29 +189,91 @@ module.exports = function(app, passport) {
 
 
     // Only the project creator can delete projects.
-    app.post('/p/:projectid/deleteproject', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
+    app.post('/p/:projectid/deleteproject/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
 
-        // Get project details so we can access the project's admin
-        Project.findById(req.params.projectid, function(err, foundProj){
-            if (err) {
-                throw err;
-            } else {
-                // Found the project, compare admin with current logged in user
-                if (foundProj.admin === req.user.local.email) {
-                    Project.remove({ projectid : req.params.projectid }, function(err){
+        async.waterfall([
+            // First, find the project (we know it already exists because of Helper.doesProjectExist)
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj){
+                    if (err) throw err;
+
+                    else callback(null, foundProj);
+                });
+            } ,
+            // Found the project; now compare admin with current logged in user
+            function canDelete(foundProj, callback) {
+                if (foundProj.admin === req.user.local.email) callback(null, foundProj.members);
+
+                else callback(-1);
+            } ,
+            function removeProjectFromEachMember(memberList, callback) {
+                console.log(memberList);
+                async.each(memberList, function(member, done) {
+
+                    User.findOne({'local.email' : member}, function(err, foundUser) {
                         if (err) {
                             throw err;
                         } else {
-                            console.log("project successfully deleted");
-                            res.redirect('/profile');
+                            console.log("doing stuff to " + member);
+                            var projectList = foundUser.local.projects;
+                            //var index = projectList.indexOf(req.params.projectid);
+                            console.log(projectList.length);
+                            for (var i = 0; i < projectList.length; i++) {
+                                if (projectList[i].projectid === req.params.projectid) {
+                                    console.log("found correct project, deleting now.");
+                                    projectList.splice(i, 1);
+                                    break;
+                                }
+                            }
+                            foundUser.save(function(err, res) {
+                                if (err) {
+                                    throw err;
+                                } else {
+                                    console.log("===");
+                                    done();
+                                }
+                            });
+
                         }
-                    });
-                } else {
-                    console.log('invalid permissions for deletion');
-                    res.redirect('/p/' + newProject.projectid + '/');
-                }
+                    })
+
+                } ,
+                function(err) {
+                    if (err) {
+                        console.log("something happened when trying to remove this project from all members");
+                        throw err;
+                    } else {
+                        console.log('removed this project from all members');
+                        callback(null);
+                    }
+
+                })
+            } ,
+            // Now that we've removed this project from all users' member lists, we can delete the actual project.
+            function deleteProject(callback) {
+                Project.remove({ projectid : req.params.projectid} , function(err) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                         callback(null);
+                    }
+                });
             }
-        });
+
+        ], function(err) {
+            if (err) {
+                if (err === -1 ) {
+                    console.log('invalid permissions for deletion');
+                    res.redirect('/p/' + req.params.projectid + '/');
+                } else {
+                    throw err;
+                }
+            } else {
+                console.log("project successfully deleted and members updated");
+                res.redirect('/profile');
+            }
+        })
+
 
     }); //end app.post
 
