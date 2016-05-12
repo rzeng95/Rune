@@ -9,10 +9,10 @@ block bodyContent
                 div(class="no-user-error")=message
                 div
                     //- label Email 
-                    input(class="form-control" type="text" name="email" placeholder="E-mail")
+                    input(class="form-control" type="text" name="email" placeholder="E-mail" required="required")
                 div
                     //- label Password 
-                    input(class="form-control" type="password" name="password" placeholder="Password")
+                    input(class="form-control" type="password" name="password" placeholder="Password" required="required")
                 button(class="btn btn-primary btn-block" type="submit") Login 
                 div(class="row ")
                     a(id="sign-up" class="col-xs-6" href='/signup') Sign up for Rune
