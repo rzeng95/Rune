@@ -71,3 +71,9 @@ block bodyContent
                                                 | Status: 
                                             td(class="col-md-8")
                                                 | #{task.status}
+            
+            form(action="deleteuser/" method="POST")
+                p need a "are you sure" form
+                p also, this button can't appear if it's not your own account 
+                p or, create separate page "edit profile" that controls editing description & deleting profile
+                button(type="submit") Delete Profile

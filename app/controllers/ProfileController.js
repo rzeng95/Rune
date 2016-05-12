@@ -153,4 +153,89 @@ module.exports = function(app, passport) {
         });
     }); //End of app.get('/users')
 
+    app.post('/u/:userid/deleteuser', Helper.isLoggedIn, Helper.doesUserExist, function(req, res) {
+        async.waterfall([
+            function getUser(callback) {
+                User.findOne({'local.userid': req.params.userid}, function(err, foundUser) {
+                    if (err) callback(err);
+                    else callback(null, foundUser);
+                });
+            } ,
+            function checkPermissions(foundUser, callback) {
+                var accessorID = (req.params.userid).toString();
+                var loggedInID = (req.user.local.userid).toString();
+                if (accessorID === loggedInID) {
+                    console.log("Confirmed that logged in user is attempting to delete their own account");
+                    callback(null, foundUser.local.projects);
+                } else {
+                    callback(-1);
+                }
+            } ,
+            function removeUserFromProjects(projectList, callback) {
+                //console.log(projectList);
+                async.each(projectList, function(proj, done) {
+                        console.log("doing stuff to individual project")
+
+                        var projID = proj['projectid'];
+                        // look for the project with that ID, and remove req.user.local.email from that project's "members" array
+
+                        Project.findById(projID, function(err, foundProj) {
+                            if (err) callback(-2);
+                            else {
+                                var memberList = foundProj.members;
+                                for (var i = 0; i < memberList.length; i++) {
+                                    if (memberList[i] === req.user.local.email) {
+                                        console.log('found user inside project members list, removing now');
+                                        memberList.splice(i, 1);
+                                    }
+                                }
+                                foundProj.save(function(err) {
+                                    if (err) callback(err);
+                                    done();
+                                })
+                            }
+                        });
+
+
+
+                } ,
+                function(err) {
+
+                    console.log('done operating on all projects in the user project list');
+                    callback(null);
+                })
+
+            } ,
+            function deleteUser(callback) {
+
+                User.remove({ 'local.userid' : req.params.userid} , function(err) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                         callback(null);
+                    }
+                });
+
+                callback(null);
+            }
+
+        ], function(err) {
+            if (err) {
+                if (err === -1) {
+                    console.log("Can't delete someone that's not yourself. Redirecting");
+                    res.redirect('/u/' + req.params.userid + '/');
+                } else if (err === -2){
+                    console.log("Shouldn't come to this. Means we tried to access a project that didn't exist");
+                    throw err;
+                } else {
+                    throw err;
+                }
+            } else {
+            console.log('Waterfall done. User is deleted, redirecting to logout');
+            res.redirect('/logout');
+            }
+        })
+
+    });
+
 }; // End of module exports
