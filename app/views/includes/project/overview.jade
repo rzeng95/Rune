@@ -4,13 +4,15 @@ div(class="container")
 		tbody
 			tr
 				th Project Name: 
-				td #{projName}
+				td(id="project-name") #{projName}
 			tr
 				th Project Key: 
 				td #{projKey}
 			tr
 				th Project ID: 
 				td #{projId}
+			tr
+				th Project Administrator: 
+				td #{projAdmin}
 	form(action="deleteproject/" method="POST")
-		label ToDo: add front-end confirmation message. Only the board creator can delete projects. 
-		button(type="submit") Delete Project 
+		button(id="btn-proj-del" class="btn btn-primary btn-md" type="submit") Delete Project 

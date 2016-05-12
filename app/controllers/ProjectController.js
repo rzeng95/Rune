@@ -170,6 +170,7 @@ module.exports = function(app, passport) {
                     projName : foundProj.projectname,
                     projKey : foundProj.projectkey,
                     projId : foundProj.projectid,
+                    projAdmin : foundProj.admin,
 
                     // User tab variables
                     projMembers : memberList,

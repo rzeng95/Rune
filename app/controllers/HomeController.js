@@ -12,17 +12,12 @@ module.exports = function(app, passport) {
     // HOME PAGE - This endpoint handles both the logged-out and logged-in homepage.
     // =====================================
     app.get('/', function(req, res) {
-        var firstname = '';
-        var projectList = [];
         if (req.isAuthenticated()) {
-            firstname = req.user.local.firstname;
-            projectList = req.user.local.projects;
+            res.redirect('/profile');
         }
         res.render('home.jade', {
             // These variables are required for the navbar
-            firstname : firstname,
             loggedIn : req.isAuthenticated(),
-            projList : projectList,
 
             // This message is displayed upon unsuccessful signups
             signupMessage : req.flash('signupMessage')
