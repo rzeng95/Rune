@@ -4,10 +4,10 @@ div(class="container-fluid task-body")
             h2(class="form-signin-heading") Edit Task
             div(class="form-group")
                 label(for="taskname") Task Name
-                input(class="form-control" type="text" name="taskname" placeholder="Task Name" value=taskname)
+                input(class="form-control" type="text" name="taskname" placeholder="Task Name" value=taskname required="required")
             div(class="form-group")
                 label(for="taskdescription") Task Description
-                textarea(class="form-control" rows="4" name="taskdescription" placeholder="Description") #{taskdescription}
+                textarea(class="form-control" rows="4" name="taskdescription" placeholder="Description" required="required") #{taskdescription}
             div(class="form-group")
                 label(for="assignedto") Assign to
                 select(class="form-control" name="assignedto")

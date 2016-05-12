@@ -10,7 +10,7 @@ block bodyContent
                     br
                     div(class="col-xs-12 boxes")
                         label Project Name  
-                        input(id="chatinput" class="form-control" type="text" style="margin:2px" name="projectname")
+                        input(id="chatinput" class="form-control" type="text" style="margin:2px" name="projectname" required="required")
                         p Max. 80 Characters.
                         //input(type="text" name="projectname" class="chatinput" id="chatinput")
                     div(class="col-xs-12 boxes")
@@ -20,7 +20,6 @@ block bodyContent
                         br
                     div(class="button-center")
                         button(class="btn btn-primary" type="submit") Submit 
-                    
                     
                 script.
                     var inputBox = document.getElementById('chatinput');
