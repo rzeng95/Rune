@@ -34,7 +34,7 @@ var passport = require('passport');
 var session = require('express-session');
 var flash = require('connect-flash');
 require('./config/passport')(passport);
-app.use(session({ secret: 'really super secret key', resave: false, saveUninitialized: false }));
+app.use(session({ secret: 'really super secret key', cookie: { maxAge: 14400000 }, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -53,4 +53,4 @@ app.listen(port, function() {
     console.log('App is running on port ' + port);
 });
 
-exports = module.exports = app; 
+exports = module.exports = app;
