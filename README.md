@@ -1,7 +1,12 @@
 # RUNE 
 ### An intuitive and student-focused Kanban project management tool   
 
+
+
+[![Build Status](https://travis-ci.org/rzeng95/Rune.svg?branch=master)](https://travis-ci.org/rzeng95/Rune.svg?branch=master)  
+
 ##### Live Site : https://rune130.herokuapp.com
+
 
 How to get this running:
 
