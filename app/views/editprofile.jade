@@ -13,17 +13,15 @@ block bodyContent
                 div
                     h2=fullname
                     h4=email
-                    if isMe
-                        a(type="button" class="btn btn-primary" href="edit/") Edit Profile
-                    else 
-                        ul(class="nav nav-stacked")
-                            li
-                                div(class="btn-group")
-                                    button(class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#") Add to Project 
-                                        span(class="glyphicon glyphicon-menu-right")
-                                    ul(class="dropdown-menu" style="top: 0;left: 100%;")
-                                        each proj in projList
-                                            li #[a(href="adduser/"+proj['projectid']) #{ proj['projectkey'] }]
+                    
+                    ul(class="nav nav-stacked")
+                        li
+                            div(class="btn-group")
+                                //form(action="" method="POST")
+                                //    button(type="submit" class="btn btn-primary") Save Profile
+                                form(action="delete/" method="POST")
+                                    button(type="submit" class="btn btn-primary") Delete Profile                                
+                                    
                 div(style="padding-top:48px")                              
                     div(class="panel panel-primary" style="max-width:400px")
                         div(class="panel-heading" style="text-color=white")
@@ -42,7 +40,8 @@ block bodyContent
                                         td(class="text-center")
                                             You have no projects! 
 
-            div(class="col-sm-4" style="padding-top:24px")
-                p=description
-                p=github
-                
+            form(action="" method="POST")
+                button(type="submit" class="btn btn-primary") Save Profile
+                div(class="col-sm-4" style="padding-top:24px")
+                    input(class="form-control" type="text" name="description" value=description)         
+                    input(class="form-control" type="text" name="github" value=github)        

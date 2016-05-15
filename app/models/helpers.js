@@ -28,6 +28,17 @@ module.exports = {
         });
     } ,
 
+    // Only the logged in user can edit their own profile
+    canUserEditProfile : function(req,res,next) {
+        if (req.params.userid === req.user.local.userid) {
+            return next();
+        } else {
+            req.flash('errorMessage', 'Can only edit own account');
+            res.redirect('/error');
+        }
+
+    } ,
+
     //Find the current user and make sure they're part of the project being accessed
     isUserProjectMember : function(req,res,next) {
 

@@ -47,7 +47,9 @@ module.exports = function(app, passport) {
                         isMe : isMe,
                         userColor : usr.local.userColor,
                         userProjects : usr.local.projects,
-                        myProjects : projects
+                        myProjects : projects,
+                        description : usr.local.description,
+                        github : req.user.local.github
                     });
                 }); //end project.find
 
@@ -131,6 +133,61 @@ module.exports = function(app, passport) {
                 res.redirect('/p/' + req.params.projectid + '/');
             }
         });
+    });
+
+
+    app.get('/u/:userid/edit', Helper.isLoggedIn, Helper.doesUserExist, Helper.canUserEditProfile, function(req,res) {
+
+        User.findOne({'local.userid': req.params.userid}, function(err, usr){
+            if (err) {
+                throw err;
+            } else {
+                Project.find({'members': usr.local.email}, function(err, projects)
+                {
+
+                    res.render('editprofile.jade', {
+                        // These are navbar variables
+                        loggedIn : req.isAuthenticated(),
+                        projList : req.user.local.projects,
+                        firstname : req.user.local.firstname,
+
+                        // These are profile variables
+                        fullname : usr.local.firstname + ' ' + usr.local.lastname,
+                        initials : usr.local.firstname.charAt(0) + usr.local.lastname.charAt(0),
+                        email : usr.local.email,
+                        isMe : 1,
+                        userColor : usr.local.userColor,
+                        userProjects : usr.local.projects,
+                        myProjects : projects,
+                        description : req.user.local.description,
+                        github : req.user.local.github
+
+                    });
+                }); //end project.find
+
+            } //end else
+        }); // end User.findOne
+    });
+
+    app.post('/u/:userid/edit', Helper.isLoggedIn, Helper.doesUserExist, Helper.canUserEditProfile, function(req,res) {
+        User.findOne({'local.userid': req.params.userid}, function(err, usr){
+            if (err) {
+                throw err;
+            } else {
+                console.log(req.body.description);
+                console.log(req.body.github);
+                usr.local.description = req.body.description;
+                usr.local.github = req.body.github;
+
+                usr.save(function(err) {
+                    if (err) throw err;
+                    console.log('info saved and user updated');
+                    res.redirect('/u/' + req.params.userid + '/');
+
+                });
+            }
+        });
+
     });
 
     //generates a page with all users, and a link to their profiles
