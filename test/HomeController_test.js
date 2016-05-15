@@ -6,7 +6,7 @@ var agent = request.agent(app);
 
 describe('Homepage', function() {
 
-    it('should return a 200 reponse', function(done) {
+    it('accessing homepage should return a 200 reponse', function(done) {
         agent
         .get('/')
         .expect(200)
