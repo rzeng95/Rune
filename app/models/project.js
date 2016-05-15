@@ -12,8 +12,10 @@ var projectSchema = mongoose.Schema({
     counter        : Number,    // Stores the task number
     history        : [
         {
+            date : String,
             link : String,
-            content : String
+            action : String,
+            description: String
         }
     ],
     tasks          :  [

@@ -56,8 +56,10 @@ module.exports = function(app, passport) {
                 });
 
                 foundProj.history.push({
-                    link : taskID ,
-                    content : req.user.local.firstname + ' ' + req.user.local.lastname + ' created new task'
+                    date : new Date().toDateString(),
+                    link : taskID,
+                    action : req.user.local.firstname + ' ' + req.user.local.lastname + ' created new task',
+                    description : 'and assigned to ' + req.body.assignedto
                 });
 
                 foundProj.save(function(err) {
