@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 5000;
+var env = process.env.NODE_ENV || 'production';
 var path = require('path');
 app.set('views', path.join(__dirname, './app/views'));
 app.use(express.static(__dirname + "/public"));
@@ -27,7 +28,9 @@ app.use(function(req, res, next) {
 
 // Morgan Logging Setup
 var morgan = require('morgan');
-app.use(morgan('dev'));
+if (env !== 'test') {
+    app.use(morgan('dev'));
+}
 
 // Authentication Setup
 var passport = require('passport');
@@ -42,7 +45,13 @@ app.use(flash());
 // Database Setup
 var mongoose = require('mongoose');
 var configDB = require('./config/db.js');
-mongoose.connect(configDB.url);
+if (env !== 'test') {
+    mongoose.connect(configDB['production']);
+}
+else {
+    mongoose.connect(configDB['test']);
+}
+
 
 app.locals.statuses = ["Backlog", "Selected for Development", "In Progress", "Completed"];
 
@@ -50,7 +59,8 @@ app.locals.statuses = ["Backlog", "Selected for Development", "In Progress", "Co
 require('./app/routes.js')(app, passport);
 
 app.listen(port, function() {
-    console.log('App is running on port ' + port);
+    console.log('App is running on environment: ' + env);
+    console.log('App is running on port: ' + port);
 });
 
 exports = module.exports = app;
