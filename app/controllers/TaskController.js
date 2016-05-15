@@ -238,6 +238,16 @@ module.exports = function(app, passport) {
             },
             function editTask(foundProj, taskList, index, callback) {
                 console.log(req.body);
+
+                if (taskList[index].status != req.body.status) {
+                    foundProj.history.push({
+                        date : new Date().toDateString(),
+                        link : taskList[index].taskid,
+                        action : req.user.local.firstname + ' ' + req.user.local.lastname + ' moved',
+                        description : 'from [ ' + taskList[index].status + ' ] to [ ' + req.body.status + ' ]'
+                    });
+                }
+
                 taskList[index].taskname = req.body.taskname;
                 taskList[index].taskdescription = req.body.taskdescription;
                 taskList[index].status = req.body.status;
@@ -297,7 +307,11 @@ module.exports = function(app, passport) {
             function archiveTask(foundProj, taskList, index, callback) {
                 console.log(taskList[index]);
                 taskList[index].status = "Archived";
-
+                foundProj.history.push({
+                    date : new Date().toDateString(),
+                    link : taskList[index].taskid,
+                    action : req.user.local.firstname + ' ' + req.user.local.lastname + ' archived'
+                });
                 // save this updated project
                 foundProj.save(function(err2,done) {
                     if (err2) {
@@ -348,8 +362,15 @@ module.exports = function(app, passport) {
                 callback(1);
             },
             function deleteTask(foundProj, taskList, index, callback) {
+                foundProj.history.push({
+                    date : new Date().toDateString(),
+                    action : req.user.local.firstname + ' ' + req.user.local.lastname + ' deleted ' + taskList[index].taskid + ': ' +  taskList[index].taskdescription,
+                });
+
+
                 taskList.splice(index,1);
                 // save this updated project
+
                 foundProj.save(function(err2,done) {
                     if (err2) {
                         throw err2;
@@ -397,6 +418,16 @@ module.exports = function(app, passport) {
             },
             function moveTask(foundProj, taskList, index, callback) {
                 // Update the task's status and save it the project state.
+
+                if (taskList[index].status != req.body.status) {
+                    foundProj.history.push({
+                        date : new Date().toDateString(),
+                        link : taskList[index].taskid,
+                        action : req.user.local.firstname + ' ' + req.user.local.lastname + ' moved',
+                        description : 'from [ ' + taskList[index].status + ' ] to [ ' + req.body.status + ' ]'
+                    });
+                }
+
                 taskList[index].status = req.body.status;
                 foundProj.save(function(err2, done) {
                     if (err2) {
