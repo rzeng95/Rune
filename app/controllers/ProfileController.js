@@ -34,6 +34,18 @@ module.exports = function(app, passport) {
                     var loggedInID = (req.user.local.userid).toString(); // Pulled from the logged in user's info
                     var isMe = (accessorID === loggedInID);
 
+                    var description;
+                    if (!usr.local.description) {
+                        description = 'I don\'t have a description!';
+                    } else {
+                        description = usr.local.description;
+                    }
+                    var github;
+                    if (!usr.local.github) {
+                        github = 'I haven\'t posted my github!';
+                    } else {
+                        github = usr.local.github;
+                    }
                     res.render('profile.jade', {
                         // These are navbar variables
                         loggedIn : req.isAuthenticated(),
@@ -48,8 +60,8 @@ module.exports = function(app, passport) {
                         userColor : usr.local.userColor,
                         userProjects : usr.local.projects,
                         myProjects : projects,
-                        description : usr.local.description,
-                        github : usr.local.github
+                        description : description,
+                        github : github
                     });
                 }); //end project.find
 
