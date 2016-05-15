@@ -49,7 +49,7 @@ module.exports = function(app, passport) {
                         userProjects : usr.local.projects,
                         myProjects : projects,
                         description : usr.local.description,
-                        github : req.user.local.github
+                        github : usr.local.github
                     });
                 }); //end project.find
 
