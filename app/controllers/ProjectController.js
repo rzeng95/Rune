@@ -104,32 +104,40 @@ module.exports = function(app, passport) {
         var statuses = app.locals.statuses;
         async.waterfall([
             function createTasks(callback) {
-                var tasks = [];
+                var normalTasks = [];
+                var archivedTasks = [];
                 for(var j=0; j<statuses.length; j++) {
-                    tasks[statuses[j]] =[];
+                    normalTasks[statuses[j]] =[];
                 }
-                callback(null, tasks)
+                callback(null, normalTasks, archivedTasks)
             },
             // find the Project specified by the accessed URL. We need this for the project's member list
-            function getProjectByID(tasks, callback) {
+            function getProjectByID(normalTasks, archivedTasks, callback) {
                 Project.findById(req.params.projectid, function(err, foundProj){
                     if (err) {
                         callback(err);
                     } else {
+                        console.log(foundProj.tasks)
                         for (var i=0; i<foundProj.tasks.length; i++) {
-                            for (var k=0; k<statuses.length; k++) {
-                                if (foundProj.tasks[i].status == statuses[k]) {
-                                    tasks[statuses[k]].push(foundProj.tasks[i]);
-                                    break;
+                            if (foundProj.tasks[i].status == "Archived") {
+                                archivedTasks.push(foundProj.tasks[i]);
+                            }
+                            else {
+                                for (var k=0; k<statuses.length; k++) {
+                                    if (foundProj.tasks[i].status == statuses[k]) {
+                                        normalTasks[statuses[k]].push(foundProj.tasks[i]);
+                                        break;
+                                    }
                                 }
                             }
 
+
                         }
-                        callback(null, foundProj, tasks); // Pass the project members list to the next function
+                        callback(null, foundProj, normalTasks, archivedTasks); // Pass the project members list to the next function
                     }
                 });
             },
-            function getProjectUserInfo(foundProj, tasks, callback) {
+            function getProjectUserInfo(foundProj, normalTasks, archivedTasks, callback) {
                 User.find({
                     'local.email' : {
                         $in : foundProj.members
@@ -147,14 +155,15 @@ module.exports = function(app, passport) {
                                             "color":foundUsers[i].local.userColor
                                         });
                         }
-                        callback(null, foundProj, tasks, memberList);
+                        callback(null, foundProj, normalTasks, archivedTasks, memberList);
                     }
                 });
             }
-        ], function(err, foundProj, tasks, memberList){
+        ], function(err, foundProj, normalTasks, archivedTasks, memberList){
             if (err) {
                 throw err;
             } else {
+                console.log(normalTasks);
                 //console.log("done waterfalling");
                 //console.log(tasks);
                 res.render('project.jade', {
@@ -182,7 +191,8 @@ module.exports = function(app, passport) {
                     statuses: statuses,
 
                     // Kanban tab variables
-                    tasks : tasks
+                    tasks : normalTasks,
+                    archivedtasks : archivedTasks
                 });
             }
         });
