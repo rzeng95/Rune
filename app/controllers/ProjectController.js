@@ -192,7 +192,10 @@ module.exports = function(app, passport) {
 
                     // Kanban tab variables
                     tasks : normalTasks,
-                    archivedtasks : archivedTasks
+                    archivedtasks : archivedTasks,
+
+                    // History variables
+                    history : foundProj.history 
                 });
             }
         });

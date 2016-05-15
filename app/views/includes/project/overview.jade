@@ -16,3 +16,7 @@ div(class="container")
 				td #{projAdmin}
 	form(action="deleteproject/" method="POST")
 		button(id="btn-proj-del" class="btn btn-primary btn-md" type="submit") Delete Project 
+		
+	h2 Project History
+	each hist in history
+		h4 #{hist['content']} : #[a(href='t/' + hist['link'] +'/') #{hist['link']}]

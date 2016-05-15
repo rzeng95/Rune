@@ -41,10 +41,11 @@ module.exports = function(app, passport) {
                 throw err;
             } else {
                 foundProj.counter++;
+                var taskID = foundProj.projectkey + '-' + Helper.zeroPad(foundProj.counter, 3);
                 foundProj.tasks.push({
                     projectid       :   req.params.projectid,
                     taskname        :   req.body.taskname,
-                    taskid          :   foundProj.projectkey + '-' + Helper.zeroPad(foundProj.counter, 3),
+                    taskid          :   taskID,
                     taskdescription :   req.body.taskdescription,
                     createdby       :   req.user.local.firstname + ' ' + req.user.local.lastname,
                     assignedto      :   req.body.assignedto,
@@ -53,6 +54,12 @@ module.exports = function(app, passport) {
                     priority        :   req.body.priority,
                     issuetype       :   req.body.issuetype
                 });
+
+                foundProj.history.push({
+                    link : taskID ,
+                    content : req.user.local.firstname + ' ' + req.user.local.lastname + ' created new task'
+                });
+
                 foundProj.save(function(err) {
                     res.redirect('/p/' + req.params.projectid + '/');
                 });
