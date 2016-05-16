@@ -3,7 +3,9 @@
 
 
 
-[![Build Status](https://travis-ci.org/rzeng95/Rune.svg?branch=master)](https://travis-ci.org/rzeng95/Rune.svg?branch=master)  
+[![Build Status](https://travis-ci.org/rzeng95/Rune.svg?branch=master)](https://travis-ci.org/rzeng95/Rune.svg?branch=master) 
+[![Code Climate](https://codeclimate.com/github/rzeng95/Rune/badges/gpa.svg)](https://codeclimate.com/github/rzeng95/Rune)
+[![Dependencies](https://david-dm.org/rzeng95/rune.svg)](https://david-dm.org/rzeng95/rune.svg)
 
 ##### Live Site : https://rune130.herokuapp.com
 
