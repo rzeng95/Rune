@@ -554,3 +554,10 @@ $project-body-offset: $navbar-height + $project-header-offset;
     overflow-y: scroll;
     height: calc(100vh - #{$project-body-offset});
 }
+
+// Overview styling specifications.
+.overview-container {
+    @extend .container;
+    overflow-y: scroll;
+    height: calc(100vh - #{$project-body-offset});
+}
