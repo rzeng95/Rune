@@ -1,6 +1,9 @@
 var LocalStrategy = require('passport-local').Strategy;
+var GithubStrategy = require('passport-github').Strategy;
 
 var User = require('../app/models/user');
+
+var configAuth = require('./auth');
 
 module.exports = function(passport) {
 
@@ -36,7 +39,7 @@ module.exports = function(passport) {
     }, function(req, email, password, done) { // callback with email and password from our form
 
         var emailProcessed = email.replace(/\s/g,'');
-        
+
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         User.findOne({
@@ -114,4 +117,25 @@ module.exports = function(passport) {
             });
         });
     }));
+
+    passport.use(new GithubStrategy({
+
+        clientID     : configAuth.githubAuth.clientID,
+        clientSecret : configAuth.githubAuth.clientSecret,
+        callbackURL  : configAuth.githubAuth.callbackURL
+
+    }, function(accessToken, refreshToken, profile, cb) {
+        process.nextTick(function() {
+            User.findOne({'local.github' : profile.id}, function(err, user) {
+                return cb(err, user);
+            });
+
+        });
+
+    }
+    ));
+
+
+
+
 };
