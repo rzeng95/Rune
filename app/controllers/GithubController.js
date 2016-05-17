@@ -47,7 +47,7 @@ module.exports = function(app, passport) {
             } else {
                 var commitList = JSON.parse(body);
                 res.render('github.jade', {
-                    url : 'https:/github.com/'+ req.body.repo_owner + '/' + req.body.repo_name + '/commit/' ,
+                    url : 'https://github.com/'+ req.body.repo_owner + '/' + req.body.repo_name + '/commit/' ,
                     results : commitList
                 })
             }
@@ -55,4 +55,9 @@ module.exports = function(app, passport) {
         });
 
     });
+
+    app.get('/github.com/*', function(req,res) {
+        console.log('being matched');
+        res.send('/github.com/*')
+    })
 };
