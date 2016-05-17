@@ -1,8 +1,5 @@
 var mongoose = require('mongoose');
 
-//var taskModel = require('./task.js');
-//var taskSchema = taskModel.schema;
-
 var projectSchema = mongoose.Schema({
     projectid      : String,
     projectname    : String,
@@ -38,7 +35,7 @@ var projectSchema = mongoose.Schema({
                     comment : String,
                     github : String
                 }
-            ] 
+            ]
 
         }
     ],

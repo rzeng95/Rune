@@ -7,8 +7,9 @@
 
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
-//var Task = require('../models/task.js');
+
 var Helper = require('../models/helpers.js');
+
 var async = require('async');
 
 module.exports = function(app, passport) {
@@ -200,7 +201,7 @@ module.exports = function(app, passport) {
                     archivedtasks : archivedTasks,
 
                     // History variables
-                    history : foundProj.history 
+                    history : foundProj.history
                 });
             }
         });

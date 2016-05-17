@@ -4,8 +4,9 @@
 
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
-//var Task = require('../models/task.js');
+
 var Helper = require('../models/helpers.js');
+
 var async = require('async');
 var request = require('request');
 
@@ -578,7 +579,7 @@ module.exports = function(app, passport) {
                     }
                 });
 
-                
+
             }
         ], function(err, foundProj, taskList, index) {
             if (err) {

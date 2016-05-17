@@ -21,7 +21,6 @@ var userSchema = mongoose.Schema({
 
         ]
     }
-    // Maybe add github integration here
 });
 
 // This generates hash for newly created passwords
