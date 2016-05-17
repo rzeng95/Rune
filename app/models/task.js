@@ -17,7 +17,8 @@ var taskSchema = mongoose.Schema({
     comments        : [
         {
             date    : String,
-            author  : String,
+            authorname : String,
+            authorid : String,
             comment : String
         }
     ]           

@@ -19,11 +19,21 @@ div(class="task-body")
                 tbody
                     each comnt in comments
                         tr
-                            td #{comnt.author}
-                            td #{comnt.comment}
+                            div(class="panel panel-default" )
+                                div(class="panel-heading" style="text-align: right") #[a(href='/u/'+comnt.authorid+'/') #{comnt.authorname}] added a comment on #{comnt.date}
+                                div(class="panel-body") #{comnt.comment}
+                                if comnt.github
+                                    div(class="panel-footer") #[a(href='https:/github.com/'+ github_owner + '/' + github_repo + '/commit/'+comnt.github) GitHub - #{ comnt.github } ]
+                                    
 
-            form(class="form-group" action="comment/" method="POST") 
-                <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+            form(class="form-group" action="comment/" method="POST")
+                label Add Comment 
+                textarea(class="form-control" name="comment" id="comment" rows="3")
+                label Optional - Add Github Commit 
+                select(class="form-control" name="githubcommit")
+                    option(value="") N/A
+                    each commit in commits
+                        option(value="#{commit['sha']}") #{commit['commit']['author']['name']} - #{commit['commit']['message']} 
                 button(class="btn btn-primary" type="submit") Submit
 
         div(class="col-xs-4")

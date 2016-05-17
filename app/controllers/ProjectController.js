@@ -67,6 +67,8 @@ module.exports = function(app, passport) {
         newProject.admin = req.user.local.email;
         newProject.members.push(userEmail);
         newProject.counter = 0;
+        newProject.github_repo = req.body.githubrepo;
+        newProject.github_owner = req.body.githubowner;
         newProject.save(function(err) {
             if (err) {
                 throw err;
@@ -180,6 +182,9 @@ module.exports = function(app, passport) {
                     projKey : foundProj.projectkey,
                     projId : foundProj.projectid,
                     projAdmin : foundProj.admin,
+
+                    github_repo : foundProj.github_repo,
+                    github_owner : foundProj.github_owner,
 
                     // User tab variables
                     projMembers : memberList,

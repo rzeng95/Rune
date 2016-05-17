@@ -7,6 +7,8 @@ var Project = require('../models/project.js');
 //var Task = require('../models/task.js');
 var Helper = require('../models/helpers.js');
 var async = require('async');
+var request = require('request');
+
 
 module.exports = function(app, passport) {
 
@@ -99,9 +101,29 @@ module.exports = function(app, passport) {
                         callback(null, foundProj, foundTask, usersList);
                     }
                 });
+            },
+            function getGitHubCommits(foundProj, foundTask, usersList, callback) {
+                var commitList;
+                var options = {
+                    url : 'https://api.github.com/repos/' + foundProj.github_owner + '/' + foundProj.github_repo + '/commits?client_id=fb79527a871e5ba8f0f7&client_secret=a82aa7f700c3f1022aefa81abdf77cf590593098',
+                    headers : {
+                        'User-Agent': 'request'
+                    }
+                }
+                request(options, function(err,response,body){
+                    if (response.statusCode != 200) {
+                        console.log('something weird happened.');
+                        callback(null, foundProj, foundTask, usersList, null);
+
+                    } else {
+                        commitList = JSON.parse(body);
+                        callback(null, foundProj, foundTask, usersList, commitList);
+                    }
+
+                });
             }
         ],
-        function(err, foundProj, foundTask, usersList) {
+        function(err, foundProj, foundTask, usersList, commitList) {
             if (err) {
                 res.send('error');
             } else {
@@ -110,7 +132,7 @@ module.exports = function(app, passport) {
                         throw err2;
                     } else {
                         var taskRender = (!req.xhr) ? 'task.jade' : 'includes/task/task.jade';
-                        console.log(foundTask.comments);
+                        console.log(commitList);
                         res.render(taskRender, {
                             // These are navbar variables
                             loggedIn : req.isAuthenticated(),
@@ -123,6 +145,10 @@ module.exports = function(app, passport) {
                             projList : req.user.local.projects,
                             firstname : req.user.local.firstname,
                             isProjectPage : false,
+
+                            github_repo : foundProj.github_repo,
+                            github_owner : foundProj.github_owner,
+                            commits : commitList,
 
                             // Task information.
                             taskid : req.params.taskid,
@@ -535,8 +561,10 @@ module.exports = function(app, passport) {
 
                 taskList[index].comments.push({
                     date : new Date().toDateString(),
-                    author : req.user.local.email,
-                    comment : req.body.comment
+                    authorid : req.user.local.userid,
+                    authorname : req.user.local.firstname + ' ' + req.user.local.lastname,
+                    comment : req.body.comment,
+                    github : req.body.githubcommit
                 });
 
                 // save this updated project

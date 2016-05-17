@@ -33,13 +33,17 @@ var projectSchema = mongoose.Schema({
             comments        : [
                 {
                     date    : String,
-                    author  : String,
-                    comment : String
+                    authorname : String,
+                    authorid : String,
+                    comment : String,
+                    github : String
                 }
-    ] 
+            ] 
 
         }
-    ]
+    ],
+    github_owner    : String,
+    github_repo     : String
 });
 
 module.exports = mongoose.model('Project', projectSchema);
