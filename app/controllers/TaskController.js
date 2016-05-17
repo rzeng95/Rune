@@ -336,6 +336,63 @@ module.exports = function(app, passport) {
     }); // end delete task
 
 
+    // A Task unarchive AJAX POST request.
+    app.post('/p/:projectid/t/:taskid/unarchive/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
+        async.waterfall([
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            },
+            function searchForTask(foundProj, callback) {
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid == req.params.taskid) {
+                        var foundTask = taskList[i];
+                        console.log('found task');
+                        return callback(null, foundProj, taskList, i);
+                    }
+                }
+                console.log('1. couldn\'t find task');
+                callback(1);
+            },
+            function unarchiveTask(foundProj, taskList, index, callback) {
+                console.log(taskList[index]);
+                taskList[index].status = "Completed";
+                foundProj.history.push({
+                    date : new Date().toDateString(),
+                    link : taskList[index].taskid,
+                    action : req.user.local.firstname + ' ' + req.user.local.lastname + ' unarchived'
+                });
+                // save this updated project
+                foundProj.save(function(err2,done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+                        console.log('task unarchived');
+                        //res.redirect('/p/' + req.params.projectid + '/');
+                        callback(null, 'done');
+                    }
+                });
+            }
+        ], function(err, foundProj, taskList, index) {
+            if (err) {
+                if (err == 1) {
+                    console.log('2. couldn\'t find task');
+                }
+                res.send('error');
+            } else {
+                res.redirect('/p/' + req.params.projectid + '/');
+            }
+        }); // end async waterfall
+    }); // end delete task
+
+
     // A Task delete AJAX POST request.
     app.post('/p/:projectid/t/:taskid/delete/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
         async.waterfall([
