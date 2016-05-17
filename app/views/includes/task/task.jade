@@ -29,11 +29,12 @@ div(class="task-body")
             form(class="form-group" action="comment/" method="POST")
                 label Add Comment 
                 textarea(class="form-control" name="comment" id="comment" rows="3")
-                label Optional - Add Github Commit 
-                select(class="form-control" name="githubcommit")
-                    option(value="") N/A
-                    each commit in commits
-                        option(value="#{commit['sha']}") #{commit['commit']['author']['name']} - #{commit['commit']['message']} 
+                if commits
+                    label Optional - Add Github Commit 
+                    select(class="form-control" name="githubcommit")
+                        option(value="") N/A
+                        each commit in commits
+                            option(value="#{commit['sha']}") #{commit['commit']['author']['name']} - #{commit['commit']['message']} 
                 button(class="btn btn-primary" type="submit") Submit
 
         div(class="col-xs-4")
