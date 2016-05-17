@@ -48,12 +48,18 @@ div(class="task-body")
                         tr
                             td
                                 a(class="btn btn-primary" role="button" data-toggle="modal" href="#task-modal" onclick="Task.taskEditLoad()") Edit Task
+                            td
+                                form(action="delete/" method="post")
+                                    button(class="btn btn-primary" type="submit") Delete Task
+                        tr
                             if completed
                                 td
                                     form(action="archive/" method="post")
                                         button(class="btn btn-primary" type="submit" onclick="if (!confirm('Are you sure?')) return false;") Archive
+                            else if archived
+                                td
+                                    form(action="unarchive/" method="post")
+                                        button(class="btn btn-primary" type="submit" onclick="if (!confirm('Are you sure?')) return false;") Unarchive
                             else
                                 td
                             td
-                                form(action="delete/" method="post")
-                                    button(class="btn btn-primary" type="submit") Delete Task
