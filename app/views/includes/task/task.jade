@@ -17,18 +17,15 @@ div(class="task-body")
             h4 Comments
             table(class="table")
                 tbody
-                    tr
-                        td User 1
-                        td Filler comment 1.
-                    tr
-                        td User 2
-                        td Filler comment 2.
-                    tr
-                        td User 3
-                        td Filler comment 3.
-                    tr
-                        td
-                        td
+                    each comnt in comments
+                        tr
+                            td #{comnt.author}
+                            td #{comnt.comment}
+
+            form(class="form-group" action="comment/" method="POST") 
+                <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+                button(class="btn btn-primary" type="submit") Submit
+
         div(class="col-xs-4")
             h4 Details
             div(class="task-tags")

@@ -110,6 +110,7 @@ module.exports = function(app, passport) {
                         throw err2;
                     } else {
                         var taskRender = (!req.xhr) ? 'task.jade' : 'includes/task/task.jade';
+                        console.log(foundTask.comments);
                         res.render(taskRender, {
                             // These are navbar variables
                             loggedIn : req.isAuthenticated(),
@@ -133,7 +134,8 @@ module.exports = function(app, passport) {
                             curStatus : foundTask.status,
                             completed : (foundTask.status == "Completed") ? true : false,
                             archived : (foundTask.status == "Archived") ? true : false,
-                            curPriority : foundTask.priority
+                            curPriority : foundTask.priority,
+                            comments : foundTask.comments
                         });
                     }
                 });
@@ -502,5 +504,65 @@ module.exports = function(app, passport) {
             }
         }); // end async waterfall
     }); // end movetask
+
+
+    app.post('/p/:projectid/t/:taskid/comment/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
+        async.waterfall([
+            function findProject(callback) {
+                Project.findById(req.params.projectid, function(err, foundProj) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        callback(null, foundProj);
+                    }
+                });
+            },
+            function searchForTask(foundProj, callback) {
+                var taskList = foundProj.tasks;
+                for (var i = 0; i < taskList.length; i++) {
+                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid == req.params.taskid) {
+                        var foundTask = taskList[i];
+                        console.log('found task');
+                        return callback(null, foundProj, taskList, i);
+                    }
+                }
+                console.log('1. couldn\'t find task');
+                callback(1);
+            },
+            function addComment(foundProj, taskList, index, callback) {
+                console.log(req.body);
+
+                taskList[index].comments.push({
+                    date : new Date().toDateString(),
+                    author : req.user.local.email,
+                    comment : req.body.comment
+                });
+
+                // save this updated project
+                foundProj.save(function(err2,done) {
+                    if (err2) {
+                        throw err2;
+                    } else {
+                        console.log('task modified and project updated');
+                        //res.redirect('/p/' + req.params.projectid + '/');
+                        callback(null, 'done');
+                    }
+                });
+
+                
+            }
+        ], function(err, foundProj, taskList, index) {
+            if (err) {
+                if (err == 1) {
+                    console.log('2. couldn\'t find task');
+                }
+                res.send('error');
+            } else {
+                res.redirect('/p/' + req.params.projectid + '/t/' + req.params.taskid);
+                //res.redirect('/');
+            }
+        }); // end async waterfall
+    }); // end edit
 
 } // End of module exports

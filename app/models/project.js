@@ -29,7 +29,14 @@ var projectSchema = mongoose.Schema({
             status          : String,   // todo, in progress, etc.
             datecreated     : String,   // current date at creation of the task (date.now)
             priority        : String,   // high / medium / low
-            issuetype       : String    // core / feature / bug
+            issuetype       : String,    // core / feature / bug
+            comments        : [
+                {
+                    date    : String,
+                    author  : String,
+                    comment : String
+                }
+    ] 
 
         }
     ]
