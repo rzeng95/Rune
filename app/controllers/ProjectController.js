@@ -291,5 +291,17 @@ module.exports = function(app, passport) {
 
     }); //end app.post
 
+    app.get('/projectfinder', Helper.isLoggedIn, function(req, res) {
+        res.render('projectfinder.jade', {
+            // These are navbar variables
+            loggedIn : req.isAuthenticated(),
+            projList : req.user.local.projects,
+            firstname : req.user.local.firstname,
+            color: req.user.local.userColor,
+            user : req.user
+        });
+        
+    });
+
 
 } // End of module.exports
