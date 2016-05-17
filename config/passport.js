@@ -122,13 +122,43 @@ module.exports = function(passport) {
 
         clientID     : configAuth.githubAuth.clientID,
         clientSecret : configAuth.githubAuth.clientSecret,
-        callbackURL  : configAuth.githubAuth.callbackURL
+        callbackURL  : configAuth.githubAuth.callbackURL,
+        passReqToCallback : true
 
-    }, function(accessToken, refreshToken, profile, cb) {
+    }, function(req, accessToken, refreshToken, profile, cb) {
         process.nextTick(function() {
-            User.findOne({'local.github' : profile.id}, function(err, user) {
-                return cb(err, user);
+
+            User.findById(req.user.local.userid, function(err, foundUser){
+                if (err) throw err;
+                else {
+                    if (req.user.local.github === profile.username) {
+                        console.log('already linked');
+                        return cb(null, false, req.flash('githubMessage', 'Account already associated with this username'));
+                    } else {
+                        req.user.local.github = profile.username;
+                        return cb(null, foundUser);
+                    }
+                }
             });
+            //console.log(req.user.local.userid);
+            //console.log(refreshToken);
+
+            /*
+            console.log(profile.username);
+            User.findOne({'local.github' : profile.username}, function(err, user) {
+                if (err) throw err;
+                else if (user) {
+                    console.log('this github username has already been linked with a github account');
+                    return cb(null, false, req.flash('githubMessage', 'Account already associated with this username'));
+                } else {
+                    console.log('time to do cool stuff!');
+                    console.log(err, user);
+                    return cb(null, )
+                }
+
+                //return cb(err, user);
+            });
+            */
 
         });
 
