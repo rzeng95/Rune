@@ -16,14 +16,14 @@ module.exports = function(app, passport) {
         res.render('github.jade', {
             message1: 'fail',
             message2: req.flash('githubMessage')
-        })
-    })
+        });
+    });
     app.get('/github_success', function(req,res) {
         res.render('github.jade', {
             message1: 'success',
             message2: req.flash('githubMessage')
-        })
-    })
+        });
+    });
 
     app.get('/github_project', function(req,res) {
         res.render('github.jade');
@@ -35,13 +35,13 @@ module.exports = function(app, passport) {
             headers : {
                 'User-Agent': 'request'
             }
-        }
+        };
         request(options, function(err,response,body){
-            if (response.statusCode != 200) {
+            if (response.statusCode !== 200) {
                 console.log('something weird happened.');
                 res.render('github.jade', {
                     errorMessage : '-_-'
-                })
+                });
 
 
             } else {
@@ -49,7 +49,7 @@ module.exports = function(app, passport) {
                 res.render('github.jade', {
                     url : 'github.com/'+ req.body.repo_owner + '/' + req.body.repo_name + '/commit/' ,
                     results : commitList
-                })
+                });
             }
 
         });
@@ -71,5 +71,5 @@ module.exports = function(app, passport) {
         res.end();
 
 
-    })
+    });
 };

@@ -56,8 +56,8 @@ module.exports = function(app, passport) {
         // 2. The current logged-in user must automatically added to the project's member list
         // 3. The current logged-in user's database entry must be modified to add the project id to the user's "project" list
         var rawProjectName = req.body.projectname;
-        var projectName = rawProjectName.trim();;
-        var projectKey = rawProjectName.replace(/\s+/g, "").substring(0,4).toUpperCase();
+        var projectName = rawProjectName.trim();
+        var projectKey = rawProjectName.replace(/\s+/g, '').substring(0,4).toUpperCase();
         var userEmail = req.user.local.email;
 
         // Add the user's email to the project's "members" array
@@ -112,7 +112,7 @@ module.exports = function(app, passport) {
                 for(var j=0; j<statuses.length; j++) {
                     normalTasks[statuses[j]] =[];
                 }
-                callback(null, normalTasks, archivedTasks)
+                callback(null, normalTasks, archivedTasks);
             },
             // find the Project specified by the accessed URL. We need this for the project's member list
             function getProjectByID(normalTasks, archivedTasks, callback) {
@@ -120,9 +120,9 @@ module.exports = function(app, passport) {
                     if (err) {
                         callback(err);
                     } else {
-                        console.log(foundProj.tasks)
+                        //console.log(foundProj.tasks);
                         for (var i=0; i<foundProj.tasks.length; i++) {
-                            if (foundProj.tasks[i].status == "Archived") {
+                            if (foundProj.tasks[i].status == 'Archived') {
                                 archivedTasks.push(foundProj.tasks[i]);
                             }
                             else {
@@ -152,11 +152,11 @@ module.exports = function(app, passport) {
                         var memberList = [];
                         for (var i=0; i<foundUsers.length; i++) {
                             memberList.push({
-                                            "name":foundUsers[i].local.firstname+" "+foundUsers[i].local.lastname,
-                                            "initials":foundUsers[i].local.firstname.charAt(0) + foundUsers[i].local.lastname.charAt(0),
-                                            "email":foundUsers[i].local.email, "id":foundUsers[i].local.userid,
-                                            "color":foundUsers[i].local.userColor
-                                        });
+                                'name':foundUsers[i].local.firstname+' '+foundUsers[i].local.lastname,
+                                'initials':foundUsers[i].local.firstname.charAt(0) + foundUsers[i].local.lastname.charAt(0),
+                                'email':foundUsers[i].local.email, 'id':foundUsers[i].local.userid,
+                                'color':foundUsers[i].local.userColor
+                            });
                         }
                         callback(null, foundProj, normalTasks, archivedTasks, memberList);
                     }
@@ -166,9 +166,8 @@ module.exports = function(app, passport) {
             if (err) {
                 throw err;
             } else {
-                console.log(normalTasks);
-                //console.log("done waterfalling");
-                //console.log(tasks);
+                //console.log(normalTasks);
+
                 res.render('project.jade', {
                     // These are navbar variables
                     loggedIn : req.isAuthenticated(),
@@ -234,13 +233,13 @@ module.exports = function(app, passport) {
                         if (err) {
                             throw err;
                         } else {
-                            console.log("doing stuff to " + member);
+                            console.log('doing stuff to ' + member);
                             var projectList = foundUser.local.projects;
                             //var index = projectList.indexOf(req.params.projectid);
                             console.log(projectList.length);
                             for (var i = 0; i < projectList.length; i++) {
                                 if (projectList[i].projectid === req.params.projectid) {
-                                    console.log("found correct project, deleting now.");
+                                    console.log('found correct project, deleting now.');
                                     projectList.splice(i, 1);
                                     break;
                                 }
@@ -249,25 +248,25 @@ module.exports = function(app, passport) {
                                 if (err) {
                                     throw err;
                                 } else {
-                                    console.log("===");
+                                    console.log('===');
                                     done();
                                 }
                             });
 
                         }
-                    })
+                    });
 
                 } ,
                 function(err) {
                     if (err) {
-                        console.log("something happened when trying to remove this project from all members");
+                        console.log('something happened when trying to remove this project from all members');
                         throw err;
                     } else {
                         console.log('removed this project from all members');
                         callback(null);
                     }
 
-                })
+                });
             } ,
             // Now that we've removed this project from all users' member lists, we can delete the actual project.
             function deleteProject(callback) {
@@ -275,7 +274,7 @@ module.exports = function(app, passport) {
                     if (err) {
                         callback(err);
                     } else {
-                         callback(null);
+                        callback(null);
                     }
                 });
             }
@@ -289,13 +288,13 @@ module.exports = function(app, passport) {
                     throw err;
                 }
             } else {
-                console.log("project successfully deleted and members updated");
+                console.log('project successfully deleted and members updated');
                 res.redirect('/profile');
             }
-        })
+        });
 
 
     }); //end app.post
 
 
-} // End of module.exports
+}; // End of module.exports
