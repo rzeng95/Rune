@@ -23,7 +23,7 @@ div(class="task-body")
                                 div(class="panel-heading" style="text-align: right") #[a(href='/u/'+comnt.authorid+'/') #{comnt.authorname}] added a comment on #{comnt.date}
                                 div(class="panel-body") #{comnt.comment}
                                 if comnt.github
-                                    div(class="panel-footer") #[a(href='https:/github.com/'+ github_owner + '/' + github_repo + '/commit/'+comnt.github) GitHub - #{ comnt.github } ]
+                                    div(class="panel-footer") #[a(href='https://github.com/'+ github_owner + '/' + github_repo + '/commit/'+comnt.github) GitHub - #{ comnt.github } ]
                                     
 
             form(class="form-group" action="comment/" method="POST")

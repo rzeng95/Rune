@@ -47,7 +47,7 @@ module.exports = function(app, passport) {
             } else {
                 var commitList = JSON.parse(body);
                 res.render('github.jade', {
-                    url : 'https://github.com/'+ req.body.repo_owner + '/' + req.body.repo_name + '/commit/' ,
+                    url : 'github.com/'+ req.body.repo_owner + '/' + req.body.repo_name + '/commit/' ,
                     results : commitList
                 })
             }
@@ -56,8 +56,20 @@ module.exports = function(app, passport) {
 
     });
 
-    app.get('/github.com/*', function(req,res) {
-        console.log('being matched');
-        res.send('/github.com/*')
+    app.get('/https://github.com/*', function(req,res) {
+        var url = req.url;
+        url = url.substring(1);
+        console.log(url);
+        //res.redirect(url);
+        //res.send('hello')
+        //console.log(req.originalUrl);
+        //console.log(req.url);
+        //console.log(req.get('host'));
+        //res.send('/github.com/*')
+
+        res.writeHead(302, {'Location': url});
+        res.end();
+
+
     })
 };
