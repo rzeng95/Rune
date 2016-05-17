@@ -16,14 +16,14 @@ module.exports = function(app, passport) {
         res.render('github.jade', {
             message1: 'fail',
             message2: req.flash('githubMessage')
-        })
-    })
+        });
+    });
     app.get('/github_success', function(req,res) {
         res.render('github.jade', {
             message1: 'success',
             message2: req.flash('githubMessage')
-        })
-    })
+        });
+    });
 
     app.get('/github_project', function(req,res) {
         res.render('github.jade');
@@ -35,24 +35,41 @@ module.exports = function(app, passport) {
             headers : {
                 'User-Agent': 'request'
             }
-        }
+        };
         request(options, function(err,response,body){
-            if (response.statusCode != 200) {
+            if (response.statusCode !== 200) {
                 console.log('something weird happened.');
                 res.render('github.jade', {
                     errorMessage : '-_-'
-                })
+                });
 
 
             } else {
                 var commitList = JSON.parse(body);
                 res.render('github.jade', {
-                    url : 'https:/github.com/'+ req.body.repo_owner + '/' + req.body.repo_name + '/commit/' ,
+                    url : 'github.com/'+ req.body.repo_owner + '/' + req.body.repo_name + '/commit/' ,
                     results : commitList
-                })
+                });
             }
 
         });
+
+    });
+
+    app.get('/https://github.com/*', function(req,res) {
+        var url = req.url;
+        url = url.substring(1);
+        console.log(url);
+        //res.redirect(url);
+        //res.send('hello')
+        //console.log(req.originalUrl);
+        //console.log(req.url);
+        //console.log(req.get('host'));
+        //res.send('/github.com/*')
+
+        res.writeHead(302, {'Location': url});
+        res.end();
+
 
     });
 };

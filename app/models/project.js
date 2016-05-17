@@ -1,8 +1,5 @@
 var mongoose = require('mongoose');
 
-//var taskModel = require('./task.js');
-//var taskSchema = taskModel.schema;
-
 var projectSchema = mongoose.Schema({
     projectid      : String,
     projectname    : String,
@@ -29,10 +26,21 @@ var projectSchema = mongoose.Schema({
             status          : String,   // todo, in progress, etc.
             datecreated     : String,   // current date at creation of the task (date.now)
             priority        : String,   // high / medium / low
-            issuetype       : String    // core / feature / bug
+            issuetype       : String,    // core / feature / bug
+            comments        : [
+                {
+                    date    : String,
+                    authorname : String,
+                    authorid : String,
+                    comment : String,
+                    github : String
+                }
+            ]
 
         }
-    ]
+    ],
+    github_owner    : String,
+    github_repo     : String
 });
 
 module.exports = mongoose.model('Project', projectSchema);

@@ -234,7 +234,7 @@ module.exports = function(app, passport) {
                 var accessorID = (req.params.userid).toString();
                 var loggedInID = (req.user.local.userid).toString();
                 if (accessorID === loggedInID) {
-                    console.log("Confirmed that logged in user is attempting to delete their own account");
+                    console.log('Confirmed that logged in user is attempting to delete their own account');
                     callback(null, foundUser.local.projects);
                 } else {
                     callback(-1);
@@ -243,14 +243,14 @@ module.exports = function(app, passport) {
             function removeUserFromProjects(projectList, callback) {
                 //console.log(projectList);
                 async.each(projectList, function(proj, done) {
-                        console.log("doing stuff to individual project")
+                    console.log('doing stuff to individual project');
 
-                        var projID = proj['projectid'];
+                    var projID = proj['projectid'];
                         // look for the project with that ID, and remove req.user.local.email from that project's "members" array
 
-                        Project.findById(projID, function(err, foundProj) {
-                            if (err) callback(-2);
-                            else {
+                    Project.findById(projID, function(err, foundProj) {
+                        if (err) callback(-2);
+                        else {
                                 var memberList = foundProj.members;
                                 for (var i = 0; i < memberList.length; i++) {
                                     if (memberList[i] === req.user.local.email) {
@@ -261,9 +261,9 @@ module.exports = function(app, passport) {
                                 foundProj.save(function(err) {
                                     if (err) callback(err);
                                     done();
-                                })
+                                });
                             }
-                        });
+                    });
 
 
 
@@ -272,7 +272,7 @@ module.exports = function(app, passport) {
 
                     console.log('done operating on all projects in the user project list');
                     callback(null);
-                })
+                });
 
             } ,
             function deleteUser(callback) {
@@ -281,7 +281,7 @@ module.exports = function(app, passport) {
                     if (err) {
                         callback(err);
                     } else {
-                         callback(null);
+                        callback(null);
                     }
                 });
 
@@ -291,19 +291,19 @@ module.exports = function(app, passport) {
         ], function(err) {
             if (err) {
                 if (err === -1) {
-                    console.log("Can't delete someone that's not yourself. Redirecting");
+                    console.log('Can\'t delete someone that\'s not yourself. Redirecting');
                     res.redirect('/u/' + req.params.userid + '/');
                 } else if (err === -2){
-                    console.log("Shouldn't come to this. Means we tried to access a project that didn't exist");
+                    console.log('Shouldn\'t come to this. Means we tried to access a project that didn\'t exist');
                     throw err;
                 } else {
                     throw err;
                 }
             } else {
-            console.log('Waterfall done. User is deleted, redirecting to logout');
-            res.redirect('/logout');
+                console.log('Waterfall done. User is deleted, redirecting to logout');
+                res.redirect('/logout');
             }
-        })
+        });
 
     });
 

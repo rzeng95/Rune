@@ -4,9 +4,12 @@
 
 var User = require('../models/user.js');
 var Project = require('../models/project.js');
-//var Task = require('../models/task.js');
+
 var Helper = require('../models/helpers.js');
+
 var async = require('async');
+var request = require('request');
+
 
 module.exports = function(app, passport) {
 
@@ -84,7 +87,7 @@ module.exports = function(app, passport) {
             function searchForTask(foundProj, callback) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
-                    if (taskList[i].taskid == req.params.taskid) {
+                    if (taskList[i].taskid === req.params.taskid) {
                         var foundTask = taskList[i];
                         return callback(null, foundProj, foundTask);
                     }
@@ -99,9 +102,29 @@ module.exports = function(app, passport) {
                         callback(null, foundProj, foundTask, usersList);
                     }
                 });
+            },
+            function getGitHubCommits(foundProj, foundTask, usersList, callback) {
+                var commitList;
+                var options = {
+                    url : 'https://api.github.com/repos/' + foundProj.github_owner + '/' + foundProj.github_repo + '/commits?client_id=fb79527a871e5ba8f0f7&client_secret=a82aa7f700c3f1022aefa81abdf77cf590593098',
+                    headers : {
+                        'User-Agent': 'request'
+                    }
+                };
+                request(options, function(err,response,body){
+                    if (response.statusCode !== 200) {
+                        console.log('something weird happened.');
+                        callback(null, foundProj, foundTask, usersList, null);
+
+                    } else {
+                        commitList = JSON.parse(body);
+                        callback(null, foundProj, foundTask, usersList, commitList);
+                    }
+
+                });
             }
         ],
-        function(err, foundProj, foundTask, usersList) {
+        function(err, foundProj, foundTask, usersList, commitList) {
             if (err) {
                 res.send('error');
             } else {
@@ -110,6 +133,7 @@ module.exports = function(app, passport) {
                         throw err2;
                     } else {
                         var taskRender = (!req.xhr) ? 'task.jade' : 'includes/task/task.jade';
+                        //console.log(commitList);
                         res.render(taskRender, {
                             // These are navbar variables
                             loggedIn : req.isAuthenticated(),
@@ -123,6 +147,10 @@ module.exports = function(app, passport) {
                             firstname : req.user.local.firstname,
                             isProjectPage : false,
 
+                            github_repo : foundProj.github_repo,
+                            github_owner : foundProj.github_owner,
+                            commits : commitList,
+
                             // Task information.
                             taskid : req.params.taskid,
                             taskname : foundTask.taskname,
@@ -131,9 +159,10 @@ module.exports = function(app, passport) {
                             usersList : usersList,
                             curAssignee : foundTask.assignedto,
                             curStatus : foundTask.status,
-                            completed : (foundTask.status == "Completed") ? true : false,
-                            archived : (foundTask.status == "Archived") ? true : false,
-                            curPriority : foundTask.priority
+                            completed : (foundTask.status === 'Completed') ? true : false,
+                            archived : (foundTask.status === 'Archived') ? true : false,
+                            curPriority : foundTask.priority,
+                            comments : foundTask.comments
                         });
                     }
                 });
@@ -144,42 +173,42 @@ module.exports = function(app, passport) {
     // Task edit AJAX GET request.
     app.get('/p/:projectid/t/:taskid/edit/', Helper.isLoggedIn, Helper.doesProjectExist,
             Helper.isUserProjectMember, Helper.isAjaxRequest, function(req, res) {
-        async.waterfall([
-            function findProject(callback) {
-                Project.findById(req.params.projectid, function(err, foundProj) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(null, foundProj);
-                    }
-                });
-            },
-            function searchForTask(foundProj, callback) {
-                var taskList = foundProj.tasks;
-                for (var i = 0; i < taskList.length; i++) {
+                async.waterfall([
+                    function findProject(callback) {
+                        Project.findById(req.params.projectid, function(err, foundProj) {
+                            if (err) {
+                                callback(err);
+                            } else {
+                                callback(null, foundProj);
+                            }
+                        });
+                    },
+                    function searchForTask(foundProj, callback) {
+                        var taskList = foundProj.tasks;
+                        for (var i = 0; i < taskList.length; i++) {
                     //console.log(taskList[i].taskid + ' ' + req.params.taskid)
-                    if (taskList[i].taskid == req.params.taskid) {
-                        var foundTask = taskList[i];
-                        console.log('found task');
-                        return callback(null, foundProj, foundTask);
+                            if (taskList[i].taskid === req.params.taskid) {
+                                var foundTask = taskList[i];
+                                console.log('found task');
+                                return callback(null, foundProj, foundTask);
+                            }
+                        }
+                        console.log('1. couldn\'t find task');
+                        callback(1);
+                    },
+                    function getUsersList(foundProj, foundTask, callback) {
+                        Helper.getProjectMemberList(req.params.projectid, function(err,usersList) {
+                            if (err) {
+                                callback(err);
+                            } else {
+                                callback(null, foundProj, foundTask, usersList);
+                            }
+                        });
                     }
-                }
-                console.log('1. couldn\'t find task');
-                callback(1);
-            },
-            function getUsersList(foundProj, foundTask, callback) {
-                Helper.getProjectMemberList(req.params.projectid, function(err,usersList) {
-                    if (err) {
-                        callback(err);
-                    } else {
-                        callback(null, foundProj, foundTask, usersList);
-                    }
-                });
-            }
-        ],
+                ],
         function(err, foundProj, foundTask, usersList) {
             if (err) {
-                if (err == 1) {
+                if (err === 1) {
                     console.log('2. couldn\'t find task');
                 }
                 res.send('error');
@@ -189,9 +218,9 @@ module.exports = function(app, passport) {
                     if (err2) {
                         throw err2;
                     } else {
-                        console.log('=====\n\n');
+                        //console.log('=====\n\n');
                         //Helper.getProjectMemberList(req.params.projectid);
-                        console.log(foundTask.assignedto);
+                        //console.log(foundTask.assignedto);
                         res.render('includes/task/edit.jade', {
                             // These are navbar variables
                             loggedIn : req.isAuthenticated(),
@@ -209,7 +238,7 @@ module.exports = function(app, passport) {
                 });
             }
         }); // end async waterfall
-    }); // end app.get
+            }); // end app.get
 
     // A task-edit AJAX POST request.
     app.post('/p/:projectid/t/:taskid/edit/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
@@ -227,7 +256,7 @@ module.exports = function(app, passport) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
                     //console.log(taskList[i].taskid + ' ' + req.params.taskid)
-                    if (taskList[i].taskid == req.params.taskid) {
+                    if (taskList[i].taskid === req.params.taskid) {
                         var foundTask = taskList[i];
                         console.log('found task');
                         return callback(null, foundProj, taskList, i);
@@ -239,7 +268,7 @@ module.exports = function(app, passport) {
             function editTask(foundProj, taskList, index, callback) {
                 console.log(req.body);
 
-                if (taskList[index].status != req.body.status) {
+                if (taskList[index].status !== req.body.status) {
                     foundProj.history.push({
                         date : new Date().toDateString(),
                         link : taskList[index].taskid,
@@ -267,7 +296,7 @@ module.exports = function(app, passport) {
             }
         ], function(err, foundProj, taskList, index) {
             if (err) {
-                if (err == 1) {
+                if (err === 1) {
                     console.log('2. couldn\'t find task');
                 }
                 res.send('error');
@@ -295,7 +324,7 @@ module.exports = function(app, passport) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
                     //console.log(taskList[i].taskid + ' ' + req.params.taskid)
-                    if (taskList[i].taskid == req.params.taskid) {
+                    if (taskList[i].taskid === req.params.taskid) {
                         var foundTask = taskList[i];
                         console.log('found task');
                         return callback(null, foundProj, taskList, i);
@@ -306,7 +335,7 @@ module.exports = function(app, passport) {
             },
             function archiveTask(foundProj, taskList, index, callback) {
                 console.log(taskList[index]);
-                taskList[index].status = "Archived";
+                taskList[index].status = 'Archived';
                 foundProj.history.push({
                     date : new Date().toDateString(),
                     link : taskList[index].taskid,
@@ -325,7 +354,7 @@ module.exports = function(app, passport) {
             }
         ], function(err, foundProj, taskList, index) {
             if (err) {
-                if (err == 1) {
+                if (err === 1) {
                     console.log('2. couldn\'t find task');
                 }
                 res.send('error');
@@ -352,7 +381,7 @@ module.exports = function(app, passport) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
                     //console.log(taskList[i].taskid + ' ' + req.params.taskid)
-                    if (taskList[i].taskid == req.params.taskid) {
+                    if (taskList[i].taskid === req.params.taskid) {
                         var foundTask = taskList[i];
                         console.log('found task');
                         return callback(null, foundProj, taskList, i);
@@ -363,7 +392,7 @@ module.exports = function(app, passport) {
             },
             function unarchiveTask(foundProj, taskList, index, callback) {
                 console.log(taskList[index]);
-                taskList[index].status = "Completed";
+                taskList[index].status = 'Completed';
                 foundProj.history.push({
                     date : new Date().toDateString(),
                     link : taskList[index].taskid,
@@ -382,7 +411,7 @@ module.exports = function(app, passport) {
             }
         ], function(err, foundProj, taskList, index) {
             if (err) {
-                if (err == 1) {
+                if (err === 1) {
                     console.log('2. couldn\'t find task');
                 }
                 res.send('error');
@@ -409,7 +438,7 @@ module.exports = function(app, passport) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
                     //console.log(taskList[i].taskid + ' ' + req.params.taskid)
-                    if (taskList[i].taskid == req.params.taskid) {
+                    if (taskList[i].taskid === req.params.taskid) {
                         var foundTask = taskList[i];
                         console.log('found task');
                         return callback(null, foundProj, taskList, i);
@@ -440,7 +469,7 @@ module.exports = function(app, passport) {
             }
         ], function(err, foundProj, taskList, index) {
             if (err) {
-                if (err == 1) {
+                if (err === 1) {
                     console.log('2. couldn\'t find task');
                 }
                 res.send('error');
@@ -453,6 +482,58 @@ module.exports = function(app, passport) {
     // A task-move AJAX request.
     app.post('/p/:projectid/movetask/', Helper.isLoggedIn, Helper.doesProjectExist,
             Helper.isUserProjectMember, Helper.isAjaxRequest, function(req, res) {
+                async.waterfall([
+                    function findProject(callback) {
+                        Project.findById(req.params.projectid, function(err, foundProj) {
+                            if (err) {
+                                callback(err);
+                            } else {
+                                callback(null, foundProj);
+                            }
+                        });
+                    },
+                    function searchForTask(foundProj, callback) {
+                        var taskList = foundProj.tasks;
+                        for (var i = 0; i < taskList.length; i++) {
+                            if (taskList[i].taskid === req.body.taskid) {
+                                var foundTask = taskList[i];
+                                return callback(null, foundProj, taskList, i);
+                            }
+                        }
+                        callback(1);
+                    },
+                    function moveTask(foundProj, taskList, index, callback) {
+                // Update the task's status and save it the project state.
+
+                        if (taskList[index].status !== req.body.status) {
+                            foundProj.history.push({
+                                date : new Date().toDateString(),
+                                link : taskList[index].taskid,
+                                action : req.user.local.firstname + ' ' + req.user.local.lastname + ' moved',
+                                description : 'from [ ' + taskList[index].status + ' ] to [ ' + req.body.status + ' ]'
+                            });
+                        }
+
+                        taskList[index].status = req.body.status;
+                        foundProj.save(function(err2, done) {
+                            if (err2) {
+                                throw err2;
+                            } else {
+                                callback(null, 'done');
+                            }
+                        });
+                    }
+                ], function(err, foundProj, taskList, index) {
+                    if (err) {
+                        res.send('error');
+                    } else {
+                        res.redirect('/p/' + req.params.projectid + '/');
+                    }
+                }); // end async waterfall
+            }); // end movetask
+
+
+    app.post('/p/:projectid/t/:taskid/comment/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res){
         async.waterfall([
             function findProject(callback) {
                 Project.findById(req.params.projectid, function(err, foundProj) {
@@ -466,41 +547,51 @@ module.exports = function(app, passport) {
             function searchForTask(foundProj, callback) {
                 var taskList = foundProj.tasks;
                 for (var i = 0; i < taskList.length; i++) {
-                    if (taskList[i].taskid == req.body.taskid) {
+                    //console.log(taskList[i].taskid + ' ' + req.params.taskid)
+                    if (taskList[i].taskid === req.params.taskid) {
                         var foundTask = taskList[i];
+                        console.log('found task');
                         return callback(null, foundProj, taskList, i);
                     }
                 }
+                console.log('1. couldn\'t find task');
                 callback(1);
             },
-            function moveTask(foundProj, taskList, index, callback) {
-                // Update the task's status and save it the project state.
+            function addComment(foundProj, taskList, index, callback) {
+                console.log(req.body);
 
-                if (taskList[index].status != req.body.status) {
-                    foundProj.history.push({
-                        date : new Date().toDateString(),
-                        link : taskList[index].taskid,
-                        action : req.user.local.firstname + ' ' + req.user.local.lastname + ' moved',
-                        description : 'from [ ' + taskList[index].status + ' ] to [ ' + req.body.status + ' ]'
-                    });
-                }
+                taskList[index].comments.push({
+                    date : new Date().toDateString(),
+                    authorid : req.user.local.userid,
+                    authorname : req.user.local.firstname + ' ' + req.user.local.lastname,
+                    comment : req.body.comment,
+                    github : req.body.githubcommit
+                });
 
-                taskList[index].status = req.body.status;
-                foundProj.save(function(err2, done) {
+                // save this updated project
+                foundProj.save(function(err2,done) {
                     if (err2) {
                         throw err2;
                     } else {
+                        console.log('task modified and project updated');
+                        //res.redirect('/p/' + req.params.projectid + '/');
                         callback(null, 'done');
                     }
                 });
+
+
             }
         ], function(err, foundProj, taskList, index) {
             if (err) {
+                if (err === 1) {
+                    console.log('2. couldn\'t find task');
+                }
                 res.send('error');
             } else {
-                res.redirect('/p/' + req.params.projectid + '/');
+                res.redirect('/p/' + req.params.projectid + '/t/' + req.params.taskid);
+                //res.redirect('/');
             }
         }); // end async waterfall
-    }); // end movetask
+    }); // end edit
 
-} // End of module exports
+}; // End of module exports
