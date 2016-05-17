@@ -1,4 +1,23 @@
 extends ./partials/base.jade
 
-block bodyContent
-    p hello
+block bodyContent 
+    div(class="container-fluid")
+        div(class="row")
+            div(class="col-sm-12")
+                h2 Project Finder
+                table(class="table") 
+                    thead
+                        tr
+                            th Project Name
+                            th Project Leader
+                            th Members
+                            th Key
+                            th ID
+                    tbody
+                        each proj in projects
+                            tr
+                                td #{proj.projectname}
+                                td #{proj.admin}
+                                td #{proj.members.length}
+                                td #{proj.projectkey}
+                                td #{proj.projectid}
