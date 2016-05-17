@@ -19,5 +19,8 @@ div(class="overview-container")
 		button(id="btn-proj-del" class="btn btn-primary btn-md" type="submit") Delete Project 
 		
 	h2 Project History
-	each hist in history.reverse()
-		h4 #{hist['date']} : #{hist['action']} #[a(href='t/' + hist['link'] +'/') #{hist['link']}] #{hist['description']}
+	table(class="table table-hover")
+		tbody
+			each hist in history.reverse()
+				tr
+					td #{hist['date']} : #{hist['action']} #[a(href='t/' + hist['link'] +'/') #{hist['link']}] #{hist['description']}
