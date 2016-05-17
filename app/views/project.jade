@@ -7,6 +7,7 @@ block bodyContent
                 h2 #{projName}
             div(class="col-xs-12 project-tabs")
                 ul(class="col-xs-12 nav nav-tabs project-pages")
+                    li(id="project-tab-5") #[a(href="#tasks2" data-toggle="tab") Task List2]
                     li(id="project-tab-4") #[a(href="#tasks" data-toggle="tab") Task List]
                     li(id="project-tab-3") #[a(href="#users" data-toggle="tab") User List]
                     li(id="project-tab-2" class="active" ) #[a(href="#kanban" data-toggle="tab") Kanban Board]
@@ -14,6 +15,8 @@ block bodyContent
 
         div(class="project-header-offset")
         div(class="tab-content")
+            div(id="tasks2" class="tab-pane fade")
+                include ./includes/project/tasks2.jade
             div(id="tasks" class="tab-pane fade")
                 include ./includes/project/tasks.jade
             div(id="users" class="tab-pane fade")
@@ -21,7 +24,7 @@ block bodyContent
             div(id="kanban" class="tab-pane fade in active")
                 include ./includes/project/kanban.jade
             div(id="overview" class="tab-pane fade")
-                    include ./includes/project/overview.jade
+                include ./includes/project/overview.jade
 
 block scripts
     script(src="/javascripts/clamp.min.js")
