@@ -43,7 +43,7 @@ block bodyContent
             form(action="" method="POST")
                 div(class="col-sm-4" style="padding-top:24px; margin-left:-20px")
                     div(class="profile-description") Description
-                        input(class="profile-form-control-description" type="text" name="description" placeholder='I haven\'t entered my description!' value=description)   
+                        textarea(class="profile-form-control-description" type="text" rows="4" name="description" placeholder='I haven\'t entered my description!') #{description} 
                     div(class="profile-github") GitHub
                         input(class="profile-form-control-github" type="text" name="github" placeholder='I haven\'t entered my GitHub!' value=github)   
                     div(class="profile-edit-button")
