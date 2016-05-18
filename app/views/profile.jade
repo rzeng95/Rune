@@ -42,6 +42,11 @@ block bodyContent
                                         td(class="text-center")
                                             You have no projects! 
 
-            div(class="col-sm-4" style="padding-top:24px")
-                p=description
-                p=github     
+            div(class="col-sm-4" style="padding-top:24px; margin-left:-20px")
+                div(class="profile-description") Description
+                    p(class="profile-description-text")=description
+                div(class="profile-github") GitHub
+                if (github == '#')
+                    p(class="profile-github-text") I haven't posted my GitHub!
+                else
+                    a(class="profile-github-text" href="#{github}") #{github}

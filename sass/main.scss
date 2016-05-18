@@ -631,6 +631,51 @@ $project-body-offset: $navbar-height + $project-header-offset;
     @include truncate(270px);
 }
 
+// Profile Styling
+
+.profile-description {
+    font-size: 30px;
+}
+
+.profile-description-text {
+    position: relative;
+    left: 4px;
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+
+.profile-form-control-description {
+    @extend .form-control;
+    position: relative;
+    left: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.profile-github {
+    font-size: 30px;
+}
+
+.profile-github-text {
+    position: relative;
+    left: 4px;
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+
+.profile-form-control-github {
+    @extend .form-control;
+    position: relative;
+    left: 4px;
+    font-size: 14px;
+    margin-bottom: 14px;    
+}
+
+.profile-edit-button {
+    position: relative;
+    left: 4px;
+}
+
 // Project Finder Styling
 
 .project-finder-table {

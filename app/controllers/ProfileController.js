@@ -36,13 +36,13 @@ module.exports = function(app, passport) {
 
                     var description;
                     if (!usr.local.description) {
-                        description = 'I don\'t have a description!';
+                        description = 'I haven\'t posted my description!';
                     } else {
                         description = usr.local.description;
                     }
                     var github;
                     if (!usr.local.github) {
-                        github = 'I haven\'t posted my github!';
+                        github = '#';
                     } else {
                         github = usr.local.github;
                     }
