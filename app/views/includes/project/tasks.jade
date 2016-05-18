@@ -38,7 +38,12 @@ div(class="btn-group")
 	button(data-toggle="dropdown" class="btn btn-default dropdown-toggle")
 		span(class="caret")
 		|   
+		span(data-label-placement) Date, Newest
 	ul(class="dropdown-menu")
+		| <li><input type="radio" id="date-newest" class="sort1-el" sort-type="datecreated" sort-order="descending" name="sort1-label" value="date-newest" checked="checked"><label for="date-newest">Date, Newest</label></li>
+		| <li><input type="radio" id="date-oldest" class="sort1-el" sort-type="datecreated" sort-order="ascending" name="sort1-label" value="date-oldest"><label for="date-oldest">Date, Oldest</label></li>
+		| <li><input type="radio" id="priority-highest" class="sort1-el" sort-type="priority" sort-order="descending" name="sort1-label" value="priority-highest"><label for="priority-highest">Priority, Highest</label></li>
+		| <li><input type="radio" id="priority-lowest" class="sort1-el" sort-type="priority" sort-order="ascending" name="sort1-label" value="priority-lowest"><label for="priority-lowest">Priority, Lowest</label></li>
 div(class="row")
 	div(class="navbar task-browser-col-left")
 		div(class="collapse navbar-collapse")
