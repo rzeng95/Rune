@@ -137,6 +137,7 @@ $project-body-offset: $navbar-height + $project-header-offset;
 
 @mixin rune-kanban-small($color-index) {
     display: inline-block;
+    position: relative;
     .roo-icon-kanban {
         @include roo-image($color-index, 30px);
     }
