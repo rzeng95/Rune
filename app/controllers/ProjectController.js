@@ -178,6 +178,7 @@ module.exports = function(app, passport) {
                     isProjectPage : true,
 
                     // Overview tab variables
+                    project : foundProj,
                     projName : foundProj.projectname,
                     projKey : foundProj.projectkey,
                     projId : foundProj.projectid,

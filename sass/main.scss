@@ -7,7 +7,7 @@
 // SCSS includes.
 @include font-face('Roboto-Black', font-files('RobotoBlack/Roboto-Black.ttf', 'RobotoBlack/Roboto-Black.eot', 'RobotoBlack/Roboto-Black.woff'));
 
-// Global variables.
+// Global variables and properties.
 $color-1: #53847F;
 $color-2: #F8F8F8;
 $color-3: #EEEEEE;
@@ -485,23 +485,58 @@ $project-body-offset: $navbar-height + $project-header-offset;
     .btn-submit {
         margin: 0 auto;
     }
-    // .btn-primary {
-    //     margin: 0 10px;
-    //     width: 50%;
-    // }
 }
 
-// Task List Styling
-.task-list-container {
-    overflow-y: scroll;
+// Task browser styling
+.task-browser-container {
+    position: relative;
+    box-sizing: border-box;
     height: calc(100vh - #{$project-body-offset});
+    margin: 0 -15px;
+    overflow-y: scroll;
+}
+
+.task-browser-col-left,
+.task-browser-col-right {
+    overflow: scroll;
+    display: block;
+    float: left;
+    height: calc(100vh - #{$project-body-offset});
+}
+
+.task-browser-col-left {
+    width: 25%;
+    border-right-width: 1px;
+    border-right-color: $color-border;
+    border-right-style: solid;
+    .navbar-collapse {
+        padding: 0;
+    }
+    * {
+        width: 100%;
+    }
+}
+
+.task-browser-col-right {
+    padding: 15px;
+    width: 75%;
+}
+
+.task-browser-list-el {
+    // margin: 0 -15px;
+    width: 100%;
+    border-bottom-width: 1px;
+    border-bottom-color: $color-border;
+    border-bottom-style: solid;
+    > a {
+        color: $text-color;
+    }
 }
 
 .task-list {
     @extend .table;
     @extend .table-hover;
     margin: 0px auto;
-    // width: 1200px;
     table-layout: fixed;
     
     .task-id {

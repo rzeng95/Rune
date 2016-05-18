@@ -1,36 +1,15 @@
-div(class="task-list-container")
-	table(class="task-list")
-		col(class="task-id")
-		col(class="task-name")
-		col(class="task-description")
-		col(class="task-status")
-		col(class="task-priority")
-		col(class="task-assignedto")
-		col(class="task-createdby")
-		thead(class="task-list-header")
-			tr
-				th Task ID
-				th Task Name
-				th Description
-				th Status
-				th Priority
-				th Assigned to
-				th Created by
-		tbody(class="task-list-body")
-			each task in taskList
-				tr
-					td(class="task-id-element") 
-						a(href="t/"+task.taskid+"/") #{task.taskid}
-					td(class="task-name-element")
-						div(class="js-clamp") #{task.taskname}
-					td(class="task-description-element")
-						div(class="js-clamp") #{task.taskdescription}
-					td(class="task-status-element") #{task.status}
-					td(class="task-priority-element")
-						div(class="kanban-priority-icon-" + task.priority)
-							div(class="priority-icon")
-							div(class="priority-text") #{task.priority}
-					td(class="task-assignedto-element")
-						div #{task.assignedto}
-					td(class="task-createdby-element")
-						div #{task.createdby}
+div(class="row")
+	div(class="navbar task-browser-col-left")
+		div(class="collapse navbar-collapse")
+			ul(class="nav navbar-nav")
+				each task in taskList
+					li(id=task.taskid class="task-browser-list-el")
+						a(href="#" class="task-browser-list-el-link")
+							div(class="task-id-element") #{task.taskid}
+							div(class="task-name-element")
+								div(class="js-clamp") #{task.taskname}
+
+	div(class="task-browser-col-right")
+		each task in taskList
+			div(id=task.taskid class="task-browser-window-el" hidden="true")
+				include ../task/task.jade
