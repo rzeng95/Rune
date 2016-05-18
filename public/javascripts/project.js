@@ -138,3 +138,123 @@ $('.task-browser-list-el-link').click(function(e) {
     currTaskID = $(this).parent().attr('id');
     Page.Project.taskWindowLoad(currTaskID); 
 });
+
+// Task List Manipulation
+var $tasks = $('.task-browser-list');
+var $tasksli = $tasks.children('li');
+
+
+//Task Sorting
+//Sort Types:
+//datecreated
+//priority
+
+//Sort Orders:
+//ascending
+//descending
+$('.sort1-el').click(function(e) {
+    SortTasks($(this).attr('sort-type'), $(this).attr('sort-order'));
+});
+
+var SortTasks = function(attribute, order) {
+    $tasksli.sort(function(a, b) {
+        var an = convertAttributeForSort(a.getAttribute(attribute));
+        var bn = convertAttributeForSort(b.getAttribute(attribute));
+        if(order == "ascending") {
+            if(an > bn) {
+                return 1;
+            } 
+            else if(an < bn) {
+                return -1;
+            }
+        }
+        else if(order == "descending") {
+            if(an < bn) {
+                return 1;
+            } 
+            else if(an > bn) {
+                return -1;
+            }
+        }
+        if(a.id < b.id) {
+            return 1;
+        }
+        else if(a.id > b.id) {
+            return -1;
+        }
+        return 0;
+    });
+    $tasksli.detach().appendTo($tasks);
+}
+
+var convertAttributeForSort = function(attribute) {
+    switch(attribute) {
+        case "High":
+            return 2;
+            break;
+        case "Medium":
+            return 1;
+            break;
+        case "Low":
+            return 0;
+            break;
+        default:
+            return attribute;
+    }
+}
+
+SortTasks("datecreated", "descending");
+
+//Task Filtering
+//Filter types:
+//Priority
+//  High
+//  Medium
+//  Low
+//Status
+//  Backlog
+//  Selected for Development
+//  In Progress
+//  Completed
+//  Archived
+
+$('.filter-el').click(function(e) {
+    FilterTasks($(this).attr('filter-type'), $(this).attr('filter-val'));
+});
+
+var filters = [];
+var FilterTasks = function(attribute, value) {
+    if(filters[attribute] != null) {
+        var valueIndex = filters[attribute].indexOf(value);
+        if(valueIndex > -1) {
+            filters[attribute].splice(valueIndex, 1);
+        }
+        else {
+            filters[attribute].push(value);
+        }
+    }
+    else {
+        var newType = [value];
+        filters[attribute] = newType;
+    }
+    Filter();
+}
+
+var Filter = function() {
+    $tasksli.show();
+    for(var filterType in filters) {
+        if(filters[filterType].length > 0) {
+            $tasksli.each(function() {
+                var isType = false;
+                for(var filterValue in filters[filterType]) {
+                    if($(this).attr(filterType) == filters[filterType][filterValue]) {
+                        isType = true;
+                    }
+                }
+                if(!isType) {
+                    $(this).hide();
+                }
+            });
+        }
+    }
+}

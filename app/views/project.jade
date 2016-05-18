@@ -7,7 +7,6 @@ block bodyContent
                 h2 #{project.projectname}
             div(class="col-xs-12 project-tabs")
                 ul(class="col-xs-12 nav nav-tabs project-pages")
-                    li(id="project-tab-5") #[a(href="#tasks2" data-toggle="tab") Task List2]
                     li(id="project-tab-4") #[a(href="#tasks" data-toggle="tab") Tasks]
                     li(id="project-tab-3") #[a(href="#users" data-toggle="tab") Users]
                     li(id="project-tab-2" class="active" ) #[a(href="#kanban" data-toggle="tab") Kanban Board]
@@ -15,8 +14,6 @@ block bodyContent
 
         div(class="project-header-offset")
         div(class="tab-content")
-            div(id="tasks2" class="tab-pane fade")
-                include ./includes/project/tasks2.jade
             div(id="tasks" class="tab-pane fade")
                 include ./includes/project/tasks.jade
             div(id="users" class="tab-pane fade")
@@ -29,5 +26,6 @@ block bodyContent
 block scripts
     script(src="/javascripts/clamp.min.js")
     script(src="/javascripts/project.js")
+    script(src="/javascripts/dropdowns-enhancement.js")
     script.
         document.body.style = "overflow: hidden;"
