@@ -18,8 +18,9 @@ describe('Accessing pages while not logged in', function() {
     it('accessing profile should redirect to login', function(done) {
         request(app)
         .get('/profile/')
+        .expect(302)
         .end(function(err,res) {
-            expect(res.header.location).to.include('login');
+            expect(res.header.location).to.equal('/login');
             done(err);
         });
     });
@@ -27,8 +28,9 @@ describe('Accessing pages while not logged in', function() {
     it('accessing users list should redirect to login', function(done) {
         request(app)
         .get('/users/')
+        .expect(302)
         .end(function(err,res) {
-            expect(res.header.location).to.include('login');
+            expect(res.header.location).to.equal('/login');
             done(err);
         });
     });
@@ -36,8 +38,9 @@ describe('Accessing pages while not logged in', function() {
     it('accessing any user page should redirect to login', function(done) {
         request(app)
         .get('/u/1/')
+        .expect(302)
         .end(function(err,res) {
-            expect(res.header.location).to.include('login');
+            expect(res.header.location).to.equal('/login');
             done(err);
         });
     })
@@ -45,8 +48,9 @@ describe('Accessing pages while not logged in', function() {
     it('accessing any project page should redirect to login', function(done) {
         request(app)
         .get('/p/1/')
+        .expect(302)
         .end(function(err,res) {
-            expect(res.header.location).to.include('login');
+            expect(res.header.location).to.equal('/login');
             done(err);
         });
     })
@@ -54,8 +58,9 @@ describe('Accessing pages while not logged in', function() {
     it('accessing any task on any project page should redirect to login', function(done) {
         request(app)
         .get('/p/1/t/1/')
+        .expect(302)
         .end(function(err,res) {
-            expect(res.header.location).to.include('login');
+            expect(res.header.location).to.equal('/login');
             done(err);
         });
     })
