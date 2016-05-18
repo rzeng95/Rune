@@ -5,19 +5,34 @@ block bodyContent
         div(class="row")
             div(class="col-sm-12")
                 h2 Project Finder
-                table(class="table") 
+                table(class="project-finder-table") 
                     thead
                         tr
                             th Project Name
                             th Project Leader
                             th Members
-                            th Key
-                            th ID
+                            th Description
+                            th Skills
+                            th 
                     tbody
                         each proj in projects
                             tr
-                                td #{proj.projectname}
-                                td #{proj.admin}
-                                td #{proj.members.length}
-                                td #{proj.projectkey}
-                                td #{proj.projectid}
+                                td(class="project-finder-name") 
+                                    div(class="project-finder-name-text") 
+                                        b #{proj.name}
+                                td(class="project-finder-leader")
+                                    div(id="rune-icon-kanban-" + proj.color)
+                                        img(class="roo-icon-kanban" src="/images/Roo.svg")
+                                        div(class="initials-icon-kanban") #{proj.initials}
+                                        if proj.link == '#'
+                                            div(class="project-finder-user-name") #{proj.leader}]
+                                        else
+                                            div(class="project-finder-user-name") #[a(href='#{proj.link}') #{proj.leader}]
+                                td(class="project-finder-members") 
+                                    div(class="project-finder-members-text") #{proj.size}
+                                td(class="project-finder-description") 
+                                    div(class="project-finder-description-text") WAOO CSS3 FLEXBOX IS OP WAOO #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp #FaZeUp 
+                                td(class="project-finder-skills") 
+                                    div(class="project-finder-skills-text") HTML, CSS, Javascript, Node.js, MongoDB HTML, CSS, Javascript, Node.js, MongoDB HTML, CSS, Javascript, Node.js, MongoDB
+                                td(class="project-finder-button")
+                                    button(id="submit" type="submit" class="btn btn-primary" style="width:80px") Apply

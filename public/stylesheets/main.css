@@ -295,12 +295,13 @@ th {
     border: 1px solid #000;
   }
 
-  .table, .task-list {
+  .table, .task-list, .project-finder-table {
     border-collapse: collapse !important;
   }
-  .table td, .task-list td,
+  .table td, .task-list td, .project-finder-table td,
   .table th,
-  .task-list th {
+  .task-list th,
+  .project-finder-table th {
     background-color: #fff !important;
   }
 
@@ -2843,48 +2844,58 @@ th {
   text-align: left;
 }
 
-.table, .task-list {
+.table, .task-list, .project-finder-table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
 }
-.table > thead > tr > th, .task-list > thead > tr > th,
+.table > thead > tr > th, .task-list > thead > tr > th, .project-finder-table > thead > tr > th,
 .table > thead > tr > td,
 .task-list > thead > tr > td,
+.project-finder-table > thead > tr > td,
 .table > tbody > tr > th,
 .task-list > tbody > tr > th,
+.project-finder-table > tbody > tr > th,
 .table > tbody > tr > td,
 .task-list > tbody > tr > td,
+.project-finder-table > tbody > tr > td,
 .table > tfoot > tr > th,
 .task-list > tfoot > tr > th,
+.project-finder-table > tfoot > tr > th,
 .table > tfoot > tr > td,
-.task-list > tfoot > tr > td {
+.task-list > tfoot > tr > td,
+.project-finder-table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
   border-top: 1px solid #ddd;
 }
-.table > thead > tr > th, .task-list > thead > tr > th {
+.table > thead > tr > th, .task-list > thead > tr > th, .project-finder-table > thead > tr > th {
   vertical-align: bottom;
   border-bottom: 2px solid #ddd;
 }
-.table > caption + thead > tr:first-child > th, .task-list > caption + thead > tr:first-child > th,
+.table > caption + thead > tr:first-child > th, .task-list > caption + thead > tr:first-child > th, .project-finder-table > caption + thead > tr:first-child > th,
 .table > caption + thead > tr:first-child > td,
 .task-list > caption + thead > tr:first-child > td,
+.project-finder-table > caption + thead > tr:first-child > td,
 .table > colgroup + thead > tr:first-child > th,
 .task-list > colgroup + thead > tr:first-child > th,
+.project-finder-table > colgroup + thead > tr:first-child > th,
 .table > colgroup + thead > tr:first-child > td,
 .task-list > colgroup + thead > tr:first-child > td,
+.project-finder-table > colgroup + thead > tr:first-child > td,
 .table > thead:first-child > tr:first-child > th,
 .task-list > thead:first-child > tr:first-child > th,
+.project-finder-table > thead:first-child > tr:first-child > th,
 .table > thead:first-child > tr:first-child > td,
-.task-list > thead:first-child > tr:first-child > td {
+.task-list > thead:first-child > tr:first-child > td,
+.project-finder-table > thead:first-child > tr:first-child > td {
   border-top: 0;
 }
-.table > tbody + tbody, .task-list > tbody + tbody {
+.table > tbody + tbody, .task-list > tbody + tbody, .project-finder-table > tbody + tbody {
   border-top: 2px solid #ddd;
 }
-.table .table, .task-list .table, .table .task-list, .task-list .task-list {
+.table .table, .task-list .table, .project-finder-table .table, .table .task-list, .task-list .task-list, .project-finder-table .task-list, .table .project-finder-table, .task-list .project-finder-table, .project-finder-table .project-finder-table {
   background-color: #F8F8F8;
 }
 
@@ -2934,25 +2945,34 @@ table th[class*="col-"] {
   display: table-cell;
 }
 
-.table > thead > tr > td.active, .task-list > thead > tr > td.active,
+.table > thead > tr > td.active, .task-list > thead > tr > td.active, .project-finder-table > thead > tr > td.active,
 .table > thead > tr > th.active,
-.task-list > thead > tr > th.active, .table > thead > tr.active > td, .task-list > thead > tr.active > td, .table > thead > tr.active > th, .task-list > thead > tr.active > th,
+.task-list > thead > tr > th.active,
+.project-finder-table > thead > tr > th.active, .table > thead > tr.active > td, .task-list > thead > tr.active > td, .project-finder-table > thead > tr.active > td, .table > thead > tr.active > th, .task-list > thead > tr.active > th, .project-finder-table > thead > tr.active > th,
 .table > tbody > tr > td.active,
 .task-list > tbody > tr > td.active,
+.project-finder-table > tbody > tr > td.active,
 .table > tbody > tr > th.active,
 .task-list > tbody > tr > th.active,
+.project-finder-table > tbody > tr > th.active,
 .table > tbody > tr.active > td,
 .task-list > tbody > tr.active > td,
+.project-finder-table > tbody > tr.active > td,
 .table > tbody > tr.active > th,
 .task-list > tbody > tr.active > th,
+.project-finder-table > tbody > tr.active > th,
 .table > tfoot > tr > td.active,
 .task-list > tfoot > tr > td.active,
+.project-finder-table > tfoot > tr > td.active,
 .table > tfoot > tr > th.active,
 .task-list > tfoot > tr > th.active,
+.project-finder-table > tfoot > tr > th.active,
 .table > tfoot > tr.active > td,
 .task-list > tfoot > tr.active > td,
+.project-finder-table > tfoot > tr.active > td,
 .table > tfoot > tr.active > th,
-.task-list > tfoot > tr.active > th {
+.task-list > tfoot > tr.active > th,
+.project-finder-table > tfoot > tr.active > th {
   background-color: #f5f5f5;
 }
 
@@ -2962,25 +2982,34 @@ table th[class*="col-"] {
   background-color: #e8e8e8;
 }
 
-.table > thead > tr > td.success, .task-list > thead > tr > td.success,
+.table > thead > tr > td.success, .task-list > thead > tr > td.success, .project-finder-table > thead > tr > td.success,
 .table > thead > tr > th.success,
-.task-list > thead > tr > th.success, .table > thead > tr.success > td, .task-list > thead > tr.success > td, .table > thead > tr.success > th, .task-list > thead > tr.success > th,
+.task-list > thead > tr > th.success,
+.project-finder-table > thead > tr > th.success, .table > thead > tr.success > td, .task-list > thead > tr.success > td, .project-finder-table > thead > tr.success > td, .table > thead > tr.success > th, .task-list > thead > tr.success > th, .project-finder-table > thead > tr.success > th,
 .table > tbody > tr > td.success,
 .task-list > tbody > tr > td.success,
+.project-finder-table > tbody > tr > td.success,
 .table > tbody > tr > th.success,
 .task-list > tbody > tr > th.success,
+.project-finder-table > tbody > tr > th.success,
 .table > tbody > tr.success > td,
 .task-list > tbody > tr.success > td,
+.project-finder-table > tbody > tr.success > td,
 .table > tbody > tr.success > th,
 .task-list > tbody > tr.success > th,
+.project-finder-table > tbody > tr.success > th,
 .table > tfoot > tr > td.success,
 .task-list > tfoot > tr > td.success,
+.project-finder-table > tfoot > tr > td.success,
 .table > tfoot > tr > th.success,
 .task-list > tfoot > tr > th.success,
+.project-finder-table > tfoot > tr > th.success,
 .table > tfoot > tr.success > td,
 .task-list > tfoot > tr.success > td,
+.project-finder-table > tfoot > tr.success > td,
 .table > tfoot > tr.success > th,
-.task-list > tfoot > tr.success > th {
+.task-list > tfoot > tr.success > th,
+.project-finder-table > tfoot > tr.success > th {
   background-color: #dff0d8;
 }
 
@@ -2990,25 +3019,34 @@ table th[class*="col-"] {
   background-color: #d0e9c6;
 }
 
-.table > thead > tr > td.info, .task-list > thead > tr > td.info,
+.table > thead > tr > td.info, .task-list > thead > tr > td.info, .project-finder-table > thead > tr > td.info,
 .table > thead > tr > th.info,
-.task-list > thead > tr > th.info, .table > thead > tr.info > td, .task-list > thead > tr.info > td, .table > thead > tr.info > th, .task-list > thead > tr.info > th,
+.task-list > thead > tr > th.info,
+.project-finder-table > thead > tr > th.info, .table > thead > tr.info > td, .task-list > thead > tr.info > td, .project-finder-table > thead > tr.info > td, .table > thead > tr.info > th, .task-list > thead > tr.info > th, .project-finder-table > thead > tr.info > th,
 .table > tbody > tr > td.info,
 .task-list > tbody > tr > td.info,
+.project-finder-table > tbody > tr > td.info,
 .table > tbody > tr > th.info,
 .task-list > tbody > tr > th.info,
+.project-finder-table > tbody > tr > th.info,
 .table > tbody > tr.info > td,
 .task-list > tbody > tr.info > td,
+.project-finder-table > tbody > tr.info > td,
 .table > tbody > tr.info > th,
 .task-list > tbody > tr.info > th,
+.project-finder-table > tbody > tr.info > th,
 .table > tfoot > tr > td.info,
 .task-list > tfoot > tr > td.info,
+.project-finder-table > tfoot > tr > td.info,
 .table > tfoot > tr > th.info,
 .task-list > tfoot > tr > th.info,
+.project-finder-table > tfoot > tr > th.info,
 .table > tfoot > tr.info > td,
 .task-list > tfoot > tr.info > td,
+.project-finder-table > tfoot > tr.info > td,
 .table > tfoot > tr.info > th,
-.task-list > tfoot > tr.info > th {
+.task-list > tfoot > tr.info > th,
+.project-finder-table > tfoot > tr.info > th {
   background-color: #d9edf7;
 }
 
@@ -3018,25 +3056,34 @@ table th[class*="col-"] {
   background-color: #c4e3f3;
 }
 
-.table > thead > tr > td.warning, .task-list > thead > tr > td.warning,
+.table > thead > tr > td.warning, .task-list > thead > tr > td.warning, .project-finder-table > thead > tr > td.warning,
 .table > thead > tr > th.warning,
-.task-list > thead > tr > th.warning, .table > thead > tr.warning > td, .task-list > thead > tr.warning > td, .table > thead > tr.warning > th, .task-list > thead > tr.warning > th,
+.task-list > thead > tr > th.warning,
+.project-finder-table > thead > tr > th.warning, .table > thead > tr.warning > td, .task-list > thead > tr.warning > td, .project-finder-table > thead > tr.warning > td, .table > thead > tr.warning > th, .task-list > thead > tr.warning > th, .project-finder-table > thead > tr.warning > th,
 .table > tbody > tr > td.warning,
 .task-list > tbody > tr > td.warning,
+.project-finder-table > tbody > tr > td.warning,
 .table > tbody > tr > th.warning,
 .task-list > tbody > tr > th.warning,
+.project-finder-table > tbody > tr > th.warning,
 .table > tbody > tr.warning > td,
 .task-list > tbody > tr.warning > td,
+.project-finder-table > tbody > tr.warning > td,
 .table > tbody > tr.warning > th,
 .task-list > tbody > tr.warning > th,
+.project-finder-table > tbody > tr.warning > th,
 .table > tfoot > tr > td.warning,
 .task-list > tfoot > tr > td.warning,
+.project-finder-table > tfoot > tr > td.warning,
 .table > tfoot > tr > th.warning,
 .task-list > tfoot > tr > th.warning,
+.project-finder-table > tfoot > tr > th.warning,
 .table > tfoot > tr.warning > td,
 .task-list > tfoot > tr.warning > td,
+.project-finder-table > tfoot > tr.warning > td,
 .table > tfoot > tr.warning > th,
-.task-list > tfoot > tr.warning > th {
+.task-list > tfoot > tr.warning > th,
+.project-finder-table > tfoot > tr.warning > th {
   background-color: #fcf8e3;
 }
 
@@ -3046,25 +3093,34 @@ table th[class*="col-"] {
   background-color: #faf2cc;
 }
 
-.table > thead > tr > td.danger, .task-list > thead > tr > td.danger,
+.table > thead > tr > td.danger, .task-list > thead > tr > td.danger, .project-finder-table > thead > tr > td.danger,
 .table > thead > tr > th.danger,
-.task-list > thead > tr > th.danger, .table > thead > tr.danger > td, .task-list > thead > tr.danger > td, .table > thead > tr.danger > th, .task-list > thead > tr.danger > th,
+.task-list > thead > tr > th.danger,
+.project-finder-table > thead > tr > th.danger, .table > thead > tr.danger > td, .task-list > thead > tr.danger > td, .project-finder-table > thead > tr.danger > td, .table > thead > tr.danger > th, .task-list > thead > tr.danger > th, .project-finder-table > thead > tr.danger > th,
 .table > tbody > tr > td.danger,
 .task-list > tbody > tr > td.danger,
+.project-finder-table > tbody > tr > td.danger,
 .table > tbody > tr > th.danger,
 .task-list > tbody > tr > th.danger,
+.project-finder-table > tbody > tr > th.danger,
 .table > tbody > tr.danger > td,
 .task-list > tbody > tr.danger > td,
+.project-finder-table > tbody > tr.danger > td,
 .table > tbody > tr.danger > th,
 .task-list > tbody > tr.danger > th,
+.project-finder-table > tbody > tr.danger > th,
 .table > tfoot > tr > td.danger,
 .task-list > tfoot > tr > td.danger,
+.project-finder-table > tfoot > tr > td.danger,
 .table > tfoot > tr > th.danger,
 .task-list > tfoot > tr > th.danger,
+.project-finder-table > tfoot > tr > th.danger,
 .table > tfoot > tr.danger > td,
 .task-list > tfoot > tr.danger > td,
+.project-finder-table > tfoot > tr.danger > td,
 .table > tfoot > tr.danger > th,
-.task-list > tfoot > tr.danger > th {
+.task-list > tfoot > tr.danger > th,
+.project-finder-table > tfoot > tr.danger > th {
   background-color: #f2dede;
 }
 
@@ -3086,20 +3142,25 @@ table th[class*="col-"] {
     -ms-overflow-style: -ms-autohiding-scrollbar;
     border: 1px solid #ddd;
   }
-  .table-responsive > .table, .table-responsive > .task-list {
+  .table-responsive > .table, .table-responsive > .task-list, .table-responsive > .project-finder-table {
     margin-bottom: 0;
   }
-  .table-responsive > .table > thead > tr > th, .table-responsive > .task-list > thead > tr > th,
+  .table-responsive > .table > thead > tr > th, .table-responsive > .task-list > thead > tr > th, .table-responsive > .project-finder-table > thead > tr > th,
   .table-responsive > .table > thead > tr > td,
   .table-responsive > .task-list > thead > tr > td,
+  .table-responsive > .project-finder-table > thead > tr > td,
   .table-responsive > .table > tbody > tr > th,
   .table-responsive > .task-list > tbody > tr > th,
+  .table-responsive > .project-finder-table > tbody > tr > th,
   .table-responsive > .table > tbody > tr > td,
   .table-responsive > .task-list > tbody > tr > td,
+  .table-responsive > .project-finder-table > tbody > tr > td,
   .table-responsive > .table > tfoot > tr > th,
   .table-responsive > .task-list > tfoot > tr > th,
+  .table-responsive > .project-finder-table > tfoot > tr > th,
   .table-responsive > .table > tfoot > tr > td,
-  .table-responsive > .task-list > tfoot > tr > td {
+  .table-responsive > .task-list > tfoot > tr > td,
+  .table-responsive > .project-finder-table > tfoot > tr > td {
     white-space: nowrap;
   }
   .table-responsive > .table-bordered {
@@ -6110,131 +6171,173 @@ button.list-group-item-danger.active:focus {
   border-top-width: 0;
 }
 
-.panel > .table, .panel > .task-list,
+.panel > .table, .panel > .task-list, .panel > .project-finder-table,
 .panel > .table-responsive > .table,
 .panel > .table-responsive > .task-list,
+.panel > .table-responsive > .project-finder-table,
 .panel > .panel-collapse > .table,
-.panel > .panel-collapse > .task-list {
+.panel > .panel-collapse > .task-list,
+.panel > .panel-collapse > .project-finder-table {
   margin-bottom: 0;
 }
-.panel > .table caption, .panel > .task-list caption,
+.panel > .table caption, .panel > .task-list caption, .panel > .project-finder-table caption,
 .panel > .table-responsive > .table caption,
 .panel > .table-responsive > .task-list caption,
+.panel > .table-responsive > .project-finder-table caption,
 .panel > .panel-collapse > .table caption,
-.panel > .panel-collapse > .task-list caption {
+.panel > .panel-collapse > .task-list caption,
+.panel > .panel-collapse > .project-finder-table caption {
   padding-left: 15px;
   padding-right: 15px;
 }
-.panel > .table:first-child, .panel > .task-list:first-child,
+.panel > .table:first-child, .panel > .task-list:first-child, .panel > .project-finder-table:first-child,
 .panel > .table-responsive:first-child > .table:first-child,
-.panel > .table-responsive:first-child > .task-list:first-child {
+.panel > .table-responsive:first-child > .task-list:first-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child {
   border-top-right-radius: 1px;
   border-top-left-radius: 1px;
 }
-.panel > .table:first-child > thead:first-child > tr:first-child, .panel > .task-list:first-child > thead:first-child > tr:first-child,
+.panel > .table:first-child > thead:first-child > tr:first-child, .panel > .task-list:first-child > thead:first-child > tr:first-child, .panel > .project-finder-table:first-child > thead:first-child > tr:first-child,
 .panel > .table:first-child > tbody:first-child > tr:first-child,
 .panel > .task-list:first-child > tbody:first-child > tr:first-child,
+.panel > .project-finder-table:first-child > tbody:first-child > tr:first-child,
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,
 .panel > .table-responsive:first-child > .task-list:first-child > thead:first-child > tr:first-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > thead:first-child > tr:first-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child,
-.panel > .table-responsive:first-child > .task-list:first-child > tbody:first-child > tr:first-child {
+.panel > .table-responsive:first-child > .task-list:first-child > tbody:first-child > tr:first-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > tbody:first-child > tr:first-child {
   border-top-left-radius: 1px;
   border-top-right-radius: 1px;
 }
-.panel > .table:first-child > thead:first-child > tr:first-child td:first-child, .panel > .task-list:first-child > thead:first-child > tr:first-child td:first-child,
+.panel > .table:first-child > thead:first-child > tr:first-child td:first-child, .panel > .task-list:first-child > thead:first-child > tr:first-child td:first-child, .panel > .project-finder-table:first-child > thead:first-child > tr:first-child td:first-child,
 .panel > .table:first-child > thead:first-child > tr:first-child th:first-child,
 .panel > .task-list:first-child > thead:first-child > tr:first-child th:first-child,
+.panel > .project-finder-table:first-child > thead:first-child > tr:first-child th:first-child,
 .panel > .table:first-child > tbody:first-child > tr:first-child td:first-child,
 .panel > .task-list:first-child > tbody:first-child > tr:first-child td:first-child,
+.panel > .project-finder-table:first-child > tbody:first-child > tr:first-child td:first-child,
 .panel > .table:first-child > tbody:first-child > tr:first-child th:first-child,
 .panel > .task-list:first-child > tbody:first-child > tr:first-child th:first-child,
+.panel > .project-finder-table:first-child > tbody:first-child > tr:first-child th:first-child,
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:first-child,
 .panel > .table-responsive:first-child > .task-list:first-child > thead:first-child > tr:first-child td:first-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > thead:first-child > tr:first-child td:first-child,
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,
 .panel > .table-responsive:first-child > .task-list:first-child > thead:first-child > tr:first-child th:first-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > thead:first-child > tr:first-child th:first-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,
 .panel > .table-responsive:first-child > .task-list:first-child > tbody:first-child > tr:first-child td:first-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > tbody:first-child > tr:first-child td:first-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child,
-.panel > .table-responsive:first-child > .task-list:first-child > tbody:first-child > tr:first-child th:first-child {
+.panel > .table-responsive:first-child > .task-list:first-child > tbody:first-child > tr:first-child th:first-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > tbody:first-child > tr:first-child th:first-child {
   border-top-left-radius: 1px;
 }
-.panel > .table:first-child > thead:first-child > tr:first-child td:last-child, .panel > .task-list:first-child > thead:first-child > tr:first-child td:last-child,
+.panel > .table:first-child > thead:first-child > tr:first-child td:last-child, .panel > .task-list:first-child > thead:first-child > tr:first-child td:last-child, .panel > .project-finder-table:first-child > thead:first-child > tr:first-child td:last-child,
 .panel > .table:first-child > thead:first-child > tr:first-child th:last-child,
 .panel > .task-list:first-child > thead:first-child > tr:first-child th:last-child,
+.panel > .project-finder-table:first-child > thead:first-child > tr:first-child th:last-child,
 .panel > .table:first-child > tbody:first-child > tr:first-child td:last-child,
 .panel > .task-list:first-child > tbody:first-child > tr:first-child td:last-child,
+.panel > .project-finder-table:first-child > tbody:first-child > tr:first-child td:last-child,
 .panel > .table:first-child > tbody:first-child > tr:first-child th:last-child,
 .panel > .task-list:first-child > tbody:first-child > tr:first-child th:last-child,
+.panel > .project-finder-table:first-child > tbody:first-child > tr:first-child th:last-child,
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:last-child,
 .panel > .table-responsive:first-child > .task-list:first-child > thead:first-child > tr:first-child td:last-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > thead:first-child > tr:first-child td:last-child,
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,
 .panel > .table-responsive:first-child > .task-list:first-child > thead:first-child > tr:first-child th:last-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > thead:first-child > tr:first-child th:last-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,
 .panel > .table-responsive:first-child > .task-list:first-child > tbody:first-child > tr:first-child td:last-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > tbody:first-child > tr:first-child td:last-child,
 .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child,
-.panel > .table-responsive:first-child > .task-list:first-child > tbody:first-child > tr:first-child th:last-child {
+.panel > .table-responsive:first-child > .task-list:first-child > tbody:first-child > tr:first-child th:last-child,
+.panel > .table-responsive:first-child > .project-finder-table:first-child > tbody:first-child > tr:first-child th:last-child {
   border-top-right-radius: 1px;
 }
-.panel > .table:last-child, .panel > .task-list:last-child,
+.panel > .table:last-child, .panel > .task-list:last-child, .panel > .project-finder-table:last-child,
 .panel > .table-responsive:last-child > .table:last-child,
-.panel > .table-responsive:last-child > .task-list:last-child {
+.panel > .table-responsive:last-child > .task-list:last-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child {
   border-bottom-right-radius: 1px;
   border-bottom-left-radius: 1px;
 }
-.panel > .table:last-child > tbody:last-child > tr:last-child, .panel > .task-list:last-child > tbody:last-child > tr:last-child,
+.panel > .table:last-child > tbody:last-child > tr:last-child, .panel > .task-list:last-child > tbody:last-child > tr:last-child, .panel > .project-finder-table:last-child > tbody:last-child > tr:last-child,
 .panel > .table:last-child > tfoot:last-child > tr:last-child,
 .panel > .task-list:last-child > tfoot:last-child > tr:last-child,
+.panel > .project-finder-table:last-child > tfoot:last-child > tr:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child,
 .panel > .table-responsive:last-child > .task-list:last-child > tbody:last-child > tr:last-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tbody:last-child > tr:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child,
-.panel > .table-responsive:last-child > .task-list:last-child > tfoot:last-child > tr:last-child {
+.panel > .table-responsive:last-child > .task-list:last-child > tfoot:last-child > tr:last-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tfoot:last-child > tr:last-child {
   border-bottom-left-radius: 1px;
   border-bottom-right-radius: 1px;
 }
-.panel > .table:last-child > tbody:last-child > tr:last-child td:first-child, .panel > .task-list:last-child > tbody:last-child > tr:last-child td:first-child,
+.panel > .table:last-child > tbody:last-child > tr:last-child td:first-child, .panel > .task-list:last-child > tbody:last-child > tr:last-child td:first-child, .panel > .project-finder-table:last-child > tbody:last-child > tr:last-child td:first-child,
 .panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,
 .panel > .task-list:last-child > tbody:last-child > tr:last-child th:first-child,
+.panel > .project-finder-table:last-child > tbody:last-child > tr:last-child th:first-child,
 .panel > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
 .panel > .task-list:last-child > tfoot:last-child > tr:last-child td:first-child,
+.panel > .project-finder-table:last-child > tfoot:last-child > tr:last-child td:first-child,
 .panel > .table:last-child > tfoot:last-child > tr:last-child th:first-child,
 .panel > .task-list:last-child > tfoot:last-child > tr:last-child th:first-child,
+.panel > .project-finder-table:last-child > tfoot:last-child > tr:last-child th:first-child,
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:first-child,
 .panel > .table-responsive:last-child > .task-list:last-child > tbody:last-child > tr:last-child td:first-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tbody:last-child > tr:last-child td:first-child,
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,
 .panel > .table-responsive:last-child > .task-list:last-child > tbody:last-child > tr:last-child th:first-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tbody:last-child > tr:last-child th:first-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
 .panel > .table-responsive:last-child > .task-list:last-child > tfoot:last-child > tr:last-child td:first-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tfoot:last-child > tr:last-child td:first-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child,
-.panel > .table-responsive:last-child > .task-list:last-child > tfoot:last-child > tr:last-child th:first-child {
+.panel > .table-responsive:last-child > .task-list:last-child > tfoot:last-child > tr:last-child th:first-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tfoot:last-child > tr:last-child th:first-child {
   border-bottom-left-radius: 1px;
 }
-.panel > .table:last-child > tbody:last-child > tr:last-child td:last-child, .panel > .task-list:last-child > tbody:last-child > tr:last-child td:last-child,
+.panel > .table:last-child > tbody:last-child > tr:last-child td:last-child, .panel > .task-list:last-child > tbody:last-child > tr:last-child td:last-child, .panel > .project-finder-table:last-child > tbody:last-child > tr:last-child td:last-child,
 .panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,
 .panel > .task-list:last-child > tbody:last-child > tr:last-child th:last-child,
+.panel > .project-finder-table:last-child > tbody:last-child > tr:last-child th:last-child,
 .panel > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
 .panel > .task-list:last-child > tfoot:last-child > tr:last-child td:last-child,
+.panel > .project-finder-table:last-child > tfoot:last-child > tr:last-child td:last-child,
 .panel > .table:last-child > tfoot:last-child > tr:last-child th:last-child,
 .panel > .task-list:last-child > tfoot:last-child > tr:last-child th:last-child,
+.panel > .project-finder-table:last-child > tfoot:last-child > tr:last-child th:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:last-child,
 .panel > .table-responsive:last-child > .task-list:last-child > tbody:last-child > tr:last-child td:last-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tbody:last-child > tr:last-child td:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,
 .panel > .table-responsive:last-child > .task-list:last-child > tbody:last-child > tr:last-child th:last-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tbody:last-child > tr:last-child th:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
 .panel > .table-responsive:last-child > .task-list:last-child > tfoot:last-child > tr:last-child td:last-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tfoot:last-child > tr:last-child td:last-child,
 .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child,
-.panel > .table-responsive:last-child > .task-list:last-child > tfoot:last-child > tr:last-child th:last-child {
+.panel > .table-responsive:last-child > .task-list:last-child > tfoot:last-child > tr:last-child th:last-child,
+.panel > .table-responsive:last-child > .project-finder-table:last-child > tfoot:last-child > tr:last-child th:last-child {
   border-bottom-right-radius: 1px;
 }
-.panel > .panel-body + .table, .panel > .panel-body + .task-list,
+.panel > .panel-body + .table, .panel > .panel-body + .task-list, .panel > .panel-body + .project-finder-table,
 .panel > .panel-body + .table-responsive,
 .panel > .table + .panel-body,
 .panel > .task-list + .panel-body,
+.panel > .project-finder-table + .panel-body,
 .panel > .table-responsive + .panel-body {
   border-top: 1px solid #ddd;
 }
-.panel > .table > tbody:first-child > tr:first-child th, .panel > .task-list > tbody:first-child > tr:first-child th,
+.panel > .table > tbody:first-child > tr:first-child th, .panel > .task-list > tbody:first-child > tr:first-child th, .panel > .project-finder-table > tbody:first-child > tr:first-child th,
 .panel > .table > tbody:first-child > tr:first-child td,
-.panel > .task-list > tbody:first-child > tr:first-child td {
+.panel > .task-list > tbody:first-child > tr:first-child td,
+.panel > .project-finder-table > tbody:first-child > tr:first-child td {
   border-top: 0;
 }
 .panel > .table-bordered,
@@ -8676,6 +8779,78 @@ button.close {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.project-finder-table {
+  display: flex-grid;
+  flex-direction: column;
+}
+
+.project-finder-name {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-finder-name-text {
+  position: relative;
+}
+
+.project-finder-leader {
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-finder-user-name {
+  display: inline-block;
+  position: relative;
+  left: 6px;
+}
+
+.project-finder-members {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-finder-members-text {
+  position: relative;
+  left: 25px;
+}
+
+.project-finder-description {
+  width: 460px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-finder-description-text {
+  width: 460px;
+  flex: 1;
+  word-wrap: break-word;
+  word-break: normal;
+  white-space: normal;
+  overflow: auto;
+}
+
+.project-finder-skills {
+  width: 340px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-finder-skills-text {
+  width: 340px;
+  word-wrap: break-word;
+  word-break: normal;
+  white-space: normal;
+  overflow: auto;
 }
 
 .dropdown-menu > li > label {

@@ -154,7 +154,8 @@ module.exports = function(app, passport) {
                             memberList.push({
                                 'name':foundUsers[i].local.firstname+' '+foundUsers[i].local.lastname,
                                 'initials':foundUsers[i].local.firstname.charAt(0) + foundUsers[i].local.lastname.charAt(0),
-                                'email':foundUsers[i].local.email, 'id':foundUsers[i].local.userid,
+                                'email':foundUsers[i].local.email, 
+                                'id':foundUsers[i].local.userid,
                                 'color':foundUsers[i].local.userColor
                             });
                         }
