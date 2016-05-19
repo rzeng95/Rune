@@ -8,10 +8,11 @@ div(class="overview-container")
         h3 Project Settings
         hr
         h4 Project Description
-        textarea(type="text" rows="4" name="description" placeholder="No current description found" value=description)
+        textarea(type="text" rows="4" name="description" placeholder="No current description found") #{description}
         
-        h4 Project Github URL 
-        input(type="text" name="github" placeholder="No Github URL posted" value=github_repo)   
+        h4 Project Github URL (Must follow the format [username]/[repository name])
+        h4 Example: If your repository has name "https://github.com/rzeng95/Rune" then enter "rzeng95/Rune"
+        input(type="text" name="github_url" placeholder="No Github URL posted" value=github_url)   
         hr
         
         h4 Project Applicants (make this a table)

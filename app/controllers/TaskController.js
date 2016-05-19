@@ -104,7 +104,8 @@ module.exports = function(app, passport) {
             function getGitHubCommits(foundProj, foundTask, usersList, callback) {
                 var commitList;
                 var options = {
-                    url : 'https://api.github.com/repos/' + foundProj.github_owner + '/' + foundProj.github_repo + '/commits?client_id=fb79527a871e5ba8f0f7&client_secret=a82aa7f700c3f1022aefa81abdf77cf590593098',
+                    //url : 'https://api.github.com/repos/' + foundProj.github_owner + '/' + foundProj.github_repo +
+                    url : 'https://api.github.com/repos/' + foundProj.github_url + '/commits?client_id=fb79527a871e5ba8f0f7&client_secret=a82aa7f700c3f1022aefa81abdf77cf590593098',
                     headers : {
                         'User-Agent': 'request'
                     }
@@ -144,6 +145,7 @@ module.exports = function(app, passport) {
 
                             github_repo : foundProj.github_repo,
                             github_owner : foundProj.github_owner,
+                            github_url : foundProj.github_url,
                             commits : commitList,
 
                             // Task information.

@@ -202,7 +202,11 @@ module.exports = function(app, passport) {
                     archivedtasks : archivedTasks,
 
                     // History variables
-                    history : foundProj.history
+                    history : foundProj.history,
+
+                    // Settings variables
+                    github_url : foundProj.github_url,
+                    description : foundProj.description
                 });
             }
         });
@@ -210,7 +214,21 @@ module.exports = function(app, passport) {
 
     app.post('/p/:projectid/edit/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
         // update description and github repo
-        console.log('oh hello!');
+        Project.findById(req.params.projectid, function(err, foundProj){
+            if (err) throw err;
+
+            foundProj.github_url = req.body.github_url;
+            foundProj.description = req.body.description;
+
+            foundProj.save(function(err){
+                if (err) throw err;
+                else {
+                    res.redirect('/p/' + req.params.projectid + '/');
+                }
+
+            });
+
+        });
     });
 
     // Only the project creator can delete projects.

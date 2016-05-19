@@ -33,7 +33,8 @@ div(class="task-body")
                                 div(class="panel-body") #{comment.comment}
                                 if comment.github
                                     div(class="panel-footer")
-                                        a(href='https://github.com/'+github_owner+'/'+github_repo+'/commit/'+comment.github)
+                                        //a(href='https://github.com/'+github_owner+'/'+github_repo+'/commit/'+comment.github)
+                                        a(href='https://github.com/'+github_url+'/commit/'+comment.github)
                                             | GitHub - #{comment.github}
             form(class="form-group task-comment-form" action="comment/" method="POST")
                 div(class="form-group")

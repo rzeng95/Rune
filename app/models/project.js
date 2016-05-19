@@ -42,7 +42,8 @@ var projectSchema = mongoose.Schema({
         }
     ],
     github_owner    : String,
-    github_repo     : String
+    github_repo     : String,
+    github_url      : String
 });
 
 module.exports = mongoose.model('Project', projectSchema);
