@@ -154,7 +154,7 @@ module.exports = function(app, passport) {
                             memberList.push({
                                 'name':foundUsers[i].local.firstname+' '+foundUsers[i].local.lastname,
                                 'initials':foundUsers[i].local.firstname.charAt(0) + foundUsers[i].local.lastname.charAt(0),
-                                'email':foundUsers[i].local.email, 
+                                'email':foundUsers[i].local.email,
                                 'id':foundUsers[i].local.userid,
                                 'color':foundUsers[i].local.userColor
                             });
@@ -208,6 +208,10 @@ module.exports = function(app, passport) {
         });
     }); //end of app.post('/p/:projectid/')
 
+    app.post('/p/:projectid/edit/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
+        // update description and github repo
+        console.log('oh hello!');
+    });
 
     // Only the project creator can delete projects.
     app.post('/p/:projectid/deleteproject/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
