@@ -187,6 +187,7 @@ module.exports = function(app, passport) {
 
                     github_repo : foundProj.github_repo,
                     github_owner : foundProj.github_owner,
+                    full_url : 'https://github.com/' + foundProj.github_url,
 
                     // User tab variables
                     projMembers : memberList,

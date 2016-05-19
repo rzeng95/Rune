@@ -3,6 +3,17 @@ div(class="overview-container")
 	table(class="table table-hover")
 		tbody
 			tr
+				th Project Name:
+				td #{projName}
+			tr
+				th Project Repository:
+				td #[a(href=full_url) #{full_url}]
+			tr
+				th Project Description:
+				td #{description}
+	//
+		tbody
+			tr
 				th Project Name: 
 				td(id="project-name") #{projName}
 			tr
@@ -20,10 +31,10 @@ div(class="overview-container")
 			tr
 				th GitHub Owner
 				td #{github_owner}
-
-	button(id="btn-proj-list" class="btn btn-primary btn-md" type="submit") List Project
-	form(action="deleteproject/" method="POST")
-		button(id="btn-proj-del" class="btn btn-primary btn-md" type="submit") Delete Project 
+	//
+		button(id="btn-proj-list" class="btn btn-primary btn-md" type="submit") List Project
+		form(action="deleteproject/" method="POST")
+			button(id="btn-proj-del" class="btn btn-primary btn-md" type="submit") Delete Project 
 		
 	h2 Project History
 	each hist in history.reverse()
