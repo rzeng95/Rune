@@ -3,15 +3,14 @@ extends ./partials/base.jade
 block bodyContent
     div(class="container-fluid project-container")
         div(class="row project-header")
-            div(class="col-xs-12")
-                h2 #{project.projectname}
-            div(class="col-xs-12 project-tabs")
-                ul(class="col-xs-12 nav nav-tabs project-pages")
-                    li(id="project-tab-5") #[a(href="#settings" data-toggle="tab") Settings]
-                    li(id="project-tab-4") #[a(href="#tasks" data-toggle="tab") Tasks]
-                    li(id="project-tab-3") #[a(href="#users" data-toggle="tab") Users]
-                    li(id="project-tab-2" class="active" ) #[a(href="#kanban" data-toggle="tab") Kanban Board]
-                    li(id="project-tab-1") #[a(href="#overview" data-toggle="tab") Overview]
+            div(class="col-xs-6 project-name")
+                h2(id="project-name") #{project.projectname}
+            ul(class="col-xs-12 nav nav-tabs project-tabs")
+                li(id="project-tab-5") #[a(href="#settings" data-toggle="tab") Settings]
+                li(id="project-tab-4") #[a(href="#tasks" data-toggle="tab") Tasks]
+                li(id="project-tab-3") #[a(href="#users" data-toggle="tab") Users]
+                li(id="project-tab-2" class="active" ) #[a(href="#kanban" data-toggle="tab") Kanban Board]
+                li(id="project-tab-1") #[a(href="#overview" data-toggle="tab") Overview]
 
         div(class="project-header-offset")
         div(class="tab-content")

@@ -100,7 +100,7 @@ Page.Project.taskWindowListeners = function() {
 Page.Project.taskWindowListeners();
 
 // Add a confirmation prompt for deleting projects.
-$('#btn-proj-del').click(function(e) {
+$('.project-del-form').submit(function(e) {
     var projectName = $('#project-name').text();
     var promptDialogue = "Warning - deleting a project may have substantial repercussions!\n" + 
         "Are you sure you want to delete this project?\n\n" +
@@ -110,6 +110,7 @@ $('#btn-proj-del').click(function(e) {
         e.preventDefault();
     }
 });
+
 
 // Add a sortable property to Kanban board task objects.
 $('.kanban-col').sortable({
@@ -143,7 +144,6 @@ $('.task-browser-list-el-link').click(function(e) {
 var $tasks = $('.task-browser-list');
 var $tasksli = $tasks.children('li');
 
-
 //Task Sorting
 //Sort Types:
 //datecreated
@@ -160,26 +160,23 @@ var SortTasks = function(attribute, order) {
     $tasksli.sort(function(a, b) {
         var an = convertAttributeForSort(a.getAttribute(attribute));
         var bn = convertAttributeForSort(b.getAttribute(attribute));
-        if(order == "ascending") {
-            if(an > bn) {
+        if (order == "ascending") {
+            if (an > bn) {
                 return 1;
-            } 
-            else if(an < bn) {
+            }  else if (an < bn) {
                 return -1;
             }
-        }
-        else if(order == "descending") {
-            if(an < bn) {
+        } else if (order == "descending") {
+            if (an < bn) {
                 return 1;
             } 
             else if(an > bn) {
                 return -1;
             }
         }
-        if(a.id < b.id) {
+        if (a.id < b.id) {
             return 1;
-        }
-        else if(a.id > b.id) {
+        } else if (a.id > b.id) {
             return -1;
         }
         return 0;
@@ -242,16 +239,16 @@ var FilterTasks = function(attribute, value) {
 
 var Filter = function() {
     $tasksli.show();
-    for(var filterType in filters) {
-        if(filters[filterType].length > 0) {
+    for (var filterType in filters) {
+        if (filters[filterType].length > 0) {
             $tasksli.each(function() {
                 var isType = false;
-                for(var filterValue in filters[filterType]) {
-                    if($(this).attr(filterType) == filters[filterType][filterValue]) {
+                for (var filterValue in filters[filterType]) {
+                    if ($(this).attr(filterType) == filters[filterType][filterValue]) {
                         isType = true;
                     }
                 }
-                if(!isType) {
+                if (!isType) {
                     $(this).hide();
                 }
             });
