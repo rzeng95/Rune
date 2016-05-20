@@ -1,9 +1,18 @@
-div(class="row task-header")
-    div(class="col-xs-12")
-        h4 #{projName} (#{projKey})
-    div(class="col-xs-12")
-        h2 #{taskid}: #{taskname}
-div(style="margin-top: 103px;")
+if (isProjectPage || isAjax)
+    div(class="row")
+        div(class="col-xs-12")
+            h5
+                | #[a(href="/p/"+projId+"/") #{project.projectname}] / 
+                | #[a(href="/p/"+projId+"/t/"+task.taskid+"/") #{task.taskid}]
+            h3 #{task.taskname}
+else
+    div(class="row task-header")
+        div(class="col-xs-12")
+            h5
+                | #[a(href="/p/"+projId+"/") #{project.projectname}] / 
+                | #[a(href="/p/"+projId+"/t/"+task.taskid+"/") #{task.taskid}]
+            h3 #{task.taskname}
+    div(style="margin-top: 103px;")
 div(class="task-body")
     div(class="row")
         div(class="col-xs-8")
@@ -11,62 +20,70 @@ div(class="task-body")
             table(class="table")
                 tbody
                     tr
-                        td #{taskdescription}
+                        td #{task.taskdescription}
                     tr
                         td
             h4 Comments
             table(class="table")
                 tbody
-                    each comnt in comments
+                    each comment in task.comments
                         tr
                             div(class="panel panel-default" )
-                                div(class="panel-heading" style="text-align: right") #[a(href='/u/'+comnt.authorid+'/') #{comnt.authorname}] added a comment on #{comnt.date}
-                                div(class="panel-body") #{comnt.comment}
-                                if comnt.github
-                                    div(class="panel-footer") #[a(href='https://github.com/'+ github_owner + '/' + github_repo + '/commit/'+comnt.github) GitHub - #{ comnt.github } ]
-                                    
-
-            form(class="form-group" action="comment/" method="POST")
-                label Add Comment 
-                textarea(class="form-control" name="comment" id="comment" rows="3")
-                label Optional - Add Github Commit 
-                select(class="form-control" name="githubcommit")
-                    option(value="") N/A
-                    each commit in commits
-                        option(value="#{commit['sha']}") #{commit['commit']['author']['name']} - #{commit['commit']['message']} 
-                button(class="btn btn-primary" type="submit") Submit
-
+                                div(class="panel-heading") #[a(href='/u/'+comment.authorid+'/') #{comment.authorname}] added a comment on #{comment.date}
+                                div(class="panel-body") #{comment.comment}
+                                if comment.github
+                                    div(class="panel-footer")
+                                        //a(href='https://github.com/'+github_owner+'/'+github_repo+'/commit/'+comment.github)
+                                        a(href='https://github.com/'+github_url+'/commit/'+comment.github)
+                                            | GitHub - #{comment.github}
+            form(class="form-group task-comment-form" action="comment/" method="POST")
+                div(class="form-group")
+                    label Add Comment 
+                div(class="form-group")
+                    textarea(class="form-control" name="comment" id="comment" rows="3")                    
+                    if commits
+                        if !isProjectPage
+                            label Optional - Add Github Commit 
+                            select(class="form-control" name="githubcommit")
+                                option(value="") N/A
+                                each commit in commits
+                                    option(value="#{commit['sha']}") #{commit['commit']['author']['name']} - #{commit['commit']['message']}
+                div(class="form-group")
+                    button(class="btn btn-primary" type="submit") Submit
         div(class="col-xs-4")
             h4 Details
             div(class="task-tags")
                 table(class="table")
                     tbody
                         tr
+                            td Created by:
+                            td #{task.createdby}
+                        tr
                             td Assignee:
-                            td #{curAssignee}
-                            td
+                            td #{task.assignedto}
+                        tr
+                            td Status:
+                            td #{task.status}
                         tr
                             td Priority:
                             td
-                                div(class="kanban-priority-icon-" + curPriority)
+                                div(class="kanban-priority-icon-" + task.priority)
                                     div(class="priority-icon")
-                                    div(class="priority-text") #{curPriority}
-                            td
+                                    div(class="priority-text") #{task.priority}
                         tr
                             td
-                                a(class="btn btn-primary" role="button" data-toggle="modal" href="#task-modal" onclick="Task.taskEditLoad()") Edit Task
+                                a(class="btn btn-primary btn-task-edit" role="button" data-toggle="modal" href="#task-modal") Edit Task
                             td
-                                form(action="delete/" method="post")
-                                    button(class="btn btn-primary" type="submit") Delete Task
+                                form(class="task-delete-form" action="delete/" method="post")
+                                    button(class="btn btn-primary btn-task-delete" type="submit") Delete Task
                         tr
                             if completed
                                 td
                                     form(action="archive/" method="post")
                                         button(class="btn btn-primary" type="submit" onclick="if (!confirm('Are you sure?')) return false;") Archive
+                                td
                             else if archived
                                 td
                                     form(action="unarchive/" method="post")
                                         button(class="btn btn-primary" type="submit" onclick="if (!confirm('Are you sure?')) return false;") Unarchive
-                            else
                                 td
-                            td

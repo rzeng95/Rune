@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////////////////////////////////
+// Global specifications.
+////////////////////////////////////////////////////////////////////////////////
+
 // Compass imports.
 @import "bootstrap-compass";
 @import "bootstrap-variables";
@@ -7,7 +11,7 @@
 // SCSS includes.
 @include font-face('Roboto-Black', font-files('RobotoBlack/Roboto-Black.ttf', 'RobotoBlack/Roboto-Black.eot', 'RobotoBlack/Roboto-Black.woff'));
 
-// Global variables.
+// Global variables and properties.
 $color-1: #53847F;
 $color-2: #F8F8F8;
 $color-3: #EEEEEE;
@@ -19,7 +23,7 @@ $rainbow: #EB222A, #F36F26, #F68F22, #FEC317, #F4EA28, #9BCA3C,
           #04AA51, #1991CD, #0857A3, #6C459B, #A54499, #E34197;
 
 // Used for calculating size of the container divs for each tab of the project page
-$project-header-offset: 113px;
+$project-header-offset: 70px;
 $project-body-offset: $navbar-height + $project-header-offset;
 
 // General Utility Classes
@@ -52,7 +56,6 @@ $project-body-offset: $navbar-height + $project-header-offset;
     line-height: $line-height;
 }
 
-
 // Navbar CSS style specifications.
 .btn-is-disabled {
     pointer-events: none;
@@ -72,7 +75,7 @@ $project-body-offset: $navbar-height + $project-header-offset;
     margin-top: 200px;
     width: 400px;
     height: 400px;
-    >img {
+    > img {
         display: inline-block;
         height: 300px;
         margin-left: 40px;
@@ -85,7 +88,6 @@ $project-body-offset: $navbar-height + $project-header-offset;
         color: white;
     }
 }
-
 
 // Roo icon stylings
 #rune-logo-img {
@@ -137,6 +139,7 @@ $project-body-offset: $navbar-height + $project-header-offset;
 
 @mixin rune-kanban-small($color-index) {
     display: inline-block;
+    position: relative;
     .roo-icon-kanban {
         @include roo-image($color-index, 30px);
     }
@@ -217,7 +220,11 @@ $project-body-offset: $navbar-height + $project-header-offset;
     visibility: hidden;
 }
 
-//user list stylings
+////////////////////////////////////////////////////////////////////////////////
+// Specific style specifications to the Rune website.
+////////////////////////////////////////////////////////////////////////////////
+
+// User list styling specifications.
 .user-name {
     @include truncate(400px);
 }
@@ -226,7 +233,7 @@ $project-body-offset: $navbar-height + $project-header-offset;
     @include truncate(400px);
 }
 
-//create project page style specifications
+// Create project page style specifications.
 .createproject {
     width: 450px;
     margin-left: auto;
@@ -255,7 +262,6 @@ $project-body-offset: $navbar-height + $project-header-offset;
     .button-center {
         text-align: center;
     }
-
 }
 
 // Login page style specifications.
@@ -312,34 +318,36 @@ $project-body-offset: $navbar-height + $project-header-offset;
 // Project page CSS style specifications.
 .project-container {
     position: relative;
-    .project-tabs {
-        padding: 0;
-    }
 }
 
 .project-header {
     position: fixed;
     width: 100%;
     background-color: $color-3;
-    font-size: 20px;
+    font-size: 18px;
     z-index: 900;
+    .project-name {
+        position: absolute;
+        z-index: 1000;
+    }
+    .project-tabs {
+        margin-top: $project-header-offset - 47px;
+        bottom: 0;
+        li {
+            float: right;
+        }
+    }
 }
 
 .project-header-offset {
     margin-top: $project-header-offset;
 }
 
-.project-pages {
-    li {
-        float: right;
-    }
-}
-
 // Kanban board CSS style specifications.
 .kanban-board {
-    display: relative;
     margin: 0 -15px;
-    overflow-y: scroll; 
+    display: relative;
+    overflow-y: scroll;
     height: calc(100vh - #{$project-body-offset});
 }
 
@@ -485,68 +493,60 @@ $project-body-offset: $navbar-height + $project-header-offset;
     .btn-submit {
         margin: 0 auto;
     }
-    // .btn-primary {
-    //     margin: 0 10px;
-    //     width: 50%;
-    // }
 }
 
-// Task List Styling
-.task-list-container {
+// Task browser styling specifications.
+$task-browser-offset: $project-body-offset + 55px; 
+
+.task-browser {
+    position: relative;
+    box-sizing: border-box;
+    height: calc(100vh - #{$task-browser-offset});
     overflow-y: scroll;
-    height: calc(100vh - #{$project-body-offset});
 }
 
-.task-list {
-    @extend .table;
-    @extend .table-hover;
-    margin: 0px auto;
-    // width: 1200px;
-    table-layout: fixed;
-    
-    .task-id {
-        width: 100px;
-    }
-    .task-name {
-        width: 220px;
-    }
-    .task-description {
-        width: 400px;
-    }
-    .task-status {
-        width: 100px;
-    }
-    .task-priority {
-        width: 100px;
-    }
-    .task-assignedto {
-        width: 120px;
-    }
-    .task-createdby {
-        width: 120px;
+.task-browser-filter {
+    border-bottom-width: 1px;
+    border-bottom-color: $color-border;
+    border-bottom-style: solid;
+    > div {
+        float: left;
     }
 }
-.task-list-body {
-    .task-id-element {
-        @extend .nowrap;
+
+.task-browser-col-left,
+.task-browser-col-right {
+    overflow: scroll;
+    display: block;
+    float: left;
+    height: calc(100vh - #{$task-browser-offset});
+}
+
+.task-browser-col-left {
+    width: 25%;
+    border-right-width: 1px;
+    border-right-color: $color-border;
+    border-right-style: solid;
+    .navbar-collapse {
+        padding: 0;
     }
-    .task-name-element {
+    * {
+        width: 100%;
     }
-    .task-description-element {
-    }
-    .task-status-element { 
-    }
-    .task-priority-element {
-    }
-    .task-assignedto-element {
-        > div {
-            @include truncate(100px);
-        }
-    }
-    .task-createdby-element {
-        > div {
-            @include truncate(100px);
-        }
+}
+
+.task-browser-col-right {
+    padding: 15px;
+    width: 75%;
+}
+
+.task-browser-list-el {
+    width: 100%;
+    border-bottom-width: 1px;
+    border-bottom-color: $color-border;
+    border-bottom-style: solid;
+    > a {
+        color: $text-color;
     }
 }
 
@@ -594,6 +594,119 @@ $project-body-offset: $navbar-height + $project-header-offset;
 .task-list-name-element {
     @include truncate(270px);
 }
+
+// Profile Styling
+
+.profile-description {
+    font-size: 30px;
+}
+
+.profile-description-text {
+    position: relative;
+    left: 4px;
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+
+.profile-form-control-description {
+    @extend .form-control;
+    position: relative;
+    left: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.profile-github {
+    font-size: 30px;
+}
+
+.profile-github-text {
+    position: relative;
+    left: 4px;
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+
+.profile-form-control-github {
+    @extend .form-control;
+    position: relative;
+    left: 4px;
+    font-size: 14px;
+    margin-bottom: 14px;    
+}
+
+.profile-edit-button {
+    position: relative;
+    left: 4px;
+}
+
+// Project Finder Styling
+
+.project-finder-table {
+    @extend .table;
+    display: flex-grid;
+    flex-direction: column;
+    // table-layout: relative;
+}
+
+.project-finder-name {
+    @include truncate(200px);
+}
+
+.project-finder-name-text {
+    position: relative;
+    // left: 0px;
+}
+
+.project-finder-leader {
+    @include truncate(180px);
+}
+
+.project-finder-user-name {
+    display: inline-block;
+    position: relative;
+    left: 6px;
+}
+
+.project-finder-members {
+    @include truncate(100px);
+}
+
+.project-finder-members-text {
+    position: relative;
+    left: 25px;
+}
+
+.project-finder-description {
+    @include truncate(460px);
+}
+
+.project-finder-description-text {
+    width: 460px;
+    flex:1;
+    word-wrap: break-word;
+    word-break: normal;
+    white-space: normal;
+    overflow: auto;
+}
+
+.project-finder-skills {
+    @include truncate(340px);
+}
+
+.project-finder-skills-text {
+    width: 340px;
+    flex:1;
+    word-wrap: break-word;
+    word-break: normal;
+    white-space: normal;
+    overflow: auto; 
+}
+
+.project-finder-button {
+    // left:10px;
+}
+
 
 //dropdowns-enhancement.css
 .dropdown-menu>li>label{display:block;padding:3px 20px;clear:both;font-weight:400;line-height:1.42857143;color:#333;white-space:nowrap}.dropdown-menu>li>label:hover,.dropdown-menu>li>label:focus{text-decoration:none;color:#262626;background-color:#f5f5f5}.dropdown-menu>li>input:checked~label,.dropdown-menu>li>input:checked~label:hover,.dropdown-menu>li>input:checked~label:focus,.dropdown-menu>.active>label,.dropdown-menu>.active>label:hover,.dropdown-menu>.active>label:focus{color:#fff;text-decoration:none;outline:0;background-color:#428bca}.dropdown-menu>li>input[disabled]~label,.dropdown-menu>li>input[disabled]~label:hover,.dropdown-menu>li>input[disabled]~label:focus,.dropdown-menu>.disabled>label,.dropdown-menu>.disabled>label:hover,.dropdown-menu>.disabled>label:focus{color:#999}.dropdown-menu>li>input[disabled]~label:hover,.dropdown-menu>li>input[disabled]~label:focus,.dropdown-menu>.disabled>label:hover,.dropdown-menu>.disabled>label:focus{text-decoration:none;background-color:transparent;background-image:none;filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);cursor:not-allowed}.dropdown-menu>li>label{margin-bottom:0;cursor:pointer}.dropdown-menu>li>input[type=radio],.dropdown-menu>li>input[type=checkbox]{display:none;position:absolute;top:-9999em;left:-9999em}.dropdown-menu>li>label:focus,.dropdown-menu>li>input:focus~label{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}.dropdown-menu.pull-right{right:0;left:auto}.dropdown-menu.pull-top{bottom:100%;top:auto;margin:0 0 2px;-webkit-box-shadow:0 -6px 12px rgba(0,0,0,.175);box-shadow:0 -6px 12px rgba(0,0,0,.175)}.dropdown-menu.pull-center{right:50%;left:auto}.dropdown-menu.pull-middle{right:100%;margin:0 2px 0 0;box-shadow:-5px 0 10px rgba(0,0,0,.2);left:auto}.dropdown-menu.pull-middle.pull-right{right:auto;left:100%;margin:0 0 0 2px;box-shadow:5px 0 10px rgba(0,0,0,.2)}.dropdown-menu.pull-middle.pull-center{right:50%;margin:0;box-shadow:0 0 10px rgba(0,0,0,.2)}.dropdown-menu.bullet{margin-top:8px}.dropdown-menu.bullet:before{width:0;height:0;content:'';display:inline-block;position:absolute;border-color:transparent;border-style:solid;-webkit-transform:rotate(360deg);border-width:0 7px 7px;border-bottom-color:#ccc;border-bottom-color:rgba(0,0,0,.15);top:-7px;left:9px}.dropdown-menu.bullet:after{width:0;height:0;content:'';display:inline-block;position:absolute;border-color:transparent;border-style:solid;-webkit-transform:rotate(360deg);border-width:0 6px 6px;border-bottom-color:#fff;top:-6px;left:10px}.dropdown-menu.bullet.pull-right:before{left:auto;right:9px}.dropdown-menu.bullet.pull-right:after{left:auto;right:10px}.dropdown-menu.bullet.pull-top{margin-top:0;margin-bottom:8px}.dropdown-menu.bullet.pull-top:before{top:auto;bottom:-7px;border-bottom-width:0;border-top-width:7px;border-top-color:#ccc;border-top-color:rgba(0,0,0,.15)}.dropdown-menu.bullet.pull-top:after{top:auto;bottom:-6px;border-bottom:0;border-top-width:6px;border-top-color:#fff}.dropdown-menu.bullet.pull-center:before{left:auto;right:50%;margin-right:-7px}.dropdown-menu.bullet.pull-center:after{left:auto;right:50%;margin-right:-6px}.dropdown-menu.bullet.pull-middle{margin-right:8px}.dropdown-menu.bullet.pull-middle:before{top:50%;left:100%;right:auto;margin-top:-7px;border-right-width:0;border-bottom-color:transparent;border-top-width:7px;border-left-color:#ccc;border-left-color:rgba(0,0,0,.15)}.dropdown-menu.bullet.pull-middle:after{top:50%;left:100%;right:auto;margin-top:-6px;border-right-width:0;border-bottom-color:transparent;border-top-width:6px;border-left-color:#fff}.dropdown-menu.bullet.pull-middle.pull-right{margin-right:0;margin-left:8px}.dropdown-menu.bullet.pull-middle.pull-right:before{left:-7px;border-left-width:0;border-right-width:7px;border-right-color:#ccc;border-right-color:rgba(0,0,0,.15)}.dropdown-menu.bullet.pull-middle.pull-right:after{left:-6px;border-left-width:0;border-right-width:6px;border-right-color:#fff}.dropdown-menu.bullet.pull-middle.pull-center{margin-left:0;margin-right:0}.dropdown-menu.bullet.pull-middle.pull-center:before{border:0;display:none}.dropdown-menu.bullet.pull-middle.pull-center:after{border:0;display:none}.dropdown-submenu{position:relative}.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;border-top-left-radius:0}.dropdown-submenu>a:before{display:block;float:right;width:0;height:0;content:"";margin-top:6px;margin-right:-8px;border-width:4px 0 4px 4px;border-style:solid;border-left-style:dashed;border-top-color:transparent;border-bottom-color:transparent}@media (max-width:767px){.navbar-nav .dropdown-submenu>a:before{margin-top:8px;border-color:inherit;border-style:solid;border-width:4px 4px 0;border-left-color:transparent;border-right-color:transparent}.navbar-nav .dropdown-submenu>a{padding-left:40px}.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>a,.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>label{padding-left:35px}.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>.dropdown-menu>li>a,.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>.dropdown-menu>li>label{padding-left:45px}.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>a,.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>label{padding-left:55px}.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>a,.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>label{padding-left:65px}.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>a,.navbar-nav>.open>.dropdown-menu>.dropdown-submenu>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>.dropdown-menu>li>label{padding-left:75px}}.navbar-default .navbar-nav .open>.dropdown-menu>.dropdown-submenu.open>a,.navbar-default .navbar-nav .open>.dropdown-menu>.dropdown-submenu.open>a:hover,.navbar-default .navbar-nav .open>.dropdown-menu>.dropdown-submenu.open>a:focus{background-color:#e7e7e7;color:#555}@media (max-width:767px){.navbar-default .navbar-nav .open>.dropdown-menu>.dropdown-submenu.open>a:before{border-top-color:#555}}.navbar-inverse .navbar-nav .open>.dropdown-menu>.dropdown-submenu.open>a,.navbar-inverse .navbar-nav .open>.dropdown-menu>.dropdown-submenu.open>a:hover,.navbar-inverse .navbar-nav .open>.dropdown-menu>.dropdown-submenu.open>a:focus{background-color:#080808;color:#fff}@media (max-width:767px){.navbar-inverse .navbar-nav .open>.dropdown-menu>.dropdown-submenu.open>a:before{border-top-color:#fff}}

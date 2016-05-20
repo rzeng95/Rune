@@ -1,36 +1,64 @@
-div(class="task-list-container")
-	table(class="task-list")
-		col(class="task-id")
-		col(class="task-name")
-		col(class="task-description")
-		col(class="task-status")
-		col(class="task-priority")
-		col(class="task-assignedto")
-		col(class="task-createdby")
-		thead(class="task-list-header")
-			tr
-				th Task ID
-				th Task Name
-				th Description
-				th Status
-				th Priority
-				th Assigned to
-				th Created by
-		tbody(class="task-list-body")
-			each task in taskList
-				tr
-					td(class="task-id-element") 
-						a(href="t/"+task.taskid+"/") #{task.taskid}
-					td(class="task-name-element")
-						div(class="js-clamp") #{task.taskname}
-					td(class="task-description-element")
-						div(class="js-clamp") #{task.taskdescription}
-					td(class="task-status-element") #{task.status}
-					td(class="task-priority-element")
-						div(class="kanban-priority-icon-" + task.priority)
-							div(class="priority-icon")
-							div(class="priority-text") #{task.priority}
-					td(class="task-assignedto-element")
-						div #{task.assignedto}
-					td(class="task-createdby-element")
-						div #{task.createdby}
+div(class="row task-browser-filter")
+	div(class="")
+		div Filter by:
+		div(class="btn-group")
+			button(data-toggle="dropdown" class="btn btn-default dropdown-toggle")
+				span(class="caret")
+				|   
+				span(class="data-label") Priority,
+				|  
+				span(id="priority-label" class ="data-label-placement" data-label-placement) None
+			ul(class="dropdown-menu" placeholder="None")
+				| <li><input type="checkbox" id="High" class="filter-el" filter-type="priority" filter-val="High"><label for="High" name="priority-label" value="High">High</label></li>
+				| <li><input type="checkbox" id="Medium" class="filter-el" filter-type="priority" filter-val="Medium"><label for="Medium" name="priority-label" value="Medium">Medium</label></li>
+				| <li><input type="checkbox" id="Low" class="filter-el" filter-type="priority" filter-val="Low"><label for="Low" name="priority-label" value="Low">Low</label></li>
+		div(class="btn-group")
+			button(data-toggle="dropdown" class="btn btn-default dropdown-toggle")
+				span(class="caret")
+				|   
+				span(class="data-label") Status,
+				|  
+				span(id="status-label" class ="data-label-placement" data-label-placement) None
+			ul(class="dropdown-menu" placeholder="None")
+				| <li><input type="checkbox" id="Backlog" class="filter-el" filter-type="status" filter-val="Backlog" name="status-label" value="Backlog"><label for="Backlog">Backlog</label></li>
+				| <li><input type="checkbox" id="Selected" class="filter-el" filter-type="status" filter-val="Selected for Development" name="status-label" value="Selected"><label for="Selected">Selected for Development</label></li>
+				| <li><input type="checkbox" id="Progress" class="filter-el" filter-type="status" filter-val="In Progress" name="status-label" value="Progress"><label for="Progress">In Progress</label></li>
+				| <li><input type="checkbox" id="Completed" class="filter-el" filter-type="status" filter-val="Completed" name="status-label" value="Completed"><label for="Completed">Completed</label></li>
+				| <li><input type="checkbox" id="Archived" class="filter-el" filter-type="status" filter-val="Archived" name="status-label" value="Archived"><label for="Archived">Archived</label></li>
+		div(class="btn-group")
+			button(data-toggle="dropdown" class="btn btn-default dropdown-toggle")
+				span(class="caret")
+				|   
+				span(class="data-label") User,
+				|  
+				span(id="assignedto-label" class ="data-label-placement" data-label-placement) None
+			ul(class="dropdown-menu" placeholder="None")
+				each user in projMembers
+					| <li><input type="checkbox" id=#{user.email} class="filter-el" filter-type="assignedto" filter-val=#{user.email} name="assignedto-label" value=#{user.email}><label for=#{user.email}>#{user.name}</label></li>
+	div
+		div Sort by:
+		div(class="btn-group")
+			button(data-toggle="dropdown" class="btn btn-default dropdown-toggle")
+				span(class="caret")
+				|   
+				span(data-label-placement) Date, Newest
+			ul(class="dropdown-menu")
+				| <li><input type="radio" id="date-newest" class="sort1-el" sort-type="datecreated" sort-order="descending" name="sort1-label" value="date-newest" checked="checked"><label for="date-newest">Date, Newest</label></li>
+				| <li><input type="radio" id="date-oldest" class="sort1-el" sort-type="datecreated" sort-order="ascending" name="sort1-label" value="date-oldest"><label for="date-oldest">Date, Oldest</label></li>
+				| <li><input type="radio" id="priority-highest" class="sort1-el" sort-type="priority" sort-order="descending" name="sort1-label" value="priority-highest"><label for="priority-highest">Priority, Highest</label></li>
+				| <li><input type="radio" id="priority-lowest" class="sort1-el" sort-type="priority" sort-order="ascending" name="sort1-label" value="priority-lowest"><label for="priority-lowest">Priority, Lowest</label></li>
+div(class="row task-browser")
+	div(class="navbar task-browser-col-left")
+		div(class="collapse navbar-collapse")
+			ul(class="task-browser-list nav navbar-nav")
+				each task in taskList
+					li(id=task.taskid class="task-browser-list-el" priority = task.priority status = task.status datecreated = task.id assignedto = task.assignedto)
+						a(href="#" class="task-browser-list-el-link")
+							div(class="task-id-element") #{task.taskid}
+							div(class="task-name-element")
+								div(class="js-clamp") #{task.taskname}
+
+	div(class="task-browser-col-right")
+		each task in taskList
+			div(id=task.taskid class="task-browser-window-el" hidden="true")
+				include ../task/task.jade

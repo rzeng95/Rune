@@ -154,7 +154,8 @@ module.exports = function(app, passport) {
                             memberList.push({
                                 'name':foundUsers[i].local.firstname+' '+foundUsers[i].local.lastname,
                                 'initials':foundUsers[i].local.firstname.charAt(0) + foundUsers[i].local.lastname.charAt(0),
-                                'email':foundUsers[i].local.email, 'id':foundUsers[i].local.userid,
+                                'email':foundUsers[i].local.email,
+                                'id':foundUsers[i].local.userid,
                                 'color':foundUsers[i].local.userColor
                             });
                         }
@@ -178,6 +179,7 @@ module.exports = function(app, passport) {
                     isProjectPage : true,
 
                     // Overview tab variables
+                    project : foundProj,
                     projName : foundProj.projectname,
                     projKey : foundProj.projectkey,
                     projId : foundProj.projectid,
@@ -185,6 +187,7 @@ module.exports = function(app, passport) {
 
                     github_repo : foundProj.github_repo,
                     github_owner : foundProj.github_owner,
+                    full_url : 'https://github.com/' + foundProj.github_url,
 
                     // User tab variables
                     projMembers : memberList,
@@ -200,12 +203,34 @@ module.exports = function(app, passport) {
                     archivedtasks : archivedTasks,
 
                     // History variables
-                    history : foundProj.history
+                    history : foundProj.history,
+
+                    // Settings variables
+                    github_url : foundProj.github_url,
+                    description : foundProj.description
                 });
             }
         });
     }); //end of app.post('/p/:projectid/')
 
+    app.post('/p/:projectid/edit/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
+        // update description and github repo
+        Project.findById(req.params.projectid, function(err, foundProj){
+            if (err) throw err;
+
+            foundProj.github_url = req.body.github_url;
+            foundProj.description = req.body.description;
+
+            foundProj.save(function(err){
+                if (err) throw err;
+                else {
+                    res.redirect('/p/' + req.params.projectid + '/');
+                }
+
+            });
+
+        });
+    });
 
     // Only the project creator can delete projects.
     app.post('/p/:projectid/deleteproject/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {

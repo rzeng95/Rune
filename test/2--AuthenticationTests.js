@@ -21,19 +21,19 @@ describe('Passport authentication', function() {
         .type('form')
         .send({email: '@@@@' , password: 'a_fake_password'})
         .end(function(err,res) {
-            expect(res.header.location).to.include('login');
+            expect(res.header.location).to.equal('/login');
             done(err);
         });
 
     });
 
-    it('Signups should redirect to /profile', function(done) {
+    it('Successful signups redirect to /profile', function(done) {
         request(app)
         .post('/signup')
         .type('form')
         .send({firstname: 'roland', lastname: 'zeng', email:'rzeng0508@gmail.com', password: 'hello', userColor : 'yelloworange'})
         .end(function(err,res) {
-            expect(res.header.location).to.include('profile');
+            expect(res.header.location).to.equal('/profile');
             done(err);
         })
     });
@@ -44,7 +44,7 @@ describe('Passport authentication', function() {
         .type('form')
         .send({email: 'rzeng0508@gmail.com' , password: 'hello'})
         .end(function(err,res) {
-            expect(res.header.location).to.include('profile');
+            expect(res.header.location).to.equal('/profile');
             done(err);
         });
     });

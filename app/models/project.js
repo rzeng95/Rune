@@ -15,6 +15,8 @@ var projectSchema = mongoose.Schema({
             description: String
         }
     ],
+    description	   : String,
+    skills	       : String,
     tasks          :  [
         {
             projectid       : String,   // 571b042d4bd894d80a71c2a2
@@ -40,7 +42,8 @@ var projectSchema = mongoose.Schema({
         }
     ],
     github_owner    : String,
-    github_repo     : String
+    github_repo     : String,
+    github_url      : String
 });
 
 module.exports = mongoose.model('Project', projectSchema);

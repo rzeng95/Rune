@@ -42,62 +42,11 @@ block bodyContent
                                         td(class="text-center")
                                             You have no projects! 
 
-            div(class="col-sm-4" style="padding-top:24px")
-                p=description
-                p=github
-        div(class="row") 
-            div(class="col-xs-12" style="background-color:green") El Divider
-        div(class="row" style="margin:5px")
-        div(class="row")
-            div(class="col-xs-8")
-            div(class="col-xs-2")
-                input(type="text" class="form-control" placeholder="Filter" name="project-skills-filter")
-            div(class="col-xs-1")
-        div(class="row")
-            div(class="col-xs-1")
-            div(class="col-xs-10")
-                table(class="task-list" style="table-layout:fixed")
-                    col(class="project-name")
-                    col(class="project-leader")
-                    col(class="project-description")
-                    col(class="project-size")
-                    col(class="project-skills")
-                    col(class="project-apply-button")
-                    thead(class="task-list-header")
-                        tr
-                            th Project Name
-                            th Project Leader
-                            th Description
-                            th Group Size
-                            th Skills
-                            th  
-                    tbody(class="task-list-body")
-                        tr
-                            td(class="task-id-element")
-                                a(href="") Rune
-                            td(class="task-id-element") 
-                                a(href="") Roland Zeng
-                            td(class="task-id-element" style="word-wrap:break-word") Rune is a dank m...
-                            td(class="task-id-element") 7
-                            td(class="task-id-element")
-                                span HTML, CSS, Javascript 
-                            td(class="task-id-element")
-                                button(id="submit" type="submit" class="btn btn-primary" style="width:100px") Apply
-                        tr
-                            td(class="task-id-element")
-                                a(href="") Boba
-                            td(class="task-id-element") 
-                                a(href="") BobaKing69
-                            td(class="task-id-element" style="word-wrap:break-word") Boba boba!!!
-                            td(class="task-id-element") 420
-                            td(class="task-id-element")
-                                span Python, Ruby, Boba
-                            td(class="task-id-element")
-                                button(id="submit" type="submit" class="btn btn-primary" style="width:100px") Apply
-            div(class="col-xs-1")
-                  
-
-
- 
-
-          
+            div(class="col-sm-4" style="padding-top:24px; margin-left:-20px")
+                div(class="profile-description") Description
+                    p(class="profile-description-text") #{description}
+                div(class="profile-github") GitHub
+                if (github == '#')
+                    p(class="profile-github-text") I haven't posted my GitHub!
+                else
+                    a(class="profile-github-text" href="#{github}") #{github}

@@ -1,6 +1,6 @@
 div(class="container-fluid task-body")
     div(class="task-create")
-        form(class="form-group" action="edit/" method="POST")
+        form(class="form-group task-edit-form" action="edit/" method="POST")
             h2(class="form-signin-heading") Edit Task
             div(class="form-group")
                 label(for="taskname") Task Name
@@ -24,5 +24,5 @@ div(class="container-fluid task-body")
                     each priority in ['High', 'Medium', 'Low']
                         option( selected=(priority==curPriority) )= priority
             div(class="row btn-submit")
-                button(class="col-xs-5 btn btn-primary" type="submit") Edit Task
+                button(class="col-xs-5 btn btn-primary btn-task-edit-submit" type="submit") Save changes
                 button(class="col-xs-5 col-xs-offset-2 btn btn-secondary" type="button" data-dismiss="modal") Cancel

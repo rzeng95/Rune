@@ -9,3 +9,10 @@ Task.taskEditLoad = function() {
         },
     });
 }
+
+// Make edit button AJAX'd.
+$('.btn-task-edit').click(function(e) {
+    e.preventDefault();
+    Task.taskEditLoad(); 
+});
+

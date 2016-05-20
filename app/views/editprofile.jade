@@ -41,7 +41,11 @@ block bodyContent
                                             You have no projects! 
 
             form(action="" method="POST")
-                button(type="submit" class="btn btn-primary") Save Profile
-                div(class="col-sm-4" style="padding-top:24px")
-                    input(class="form-control" type="text" name="description" value=description)         
-                    input(class="form-control" type="text" name="github" value=github)        
+                div(class="col-sm-4" style="padding-top:24px; margin-left:-20px")
+                    div(class="profile-description") Description
+                        textarea(class="profile-form-control-description" type="text" rows="4" name="description" placeholder="I haven\'t entered my description!") #{description} 
+                    div(class="profile-github") GitHub
+                        input(class="profile-form-control-github" type="text" name="github" placeholder="I haven\'t entered my GitHub!" value=github)   
+                    div(class="profile-edit-button")
+                        button(type="submit" class="btn btn-primary") Save Profile
+             

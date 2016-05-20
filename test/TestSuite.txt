@@ -1,0 +1,14 @@
+1-- NonAuthenticationTests
+    * Make sure homepage loads
+    * Accessing authentication-protected pages should redirect to /login page
+
+2-- AuthenticationTests
+    * Unsuccessful logins redirect to /login page
+    * Successful signups redirect to /profile page
+    * Successful logins redirect to /profile page
+
+3-- LoggedInTests
+    These tests are all executed when the user is logged in
+    Before the tests, create one user and log in
+    * Homepage redirects to /profile page
+    *

@@ -1,0 +1,30 @@
+div(class="overview-container")
+    p Settings allows the project admin to modify the description and github repo URL 
+    p Also, this displays the list of project applicants 
+    p Finally, show the option to list the project on project finder, as well as delete it 
+
+
+    form(action="edit/" method="POST")
+        h3 Project Settings
+        hr
+        h4 Project Description
+        textarea(type="text" rows="4" name="description" placeholder="No current description found") #{description}
+        
+        h4 Project Github URL (Must follow the format [username]/[repository name])
+        h4 Example: If your repository has name "https://github.com/rzeng95/Rune" then enter "rzeng95/Rune"
+        input(type="text" name="github_url" placeholder="No Github URL posted" value=github_url)   
+        hr
+        
+        h4 Project Applicants (make this a table)
+        p applicant 1 (hard coded for now) [accept]
+        p applicant 2 (hard coded for now) [accept]
+        
+        hr
+        
+        button(type="submit" class="btn btn-primary") Update Project Settings
+        
+    hr 
+    button(id="btn-proj-list" class="btn btn-primary btn-md" type="submit") List Project
+    form(class="project-del-form" action="deleteproject/" method="POST")
+        button(id="btn-proj-del" class="btn btn-primary btn-md" type="submit") Delete Project 
+    
