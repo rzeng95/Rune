@@ -1,0 +1,6 @@
+# /node_modules/* and /bower_components/* ignored by default
+
+# Ignore anything in the public folders because they include downloaded 3rd party javascript files (bootstrap, etc)
+# The only file we created is public/javascripts/project.js, so un-ignore that
+public/*
+!public/javascripts/project.js
