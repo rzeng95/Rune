@@ -17,6 +17,12 @@ Page.Project.taskCreateLoad = function() {
         url : 'createtask/',
         success : function(data) {
             $('.modal-content').html(data);
+
+            // Add a listener for when the "create task" form gets submitted.
+            $('.task-create-form').submit(function(e) {
+                $('#task-modal').modal('toggle');
+                e.unbind();
+            });
         }
     });
 };
@@ -82,6 +88,7 @@ Page.Project.taskWindowListeners = function() {
 
     // Make comment submission work on task browser tab.
     $('.task-comment-form').submit(function(e) {
+        $('#task-modal').modal('toggle');
         e.preventDefault();
         var postData = $(this).serializeArray();
         $.ajax({
@@ -101,7 +108,7 @@ Page.Project.taskWindowListeners();
 
 // Add a confirmation prompt for deleting projects.
 $('.project-del-form').submit(function(e) {
-    var projectName = $('#project-name').text();
+    var projectName = $('#project-name-text').text();
     var promptDialogue = "Warning - deleting a project may have substantial repercussions!\n" + 
         "Are you sure you want to delete this project?\n\n" +
         "Type in the full project name to confirm that you want to delete this project:";
@@ -110,7 +117,6 @@ $('.project-del-form').submit(function(e) {
         e.preventDefault();
     }
 });
-
 
 // Add a sortable property to Kanban board task objects.
 $('.kanban-col').sortable({

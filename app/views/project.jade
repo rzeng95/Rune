@@ -4,7 +4,7 @@ block bodyContent
     div(class="container-fluid project-container")
         div(class="row project-header")
             div(class="col-xs-6 project-name")
-                h2(id="project-name") #{project.projectname}
+                h2(id="project-name-text") #{project.projectname}
             ul(class="col-xs-12 nav nav-tabs project-tabs")
                 li(id="project-tab-5") #[a(href="#settings" data-toggle="tab") Settings]
                 li(id="project-tab-4") #[a(href="#tasks" data-toggle="tab") Tasks]
@@ -14,6 +14,8 @@ block bodyContent
 
         div(class="project-header-offset")
         div(class="tab-content")
+            div(id="settings" class="tab-pane fade")
+                include ./includes/project/settings.jade
             div(id="tasks" class="tab-pane fade")
                 include ./includes/project/tasks.jade
             div(id="users" class="tab-pane fade")
@@ -22,8 +24,6 @@ block bodyContent
                 include ./includes/project/kanban.jade
             div(id="overview" class="tab-pane fade")
                 include ./includes/project/overview.jade
-            div(id="settings" class="tab-pane fade")
-                include ./includes/project/settings.jade
 block scripts
     script(src="/javascripts/clamp.min.js")
     script(src="/javascripts/project.js")

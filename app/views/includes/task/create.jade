@@ -1,6 +1,6 @@
 div(class="container-fluid task-body")
     div(class="task-create")
-        form(class="form-group" action="createtask/" method="post")
+        form(class="form-group task-create-form" action="createtask/" method="post")
             h2(class="form-signin-heading") Create New Task
             div(class="form-group")
                 label(for="taskname") Task Name
@@ -26,5 +26,5 @@ div(class="container-fluid task-body")
                     option Medium
                     option Low
             div(class="row btn-submit")
-                button(type="submit" class="col-xs-5 btn btn-primary") Submit
+                button(type="submit" class="col-xs-5 btn btn-primary btn-modal") Submit
                 button(type="button" class="col-xs-5 col-xs-offset-2 btn btn-secondary" data-dismiss="modal") Cancel
