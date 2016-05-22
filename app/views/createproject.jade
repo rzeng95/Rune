@@ -1,34 +1,32 @@
 extends ./partials/base.jade
 
 block bodyContent 
-
-    div(class="container")
-        div(class="createproject")
-            form(class="form-createtask" action="" method="post")
-                h2(class="form-signin-heading") Create a New Project
-                form(action="/createproject" method="post")
+    div(class="project-create-container")
+        form(class="form-createtask" action="" method="post")
+            h2(class="form-signin-heading") Create a New Project
+            form(action="/createproject" method="post")
+                br
+                div(class="col-xs-12 boxes")
+                    label Project Name  
+                    input(id="chatinput" class="form-control" type="text" style="margin:2px" name="projectname" required="required")
+                    p Max. 80 Characters.
+                    //input(type="text" name="projectname" class="chatinput" id="chatinput")
+                div(class="col-xs-12 boxes")
+                    label Project Key 
+                    div(id="printchatbox" class="form-control chatbox" name="projectkey")
+                    p The project key prefixes every task made. Example: JIRA-649
+                div(class="col-xs-12 boxes")
+                    label GitHub Repo 
+                    input(id="chatinput" class="form-control" type="text" style="margin:2px" name="githubrepo")
+                div(class="col-xs-12 boxes")
+                    label GitHub Owner 
+                    input(id="chatinput" class="form-control" type="text" style="margin:2px" name="githubowner")
                     br
-                    div(class="col-xs-12 boxes")
-                        label Project Name  
-                        input(id="chatinput" class="form-control" type="text" style="margin:2px" name="projectname" required="required")
-                        p Max. 80 Characters.
-                        //input(type="text" name="projectname" class="chatinput" id="chatinput")
-                    div(class="col-xs-12 boxes")
-                        label Project Key 
-                        div(id="printchatbox" class="form-control chatbox" name="projectkey")
-                        p The project key prefixes every task made. Example: JIRA-649
-                    div(class="col-xs-12 boxes")
-                        label GitHub Repo 
-                        input(id="chatinput" class="form-control" type="text" style="margin:2px" name="githubrepo")
-                    div(class="col-xs-12 boxes")
-                        label GitHub Owner 
-                        input(id="chatinput" class="form-control" type="text" style="margin:2px" name="githubowner")
-                        br
-                    div(class="button-center")
-                        button(class="btn btn-primary" type="submit") Submit 
-                    
-                script.
-                    var inputBox = document.getElementById('chatinput');
-                    inputBox.onkeyup = function() {
-                        document.getElementById("printchatbox").innerHTML = inputBox.value.replace(/\s+/g, "").substring(0,4).toUpperCase();
-                    }
+                div(class="button-center")
+                    button(class="btn btn-primary" type="submit") Submit 
+                
+            script.
+                var inputBox = document.getElementById('chatinput');
+                inputBox.onkeyup = function() {
+                    document.getElementById("printchatbox").innerHTML = inputBox.value.replace(/\s+/g, "").substring(0,4).toUpperCase();
+                }

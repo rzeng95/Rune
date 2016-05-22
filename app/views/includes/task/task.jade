@@ -40,7 +40,7 @@ div(class="task-body")
                 div(class="form-group")
                     label Add Comment 
                 div(class="form-group")
-                    textarea(class="form-control" name="comment" id="comment" rows="3")                    
+                    textarea(class="form-control" name="comment" id="comment" rows="3")
                     if commits
                         if !isProjectPage
                             label Optional - Add Github Commit 
@@ -49,7 +49,7 @@ div(class="task-body")
                                 each commit in commits
                                     option(value="#{commit['sha']}") #{commit['commit']['author']['name']} - #{commit['commit']['message']}
                 div(class="form-group")
-                    button(class="btn btn-primary" type="submit") Submit
+                    button(class="btn btn-primary btn-comment-submit" type="submit") Submit
         div(class="col-xs-4")
             h4 Details
             div(class="task-tags")

@@ -88,7 +88,6 @@ Page.Project.taskWindowListeners = function() {
 
     // Make comment submission work on task browser tab.
     $('.task-comment-form').submit(function(e) {
-        $('#task-modal').modal('toggle');
         e.preventDefault();
         var postData = $(this).serializeArray();
         $.ajax({
@@ -99,7 +98,6 @@ Page.Project.taskWindowListeners = function() {
                 Page.Project.taskWindowUpdate(currTaskID);
             }
         });
-        e.unbind();
     });
 };
 

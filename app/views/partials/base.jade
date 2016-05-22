@@ -11,7 +11,7 @@ html(lang="en")
 
     body
         //- The main markup for the header for most pages on Rune.
-        header(id="main-header" class="navbar navbar-default navbar-fixed-top") 
+        header(class="navbar navbar-default navbar-fixed-top main-header") 
             div(class="container-fluid")
                 div(class="navbar-header")
                     a(id="rune-logo" class="navbar-brand" href="/")
@@ -40,11 +40,12 @@ html(lang="en")
                             a(class="dropdown-toggle btn-is-disabled" data-toggle="dropdown") Projects
                 if loggedIn
                     ul(class="nav navbar-nav navbar-right")
+                        li(class="active")
+                            a(href="/projectfinder") Project Finder
                         li(class="dropdown")
                             a(href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") #{firstname}
                             ul(class="dropdown-menu" style="text-align:right;")
                                 li #[a(href="/profile") My Profile]
-                                li #[a(href="/projectfinder") Project Finder]
                                 li #[a(href="/logout") Log Out]
                 else
                     ul(class="nav navbar-nav navbar-right")
@@ -57,7 +58,8 @@ html(lang="en")
 
         //- Random 45px spacer to space out margin.
         div(class="header-offset")
-        block bodyContent
+        div(class="main-container")
+            block bodyContent
         
         //- JavaScript scripts.
         script(src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous")

@@ -1,52 +1,50 @@
 extends ./partials/base.jade
 
 block bodyContent 
+    div(class="row")
+        div(class="col-xs-4 col-xs-offset-2" style="padding-top:24px")
+            div(id="rune-icon-profile-" + userColor)
+                img(class="roo-icon-profile" src="/images/Roo.svg")
+                div(class="initials-icon-profile") 
+                    p=initials
 
-    div(class="container-fluid")
-        div(class="row")
-            div(class="col-xs-4 col-xs-offset-2" style="padding-top:24px")
-                div(id="rune-icon-profile-" + userColor)
-                    img(class="roo-icon-profile" src="/images/Roo.svg")
-                    div(class="initials-icon-profile") 
-                        p=initials
-
-                div
-                    h2=fullname
-                    h4=email
-                    if isMe
-                        a(type="button" class="btn btn-primary" href="edit/") Edit Profile
-                    else 
-                        ul(class="nav nav-stacked")
-                            li
-                                div(class="btn-group")
-                                    button(class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#") Add to Project 
-                                        span(class="glyphicon glyphicon-menu-right")
-                                    ul(class="dropdown-menu" style="top: 0;left: 100%;")
-                                        each proj in projList
-                                            li #[a(href="adduser/"+proj['projectid']) #{ proj['projectkey'] }]
-                div(style="padding-top:48px")                              
-                    div(class="panel panel-primary" style="max-width:400px")
-                        div(class="panel-heading" style="text-color=white")
-                            |My Projects
-                        div(class="panel-content")
-                            table(class="table table-hover")
-                                if myProjects
-                                    each proj in myProjects 
-                                        tr
-                                            td(class="text-center")
-                                                |#[a(href="/p/" + proj['projectid'] + '/') #{ proj['projectkey']}]
-                                            td(class="text-center")
-                                                |#{proj['projectname']}
-                                else
+            div
+                h2=fullname
+                h4=email
+                if isMe
+                    a(type="button" class="btn btn-primary" href="edit/") Edit Profile
+                else 
+                    ul(class="nav nav-stacked")
+                        li
+                            div(class="btn-group")
+                                button(class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#") Add to Project 
+                                    span(class="glyphicon glyphicon-menu-right")
+                                ul(class="dropdown-menu" style="top: 0;left: 100%;")
+                                    each proj in projList
+                                        li #[a(href="adduser/"+proj['projectid']) #{ proj['projectkey'] }]
+            div(style="padding-top:48px")                              
+                div(class="panel panel-primary" style="max-width:400px")
+                    div(class="panel-heading" style="text-color=white")
+                        |My Projects
+                    div(class="panel-content")
+                        table(class="table table-hover")
+                            if myProjects
+                                each proj in myProjects 
                                     tr
                                         td(class="text-center")
-                                            You have no projects! 
+                                            |#[a(href="/p/" + proj['projectid'] + '/') #{ proj['projectkey']}]
+                                        td(class="text-center")
+                                            |#{proj['projectname']}
+                            else
+                                tr
+                                    td(class="text-center")
+                                        You have no projects! 
 
-            div(class="col-sm-4" style="padding-top:24px; margin-left:-20px")
-                div(class="profile-description") Description
-                    p(class="profile-description-text") #{description}
-                div(class="profile-github") GitHub
-                if (github == '#')
-                    p(class="profile-github-text") I haven't posted my GitHub!
-                else
-                    a(class="profile-github-text" href="#{github}") #{github}
+        div(class="col-sm-4" style="padding-top:24px; margin-left:-20px")
+            div(class="profile-description") Description
+                p(class="profile-description-text") #{description}
+            div(class="profile-github") GitHub
+            if (github == '#')
+                p(class="profile-github-text") I haven't posted my GitHub!
+            else
+                a(class="profile-github-text" href="#{github}") #{github}

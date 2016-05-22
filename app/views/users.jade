@@ -1,20 +1,19 @@
 extends ./partials/base.jade
 
 block bodyContent 
-    div(class="container-fluid")
-        div(class="row")
-            div(class="col-sm-12")
-                h2 All Users
-                table(class="table") 
-                    thead
+    div(class="row")
+        div(class="col-sm-12")
+            h2 All Users
+            table(class="table") 
+                thead
+                    tr
+                        th Profile
+                tbody
+                    each user in userlist
                         tr
-                            th Profile
-                    tbody
-                        each user in userlist
-                            tr
-                                userlist
-                                td
-                                    div(id="rune-icon-kanban-" + user.local.userColor)
-                                        img(class="roo-icon-kanban" src="/images/Roo.svg")
-                                        div(class="user-name") #[a(href='/u/'+user.local.userid+'/') #{user.local.firstname+' '+user.local.lastname}]
-                                        div(class="initials-icon-kanban") #{user.local.firstname.charAt(0) + user.local.lastname.charAt(0)}
+                            userlist
+                            td
+                                div(id="rune-icon-kanban-" + user.local.userColor)
+                                    img(class="roo-icon-kanban" src="/images/Roo.svg")
+                                    div(class="user-name") #[a(href='/u/'+user.local.userid+'/') #{user.local.firstname+' '+user.local.lastname}]
+                                    div(class="initials-icon-kanban") #{user.local.firstname.charAt(0) + user.local.lastname.charAt(0)}
