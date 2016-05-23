@@ -7839,11 +7839,11 @@ body {
 }
 
 #error-message {
+  width: 400px;
   margin-left: auto;
   margin-right: auto;
   background-color: #53847F;
   margin-top: 200px;
-  width: 400px;
   height: 400px;
 }
 #error-message > img {
@@ -8970,40 +8970,24 @@ body {
   color: #333333;
 }
 
+.settings-des {
+  margin-top: 15px;
+  padding: 15px;
+}
+
 .settings-form {
-  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
-
-.settings-row {
-  flex-basis: 100%;
-  display: flex;
+.settings-form > h3, .settings-form h6 {
+  display: inline;
 }
-.settings-row .settings-left {
-  flex-basis: 40%;
-}
-.settings-row .settings-right {
-  flex-basis: 60%;
-}
-
-.settings-item {
-  flex-basis: 50%;
-}
-
-.settings-title {
+.settings-form .settings-label {
   text-align: right;
-  padding: 15px;
 }
-.settings-title > h1,
-.settings-title > h2,
-.settings-title > h3,
-.settings-title > h4,
-.settings-title > h5,
-.settings-title > h6 {
-  margin: 0;
-}
-
-.settings-input {
-  padding: 15px;
+.settings-form .settings-input {
+  padding-top: 25px;
+  padding-bottom: 15px;
 }
 
 .settings-btn {
@@ -9011,6 +8995,24 @@ body {
 }
 .settings-btn .btn-md {
   width: 50%;
+}
+
+.settings-del {
+  text-align: center;
+  padding: 15px;
+}
+.settings-del form {
+  width: 200px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+#settings-proj-des {
+  resize: vertical;
+}
+
+#settings-proj-gh {
+  width: 80%;
 }
 
 .profile-description {

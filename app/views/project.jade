@@ -8,19 +8,19 @@ block bodyContent
             li(id="project-tab-5") #[a(href="#settings" data-toggle="tab") Settings]
             li(id="project-tab-4") #[a(href="#tasks" data-toggle="tab") Tasks]
             li(id="project-tab-3") #[a(href="#users" data-toggle="tab") Users]
-            li(id="project-tab-2" class="active" ) #[a(href="#kanban" data-toggle="tab") Kanban Board]
+            li(id="project-tab-2" class="active") #[a(href="#kanban" data-toggle="tab") Kanban Board]
             li(id="project-tab-1") #[a(href="#overview" data-toggle="tab") Overview]
     div(class="project-header-offset")
     div(class="row tab-content project-body")
         div(id="overview" class="tab-pane fade")
             include ./includes/project/overview.jade
-        div(id="kanban" class="tab-pane fade")
+        div(id="kanban" class="tab-pane fade in active")
             include ./includes/project/kanban.jade
         div(id="users" class="tab-pane fade")
             include ./includes/project/users.jade            
         div(id="tasks" class="tab-pane fade")
             include ./includes/project/tasks.jade
-        div(id="settings" class="tab-pane fade in active")
+        div(id="settings" class="tab-pane fade")
             include ./includes/project/settings.jade
 
 block scripts

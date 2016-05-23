@@ -68,6 +68,12 @@ body {
     line-height: $line-height;
 }
 
+@mixin center-el($width) {
+    width: $width;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 // Navbar CSS style specifications.
 .btn-is-disabled {
     pointer-events: none;
@@ -80,12 +86,10 @@ body {
 
 // Error styling
 #error-message {
-    margin-left: auto;
-    margin-right: auto;
-    background-color: $color-1;
+    @include center-el(400px);
     @extend .img-rounded;
+    background-color: $color-1;
     margin-top: 200px;
-    width: 400px;
     height: 400px;
     > img {
         display: inline-block;
@@ -104,7 +108,6 @@ body {
 // Roo icon stylings
 #rune-logo-img {
     display: inline;
-    // padding-left: 30px;
     > img {
         position: relative;
         top: -6px;
@@ -247,9 +250,7 @@ body {
 
 // Create project page style specifications.
 .project-create-container {
-    width: 450px;
-    margin-left: auto;
-    margin-right: auto;
+    @include center-el(450px);
     padding: 15px;
     padding-top: 70px;
     h2 {
@@ -278,9 +279,7 @@ body {
 
 // Login page style specifications.
 .login {
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    @include center-el(300px);
     padding: 15px;
     padding-top: 50px;
     h2 {
@@ -319,9 +318,7 @@ body {
     .signup-btn {
         text-align: center;
     }
-    width: 440px;
-    margin-left: auto;
-    margin-right: auto;
+    @include center-el(440px);
     padding: 15px;
     padding-top: 50px;
     text-align: center;
@@ -332,7 +329,6 @@ body {
     position: fixed;
     width: 100%;
     background-color: $color-3;
-    // font-size: 14px;
     z-index: 900;
     .project-name {
         position: absolute;
@@ -580,40 +576,24 @@ $task-browser-offset: $project-body-offset + 55px;
     @extend .container;
 }
 
+.settings-des {
+    margin-top: 15px;
+    padding: 15px;
+}
+
 .settings-form {
-    padding: 15px;
-}
-
-.settings-row {
-    flex-basis: 100%;
-    display: flex;
-    .settings-left {
-        flex-basis: 40%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    > h3, h6 {
+        display: inline;
     }
-    .settings-right {
-        flex-basis: 60%
+    .settings-label {
+        text-align: right;
     }
-}
-
-.settings-item {
-    flex-basis: 50%;
-}
-
-.settings-title {
-    text-align: right;
-    padding: 15px;
-    > h1,
-    > h2,
-    > h3,
-    > h4,
-    > h5,
-    > h6 {
-        margin: 0;
+    .settings-input {
+        padding-top: 25px;
+        padding-bottom: 15px;
     }
-}
-
-.settings-input {
-    padding: 15px;
 }
 
 .settings-btn {
@@ -621,6 +601,24 @@ $task-browser-offset: $project-body-offset + 55px;
     .btn-md {
         width: 50%;
     }
+}
+
+.settings-del {
+    text-align: center;
+    padding: 15px;
+    form {
+        width: 200px;
+        margin: 0 auto;
+        padding: 15px;
+    }
+}
+
+#settings-proj-des {
+    resize: vertical;
+}
+
+#settings-proj-gh {
+    width: 80%;
 }
 
 // Profile Styling
@@ -668,7 +666,6 @@ $task-browser-offset: $project-body-offset + 55px;
 }
 
 // Project Finder Styling
-
 .project-finder-table {
     @extend .table;
     display: flex-grid;

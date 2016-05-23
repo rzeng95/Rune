@@ -1,30 +1,64 @@
-div(class="overview-container")
-    p Settings allows the project admin to modify the description and github repo URL 
-    p Also, this displays the list of project applicants 
-    p Finally, show the option to list the project on project finder, as well as delete it 
-
-
-    form(action="edit/" method="POST")
-        h3 Project Settings
-        hr
-        h4 Project Description
-        textarea(type="text" rows="4" name="description" placeholder="No current description found") #{description}
-        
-        h4 Project Github URL (Must follow the format [username]/[repository name])
-        h4 Example: If your repository has name "https://github.com/rzeng95/Rune" then enter "rzeng95/Rune"
-        input(type="text" name="github_url" placeholder="No Github URL posted" value=github_url)   
-        hr
-        
-        h4 Project Applicants (make this a table)
-        p applicant 1 (hard coded for now) [accept]
-        p applicant 2 (hard coded for now) [accept]
-        
-        hr
-        
-        button(type="submit" class="btn btn-primary") Update Project Settings
-        
-    hr 
-    button(id="btn-proj-list" class="btn btn-primary btn-md" type="submit") List Project
-    form(class="project-del-form" action="deleteproject/" method="POST")
-        button(id="btn-proj-del" class="btn btn-primary btn-md" type="submit") Delete Project 
-    
+div(class="settings-container")
+    div(class="row")
+        div(class="col-xs-10 col-xs-offset-1")
+            div(class="panel panel-default settings-des")
+                div
+                    | Add and change details about your project such as a description or a GitHub repository on this page.
+                    | Make your project public to others to view on the Project Finder, or delete the project.
+    form(class="settings-form" action="edit/" method="POST")
+        div(class="row form-group")
+            div(class="col-xs-3 col-xs-offset-1 settings-label")
+                label(for="settings-proj-des")
+                    h3 Project Description
+                    h6 Add or change the project description as seen by other users.
+            div(class="col-xs-7 settings-input")
+                textarea(id="settings-proj-des" class="col-xs-7 form-control" type="text" rows="4" name="description" placeholder="Enter a description here.") #{description}
+        div(class="row form-group")
+            div(class="col-xs-3 col-xs-offset-1 settings-label")
+                label(for="settings-proj-gh")
+                    h3 GitHub Repository
+                    h6 Include a GitHub repository for this project.
+            div(class="col-xs-7 settings-input")
+                div(class="input-group")
+                    span(class="input-group-addon" id="basic-addon3") https://github.com/
+                    input(id="settings-proj-gh" class="form-control" type="text" name="github_url" placeholder="Enter the project GitHub repository information here." value=github_url)
+        div(class="row form-group")
+            div(class="col-xs-3 col-xs-offset-1 settings-label")
+                label(for="settings-proj-pf")
+                    h3 Project Finder Visibility
+                    h6 Make this project publicly visible on the Project Finder.
+            div(class="col-xs-7 settings-input")
+                div(class="input-group")
+                    label(class="radio-inline")
+                        input(type="radio" name="optradio")
+                        | Public
+                    label(class="radio-inline")
+                        input(type="radio" name="optradio" checked)
+                        | Private
+        div(class="row form-group")            
+            div(class="col-xs-3 col-xs-offset-1 settings-label")
+            div(class="col-xs-7 settings-input")
+                div(class="settings-btn")
+                    button(type="submit" class="btn btn-primary") Update Project Settings
+    div(class="form-group")
+        div(class="row")
+            form(class="col-xs-7 col-xs-offset-4 settings-input project-del-form" action="deleteproject/" method="POST")
+                button(id="btn-settings-del" class="btn btn-primary btn-md" type="submit") Delete Project
+    div(class="row")
+        div(class="col-xs-10 col-xs-offset-1 panel panel-default")
+            h3 Project Applicants
+            table(class="table")
+                thead
+                    tr
+                        th Applicant
+                        th GitHub User Profile
+                tbody
+                    tr
+                        td Gabe Newell
+                        td https://www.github.com/gaben/
+                    tr
+                        td Snoop Dogg
+                        td https://www.github.com/dawg/
+                    tr
+                        td Andy Salad
+                        td https://www.github.com/ilovememes
