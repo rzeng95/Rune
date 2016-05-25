@@ -234,9 +234,9 @@ module.exports = function(app, passport) {
                 throw err;
             } else {
                 console.log(req.body.description);
-                console.log(req.body.github);
+                //console.log(req.body.github);
                 usr.local.description = req.body.description;
-                usr.local.github = req.body.github;
+                //usr.local.github = req.body.github;
 
                 usr.save(function(err) {
                     if (err) throw err;
