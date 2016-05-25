@@ -44,6 +44,10 @@ module.exports = function(app, passport) {
             } else {
                 foundProj.counter++;
                 var taskID = foundProj.projectkey + '-' + Helper.zeroPad(foundProj.counter, 3);
+                if(req.body.assignedto=="")
+                    var taskAssigned = "no one yet";
+                else
+                    var taskAssigned = req.body.assignedto;
                 foundProj.tasks.push({
                     projectid       :   req.params.projectid,
                     taskname        :   req.body.taskname,
@@ -61,7 +65,7 @@ module.exports = function(app, passport) {
                     date : new Date().toDateString(),
                     link : taskID,
                     action : req.user.local.firstname + ' ' + req.user.local.lastname + ' created new task',
-                    description : 'and assigned to ' + req.body.assignedto
+                    description : 'and assigned to ' + taskAssigned
                 });
 
                 foundProj.save(function(err) {
