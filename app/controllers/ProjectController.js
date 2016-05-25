@@ -14,31 +14,6 @@ var async = require('async');
 
 module.exports = function(app, passport) {
 
-    // =====================================
-    // PROJECT LIST
-    // This will most likely be integrated with the profile screen, but currently exists as a stand-alone page.
-    // =====================================
-    app.get('/projects', Helper.isLoggedIn, function(req,res) {
-        // To get the list of all projects, we parse the variable 'req', which stores the user in the current session
-        // (this is handled by passport user authentication). Each User database model contains a list of projects
-        // that the user is a member of (See /app/models/user.js). Find the User matching the current user's email,
-        // and return the corresponding project list.
-        User.findOne({
-            'local.email' : req.user.local.email
-        }, function(err, user) {
-            if (err) {
-                throw err;
-            } else {
-                var projectList = user.local.projects;
-                res.render('projects.jade', {
-                    user : req.user,
-                    projlist : projectList,
-                    loggedIn : req.isAuthenticated()
-                });
-            }
-        });
-    });
-
     // Project creation will probably be done using a pop-up modal object, which can be done via front-end bootstrap magic.
     // Right now it's a separate page of its own located at /createproject
     app.get('/createproject', Helper.isLoggedIn, function(req, res) {
