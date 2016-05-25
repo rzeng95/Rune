@@ -127,19 +127,30 @@ module.exports = function(passport) {
 
     }, function(req, accessToken, refreshToken, profile, cb) {
         process.nextTick(function() {
+            console.log(profile.username);
+            console.log(profile.profileUrl);
+            //console.log()
+            //return cb(null, profile);
+            //return cb(null, foundUser);
+            //User.find()
+
 
             User.findById(req.user.local.userid, function(err, foundUser){
                 if (err) throw err;
                 else {
-                    if (req.user.local.github === profile.username) {
-                        console.log('already linked');
-                        return cb(null, false, req.flash('githubMessage', 'Account already associated with this username'));
-                    } else {
-                        req.user.local.github = profile.username;
+                    if (foundUser.local.github === profile.username) {
+                        console.log('already linked with same account');
                         return cb(null, foundUser);
+                    } else {
+                        foundUser.local.github = profile.profileUrl;
+                        foundUser.save(function(err) {
+                            if (err) throw err;
+                            cb(null, foundUser);
+                        });
                     }
                 }
             });
+
             //console.log(req.user.local.userid);
             //console.log(refreshToken);
 

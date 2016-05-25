@@ -7,27 +7,24 @@ module.exports = function(app, passport) {
     app.get('/auth/github/', Helper.isLoggedIn, passport.authenticate('github'));
 
     app.get('/auth/github/callback/', Helper.isLoggedIn, passport.authenticate('github', {
-        failureRedirect: '/github_fail',
         successRedirect: '/github_success',
+        failureRedirect: '/github_fail',
         failureFlash : true
     }));
 
     app.get('/github_fail', function(req,res) {
-        res.render('github.jade', {
-            message1: 'fail',
-            message2: req.flash('githubMessage')
-        });
+        console.log('uh oh- this shouldn\'t happen');
+        res.redirect('/profile');
     });
     app.get('/github_success', function(req,res) {
-        res.render('github.jade', {
-            message1: 'success',
-            message2: req.flash('githubMessage')
-        });
+        res.redirect('/profile');
     });
-
+/*
     app.get('/github_project', function(req,res) {
         res.render('github.jade');
     });
+*/
+    /*
     app.post('/github_project', function(req,res) {
 
         var options = {
@@ -55,17 +52,11 @@ module.exports = function(app, passport) {
         });
 
     });
-
+    */
     app.get('/https://github.com/*', function(req,res) {
         var url = req.url;
         url = url.substring(1);
         console.log(url);
-        //res.redirect(url);
-        //res.send('hello')
-        //console.log(req.originalUrl);
-        //console.log(req.url);
-        //console.log(req.get('host'));
-        //res.send('/github.com/*')
 
         res.writeHead(302, {'Location': url});
         res.end();
