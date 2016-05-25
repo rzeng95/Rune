@@ -138,16 +138,12 @@ module.exports = function(passport) {
             User.findById(req.user.local.userid, function(err, foundUser){
                 if (err) throw err;
                 else {
-                    if (foundUser.local.github === profile.username) {
-                        console.log('already linked with same account');
-                        return cb(null, foundUser);
-                    } else {
-                        foundUser.local.github = profile.profileUrl;
-                        foundUser.save(function(err) {
-                            if (err) throw err;
-                            cb(null, foundUser);
-                        });
-                    }
+                    foundUser.local.github = profile.username;
+                    foundUser.local.githubUrl = profile.profileUrl;
+                    foundUser.save(function(err) {
+                        if (err) throw err;
+                        cb(null, foundUser);
+                    });
                 }
             });
 

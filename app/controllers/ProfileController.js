@@ -7,6 +7,7 @@ var Project = require('../models/project.js');
 var Helper = require('../models/helpers.js');
 
 var async = require('async');
+var request = require('request');
 
 module.exports = function(app, passport) {
 
@@ -41,28 +42,74 @@ module.exports = function(app, passport) {
                         description = usr.local.description;
                     }
                     var github;
-                    if (!usr.local.github) {
+                    if (!usr.local.githubUrl) {
                         github = '#';
                     } else {
-                        github = usr.local.github;
+                        github = usr.local.githubUrl;
                     }
-                    res.render('profile.jade', {
-                        // These are navbar variables
-                        loggedIn : req.isAuthenticated(),
-                        projList : req.user.local.projects,
-                        firstname : req.user.local.firstname,
+                    console.log('github username: ' + usr.local.github);
+                    console.log('github url: ' + usr.local.githubUrl);
+                    if(usr.local.githubUrl && usr.local.github) {
+                        var options = {
+                            url : 'https://api.github.com/users/' + usr.local.github +/*+ req.body.repo_owner + '/' + req.body.repo_name +*/ '/repos?type=all&sort=updated&client_id=fb79527a871e5ba8f0f7&client_secret=a82aa7f700c3f1022aefa81abdf77cf590593098',
+                            headers : {
+                                'User-Agent': 'request'
+                            }
+                        };
+                        request(options, function(err,response,body){
+                            if (response.statusCode !== 200) {
+                                console.log('something weird happened.');
+                                res.render('error.jade', {errorMessage: 'Error connecting with Github'});
 
-                        // These are profile variables
-                        fullname : usr.local.firstname + ' ' + usr.local.lastname,
-                        initials : usr.local.firstname.charAt(0) + usr.local.lastname.charAt(0),
-                        email : usr.local.email,
-                        isMe : isMe,
-                        userColor : usr.local.userColor,
-                        userProjects : usr.local.projects,
-                        myProjects : projects,
-                        description : description,
-                        github : github
-                    });
+                            } else {
+                                var githubProjectList = JSON.parse(body);
+
+                                res.render('profile.jade', {
+                                    // These are navbar variables
+                                    loggedIn : req.isAuthenticated(),
+                                    projList : req.user.local.projects,
+                                    firstname : req.user.local.firstname,
+
+                                    // These are profile variables
+                                    fullname : usr.local.firstname + ' ' + usr.local.lastname,
+                                    initials : usr.local.firstname.charAt(0) + usr.local.lastname.charAt(0),
+                                    email : usr.local.email,
+                                    isMe : isMe,
+                                    userColor : usr.local.userColor,
+                                    userProjects : usr.local.projects,
+                                    myProjects : projects,
+                                    description : description,
+                                    github : usr.local.githubUrl,
+
+                                    githubProjectList : githubProjectList
+                                });
+                            }
+
+                        }); // end request
+
+
+                    } else {
+                        res.render('profile.jade', {
+                            // These are navbar variables
+                            loggedIn : req.isAuthenticated(),
+                            projList : req.user.local.projects,
+                            firstname : req.user.local.firstname,
+
+                            // These are profile variables
+                            fullname : usr.local.firstname + ' ' + usr.local.lastname,
+                            initials : usr.local.firstname.charAt(0) + usr.local.lastname.charAt(0),
+                            email : usr.local.email,
+                            isMe : isMe,
+                            userColor : usr.local.userColor,
+                            userProjects : usr.local.projects,
+                            myProjects : projects,
+                            description : description,
+                            github : github
+
+                        });
+                    }
+
+
                 }); //end project.find
 
             } //end else
@@ -172,7 +219,7 @@ module.exports = function(app, passport) {
                         userProjects : usr.local.projects,
                         myProjects : projects,
                         description : req.user.local.description,
-                        github : req.user.local.github
+                        githubUrl : req.user.local.githubUrl
 
                     });
                 }); //end project.find

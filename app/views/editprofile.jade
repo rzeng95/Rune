@@ -39,7 +39,18 @@ block bodyContent
                 div(class="profile-description") Description
                     textarea(class="profile-form-control-description" type="text" rows="4" name="description" placeholder="I haven\'t entered my description!") #{description} 
                 div(class="profile-github") GitHub
-                    input(class="profile-form-control-github" type="text" name="github" placeholder="I haven\'t entered my GitHub!" value=github)
+                    //input(class="profile-form-control-github" type="text" name="github" placeholder="I haven\'t entered my GitHub!" value=github)
+                    
+                    // needs front-end work done!!
+                    if githubUrl
+                        p= githubUrl 
+                    else 
+                        p Link it!
                 div(class="profile-edit-button")
                     button(type="submit" class="btn btn-primary") Save Profile
-         
+        
+        //- NEEDS REFORMATTING 
+        form(action="/auth/github/" method="GET")
+            button(type="submit" class="btn btn-primary") Link With My Github!
+        
+        

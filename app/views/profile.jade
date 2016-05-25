@@ -48,3 +48,23 @@ block bodyContent
                 p(class="profile-github-text") I haven't posted my GitHub!
             else
                 a(class="profile-github-text" href="#{github}") #{github}
+
+        // NEEDS FRONT END PRETTIFICATION
+        h4 Github Projects
+        if githubProjectList
+            each i in [0,1,2,3,4]
+                p: a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
+        else
+            p This user has not linked their account with a github repository
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
