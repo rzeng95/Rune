@@ -17,7 +17,8 @@ module.exports = function(app, passport) {
         res.redirect('/profile');
     });
     app.get('/github_success', function(req,res) {
-        res.redirect('/profile');
+        //res.redirect('/profile');
+        res.redirect('/');
     });
 /*
     app.get('/github_project', function(req,res) {
