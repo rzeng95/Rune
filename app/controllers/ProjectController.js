@@ -11,6 +11,8 @@ var Project = require('../models/project.js');
 var Helper = require('../models/helpers.js');
 
 var async = require('async');
+var request = require('request');
+
 
 module.exports = function(app, passport) {
 
@@ -137,8 +139,27 @@ module.exports = function(app, passport) {
                         callback(null, foundProj, normalTasks, archivedTasks, memberList);
                     }
                 });
+            } , 
+            function getGitHubCommits(foundProj, normalTasks, archivedTasks, memberList, callback) {
+                var commitList;
+                var options = {
+                    //url : 'https://api.github.com/repos/' + foundProj.github_owner + '/' + foundProj.github_repo +
+                    url : 'https://api.github.com/repos/' + foundProj.github_url + '/commits?client_id=fb79527a871e5ba8f0f7&client_secret=a82aa7f700c3f1022aefa81abdf77cf590593098',
+                    headers : {
+                        'User-Agent': 'request'
+                    }
+                };
+                request(options, function(err,response,body){
+                    if (response.statusCode !== 200) {
+                        console.log('something weird happened.');
+                        callback(null, foundProj, normalTasks, archivedTasks, memberList, null);
+                    } else {
+                        commitList = JSON.parse(body);
+                        callback(null, foundProj, normalTasks, archivedTasks, memberList, commitList);
+                    }
+                });
             }
-        ], function(err, foundProj, normalTasks, archivedTasks, memberList){
+        ], function(err, foundProj, normalTasks, archivedTasks, memberList, commitList){
             if (err) {
                 throw err;
             } else {
@@ -163,6 +184,9 @@ module.exports = function(app, passport) {
                     github_repo : foundProj.github_repo,
                     github_owner : foundProj.github_owner,
                     full_url : 'https://github.com/' + foundProj.github_url,
+
+                    //github commits
+                    commits : commitList,
 
                     // User tab variables
                     projMembers : memberList,
