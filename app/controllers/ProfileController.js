@@ -47,8 +47,8 @@ module.exports = function(app, passport) {
                     } else {
                         github = usr.local.githubUrl;
                     }
-                    console.log('github username: ' + usr.local.github);
-                    console.log('github url: ' + usr.local.githubUrl);
+                    //console.log('github username: ' + usr.local.github);
+                    //console.log('github url: ' + usr.local.githubUrl);
                     if(usr.local.githubUrl && usr.local.github) {
                         var options = {
                             url : 'https://api.github.com/users/' + usr.local.github +/*+ req.body.repo_owner + '/' + req.body.repo_name +*/ '/repos?type=all&sort=updated&client_id=fb79527a871e5ba8f0f7&client_secret=a82aa7f700c3f1022aefa81abdf77cf590593098',

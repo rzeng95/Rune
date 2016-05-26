@@ -6,7 +6,7 @@ module.exports = function(app, passport) {
 
     app.get('/auth/github/', Helper.isLoggedIn, passport.authenticate('github'));
 
-    app.get('/auth/github/callback/', Helper.isLoggedIn, passport.authenticate('github', {
+    app.get('/auth/callback/', Helper.isLoggedIn, passport.authenticate('github', {
         successRedirect: '/',
         failureRedirect: '/',
         failureFlash : true

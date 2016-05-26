@@ -127,6 +127,11 @@ module.exports = function(passport) {
 
     }, function(req, accessToken, refreshToken, profile, cb) {
         process.nextTick(function() {
+
+            console.log(req.get('host'));
+            console.log(req.originalUrl);
+
+
             console.log(profile.username);
             console.log(profile.profileUrl);
             //console.log()
