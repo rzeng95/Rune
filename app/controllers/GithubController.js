@@ -7,11 +7,11 @@ module.exports = function(app, passport) {
     app.get('/auth/github/', Helper.isLoggedIn, passport.authenticate('github'));
 
     app.get('/auth/github/callback/', Helper.isLoggedIn, passport.authenticate('github', {
-        successRedirect: '/github_success',
-        failureRedirect: '/github_fail',
+        successRedirect: '/',
+        failureRedirect: '/',
         failureFlash : true
     }));
-
+/*
     app.get('/github_fail', function(req,res) {
         console.log('uh oh- this shouldn\'t happen');
         res.redirect('/profile');
@@ -20,6 +20,7 @@ module.exports = function(app, passport) {
         //res.redirect('/profile');
         res.redirect('/');
     });
+*/
 /*
     app.get('/github_project', function(req,res) {
         res.render('github.jade');
