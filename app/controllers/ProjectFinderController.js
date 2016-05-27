@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
         function(req, res) {
             async.waterfall([
                 function(callback) {
-                    Project.find({}, function(err, projs) {
+                    Project.find({'ispublic' : true}, function(err, projs) {
                         if (err) {
                             throw err;
                         } else {
