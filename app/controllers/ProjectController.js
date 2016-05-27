@@ -139,7 +139,7 @@ module.exports = function(app, passport) {
                         callback(null, foundProj, normalTasks, archivedTasks, memberList);
                     }
                 });
-            } , 
+            } ,
             function getGitHubCommits(foundProj, normalTasks, archivedTasks, memberList, callback) {
                 var commitList;
                 var options = {
@@ -151,7 +151,7 @@ module.exports = function(app, passport) {
                 };
                 request(options, function(err,response,body){
                     if (response.statusCode !== 200) {
-                        console.log('something weird happened.');
+                        console.log('no associated github found; won\'t be displaying commit list');
                         callback(null, foundProj, normalTasks, archivedTasks, memberList, null);
                     } else {
                         commitList = JSON.parse(body);
@@ -163,8 +163,8 @@ module.exports = function(app, passport) {
             if (err) {
                 throw err;
             } else {
-                //console.log(normalTasks);
-
+                //console.log('Project Skills: ' + foundProj.projectskills);
+                //console.log('Project Public?: ' + foundProj.ispublic);
                 res.render('project.jade', {
                     // These are navbar variables
                     loggedIn : req.isAuthenticated(),
@@ -206,7 +206,9 @@ module.exports = function(app, passport) {
 
                     // Settings variables
                     github_url : foundProj.github_url,
-                    description : foundProj.description
+                    description : foundProj.description,
+                    projectskills: foundProj.projectskills,
+                    ispublic: foundProj.ispublic
                 });
             }
         });
@@ -216,9 +218,11 @@ module.exports = function(app, passport) {
         // update description and github repo
         Project.findById(req.params.projectid, function(err, foundProj){
             if (err) throw err;
-
+            console.log(req.body);
             foundProj.github_url = req.body.github_url;
             foundProj.description = req.body.description;
+            foundProj.ispublic = req.body.optradio;
+            foundProj.projectskills = req.body.projectskills;
 
             foundProj.save(function(err){
                 if (err) throw err;

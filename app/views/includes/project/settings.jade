@@ -30,11 +30,21 @@ div(class="settings-container")
             div(class="col-xs-7 settings-input")
                 div(class="input-group")
                     label(class="radio-inline")
-                        input(type="radio" name="optradio")
+                        input(type="radio" name="optradio" value="1" checked=(ispublic==1))
                         | Public
                     label(class="radio-inline")
-                        input(type="radio" name="optradio" checked)
+                        input(type="radio" name="optradio" value="0" checked= (ispublic==0))
                         | Private
+                        
+        // NEEDS FRONT END OVERHAUL
+        div(class="row form-group")
+            div(class="col-xs-3 col-xs-offset-1 settings-label")
+                label(for="settings-proj-gh")
+                    h3 Project Skills
+                    h6 List tech stack or skills preferred for this project.
+            div(class="col-xs-7 settings-input")
+                textarea(id="settings-proj-des" class="col-xs-7 form-control" type="text" rows="2" name="projectskills" placeholder="MongoDB, ExpressJS, AngularJS, NodeJS") #{projectskills}
+        
         div(class="row form-group")            
             div(class="col-xs-3 col-xs-offset-1 settings-label")
             div(class="col-xs-7 settings-input")

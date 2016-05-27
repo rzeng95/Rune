@@ -4,7 +4,7 @@ var Project = require('../models/project.js');
 var async = require('async');
 
 module.exports = function(app, passport) {
-    app.get('/projectfinder', Helper.isLoggedIn, 
+    app.get('/projectfinder', Helper.isLoggedIn,
         function(req, res) {
             async.waterfall([
                 function(callback) {
@@ -46,7 +46,9 @@ module.exports = function(app, passport) {
                                             'color':userList[j].color,
                                             'leader':userList[j].name,
                                             'size':projs[i].members.length,
-                                            'link':'/u/'+userList[j].id+'/'
+                                            'link':'/u/'+userList[j].id+'/',
+                                            'description': projs[i].description,
+                                            'projectskills' : projs[i].projectskills
                                         });
                                     }
                                 }
@@ -57,7 +59,9 @@ module.exports = function(app, passport) {
                                         'color':'red',
                                         'leader':admin,
                                         'size':projs[i].members.length,
-                                        'link':'#'
+                                        'link':'#',
+                                        'description': projs[i].description,
+                                        'projectskills' : projs[i].projectskills
                                     });
                                 }
                             }
@@ -68,6 +72,8 @@ module.exports = function(app, passport) {
                                 loggedIn : req.isAuthenticated(),
                                 projList : req.user.local.projects,
                                 firstname : req.user.local.firstname,
+
+
                                 projects : projects,
                                 users : userList
                             });
