@@ -47,6 +47,7 @@ module.exports = function(app, passport) {
         newProject.counter = 0;
         newProject.github_repo = req.body.githubrepo;
         newProject.github_owner = req.body.githubowner;
+        newProject.ispublic = 0;
         newProject.save(function(err) {
             if (err) {
                 throw err;
