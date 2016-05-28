@@ -197,7 +197,7 @@ module.exports = function(app, passport) {
             TaskController.getTask,
             TaskController.getUsersList
         ],
-        function(err, foundProj, foundTask, usersList) {
+        function(err, req, res, foundProj, foundTask, usersList) {
             if (err) {
                 res.send('error');
                 return;

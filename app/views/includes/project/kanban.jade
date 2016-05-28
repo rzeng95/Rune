@@ -7,7 +7,7 @@ div(class="kanban-board")
     div(class="kanban-board-body")
         div(class="kanban-board-row")
             each status in statuses
-                div(id=status class="kanban-col")
+                div(id="#{status}" class="kanban-col")
                     each task in tasks[status]
                         if (email == task.assignedto)
                             div(id=task.taskid class="kanban-task-glow-" + userColor)
