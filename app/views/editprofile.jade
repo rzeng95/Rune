@@ -38,13 +38,12 @@ block bodyContent
             div(class="col-sm-4" style="padding-top:24px; margin-left:-20px")
                 div(class="profile-description") Description
                     textarea(class="profile-form-control-description" type="text" rows="4" name="description" placeholder="I haven\'t entered my description!") #{description} 
+                div(class="profile-description") Skills
+                    textarea(class="profile-form-control-description" type="text" rows="2" name="skills" placeholder="I haven\'t entered my skills!") #{skills}
                 div(class="profile-github") GitHub
-                    //input(class="profile-form-control-github" type="text" name="github" placeholder="I haven\'t entered my GitHub!" value=github)
-                    
-                    // needs front-end work done!!
                     if githubUrl
                         div(class="profile-github-text")
-                        p= githubUrl 
+                            p= githubUrl 
                     else 
                         div(class="profile-github-text") I haven't linked my GitHub!
                 div(class="profile-edit-button")

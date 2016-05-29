@@ -43,6 +43,8 @@ block bodyContent
         div(class="col-sm-4" style="padding-top:24px; margin-left:-20px")
             div(class="profile-description") Description
                 p(class="profile-description-text") #{description}
+            div(class="profile-description") Skills
+                p(class="profile-description-text") #{skills}
             div(class="profile-github") GitHub
             if (github == '#')
                 p(class="profile-github-text") I haven't linked my GitHub!
@@ -54,7 +56,7 @@ block bodyContent
                     div(class="profile-description-text")
                         each i in [0,1,2,3,4]
                             p: a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
-                            
+
             
             
             

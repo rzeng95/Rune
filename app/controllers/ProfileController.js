@@ -41,6 +41,12 @@ module.exports = function(app, passport) {
                     } else {
                         description = usr.local.description;
                     }
+                    var skills;
+                    if (!usr.local.skills) {
+                        skills = 'I haven\'t posted my skills!';
+                    } else {
+                        skills = usr.local.skills;
+                    }
                     var github;
                     if (!usr.local.githubUrl) {
                         github = '#';
