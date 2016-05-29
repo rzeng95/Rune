@@ -45,8 +45,9 @@ module.exports = function(app, passport) {
         newProject.admin = req.user.local.email;
         newProject.members.push(userEmail);
         newProject.counter = 0;
-        newProject.github_repo = req.body.githubrepo;
-        newProject.github_owner = req.body.githubowner;
+        newProject.github_repo = "";
+        newProject.github_owner = "";
+        newProject.github_url = "";
         newProject.ispublic = 0;
         newProject.save(function(err) {
             if (err) {
@@ -188,6 +189,7 @@ module.exports = function(app, passport) {
             if (err) {
                 throw err;
             } else {
+                console.log(foundProj.github_url)
                 //console.log('Project Skills: ' + foundProj.projectskills);
                 //console.log('Project Public?: ' + foundProj.ispublic);
                 res.render('project.jade', {
