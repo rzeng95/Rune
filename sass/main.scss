@@ -498,7 +498,7 @@ body {
 }
 
 // Task browser styling specifications.
-$task-browser-offset: $project-body-offset + 55px;
+$task-browser-offset: $project-body-offset + 65px;
 
 .task-browser {
     position: relative;
@@ -512,8 +512,13 @@ $task-browser-offset: $project-body-offset + 55px;
     border-bottom-width: 1px;
     border-bottom-color: $color-border;
     border-bottom-style: solid;
+    padding: 15px;
     .task-browser-filter-group {
         float: left;
+        margin-right: 15px;
+    }
+    .btn-group {
+        margin-right: 15px;
     }
 }
 
@@ -622,6 +627,14 @@ $task-browser-offset: $project-body-offset + 55px;
 }
 
 // Profile Styling
+.profile-container {
+    padding-top: 25px;
+}
+
+.profile-el {
+    padding: 15px;
+}
+
 .profile-description {
     font-size: 30px;
 }
@@ -661,6 +674,11 @@ $task-browser-offset: $project-body-offset + 55px;
 }
 
 .profile-edit-button {
+    position: relative;
+    left: 4px;
+}
+
+.profile-github-button {
     position: relative;
     left: 4px;
 }

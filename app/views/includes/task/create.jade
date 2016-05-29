@@ -11,7 +11,7 @@ div(class="container-fluid task-body")
             div(class="form-group")
                 label(for="assignedto") Assign to
                 select(class="form-control" name="assignedto")
-                    option(value="") Unassigned
+                    option(value="Unassigned") Unassigned
                     each user in usersList
                         option(value="#{user['email']}") #{user['name']}
             div(class="form-group")
@@ -27,4 +27,4 @@ div(class="container-fluid task-body")
                     option Low
             div(class="row btn-submit")
                 button(type="submit" class="col-xs-5 btn btn-primary btn-modal") Submit
-                button(type="button" class="col-xs-5 col-xs-offset-2 btn btn-secondary" data-dismiss="modal") Cancel
+                button(type="button" class="col-xs-5 col-xs-offset-2 btn btn-default" data-dismiss="modal") Cancel

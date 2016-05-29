@@ -1,70 +1,85 @@
 extends ./partials/base.jade
 
-block bodyContent 
-    div(class="row")
-        div(class="col-xs-4 col-xs-offset-2" style="padding-top:24px")
-            div(id="rune-icon-profile-" + userColor)
-                img(class="roo-icon-profile" src="/images/Roo.svg")
-                div(class="initials-icon-profile") 
-                    p=initials
-
-            div
-                h2=fullname
-                h4=email
-                if isMe
-                    a(type="button" class="btn btn-primary" href="edit/") Edit Profile
-                else 
-                    ul(class="nav nav-stacked")
-                        li
-                            div(class="btn-group")
-                                button(class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#") Add to Project 
-                                    span(class="glyphicon glyphicon-menu-right")
-                                ul(class="dropdown-menu" style="top: 0;left: 100%;")
-                                    each proj in projList
-                                        li #[a(href="adduser/"+proj['projectid']) #{ proj['projectkey'] }]
-            div(style="padding-top:48px")                              
-                div(class="panel panel-primary" style="max-width:400px")
-                    div(class="panel-heading" style="text-color=white")
-                        |My Projects
-                    div(class="panel-content")
-                        table(class="table table-hover")
-                            if myProjects
-                                each proj in myProjects 
+block bodyContent
+    div(class="profile-container")
+        div(class="row")
+            div(class="col-xs-4 col-xs-offset-2")
+                div(class="profile-el" id="rune-icon-profile-"+userColor)
+                    img(class="roo-icon-profile" src="/images/Roo.svg")
+                    div(class="initials-icon-profile") 
+                        p=initials
+                div(class="profile-el")
+                    h2=fullname
+                    h4=email
+                    if !isEdit
+                        if isMe
+                            a(type="button" class="btn btn-primary" href="edit/") Edit Profile
+                        else 
+                            ul(class="nav nav-stacked")
+                                li
+                                    div(class="btn-group")
+                                        button(class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#") Add to Project
+                                            span(class="glyphicon glyphicon-menu-right")
+                                        ul(class="dropdown-menu" style="top: 0;left: 100%;")
+                                            each proj in projList
+                                                li #[a(href="adduser/"+proj['projectid']) #{ proj['projectkey'] }]
+                    else
+                        ul(class="nav nav-stacked")
+                            li
+                                div(class="btn-group")
+                                    form(class="profile-delete-form" action="delete/" method="POST")
+                                        button(type="submit" class="btn btn-primary") Delete Profile
+                div(class="profile-el")
+                    div(class="panel panel-primary")
+                        div(class="panel-heading")
+                            | My Projects
+                        div(class="panel-content")
+                            table(class="table table-hover")
+                                if myProjects
+                                    each proj in myProjects 
+                                        tr
+                                            td(class="text-center")
+                                                | #[a(href="/p/" + proj['projectid'] + '/') #{ proj['projectkey']}]
+                                            td(class="text-center")
+                                                | #{proj['projectname']}
+                                else
                                     tr
                                         td(class="text-center")
-                                            |#[a(href="/p/" + proj['projectid'] + '/') #{ proj['projectkey']}]
-                                        td(class="text-center")
-                                            |#{proj['projectname']}
-                            else
-                                tr
-                                    td(class="text-center")
-                                        You have no projects! 
-
-        div(class="col-sm-4" style="padding-top:24px; margin-left:-20px")
-            div(class="profile-description") Description
-                p(class="profile-description-text") #{description}
-            div(class="profile-github") GitHub
-            if (github == '#')
-                p(class="profile-github-text") I haven't posted my GitHub!
+                                            You have no projects!
+            if !isEdit
+                div(class="col-xs-4")
+                    div(class="profile-el profile-description") Description
+                        p(class="profile-description-text") #{description}
+                    div(class="profile-el profile-description") Skills
+                        p(class="profile-description-text") #{skills}
+                    div(class="profile-el profile-github") GitHub
+                        if (github == '#')
+                            p(class="profile-github-text") I haven't linked my GitHub!
+                        else
+                            a(href="#{github}")
+                                p(class="profile-github-text") #{github}
+                    if githubProjectList
+                        div(class="profile-el profile-description") GitHub Projects
+                            div(class="profile-description-text")
+                                each i in [0,1,2,3,4]
+                                    p: a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
             else
-                a(class="profile-github-text" href="#{github}") #{github}
-
-        // NEEDS FRONT END PRETTIFICATION
-        h4 Github Projects
-        if githubProjectList
-            each i in [0,1,2,3,4]
-                p: a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
-        else
-            p This user has not linked their account with a github repository
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                div(class="col-xs-4")
+                    form(action="" method="POST")
+                        div(class="profile-el profile-description") Description
+                            textarea(class="profile-form-control-description" type="text" rows="4" name="description" placeholder="I haven\'t entered my description!") #{description}
+                        div(class="profile-el profile-description") Skills
+                            textarea(class="profile-form-control-description" type="text" rows="2" name="skills" placeholder="I haven\'t entered my skills!") #{skills}
+                        div(class="profile-el profile-github") GitHub
+                            if githubUrl
+                                div(class="profile-github-text")
+                                    p= githubUrl 
+                            else 
+                                div(class="profile-github-text") I haven't linked my GitHub!
+                        div(class="profile-el profile-edit-button")
+                            button(type="submit" class="btn btn-primary") Save Profile
+                    form(action="/auth/github/" method="GET")
+                        div(class="profile-el profile-github-button")
+                            button(type="submit" class="btn btn-primary") Link With My Github!
+block scripts
+    script(src="/javascripts/profile.js")

@@ -344,7 +344,9 @@ module.exports = function(app, passport) {
             if (err) {
                 res.send('error');
             } else {
-                res.redirect('/p/' + req.params.projectid);
+                res.send({
+                    redirect: '/p/' + req.params.projectid
+                });
             }
         }); // End async waterfall.
     }); // end delete task
