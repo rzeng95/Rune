@@ -64,8 +64,8 @@ block bodyContent
                                 each i in [0,1,2,3,4]
                                     p: a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
             else
-                form(action="" method="POST")
-                    div(class="col-xs-4")
+                div(class="col-xs-4")
+                    form(action="" method="POST")
                         div(class="profile-el profile-description") Description
                             textarea(class="profile-form-control-description" type="text" rows="4" name="description" placeholder="I haven\'t entered my description!") #{description}
                         div(class="profile-el profile-description") Skills
@@ -78,8 +78,8 @@ block bodyContent
                                 div(class="profile-github-text") I haven't linked my GitHub!
                         div(class="profile-el profile-edit-button")
                             button(type="submit" class="btn btn-primary") Save Profile
-                form(action="/auth/github/" method="GET")
-                    div(class="profile-el profile-github-button")
-                        button(type="submit" class="btn btn-primary") Link With My Github!
+                    form(action="/auth/github/" method="GET")
+                        div(class="profile-el profile-github-button")
+                            button(type="submit" class="btn btn-primary") Link With My Github!
 block scripts
     script(src="/javascripts/profile.js")

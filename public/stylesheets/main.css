@@ -9071,9 +9071,7 @@ body {
 
 .profile-github-button {
   position: relative;
-  float: right;
-  top: 358px;
-  right: 100px;
+  left: 4px;
 }
 
 .project-finder-table {
