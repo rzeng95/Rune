@@ -14,14 +14,13 @@ var currTaskID = '';
 // GET function for generating the "create task" modal HTML.
 Page.Project.taskCreateLoad = function() {
     $.ajax({
-        url : 'createtask/',
-        success : function(data) {
+        url: 'createtask/',
+        success: function(data) {
             $('.modal-content').html(data);
 
             // Add a listener for when the "create task" form gets submitted.
             $('.task-create-form').submit(function(e) {
                 $('#task-modal').modal('toggle');
-                e.unbind();
             });
         }
     });
@@ -30,8 +29,8 @@ Page.Project.taskCreateLoad = function() {
 // GET function for generating the "edit task" modal HTML.
 Page.Project.taskEditLoad = function(taskid) {
     $.ajax({
-        url : 't/' + taskid + '/edit/',
-        success : function(data) {
+        url: 't/' + taskid + '/edit/',
+        success: function(data) {
             // With the generated HTML, place the HTML into the modal.
             $('.modal-content').html(data);
 
@@ -40,15 +39,14 @@ Page.Project.taskEditLoad = function(taskid) {
                 e.preventDefault();
                 var postData = $(this).serializeArray();
                 $.ajax({
-                    method : 'POST',
-                    url : 't/' + taskid + '/edit/',
-                    data : postData,
-                    success : function(data) {
+                    method: 'POST',
+                    url: 't/' + taskid + '/edit/',
+                    data: postData,
+                    success: function(data) {
                         Page.Project.taskWindowUpdate(taskid);
                     }
                 });
                 $('#task-modal').modal('toggle');
-                e.unbind();
             });
         }
     });
@@ -62,8 +60,8 @@ Page.Project.taskWindowLoad = function(taskid) {
 
 Page.Project.taskWindowUpdate = function(taskid) {
     $.ajax({
-        url : 't/' + taskid + '/',
-        success : function(data) {
+        url: 't/' + taskid + '/',
+        success: function(data) {
             $('#' + taskid + '.task-browser-window-el').html(data);
             Page.Project.taskWindowListeners();
         }
@@ -91,10 +89,10 @@ Page.Project.taskWindowListeners = function() {
         e.preventDefault();
         var postData = $(this).serializeArray();
         $.ajax({
-            method : 'POST',
-            url : 't/' + currTaskID + '/comment/',
-            data : postData,
-            success : function(data) {
+            method: 'POST',
+            url: 't/' + currTaskID + '/comment/',
+            data: postData,
+            success: function(data) {
                 Page.Project.taskWindowUpdate(currTaskID);
             }
         });
@@ -118,15 +116,15 @@ $('.project-del-form').submit(function(e) {
 
 // Add a sortable property to Kanban board task objects.
 $('.kanban-col').sortable({
-    connectWith : '.kanban-col',
-    stop : function(event, ui) {
+    connectWith: '.kanban-col',
+    stop: function(event, ui) {
         $.ajax({
-            method : 'POST',
-            data : {
-                status : $(ui.item).parent().attr('id'),
-                taskid : $(ui.item).attr('id')
+            method: 'POST',
+            data: {
+                status: $(ui.item).parent().attr('id'),
+                taskid: $(ui.item).attr('id')
             },
-            url : 'movetask/'
+            url: 'movetask/'
         });
     }
 });
@@ -142,6 +140,23 @@ $('.task-browser-list-el-link').click(function(e) {
     e.preventDefault();
     currTaskID = $(this).parent().attr('id');
     Page.Project.taskWindowLoad(currTaskID); 
+});
+
+// Add a confirmation prompt for deleting projects.
+$('.task-delete-form').submit(function(e) {
+    e.preventDefault();
+    var confirmDialogue = "Are you sure you want to delete this task?";
+    var confirmEvent = confirm(confirmDialogue);
+    if (confirmEvent) {
+        var urlDelete = $(this).attr('action');
+        $.ajax({
+            url: urlDelete,
+            method: 'POST',
+            success: function(data) {
+                window.location.href = data.redirect;
+            }
+        });
+    }
 });
 
 // Task List Manipulation

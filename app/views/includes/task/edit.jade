@@ -11,6 +11,7 @@ div(class="container-fluid task-body")
             div(class="form-group")
                 label(for="assignedto") Assign to
                 select(class="form-control" name="assignedto")
+                    option(value="Unassigned") Unassigned
                     each user in usersList
                         option( selected=(user['email']==curAssignee) value= user['email'] ) #{user['name']} -- #{user['email']}
             div(class="form-group")

@@ -25,7 +25,7 @@ block bodyContent
             div(style="padding-top:48px")                              
                 div(class="panel panel-primary" style="max-width:400px")
                     div(class="panel-heading" style="text-color=white")
-                        |My Projects
+                        | My Projects
                     div(class="panel-content")
                         table(class="table table-hover")
                             if myProjects
@@ -47,15 +47,17 @@ block bodyContent
             if (github == '#')
                 p(class="profile-github-text") I haven't posted my GitHub!
             else
-                a(class="profile-github-text" href="#{github}") #{github}
+                a(href="#{github}")
+                    p(class="profile-github-text") #{github}
 
-        // NEEDS FRONT END PRETTIFICATION
-        h4 Github Projects
-        if githubProjectList
-            each i in [0,1,2,3,4]
-                p: a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
-        else
-            p This user has not linked their account with a github repository
+            //- NEEDS FRONT END PRETTIFICATION
+            div(class="profile-description") GitHub Projects
+                div(class="profile-description-text")
+                    if githubProjectList
+                        each i in [0,1,2,3,4]
+                            p: a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
+                    else
+                        p This user has not linked their account with a github repository
             
             
             
