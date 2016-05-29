@@ -627,6 +627,14 @@ $task-browser-offset: $project-body-offset + 65px;
 }
 
 // Profile Styling
+.profile-container {
+    padding-top: 25px;
+}
+
+.profile-el {
+    padding: 15px;
+}
+
 .profile-description {
     font-size: 30px;
 }
