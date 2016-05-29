@@ -34,4 +34,8 @@ block bodyContent
                             td(class="project-finder-skills") 
                                 div(class="project-finder-skills-text") #{proj.projectskills}
                             td(class="project-finder-button")
-                                button(id="submit" type="submit" class="btn btn-primary" style="width:80px") Apply
+                                form(action="apply/" method="post")
+                                    if proj.disabled
+                                        button(name="project" type="submit" class="btn btn-primary" style="width:80px" disabled) Pending
+                                    else
+                                        button(name="project" type="submit" class="btn btn-primary" style="width:80px" value='#{proj.projectid}') Apply

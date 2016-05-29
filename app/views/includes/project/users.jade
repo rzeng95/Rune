@@ -1,4 +1,27 @@
 div(class="user-list-container")
+	if pendingMembers.length > 0
+		h3 Pending Member Requests
+		table(class="table")
+			thead
+				tr
+					th Name
+					th Email
+					th
+			tbody
+				each puser in pendingMembers
+					tr
+						td
+							div(id="rune-icon-kanban-" + puser.color)
+								img(class="roo-icon-kanban" src="/images/Roo.svg")
+								div(class="user-name") #[a(href='/u/'+puser.id+'/') #{puser.name}]
+								div(class="initials-icon-kanban") #{puser.initials}
+						td
+							div(class="user-email") #{puser.email}
+						td
+							form(action="applicationresponse/" method="post")
+								button(name="ignore" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Ignore
+								button(name="accept" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Accept
+	h3 Current Project Members
 	table(class="table")
 		thead
 			tr

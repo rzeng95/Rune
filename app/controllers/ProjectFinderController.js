@@ -33,13 +33,27 @@ module.exports = function(app, passport) {
                                 });
                             }
 
+                            
                             var projects = [];
                             for (var i = 0; i < projs.length; i++) {
+
+                                // dont show project if you're already a member of the project
+                                if(projs[i].members.indexOf(req.user.local.email)!=-1 )
+                                    break;
+
                                 var admin = projs[i].admin;
                                 var found = false;
+
+                                if(projs[i].pending.indexOf(req.user.local.userid)==-1)
+                                    var disabled = false
+                                else
+                                    var disabled = true
+
                                 for (var j = 0; j < userList.length; j++) {
                                     if (userList[j].email == admin) {
                                         found = true;
+                                        console.log(projs[i].pending)
+                                        console.log(projs[i].projectid)
                                         projects.push({
                                             'name':projs[i].projectname,
                                             'initials':userList[j].initials,
@@ -48,7 +62,10 @@ module.exports = function(app, passport) {
                                             'size':projs[i].members.length,
                                             'link':'/u/'+userList[j].id+'/',
                                             'description': projs[i].description,
-                                            'projectskills' : projs[i].projectskills
+                                            'projectskills' : projs[i].projectskills,
+                                            'projectid' : projs[i].projectid,
+                                            'disabled' : disabled
+
                                         });
                                     }
                                 }
@@ -83,4 +100,29 @@ module.exports = function(app, passport) {
             ]);
         }
     );
+    app.post('/projectfinder/apply', Helper.isLoggedIn, 
+        function(req, res) {
+            console.log(req.body.project);
+            // finds the project being applied to 
+            Project.findById(req.body.project, function(err, foundProj){
+                
+                // checks if user is already in pending. if user is not, array search will return -1
+                if(foundProj.pending.indexOf(req.user.local.userid) == -1)
+                {
+                    console.log(req.user.local.userid);
+                    // adds user's id to the array
+                    foundProj.pending.push(req.user.local.userid);
+                    foundProj.save(function(err){
+                        if (err) throw err;
+                        else {
+                            res.redirect('/projectfinder');
+                        }
+
+                    });
+                }
+                else
+                    res.redirect('/projectfinder');
+            });
+            
+        });
 };

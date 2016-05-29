@@ -141,7 +141,31 @@ module.exports = function(app, passport) {
                     }
                 });
             } ,
-            function getGitHubCommits(foundProj, normalTasks, archivedTasks, memberList, callback) {
+            function getUserApplys(foundProj, normalTasks, archivedTasks, memberList, callback) {
+                User.find({
+                    'local.userid' : {
+                        $in : foundProj.pending
+                    }
+                }, function(err, usersList) {
+                    if(err)
+                        callback(err);
+                    else {
+                        var pendingUsers = [];
+                        for (var i=0; i<usersList.length; i++) {
+                            pendingUsers.push({
+                                'name':usersList[i].local.firstname+' '+usersList[i].local.lastname,
+                                'initials':usersList[i].local.firstname.charAt(0) + usersList[i].local.lastname.charAt(0),
+                                'email':usersList[i].local.email,
+                                'id':usersList[i].local.userid,
+                                'color':usersList[i].local.userColor
+                            });
+                        }
+                        callback(null, foundProj, normalTasks, archivedTasks, memberList, pendingUsers);
+                    }
+                });
+                    
+            },
+            function getGitHubCommits(foundProj, normalTasks, archivedTasks, memberList, pendingUsers, callback) {
                 var commitList;
                 var options = {
                     //url : 'https://api.github.com/repos/' + foundProj.github_owner + '/' + foundProj.github_repo +
@@ -153,14 +177,14 @@ module.exports = function(app, passport) {
                 request(options, function(err,response,body){
                     if (response.statusCode !== 200) {
                         console.log('no associated github found; won\'t be displaying commit list');
-                        callback(null, foundProj, normalTasks, archivedTasks, memberList, null);
+                        callback(null, foundProj, normalTasks, archivedTasks, memberList, pendingUsers, null);
                     } else {
                         commitList = JSON.parse(body);
-                        callback(null, foundProj, normalTasks, archivedTasks, memberList, commitList);
+                        callback(null, foundProj, normalTasks, archivedTasks, memberList, pendingUsers, commitList);
                     }
                 });
             }
-        ], function(err, foundProj, normalTasks, archivedTasks, memberList, commitList){
+        ], function(err, foundProj, normalTasks, archivedTasks, memberList, pendingUsers, commitList){
             if (err) {
                 throw err;
             } else {
@@ -191,6 +215,7 @@ module.exports = function(app, passport) {
 
                     // User tab variables
                     projMembers : memberList,
+                    pendingMembers : pendingUsers,
 
                     // Task tab variables
                     taskList : foundProj.tasks,
@@ -321,6 +346,43 @@ module.exports = function(app, passport) {
                 res.redirect('/profile');
             }
         });
+
+
+    }); //end app.post
+
+    
+    app.post('/p/:projectid/applicationresponse/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
+        Project.findById(req.params.projectid, function(err, foundProj){
+            if (err) {
+                callback(err);
+            } else {
+                if(req.body.ignore != null) {
+                    // remove the value at index of the userid to be ignored
+                    foundProj.pending.splice(foundProj.pending.indexOf(req.body.ignore), 1);
+                    foundProj.save(function(err, response) {
+                        if (err) {
+                            res.redirect('/p/'+req.params.projectid)
+                            throw err;
+                        } else {
+                            res.redirect('/p/'+req.params.projectid)
+                        }
+                    });
+                }
+                else if(req.body.accept != null) {
+                    // remove the value at index of the userid to be accepted
+                    foundProj.pending.splice(foundProj.pending.indexOf(req.body.accept), 1);
+                    foundProj.save(function(err, response) {
+                        if (err) {
+                            res.redirect('/p/'+req.params.projectid)
+                            throw err;
+                        } else {
+                            res.redirect('/u/'+req.body.accept+'/adduser/'+req.params.projectid);
+                        }
+                    });
+                }
+            }
+        });
+        
 
 
     }); //end app.post
