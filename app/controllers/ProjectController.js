@@ -208,7 +208,7 @@ module.exports = function(app, passport) {
 
                     github_repo : foundProj.github_repo,
                     github_owner : foundProj.github_owner,
-                    full_url : 'https://github.com/' + foundProj.github_url,
+                    full_url : foundProj.github_url,
 
                     //github commits
                     commits : commitList,
