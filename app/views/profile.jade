@@ -45,22 +45,16 @@ block bodyContent
                 p(class="profile-description-text") #{description}
             div(class="profile-github") GitHub
             if (github == '#')
-                p(class="profile-github-text") I haven't posted my GitHub!
+                p(class="profile-github-text") I haven't linked my GitHub!
             else
                 a(href="#{github}")
                     p(class="profile-github-text") #{github}
-
-            //- NEEDS FRONT END PRETTIFICATION
-            div(class="profile-description") GitHub Projects
-                div(class="profile-description-text")
-                    if githubProjectList
+            if githubProjectList
+                div(class="profile-description") GitHub Projects
+                    div(class="profile-description-text")
                         each i in [0,1,2,3,4]
                             p: a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
-                    else
-                        p This user has not linked their account with a github repository
-            
-            
-            
+                            
             
             
             

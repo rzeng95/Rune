@@ -670,6 +670,13 @@ $task-browser-offset: $project-body-offset + 65px;
     left: 4px;
 }
 
+.profile-github-button {
+    position: relative;
+    float: right;
+    top: 242px;
+    right: 100px;
+}
+
 // Project Finder Styling
 .project-finder-table {
     @extend .table;
