@@ -48,36 +48,63 @@ block bodyContent
                                             You have no projects!
             if !isEdit
                 div(class="col-xs-4")
-                    div(class="profile-el profile-description") Description
-                        p(class="profile-description-text") #{description}
-                    div(class="profile-el profile-description") Skills
-                        p(class="profile-description-text") #{skills}
-                    div(class="profile-el profile-github") GitHub
-                        if (github == '#')
-                            p(class="profile-github-text") I haven't linked my GitHub!
-                        else
-                            a(href="#{github}")
-                                p(class="profile-github-text") #{github}
-                    if githubProjectList
-                        div(class="profile-el profile-description") GitHub Projects
-                            div(class="profile-description-text")
-                                each i in [0,1,2,3,4]
-                                    p: a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
+                    div(class="profile-el")
+                        div(class="panel panel-primary")
+                            div(class="panel-heading")
+                                | Description
+                            div(class="panel-content")
+                                div(class="profile-el") #{description}
+                    div(class="profile-el")
+                        div(class="panel panel-primary")
+                            div(class="panel-heading")
+                                | Skills
+                            div(class="panel-content")
+                                div(class="profile-el") #{skills}
+                    div(class="profile-el")
+                        div(class="panel panel-primary")
+                            div(class="panel-heading")
+                                | GitHub Profile
+                            div(class="panel-content")
+                                if (github == '#')
+                                    div(class="profile-el") I haven't linked my GitHub!
+                                else
+                                    a(href="#{github}")
+                                        div(class="profile-el text-center") #{github}
+                            if githubProjectList
+                                div(class="panel-heading")
+                                    | GitHub Projects
+                                div(class="panel-content")
+                                    table(class="table table-hover")
+                                        each i in [0,1,2,3,4]
+                                            tr
+                                                td(class="text-center")
+                                                    a(href=githubProjectList[i]['html_url']) #{githubProjectList[i]['name']}
             else
                 div(class="col-xs-4")
                     form(action="" method="POST")
-                        div(class="profile-el profile-description") Description
-                            textarea(class="profile-form-control-description" type="text" rows="4" name="description" placeholder="I haven\'t entered my description!") #{description}
-                        div(class="profile-el profile-description") Skills
-                            textarea(class="profile-form-control-description" type="text" rows="2" name="skills" placeholder="I haven\'t entered my skills!") #{skills}
-                        div(class="profile-el profile-github") GitHub
-                            if githubUrl
-                                div(class="profile-github-text")
-                                    p= githubUrl 
-                            else 
-                                div(class="profile-github-text") I haven't linked my GitHub!
+                        div(class="profile-el")
+                            div(class="panel panel-primary")
+                                div(class="panel-heading")
+                                    | Description
+                                textarea(class="profile-form-control-description" type="text" rows="5" name="description" placeholder="I haven\'t entered my description!") #{description}
+                        div(class="profile-el")
+                            div(class="panel panel-primary")
+                                div(class="panel-heading")
+                                    | Skills
+                                textarea(class="profile-form-control-description" type="text" rows="3" name="skills" placeholder="Add your skills here!") #{skills}
                         div(class="profile-el profile-edit-button")
                             button(type="submit" class="btn btn-primary") Save Profile
+                    hr
+                    div(class="profile-el profile-github")
+                        div(class="panel panel-primary")
+                            div(class="panel-heading")
+                                | GitHub Profile
+                            div(class="panel-content")
+                                if (githubUrl == '#')
+                                    div(class="profile-el") I haven't linked my GitHub!
+                                else
+                                    a(href="#{githubUrl}")
+                                        div(class="profile-el text-center") #{githubUrl}                        
                     form(action="/auth/github/" method="GET")
                         div(class="profile-el profile-github-button")
                             button(type="submit" class="btn btn-primary") Link With My Github!

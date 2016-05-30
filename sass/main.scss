@@ -629,6 +629,9 @@ $task-browser-offset: $project-body-offset + 65px;
 // Profile Styling
 .profile-container {
     padding-top: 25px;
+    width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .profile-el {
@@ -649,13 +652,14 @@ $task-browser-offset: $project-body-offset + 65px;
 .profile-form-control-description {
     @extend .form-control;
     position: relative;
-    left: 4px;
     font-size: 14px;
-    margin-bottom: 10px;
+    width: 100%;
+    resize: none;
+    height: 400px;
 }
 
 .profile-github {
-    font-size: 30px;
+    margin-top: 50px;
 }
 
 .profile-github-text {
@@ -674,8 +678,10 @@ $task-browser-offset: $project-body-offset + 65px;
 }
 
 .profile-edit-button {
+    padding-top:0px;
     position: relative;
     left: 4px;
+    margin-bottom: 20px;
 }
 
 .profile-github-button {

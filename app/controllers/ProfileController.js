@@ -43,7 +43,7 @@ module.exports = function(app, passport) {
                 }
                 var skills;
                 if (!usr.local.skills) {
-                    skills = 'I haven\'t posted my skills!';
+                    skills = 'I can type at 50 WPM and am proficient with Microsoft Word';
                 } else {
                     skills = usr.local.skills;
                 }
@@ -85,7 +85,8 @@ module.exports = function(app, passport) {
                                 myProjects: projects,
                                 description: description,
                                 github: usr.local.githubUrl,
-                                githubProjectList: githubProjectList
+                                githubProjectList: githubProjectList,
+                                skills: skills
                             });
                         }
                     }); // end request
