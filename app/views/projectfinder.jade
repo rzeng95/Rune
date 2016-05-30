@@ -7,15 +7,22 @@ block bodyContent
             table(class="project-finder-table") 
                 thead
                     tr
+                        th 
                         th Project Name
                         th Project Leader
                         th Members
                         th Description
                         th Skills
-                        th 
+                        
                 tbody
                     each proj in projects
                         tr
+                            td(class="project-finder-button")
+                                form(action="apply/" method="post")
+                                    if proj.disabled
+                                        button(name="project" type="submit" class="btn btn-primary" style="width:80px" disabled) Pending
+                                    else
+                                        button(name="project" type="submit" class="btn btn-primary" style="width:80px" value='#{proj.projectid}') Apply
                             td(class="project-finder-name") 
                                 div(class="project-finder-name-text") 
                                     b #{proj.name}
@@ -33,9 +40,4 @@ block bodyContent
                                 div(class="project-finder-description-text") #{proj.description}  
                             td(class="project-finder-skills") 
                                 div(class="project-finder-skills-text") #{proj.projectskills}
-                            td(class="project-finder-button")
-                                form(action="apply/" method="post")
-                                    if proj.disabled
-                                        button(name="project" type="submit" class="btn btn-primary" style="width:80px" disabled) Pending
-                                    else
-                                        button(name="project" type="submit" class="btn btn-primary" style="width:80px" value='#{proj.projectid}') Apply
+                            
