@@ -16,5 +16,7 @@ div(class="overview-container")
                 td #{description}
     h2 Project History
     div
+        if history.length == 0
+            p No History Found. Create your first task #[a(data-toggle="modal" href="#task-modal" onclick="Page.Project.taskCreateLoad();") here!] 
         each hist in history.reverse()
             div #{hist['date']} : #{hist['action']} #[a(href='t/' + hist['link'] +'/') #{hist['link']}] #{hist['description']}
