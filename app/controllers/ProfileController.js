@@ -43,7 +43,7 @@ module.exports = function(app, passport) {
                 }
                 var skills;
                 if (!usr.local.skills) {
-                    skills = 'I can type at 50 WPM and am proficient with Microsoft Word';
+                    skills = 'I havent added any skills yet!';
                 } else {
                     skills = usr.local.skills;
                 }
@@ -107,7 +107,8 @@ module.exports = function(app, passport) {
                         userProjects: usr.local.projects,
                         myProjects: projects,
                         description: description,
-                        github: github
+                        github: github,
+                        skills: skills
 
                     });
                 }
@@ -213,7 +214,8 @@ module.exports = function(app, passport) {
                     userProjects: usr.local.projects,
                     myProjects: projects,
                     description: req.user.local.description,
-                    githubUrl: req.user.local.githubUrl
+                    githubUrl: req.user.local.githubUrl,
+                    skills: req.user.local.skills
                 });
             }); //end project.find
         }); // end User.findOne
@@ -228,6 +230,7 @@ module.exports = function(app, passport) {
             console.log(req.body.description);
             //console.log(req.body.github);
             usr.local.description = req.body.description;
+            usr.local.skills = req.body.skills;
             //usr.local.github = req.body.github;
             usr.save(function(err) {
                 if (err) throw err;

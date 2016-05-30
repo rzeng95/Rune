@@ -11,6 +11,7 @@ var userSchema = mongoose.Schema({
         userid       : String,
         userColor    : String,
         description  : String,
+        skills       : String,
         github       : String,
         githubUrl    : String,
         projects : [
