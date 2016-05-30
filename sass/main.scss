@@ -754,3 +754,7 @@ $task-browser-offset: $project-body-offset + 65px;
 .project-finder-button {
     // left:10px;
 }
+
+.project-finder-table th {
+    min-width: 200px;
+}

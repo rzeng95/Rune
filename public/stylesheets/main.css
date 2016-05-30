@@ -9152,3 +9152,7 @@ body {
   white-space: normal;
   overflow: auto;
 }
+
+.project-finder-table th {
+  min-width: 200px;
+}
