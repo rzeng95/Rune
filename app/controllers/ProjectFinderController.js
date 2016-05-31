@@ -39,7 +39,7 @@ module.exports = function(app, passport) {
 
                                 // dont show project if you're already a member of the project
                                 if(projs[i].members.indexOf(req.user.local.email)!=-1 )
-                                    break;
+                                    continue;
 
                                 var admin = projs[i].admin;
                                 var found = false;

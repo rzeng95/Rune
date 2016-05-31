@@ -189,7 +189,8 @@ module.exports = function(app, passport) {
             if (err) {
                 throw err;
             } else {
-                console.log(foundProj.github_url)
+                console.log(foundProj.github_url);
+                console.log(foundProj.admin);
                 //console.log('Project Skills: ' + foundProj.projectskills);
                 //console.log('Project Public?: ' + foundProj.ispublic);
                 res.render('project.jade', {
@@ -207,6 +208,7 @@ module.exports = function(app, passport) {
                     projKey : foundProj.projectkey,
                     projId : foundProj.projectid,
                     projAdmin : foundProj.admin,
+                    isAdmin : (foundProj.admin == req.user.local.email),
 
                     github_repo : foundProj.github_repo,
                     github_owner : foundProj.github_owner,

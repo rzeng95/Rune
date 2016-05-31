@@ -18,9 +18,13 @@ div(class="user-list-container")
 						td
 							div(class="user-email") #{puser.email}
 						td
-							form(action="applicationresponse/" method="post")
-								button(name="ignore" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Ignore
-								button(name="accept" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Accept
+							form(class="app-response" action="applicationresponse/" method="post")
+								if isAdmin
+									button(name="ignore" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Ignore
+									button(name="accept" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Accept
+								else
+									button(name="ignore" type="submit" class="btn btn-primary disabled" style="width:80px" value=puser.id data-toggle="tooltip" title="Only admins can accept/ignore pending member requests!") Ignore
+									button(name="accept" type="submit" class="btn btn-primary disabled" style="width:80px" value=puser.id data-toggle="tooltip" title="Only admins can accept/ignore pending member requests!") Accept
 	h3 Current Project Members
 	table(class="table")
 		thead
