@@ -1,0 +1,39 @@
+extends ./partials/base.jade
+
+block bodyContent 
+	div(class="col-xs-offset-3 col-xs-6")
+		h2 Users
+		table(class="table")
+			tr
+				th Name
+				th Email
+				th Projects
+				th 
+			each user in users
+				tr
+					td #{user.local.firstname+' '+user.local.lastname}
+					td #{user.local.email}
+					td #{user.local.projects.length}
+					td
+						form(class="delete-user" action='/godmode/removeuser/' method="post")
+							button(type="submit" class="btn btn-danger" name="userid" value=user.local.userid onclick="return confirm('Are you sure?')") Remove User
+	div(class="col-xs-offset-2 col-xs-8")
+		h2 Projects
+		table(class="table")
+			tr
+				th Name
+				th Admin
+				th Description
+				th Members
+				th Tasks
+				th 
+			each project in projects
+				tr
+					td #{project.projectname}
+					td #{project.admin}
+					td #{project.description}
+					td #{project.members.length}
+					td #{project.tasks.length}
+					td
+						form(class="delete-project" action='/godmode/removeproject/' method="post")
+							button(type="submit" class="btn btn-danger" name="projectid" value=project.projectid onclick="return confirm('Are you sure?')") Remove Project
