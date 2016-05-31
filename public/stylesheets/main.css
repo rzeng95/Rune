@@ -311,8 +311,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?1462248984);
-  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?&1462248984#iefix) format("embedded-opentype"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff2?1462248985) format("woff2"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff?1462248985) format("woff"), url(../fonts/bootstrap/glyphicons-halflings-regular.ttf?1462248985) format("truetype"), url(../fonts/bootstrap/glyphicons-halflings-regular.svg?1462248984#glyphicons_halflingsregular) format("svg");
+  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?1462172998);
+  src: url(../fonts/bootstrap/glyphicons-halflings-regular.eot?&1462172998#iefix) format("embedded-opentype"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff2?1462172998) format("woff2"), url(../fonts/bootstrap/glyphicons-halflings-regular.woff?1462172998) format("woff"), url(../fonts/bootstrap/glyphicons-halflings-regular.ttf?1462172998) format("truetype"), url(../fonts/bootstrap/glyphicons-halflings-regular.svg?1462172998#glyphicons_halflingsregular) format("svg");
 }
 .glyphicon {
   position: relative;
@@ -7803,7 +7803,7 @@ button.close {
 }
 @font-face {
   font-family: "Roboto-Black";
-  src: url('../fonts/RobotoBlack/Roboto-Black.ttf?1462300140') format('truetype'), url('../fonts/RobotoBlack/Roboto-Black.eot?1462300140') format('embedded-opentype'), url('../fonts/RobotoBlack/Roboto-Black.woff?1462300140') format('woff');
+  src: url('../fonts/RobotoBlack/Roboto-Black.ttf?1329484638') format('truetype'), url('../fonts/RobotoBlack/Roboto-Black.eot?1329484638') format('embedded-opentype'), url('../fonts/RobotoBlack/Roboto-Black.woff?1329484638') format('woff');
 }
 *.unselectable, #rune-icon-small-red *.roo-icon-small, #rune-icon-small-redorange *.roo-icon-small, #rune-icon-small-orange *.roo-icon-small, #rune-icon-small-yelloworange *.roo-icon-small, #rune-icon-small-yellow *.roo-icon-small, #rune-icon-small-yellowgreen *.roo-icon-small, #rune-icon-small-green *.roo-icon-small, #rune-icon-small-bluegreen *.roo-icon-small, #rune-icon-small-blue *.roo-icon-small, #rune-icon-small-bluepurple *.roo-icon-small, #rune-icon-small-purple *.roo-icon-small, #rune-icon-small-redpurple *.roo-icon-small, #rune-icon-profile-red *.roo-icon-profile, #rune-icon-profile-red *.initials-icon-profile, #rune-icon-profile-redorange *.roo-icon-profile, #rune-icon-profile-redorange *.initials-icon-profile, #rune-icon-profile-orange *.roo-icon-profile, #rune-icon-profile-orange *.initials-icon-profile, #rune-icon-profile-yelloworange *.roo-icon-profile, #rune-icon-profile-yelloworange *.initials-icon-profile, #rune-icon-profile-yellow *.roo-icon-profile, #rune-icon-profile-yellow *.initials-icon-profile, #rune-icon-profile-yellowgreen *.roo-icon-profile, #rune-icon-profile-yellowgreen *.initials-icon-profile, #rune-icon-profile-green *.roo-icon-profile, #rune-icon-profile-green *.initials-icon-profile, #rune-icon-profile-bluegreen *.roo-icon-profile, #rune-icon-profile-bluegreen *.initials-icon-profile, #rune-icon-profile-blue *.roo-icon-profile, #rune-icon-profile-blue *.initials-icon-profile, #rune-icon-profile-bluepurple *.roo-icon-profile, #rune-icon-profile-bluepurple *.initials-icon-profile, #rune-icon-profile-purple *.roo-icon-profile, #rune-icon-profile-purple *.initials-icon-profile, #rune-icon-profile-redpurple *.roo-icon-profile, #rune-icon-profile-redpurple *.initials-icon-profile, #rune-icon-kanban-red *.roo-icon-kanban, #rune-icon-kanban-red *.initials-icon-kanban, #rune-icon-kanban-redorange *.roo-icon-kanban, #rune-icon-kanban-redorange *.initials-icon-kanban, #rune-icon-kanban-orange *.roo-icon-kanban, #rune-icon-kanban-orange *.initials-icon-kanban, #rune-icon-kanban-yelloworange *.roo-icon-kanban, #rune-icon-kanban-yelloworange *.initials-icon-kanban, #rune-icon-kanban-yellow *.roo-icon-kanban, #rune-icon-kanban-yellow *.initials-icon-kanban, #rune-icon-kanban-yellowgreen *.roo-icon-kanban, #rune-icon-kanban-yellowgreen *.initials-icon-kanban, #rune-icon-kanban-green *.roo-icon-kanban, #rune-icon-kanban-green *.initials-icon-kanban, #rune-icon-kanban-bluegreen *.roo-icon-kanban, #rune-icon-kanban-bluegreen *.initials-icon-kanban, #rune-icon-kanban-blue *.roo-icon-kanban, #rune-icon-kanban-blue *.initials-icon-kanban, #rune-icon-kanban-bluepurple *.roo-icon-kanban, #rune-icon-kanban-bluepurple *.initials-icon-kanban, #rune-icon-kanban-purple *.roo-icon-kanban, #rune-icon-kanban-purple *.initials-icon-kanban, #rune-icon-kanban-redpurple *.roo-icon-kanban, #rune-icon-kanban-redpurple *.initials-icon-kanban {
   -moz-user-select: -moz-none;
@@ -7816,16 +7816,6 @@ button.close {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-body {
-  position: relative;
-  overflow: hidden;
-}
-
-.main-container {
-  overflow-y: scroll;
-  height: calc(100vh - 40px);
 }
 
 .btn-is-disabled {
@@ -8668,18 +8658,14 @@ body {
   margin-top: 65px;
 }
 
-.project-body {
-  overflow-y: auto;
-  height: calc(100vh - 105px);
-}
-
 .kanban-board {
   display: relative;
+  overflow-y: scroll;
+  height: calc(100vh - 105px);
 }
 
 .kanban-board-header {
   position: fixed;
-  width: 100%;
   z-index: 700;
 }
 
@@ -8700,6 +8686,7 @@ body {
 
 .kanban-board-row-header {
   width: 100%;
+  left: 0;
   min-height: 100%;
 }
 
@@ -8769,63 +8756,51 @@ body {
 }
 
 .kanban-task-glow-red {
-  border: 1px solid rgba(235, 34, 42, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(235, 34, 42, 0.2);
+  border: 1px solid rgba(235, 34, 42, 0.7);
 }
 
 .kanban-task-glow-redorange {
-  border: 1px solid rgba(243, 111, 38, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(243, 111, 38, 0.2);
+  border: 1px solid rgba(243, 111, 38, 0.7);
 }
 
 .kanban-task-glow-orange {
-  border: 1px solid rgba(246, 143, 34, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(246, 143, 34, 0.2);
+  border: 1px solid rgba(246, 143, 34, 0.7);
 }
 
 .kanban-task-glow-yelloworange {
-  border: 1px solid rgba(254, 195, 23, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(254, 195, 23, 0.2);
+  border: 1px solid rgba(254, 195, 23, 0.7);
 }
 
 .kanban-task-glow-yellow {
-  border: 1px solid rgba(244, 234, 40, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(244, 234, 40, 0.2);
+  border: 1px solid rgba(244, 234, 40, 0.7);
 }
 
 .kanban-task-glow-yellowgreen {
-  border: 1px solid rgba(155, 202, 60, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(155, 202, 60, 0.2);
+  border: 1px solid rgba(155, 202, 60, 0.7);
 }
 
 .kanban-task-glow-green {
-  border: 1px solid rgba(4, 170, 81, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(4, 170, 81, 0.2);
+  border: 1px solid rgba(4, 170, 81, 0.7);
 }
 
 .kanban-task-glow-bluegreen {
-  border: 1px solid rgba(25, 145, 205, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(25, 145, 205, 0.2);
+  border: 1px solid rgba(25, 145, 205, 0.7);
 }
 
 .kanban-task-glow-blue {
-  border: 1px solid rgba(8, 87, 163, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(8, 87, 163, 0.2);
+  border: 1px solid rgba(8, 87, 163, 0.7);
 }
 
 .kanban-task-glow-bluepurple {
-  border: 1px solid rgba(108, 69, 155, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(108, 69, 155, 0.2);
+  border: 1px solid rgba(108, 69, 155, 0.7);
 }
 
 .kanban-task-glow-purple {
-  border: 1px solid rgba(165, 68, 153, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(165, 68, 153, 0.2);
+  border: 1px solid rgba(165, 68, 153, 0.7);
 }
 
 .kanban-task-glow-redpurple {
-  border: 1px solid rgba(227, 65, 151, 0.4);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(227, 65, 151, 0.2);
+  border: 1px solid rgba(227, 65, 151, 0.7);
 }
 
 .kanban-priority-icon-Low {
@@ -8915,7 +8890,6 @@ body {
 .task-browser {
   position: relative;
   box-sizing: border-box;
-  overflow-y: auto;
 }
 
 .task-browser-filter {
@@ -8940,7 +8914,7 @@ body {
 
 .task-browser-col-left,
 .task-browser-col-right {
-  overflow: auto;
+  overflow-y: scroll;
   display: block;
   float: left;
   height: calc(100vh - 170px);

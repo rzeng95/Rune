@@ -41,15 +41,8 @@ $project-body-offset: $navbar-height + $project-header-offset;
     text-overflow: ellipsis;
 }
 
-body {
-    position: relative;
-    overflow: hidden;
-}
-
 .main-container {
     @extend .container-fluid;
-    overflow-y: scroll;
-    height: calc(100vh - #{$navbar-height});
 }
 
 @mixin truncate($line-width) {
@@ -348,18 +341,19 @@ body {
 }
 
 .project-body {
-    overflow-y: auto;
-    height: calc(100vh - #{$project-body-offset});
+
 }
 
 // Kanban board CSS style specifications.
 .kanban-board {
     display: relative;
+    overflow-y: scroll;
+    height: calc(100vh - #{$project-body-offset});
 }
 
 .kanban-board-header {
     position: fixed;
-    width: 100%;
+    // width: 100%;
     z-index: 700;
 }
 
@@ -380,6 +374,7 @@ body {
 
 .kanban-board-row-header {
     width: 100%;
+    left: 0;
     min-height: 100%;
 }
 
@@ -426,8 +421,8 @@ body {
 
 @mixin kanban-task-glow($color-index) {
     @extend .kanban-task;
-    border: 1px solid rgba(nth($rainbow, $color-index), .4);
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(nth($rainbow, $color-index), .2);
+    border: 1px solid rgba(nth($rainbow, $color-index), .7);
+    // box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(nth($rainbow, $color-index), .2);
 }
 
 .kanban-task-glow-red { @include kanban-task-glow(1); }
@@ -503,7 +498,6 @@ $task-browser-offset: $project-body-offset + 65px;
 .task-browser {
     position: relative;
     box-sizing: border-box;
-    overflow-y: auto;
 }
 
 .task-browser-filter {
@@ -528,7 +522,7 @@ $task-browser-offset: $project-body-offset + 65px;
 
 .task-browser-col-left,
 .task-browser-col-right {
-    overflow: auto;
+    overflow-y: scroll;
     display: block;
     float: left;
     // border-bottom-width: 1px;

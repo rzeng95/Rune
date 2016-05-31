@@ -72,6 +72,10 @@ Page.Project.taskWindowUpdate = function(taskid) {
 // Listeners and actual applications to page elements.
 ////////////////////////////////////////////////////////////////////////////////
 
+$('body').css('position', 'relative');
+$('body').css('overflow', 'hidden');
+$('.kanban-board-header').width($('.kanban-board-body').width());
+
 Page.Project.taskWindowListeners = function() {
     // Make edit button AJAX'd.
     $('.btn-task-edit').click(function(e) {
@@ -118,13 +122,14 @@ $('.project-del-form').submit(function(e) {
 $('.kanban-col').sortable({
     connectWith: '.kanban-col',
     stop: function(event, ui) {
+        console.log('w t f');
         $.ajax({
             method: 'POST',
+            url: 'movetask/',
             data: {
-                status: $(ui.item).parent().attr('id'),
+                status: $(ui.item).parent().attr('status'),
                 taskid: $(ui.item).attr('id')
-            },
-            url: 'movetask/'
+            }
         });
     }
 });

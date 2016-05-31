@@ -66,7 +66,8 @@ TaskController.redirectToTask = function(err, req, res) {
     if (err) {
         res.send('error');
     } else {
-        res.redirect('/p/' + req.params.projectid + '/t/' + req.params.taskid);
+        console.log('Successful action on task.');
+        res.redirect('/p/' + req.params.projectid + '/t/' + req.params.taskid + '/');
     }
 };
 
@@ -272,7 +273,7 @@ module.exports = function(app, passport) {
                     action: req.user.local.firstname + ' ' + req.user.local.lastname + ' archived'
                 });
                 // save this updated project
-                foundProj.save(function(err2,done) {
+                foundProj.save(function(err2, done) {
                     if (err2) {
                         res.send('Error: could not save project');
                         return;
@@ -298,7 +299,7 @@ module.exports = function(app, passport) {
                     action: req.user.local.firstname + ' ' + req.user.local.lastname + ' unarchived'
                 });
                 // save this updated project
-                foundProj.save(function(err2,done) {
+                foundProj.save(function(err2, done) {
                     if (err2) {
                         res.send('Error: could not save project');
                         return;
@@ -377,7 +378,14 @@ module.exports = function(app, passport) {
                     }
                 });
             }
-        ], TaskController.redirectToTask); // End async waterfall.
+        ], function(err, req, res) {
+            if (err) {
+                res.send('error');
+            } else {
+                console.log('Task successfully moved.');
+                res.end();
+            }
+        }); // End async waterfall.
     }); // end movetask
 
     // A task-comment POST request.
