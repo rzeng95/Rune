@@ -562,17 +562,23 @@ $task-browser-offset: $project-body-offset + 65px;
 
 // User List styling specifications.
 .user-list-container {
-    @extend .container;
+    @extend .container-fluid;
+    overflow-y: scroll;
+    height: calc(100vh - #{$project-body-offset});
 }
 
 // Overview styling specifications.
 .overview-container {
-    @extend .container;
+    @extend .container-fluid;
+    overflow-y: scroll;
+    height: calc(100vh - #{$project-body-offset});
 }
 
 // Project settings style specifications.
 .settings-container {
-    @extend .container;
+    @extend .container-fluid;
+    overflow-y: scroll;
+    height: calc(100vh - #{$project-body-offset});
 }
 
 .settings-des {
@@ -583,6 +589,7 @@ $task-browser-offset: $project-body-offset + 65px;
 .settings-form {
     margin-top: 15px;
     margin-bottom: 15px;
+    padding: 15px;
     > h3, h6 {
         display: inline;
     }
@@ -597,7 +604,6 @@ $task-browser-offset: $project-body-offset + 65px;
     .settings-submit {
         padding-top: 0px;
         padding-bottom: 15px;
-
     }
 }
 
@@ -608,14 +614,10 @@ $task-browser-offset: $project-body-offset + 65px;
     }
 }
 
-.settings-del {
-    text-align: center;
+.settings-delete {
+    // text-align: center;
     padding: 15px;
-    form {
-        width: 200px;
-        margin: 0 auto;
-        padding: 15px;
-    }
+    margin-bottom: 400px;
 }
 
 #settings-proj-des {

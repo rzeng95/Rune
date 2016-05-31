@@ -1931,46 +1931,46 @@ pre code {
   overflow-y: scroll;
 }
 
-.container, .user-list-container, .overview-container, .settings-container {
+.container {
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
 }
-.container:before, .user-list-container:before, .overview-container:before, .settings-container:before, .container:after, .user-list-container:after, .overview-container:after, .settings-container:after {
+.container:before, .container:after {
   content: " ";
   display: table;
 }
-.container:after, .user-list-container:after, .overview-container:after, .settings-container:after {
+.container:after {
   clear: both;
 }
 @media (min-width: 768px) {
-  .container, .user-list-container, .overview-container, .settings-container {
+  .container {
     width: 750px;
   }
 }
 @media (min-width: 992px) {
-  .container, .user-list-container, .overview-container, .settings-container {
+  .container {
     width: 970px;
   }
 }
 @media (min-width: 1200px) {
-  .container, .user-list-container, .overview-container, .settings-container {
+  .container {
     width: 1170px;
   }
 }
 
-.container-fluid, .main-container {
+.container-fluid, .main-container, .user-list-container, .overview-container, .settings-container {
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
 }
-.container-fluid:before, .main-container:before, .container-fluid:after, .main-container:after {
+.container-fluid:before, .main-container:before, .user-list-container:before, .overview-container:before, .settings-container:before, .container-fluid:after, .main-container:after, .user-list-container:after, .overview-container:after, .settings-container:after {
   content: " ";
   display: table;
 }
-.container-fluid:after, .main-container:after {
+.container-fluid:after, .main-container:after, .user-list-container:after, .overview-container:after, .settings-container:after {
   clear: both;
 }
 
@@ -4833,28 +4833,34 @@ tbody.collapse.in {
   }
 }
 
-.container > .navbar-header, .user-list-container > .navbar-header, .overview-container > .navbar-header, .settings-container > .navbar-header,
+.container > .navbar-header,
 .container > .navbar-collapse,
-.user-list-container > .navbar-collapse,
-.overview-container > .navbar-collapse,
-.settings-container > .navbar-collapse,
 .container-fluid > .navbar-header,
 .main-container > .navbar-header,
+.user-list-container > .navbar-header,
+.overview-container > .navbar-header,
+.settings-container > .navbar-header,
 .container-fluid > .navbar-collapse,
-.main-container > .navbar-collapse {
+.main-container > .navbar-collapse,
+.user-list-container > .navbar-collapse,
+.overview-container > .navbar-collapse,
+.settings-container > .navbar-collapse {
   margin-right: -15px;
   margin-left: -15px;
 }
 @media (min-width: 768px) {
-  .container > .navbar-header, .user-list-container > .navbar-header, .overview-container > .navbar-header, .settings-container > .navbar-header,
+  .container > .navbar-header,
   .container > .navbar-collapse,
-  .user-list-container > .navbar-collapse,
-  .overview-container > .navbar-collapse,
-  .settings-container > .navbar-collapse,
   .container-fluid > .navbar-header,
   .main-container > .navbar-header,
+  .user-list-container > .navbar-header,
+  .overview-container > .navbar-header,
+  .settings-container > .navbar-header,
   .container-fluid > .navbar-collapse,
-  .main-container > .navbar-collapse {
+  .main-container > .navbar-collapse,
+  .user-list-container > .navbar-collapse,
+  .overview-container > .navbar-collapse,
+  .settings-container > .navbar-collapse {
     margin-right: 0;
     margin-left: 0;
   }
@@ -4909,7 +4915,7 @@ tbody.collapse.in {
   display: block;
 }
 @media (min-width: 768px) {
-  .navbar > .container .navbar-brand, .navbar > .user-list-container .navbar-brand, .navbar > .overview-container .navbar-brand, .navbar > .settings-container .navbar-brand, .navbar > .container-fluid .navbar-brand, .navbar > .main-container .navbar-brand {
+  .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand, .navbar > .main-container .navbar-brand, .navbar > .user-list-container .navbar-brand, .navbar > .overview-container .navbar-brand, .navbar > .settings-container .navbar-brand {
     margin-left: -15px;
   }
 }
@@ -5580,12 +5586,12 @@ a.badge:hover, a.badge:focus {
 .jumbotron > hr {
   border-top-color: #d5d5d5;
 }
-.container .jumbotron, .user-list-container .jumbotron, .overview-container .jumbotron, .settings-container .jumbotron, .container-fluid .jumbotron, .main-container .jumbotron {
+.container .jumbotron, .container-fluid .jumbotron, .main-container .jumbotron, .user-list-container .jumbotron, .overview-container .jumbotron, .settings-container .jumbotron {
   border-radius: 6px;
   padding-left: 15px;
   padding-right: 15px;
 }
-.jumbotron .container, .jumbotron .user-list-container, .jumbotron .overview-container, .jumbotron .settings-container {
+.jumbotron .container {
   max-width: 100%;
 }
 @media screen and (min-width: 768px) {
@@ -5593,7 +5599,7 @@ a.badge:hover, a.badge:focus {
     padding-top: 48px;
     padding-bottom: 48px;
   }
-  .container .jumbotron, .user-list-container .jumbotron, .overview-container .jumbotron, .settings-container .jumbotron, .container-fluid .jumbotron, .main-container .jumbotron {
+  .container .jumbotron, .container-fluid .jumbotron, .main-container .jumbotron, .user-list-container .jumbotron, .overview-container .jumbotron, .settings-container .jumbotron {
     padding-left: 60px;
     padding-right: 60px;
   }
@@ -8949,6 +8955,21 @@ button.close {
   color: #333333;
 }
 
+.user-list-container {
+  overflow-y: scroll;
+  height: calc(100vh - 105px);
+}
+
+.overview-container {
+  overflow-y: scroll;
+  height: calc(100vh - 105px);
+}
+
+.settings-container {
+  overflow-y: scroll;
+  height: calc(100vh - 105px);
+}
+
 .settings-des {
   margin-top: 15px;
   padding: 15px;
@@ -8957,6 +8978,7 @@ button.close {
 .settings-form {
   margin-top: 15px;
   margin-bottom: 15px;
+  padding: 15px;
 }
 .settings-form > h3, .settings-form h6 {
   display: inline;
@@ -8980,14 +9002,9 @@ button.close {
   width: 50%;
 }
 
-.settings-del {
-  text-align: center;
+.settings-delete {
   padding: 15px;
-}
-.settings-del form {
-  width: 200px;
-  margin: 0 auto;
-  padding: 15px;
+  margin-bottom: 400px;
 }
 
 #settings-proj-des {
