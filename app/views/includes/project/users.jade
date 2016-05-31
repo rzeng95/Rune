@@ -31,6 +31,8 @@ div(class="user-list-container")
 			tr
 				th Name
 				th Email
+				if isAdmin
+					th 
 		tbody
 			each user in projMembers
 				tr
@@ -41,3 +43,11 @@ div(class="user-list-container")
 							div(class="initials-icon-kanban") #{user.initials}
 					td
 						div(class="user-email") #{user.email}
+					if isAdmin
+						td
+							div(class="remove-user")
+								if email == user.email
+									button(type="submit" class="btn btn-danger" name="userid" value=user.id disabled) Remove User
+								else
+									form(class="app-response" action='/p/'+projId+'/removeuser/' method="post")
+										button(type="submit" class="btn btn-danger" name="userid" value=user.id) Remove User

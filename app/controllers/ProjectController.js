@@ -391,5 +391,43 @@ module.exports = function(app, passport) {
 
     }); //end app.post
 
+    app.post('/p/:projectid/removeuser/', Helper.isLoggedIn, Helper.doesProjectExist, Helper.isUserProjectMember, function(req, res) {
+        // update description and github repo
+        Project.findById(req.params.projectid, function(err, foundProj){
+            if (err) throw err;
+            else {}
+                User.findById(req.body.userid, function(err, foundUser){
+                    if(err) throw err;
+                    else {
+                        foundProj.members.splice(foundProj.members.indexOf(foundUser.local.email), 1);
+                        foundProj.save(function(err, response) {
+                            if (err) {
+                                res.redirect('/p/'+req.params.projectid)
+                                throw err;
+                            } else {
+                                for(var i=0; i<foundUser.local.projects.length; i++)
+                                {
+                                    if(foundUser.local.projects[i].projectid==req.params.projectid)
+                                    {
+                                        foundUser.local.projects.splice(i, 1);
+                                        foundProj.save(function(err, response) {
+                                            if (err) {
+                                                res.redirect('/p/'+req.params.projectid)
+                                                throw err;
+                                            } else {
+                                                console.log(foundUser)
+                                                console.log(foundProj)
+                                                res.redirect('/p/'+req.params.projectid)
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    }
+                })
+            
+        });
+    });
 
 }; // End of module.exports
