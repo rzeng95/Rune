@@ -8994,6 +8994,10 @@ body {
   padding-top: 25px;
   padding-bottom: 15px;
 }
+.settings-form .settings-submit {
+  padding-top: 0px;
+  padding-bottom: 15px;
+}
 
 .settings-btn {
   padding: 10px 0;

@@ -7,27 +7,27 @@ div(class="settings-container")
                     | Make your project public to others to view on the Project Finder, or delete the project.
     form(class="settings-form" action="edit/" method="POST")
         div(class="row form-group")
-            div(class="col-xs-4 settings-label")
+            div(class="col-xs-5 settings-label")
                 label(for="settings-proj-des")
                     h3 Project Description
                     h6 Add or change the project description as seen by other users.
-            div(class="col-xs-8 settings-input")
+            div(class="col-xs-7 settings-input")
                 textarea(id="settings-proj-des" class="col-xs-8 form-control" type="text" rows="4" name="description" placeholder="Enter a description here.") #{description}
         div(class="row form-group")
-            div(class="col-xs-4 settings-label")
+            div(class="col-xs-5 settings-label")
                 label(for="settings-proj-gh")
                     h3 GitHub Repository
                     h6 Include a GitHub repository for this project.
-            div(class="col-xs-8 settings-input")
+            div(class="col-xs-7 settings-input")
                 div(class="input-group")
                     span(class="input-group-addon" id="basic-addon3") https://github.com/
                     input(id="settings-proj-gh" class="form-control" type="text" name="github_url" placeholder="Enter the project GitHub repository information here." value=github_url)
         div(class="row form-group")
-            div(class="col-xs-4 settings-label")
+            div(class="col-xs-5 settings-label")
                 label(for="settings-proj-pf")
                     h3 Project Finder Visibility
                     h6 Make this project publicly visible on the Project Finder.
-            div(class="col-xs-8 settings-input")
+            div(class="col-xs-7 settings-input")
                 div(class="input-group")
                     label(class="radio-inline")
                         input(type="radio" name="optradio" value="1" checked=(ispublic==1))
@@ -38,34 +38,38 @@ div(class="settings-container")
                         
         // NEEDS FRONT END OVERHAUL
         div(class="row form-group")
-            div(class="col-xs-4 settings-label")
+            div(class="col-xs-5 settings-label")
                 label(for="settings-proj-gh")
                     h3 Project Skills
                     h6 List tech stack or skills preferred for this project.
-            div(class="col-xs-8 settings-input")
+            div(class="col-xs-7 settings-input")
                 textarea(id="settings-proj-des" class="col-xs-8 form-control" type="text" rows="2" name="projectskills" placeholder="MongoDB, ExpressJS, AngularJS, NodeJS") #{projectskills}
         
         div(class="row form-group")            
-            div(class="col-xs-4 settings-label")
-            div(class="col-xs-8 settings-input")
+            div(class="col-xs-offset-5 col-xs-7 settings-submit")
                 div(class="settings-btn")
                     button(type="submit" class="btn btn-primary") Update Project Settings
-    div(class="form-group")
-        div(class="row")
-            form(class="col-xs-8 col-xs-offset-4 settings-input project-del-form" action="deleteproject/" method="POST")
-                button(id="btn-settings-del" class="btn btn-primary btn-md" type="submit") Delete Project
-    div(class="row")
-        div(class="col-xs-12 panel panel-default")
-            h3 Project Applicants
-            table(class="table")
-                thead
-                    tr
-                        th Applicant
-                        th GitHub User Profile
-                        th
-                tbody
-                    tr
-                        td Andy Salad
-                        td https://www.github.com/ilovememes
-                        td
-                            button(id="submit" type="submit" class="btn btn-primary" style="width:80px") Accept
+    hr
+    div(class="form-group settings-form")
+        div(class="col-xs-5 settings-label")
+                label(for="settings-proj-del")
+                    h3 Delete Project
+                    h6 Permanently remove this project and all associated tasks.
+        div(class="col-xs-7 settings-input")
+            form(class="project-del-form" action="deleteproject/" method="POST")
+                button(id="btn-settings-del" class="btn btn-danger" type="submit") Delete Project
+    //- div(class="row")
+    //-     div(class="col-xs-12 panel panel-default")
+    //-         h3 Project Applicants
+    //-         table(class="table")
+    //-             thead
+    //-                 tr
+    //-                     th Applicant
+    //-                     th GitHub User Profile
+    //-                     th
+    //-             tbody
+    //-                 tr
+    //-                     td Andy Salad
+    //-                     td https://www.github.com/ilovememes
+    //-                     td
+    //-                         button(id="submit" type="submit" class="btn btn-primary" style="width:80px") Accept
