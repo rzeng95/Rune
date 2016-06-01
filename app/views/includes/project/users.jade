@@ -1,54 +1,54 @@
 div(class="user-list-container")
-	div(class="container")
-		if pendingMembers.length > 0
-			h3 Pending Member Requests
-			table(class="table")
-				thead
-					tr
-						th Name
-						th Email
-						th
-				tbody
-					each puser in pendingMembers
-						tr
-							td
-								div(id="rune-icon-kanban-" + puser.color)
-									img(class="roo-icon-kanban" src="/images/Roo.svg")
-									div(class="user-name") #[a(href='/u/'+puser.id+'/') #{puser.name}]
-									div(class="initials-icon-kanban") #{puser.initials}
-							td
-								div(class="user-email") #{puser.email}
-							td
-								form(class="app-response" action="applicationresponse/" method="post")
-									if isAdmin
-										button(name="ignore" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Ignore
-										button(name="accept" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Accept
-									else
-										button(name="ignore" type="submit" class="btn btn-primary disabled" style="width:80px" value=puser.id data-toggle="tooltip" title="Only admins can accept/ignore pending member requests!") Ignore
-										button(name="accept" type="submit" class="btn btn-primary disabled" style="width:80px" value=puser.id data-toggle="tooltip" title="Only admins can accept/ignore pending member requests!") Accept
-		h3 Current Project Members
-		table(class="table")
-			thead
-				tr
-					th Name
-					th Email
-					if isAdmin
-						th 
-			tbody
-				each user in projMembers
-					tr
-						td
-							div(id="rune-icon-kanban-" + user.color)
-								img(class="roo-icon-kanban" src="/images/Roo.svg")
-								div(class="user-name") #[a(href='/u/'+user.id+'/') #{user.name}]
-								div(class="initials-icon-kanban") #{user.initials}
-						td
-							div(class="user-email") #{user.email}
-						if isAdmin
-							td
-								div(class="remove-user")
-									if email == user.email
-										button(type="submit" class="btn btn-danger" name="userid" value=user.id disabled) Remove User
-									else
-										form(class="app-response" action='/p/'+projId+'/removeuser/' method="post")
-											button(type="submit" class="btn btn-danger" name="userid" value=user.id) Remove User
+    div(class="container")
+        if pendingMembers.length > 0
+            h3 Pending Member Requests
+            table(class="table")
+                thead
+                    tr
+                        th Name
+                        th Email
+                        th
+                tbody
+                    each puser in pendingMembers
+                        tr
+                            td
+                                div(id="rune-icon-kanban-" + puser.color)
+                                    img(class="roo-icon-kanban" src="/images/Roo.svg")
+                                    div(class="user-name") #[a(href='/u/'+puser.id+'/') #{puser.name}]
+                                    div(class="initials-icon-kanban") #{puser.initials}
+                            td
+                                div(class="user-email") #{puser.email}
+                            td
+                                form(class="app-response" action="applicationresponse/" method="post")
+                                    if isAdmin
+                                        button(name="ignore" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Ignore
+                                        button(name="accept" type="submit" class="btn btn-primary" style="width:80px" value=puser.id) Accept
+                                    else
+                                        button(name="ignore" type="submit" class="btn btn-primary disabled" style="width:80px" value=puser.id data-toggle="tooltip" title="Only admins can accept/ignore pending member requests!") Ignore
+                                        button(name="accept" type="submit" class="btn btn-primary disabled" style="width:80px" value=puser.id data-toggle="tooltip" title="Only admins can accept/ignore pending member requests!") Accept
+        h3 Current Project Members
+        table(class="table")
+            thead
+                tr
+                    th Name
+                    th Email
+                    if isAdmin
+                        th 
+            tbody
+                each user in projMembers
+                    tr
+                        td
+                            div(id="rune-icon-kanban-" + user.color)
+                                img(class="roo-icon-kanban" src="/images/Roo.svg")
+                                div(class="user-name") #[a(href='/u/'+user.id+'/') #{user.name}]
+                                div(class="initials-icon-kanban") #{user.initials}
+                        td
+                            div(class="user-email") #{user.email}
+                        if isAdmin
+                            td
+                                div(class="remove-user")
+                                    if email == user.email
+                                        button(type="submit" class="btn btn-danger" name="userid" value=user.id disabled) Remove User
+                                    else
+                                        form(class="app-response" action='/p/'+projId+'/removeuser/' method="post")
+                                            button(type="submit" class="btn btn-danger" name="userid" value=user.id) Remove User
