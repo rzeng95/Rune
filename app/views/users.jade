@@ -4,16 +4,21 @@ block bodyContent
     div(class="row")
         div(class="col-sm-12")
             h2 All Users
+            
+            div(class="row" style="padding:4px")
+                    div(class="col-xs-6" style="padding:4px")
+                        input(id="search" type="text" class="form-control" placeholder="Search Users" name="search")
             table(class="table") 
                 thead
                     tr
                         th Profile
                 tbody
                     each user in userlist
-                        tr
-                            userlist
+                        tr(class="user-row" firstname=user.local.firstname lastname=user.local.lastname description=user.local.description skills=user.local.skills)
                             td
                                 div(id="rune-icon-kanban-" + user.local.userColor)
                                     img(class="roo-icon-kanban" src="/images/Roo.svg")
                                     div(class="user-name") #[a(href='/u/'+user.local.userid+'/') #{user.local.firstname+' '+user.local.lastname}]
                                     div(class="initials-icon-kanban") #{user.local.firstname.charAt(0) + user.local.lastname.charAt(0)}
+block scripts
+    script(src="/javascripts/allusers.js")
