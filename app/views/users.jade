@@ -3,7 +3,7 @@ extends ./partials/base.jade
 block bodyContent 
     div(class="row")
         div(class="col-sm-12")
-            h2 All Users
+            h2 Search Users
             
             div(class="row" style="padding:4px")
                     div(class="col-xs-6" style="padding:4px")
@@ -11,7 +11,7 @@ block bodyContent
             table(class="table") 
                 thead
                     tr
-                        th Profile
+                        th
                 tbody
                     each user in userlist
                         tr(class="user-row" firstname=user.local.firstname lastname=user.local.lastname skills=user.local.skills)

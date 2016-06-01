@@ -1,5 +1,4 @@
 var $userRows = $('.user-row')
-$userRows.hide();
 $('#search').each(function(){
 	$(this).data('prev', $(this).val());
 	$(this).bind("propertychange change click keyup input paste", function(event){
@@ -26,3 +25,4 @@ var searchUsers = function(query) {
 		}
 	});
 }
+//$userRows.hide();
