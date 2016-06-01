@@ -694,22 +694,23 @@ $task-browser-offset: $project-body-offset + 65px;
 // Project Finder Styling
 .project-finder-table {
     @extend .table;
-    display: flex-grid;
-    flex-direction: column;
-    // table-layout: relative;
+}
+
+.project-finder-button {
+    width: 10%;
+    text-align: center;
 }
 
 .project-finder-name {
-    @include truncate(200px);
+    width: 14%;
 }
 
 .project-finder-name-text {
     position: relative;
-    // left: 0px;
 }
 
 .project-finder-leader {
-    @include truncate(180px);
+    width: 12%;
 }
 
 .project-finder-user-name {
@@ -719,7 +720,7 @@ $task-browser-offset: $project-body-offset + 65px;
 }
 
 .project-finder-members {
-    @include truncate(100px);
+    width: 7%;
 }
 
 .project-finder-members-text {
@@ -728,12 +729,10 @@ $task-browser-offset: $project-body-offset + 65px;
 }
 
 .project-finder-description {
-    @include truncate(460px);
+    width: 33%;
 }
 
 .project-finder-description-text {
-    width: 460px;
-    flex:1;
     word-wrap: break-word;
     word-break: normal;
     white-space: normal;
@@ -741,23 +740,14 @@ $task-browser-offset: $project-body-offset + 65px;
 }
 
 .project-finder-skills {
-    @include truncate(340px);
+    width: 24%;
 }
 
 .project-finder-skills-text {
-    width: 340px;
-    flex:1;
     word-wrap: break-word;
     word-break: normal;
     white-space: normal;
     overflow: auto; 
-}
-
-.project-finder-button {
-    width:150px}
-
-.project-finder-button-form {
-
 }
 
 .project-finder-table th {
