@@ -8,7 +8,10 @@ div(class="overview-container")
                     td #{projName}
                 tr
                     th Project Repository:
-           
+                    if full_url.length==0                 
+                        td No GitHub repository found!                         
+                    else      
+                        td #[a(href='https://github.com/'+full_url) #{"https://github.com/"+full_url}]
                         
                 tr
                     th Project Description:
