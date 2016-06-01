@@ -23,8 +23,6 @@ var searchUsers = function(query) {
 			$(this).show();
 		} else if($(this).attr('lastname') != null && $(this).attr('lastname').toLowerCase().indexOf(query) !== -1) {
 			$(this).show();
-		} else if($(this).attr('description') != null && $(this).attr('description').toLowerCase().indexOf(query) !== -1) {
-			$(this).show();
 		}
 	});
 }

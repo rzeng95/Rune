@@ -14,7 +14,7 @@ block bodyContent
                         th Profile
                 tbody
                     each user in userlist
-                        tr(class="user-row" firstname=user.local.firstname lastname=user.local.lastname description=user.local.description skills=user.local.skills)
+                        tr(class="user-row" firstname=user.local.firstname lastname=user.local.lastname skills=user.local.skills)
                             td
                                 div(id="rune-icon-kanban-" + user.local.userColor)
                                     img(class="roo-icon-kanban" src="/images/Roo.svg")
