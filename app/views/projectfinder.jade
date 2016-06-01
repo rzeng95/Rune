@@ -18,9 +18,11 @@ block bodyContent
                     each proj in projects
                         tr
                             td(class="project-finder-button")
-                                form(action="apply/" method="post")
+                                form(action="apply/" class="project-finder-button-form" method="post")
                                     if proj.disabled
                                         button(name="project" type="submit" class="btn btn-primary" style="width:80px" disabled) Pending
+                                    else if proj.ismember
+                                        button(name="project" type="submit" class="btn btn-primary" style="width:80px" disabled) Accepted
                                     else
                                         button(name="project" type="submit" class="btn btn-primary" style="width:80px" value='#{proj.projectid}') Apply
                             td(class="project-finder-name") 

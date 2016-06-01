@@ -37,9 +37,11 @@ module.exports = function(app, passport) {
                             var projects = [];
                             for (var i = 0; i < projs.length; i++) {
 
-                                // dont show project if you're already a member of the project
+                                //dont show project if you're already a member of the project
                                 if(projs[i].members.indexOf(req.user.local.email)!=-1 )
-                                    continue;
+                                    var ismember = true;
+                                else
+                                    var ismember = false;
 
                                 var admin = projs[i].admin;
                                 var found = false;
@@ -64,7 +66,8 @@ module.exports = function(app, passport) {
                                             'description': projs[i].description,
                                             'projectskills' : projs[i].projectskills,
                                             'projectid' : projs[i].projectid,
-                                            'disabled' : disabled
+                                            'disabled' : disabled,
+                                            'ismember' : ismember
 
                                         });
                                     }
