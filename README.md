@@ -21,8 +21,20 @@ Rune promotes a Kanban workflow - You can create tasks for your project that can
 <img src="https://i.gyazo.com/3a9a56fe7f69465dfa05c23b67d9907b.png">  
 <i>Six weeks into development, we started being able to use Rune to track our own project!</i>
 
+#### Future Goals  
+Email Capabilities
+- Password Recovery 
+- Notifications to relevant users when tickets are assigned or modified 
 
+Project Metrics  
+- Number of tasks completed per member  
+- Tasks completed per week  
 
+Caching
+- Currently each Kanban board loads up the list of every single task upon page load; this means caching is very useful as many existing tasks don't need to be modified upon page load.
+
+UCLA Integration
+- Users log in with their UID and can be added to separate Project Finder 
 
 #### Members  
 
