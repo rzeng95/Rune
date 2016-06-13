@@ -21,6 +21,12 @@ Rune promotes a Kanban workflow - You can create tasks for your project that can
 <img src="https://i.gyazo.com/3a9a56fe7f69465dfa05c23b67d9907b.png">  
 <i>Six weeks into development, we started being able to use Rune to track our own project!</i>
 
+Rune's biggest difference from existing task tracking tools is the Project Finder. Many services (Jira, Trello) assume you've already found your team. However, sometimes, students in project-driven courses sometimes aren't sure who they're working with. Also, they may only want to join projects they're interested in working on. On the flip side, teams could be looking for more members - people who have certain skills or similar goals. With Rune's Project Finder, teams can list their project pages, along with project descriptions, and other users can apply to those projects. Teams can visit users' profiles before accepting their applications, to see if their goals and skills align.
+
+<img src="https://i.gyazo.com/fdb3aaee8bd39ede213d4b4129902437.png">
+<i>Rune Development, our team's project page, has been listed on Project Finder</i>
+
+
 #### Future Goals  
 Email Capabilities
 - Password Recovery 
@@ -46,15 +52,3 @@ UCLA Integration
 <a href="https://github.com/rzeng95">Roland Zeng</a>  
 <a href="https://github.com/Thessiah">Kevin Zuo</a>  
 
-
-#### Steps to Run This Locally!
-
-1. Fork repo    
-2. Inside directory, open up terminal and run the following two commands (Need Node JS installed):  
-```
-npm install
-```
-```
-npm start
-```
-The app will then start on localhost:5000
